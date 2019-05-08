@@ -33,6 +33,25 @@
 		<authorization>1</authorization>
 		<zoom>2</zoom>
 		
+		<aglappkey>4f14eb68ed1387a4f87f0d19</aglappkey>
+		<aglappsecret>d74f9c4c69d6833d10311b0d</aglappsecret>
+		<kccappkey>0ff753e65080f3a283d90972</kccappkey>a
+		<kccappsecret>95aab3b5e05fdcfe50b1d9a5</kccappsecret> 
+		<!-- ÍÆËÍµÄkey  -->
+		<huaweikccappkey>100230309</huaweikccappkey>
+		<huaweikccappsecret>13afd5e3ebae1d3bb1b17967a670184e</huaweikccappsecret>
+		<oppoappkey>90jmx6m9b688c00c4C4Cck8Sg</oppoappkey>
+		<oppomastersecret>11d86c5bf68f0C9417905Deee6d89a7C</oppomastersecret>
+		<vivoappid>10892</vivoappid>
+		<vivoappkey>ce939904-9d65-4fc0-ba20-536098f5de3e</vivoappkey>
+		<vivoappsecret>abd29987-6528-464d-934f-e6468d3e8065</vivoappsecret>
+		<xiaomiappsecret>AJHOVx8oKSbsLoAaTceTGQ==</xiaomiappsecret>
+		<xiaomimypackagename>com.example.iDengBao.PlaceOrder</xiaomimypackagename>
+		
+		
+		<jgappkey>4f14eb68ed1387a4f87f0d19</jgappkey>
+		<jgmasterSecret>d74f9c4c69d6833d10311b0d</jgmasterSecret>
+		
 		<bgColor>#a29524</bgColor>
 		<bgImage>0573-86058171</bgImage>
 		<systemBHD>¿Í´®´®</systemBHD>

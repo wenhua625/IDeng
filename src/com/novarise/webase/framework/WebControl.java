@@ -40,6 +40,7 @@ import org.apache.poi.ss.usermodel.Cell;
 
 
 
+
 import com.jspsmart.upload.SmartUpload;
 import com.novarise.webase.BConstants;
 import com.novarise.webase.util.ChartUtils;
@@ -1683,7 +1684,7 @@ public class WebControl {
 		}
 		String s_selectsql = s_modifycs[0][2], s_insertsql = s_modifycs[0][3], s_deletesql = s_modifycs[0][5], s_updatesql = s_modifycs[0][4], s_cs = s_modifycs[0][1], s_url = s_modifycs[0][6];
 		
-		
+		String s_sftz =  s_modifycs[0][7],s_tsnr=s_modifycs[0][8];
 		
 		
 		if (s_action.equals("delete")) {
@@ -1876,6 +1877,28 @@ public class WebControl {
 							+ s_insertsql;
 				}
 			}
+			
+			
+			
+			
+//			if(s_sftz.equals("insert")){
+//				final String sql = HtmlFunction.parseVar(s_tsnr, request, "");
+//				Thread t=new Thread(){
+//				    public void run(){
+//				    	AppSmsAynSender a= new AppSmsAynSender();
+//				    	//a.setMsgContent(tsnr);
+//				    	System.out.println("---------------:"+sql);
+//				    //	a.sendMsgForSql(sql);
+//				   }
+//				};
+//				t.start();
+//				
+//				
+//				
+//				
+//			}
+			
+			
 
 		}
 		if (s_action.equals("update")) {
