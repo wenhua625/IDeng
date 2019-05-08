@@ -105,7 +105,8 @@ public void sendMsgForSql(String sql){
 			for(int i=0;i<nr.length;i++)
 			{
 				 String tsnr = nr[i][0];
-				 String device = nr[i][2];
+				 String device = nr[i][1];
+				// String device = nr[i][2];
 				 String  msgTel = nr[i][2];
 				/* String appkey1 = nr[0][2];
 				 String masterSecret1 = nr[0][3];*/
