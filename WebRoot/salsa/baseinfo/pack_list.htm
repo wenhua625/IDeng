@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<link rel="stylesheet" type="text/css" href="css/style1.css" />
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript></script>
+<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+</object> 
+<title>物流单价管理</title>
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+	
+    //生产品牌列表
+    var processDetailstore = new Ext.data.JsonStore({
+        url:"work?proname=MJ1030",
+        root:"root",
+        fields: ['pack_id','pack_name','pack_tj','pack_type','pxh']
+    });
+    
+  
+   
+    //品牌列表
+    var cm = new Ext.grid.ColumnModel([
+        new Ext.grid.RowNumberer(),//自动行号
+        {header:'包装方式',dataIndex:'pack_name',width: 250,editor: new Ext.form.TextField({ allowBlank: true })},
+        {header:'体积',dataIndex:'pack_tj',width: 150,editor: new Ext.form.TextField({ allowBlank: true })},
+        {header:'计费类型',dataIndex:'pack_type',width: 120,editor:
+            new Ext.form.ComboBox({   
+            width : 115,    
+            store : new Ext.data.SimpleStore({   
+                fields : [ 'Value','Label'],     
+                data : [['1','按模块箱计算' ], ['2','按角线包计算' ],['3','按龙骨计算' ],['4','按电器箱计算' ]]   
+                }),   
+            displayField : 'Label',   
+            valueField : 'Value',   
+            typeAhead : true,   
+            mode : 'local',
+            editable: false,   
+            value : 20,   
+            listWidth: 115, /** 行宽   **/    
+            triggerAction : 'all',   
+            selectOnFocus : true   
+              
+            })},
+          {header:'排序号',dataIndex:'pxh',width: 95,editor:new Ext.form.NumberField({   
+                    allowNegative: true, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: false, // 不允许为负数   
+                    maxValue: 10000000, // 最大值为10万
+                    selectOnFocus:true            
+             })}
+        
+       ]);
+    
+    cm.defaultSortable = true;
+    
+    var summary = new Ext.ux.grid.GridSummary();
+    var grid_process = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'processList',
+    	width:850, 
+    	height:380,
+    	title:'物流单价列表',
+    	ds: processDetailstore,
+        cm: cm,
+        plugins: summary,
+        frame:false,
+        clicksToEdit:1,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid_process.render();
+    processDetailstore.load();
+  
+    
+ 
+    //增加品牌
+    Ext.get("BtnAddProcess").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+        DwrComm.parseIN('IN1018',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+               processDetailstore.load();
+           }
+       },async:false});   
+   });
+   //修改品牌
+   grid_process.on("afteredit", afterEdit, grid_process); 
+   
+   function afterEdit(e) { 
+   var record = e.record;// 被编辑的记录  
+   
+   DWRUtil.setValue("d_Id",e.record.get("pack_id"));
+   
+  
+   DWRUtil.setValue("d_Brand_Name",e.record.get("pack_name"));
+   
+   DWRUtil.setValue("d_Brand_ChnName",e.record.get("pack_tj"));
+   DWRUtil.setValue("d_Brand_Tel",e.record.get("pack_type"));
+   DWRUtil.setValue("d_Brand_Fax",e.record.get("pxh"));
+   
+   
+
+   formMap = DWRUtil.getValues("form1");
+  
+   DwrComm.parseIN('IN1018',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }
+       },async:false});
+   };
+   //删除品牌
+   grid_process.on("rowcontextmenu",function(grid_process,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             if('@@View,'=='View') {return;}
+             var treeMenu = new Ext.menu.Menu
+            ([       
+                {xtype:"button",text:"删除",icon:"images/webtype/del.gif",pressed:true, handler:function(){
+                    DWRUtil.setValue("d_Id",processDetailstore.getAt(rowIndex).get('pack_id'));
+                    formMap = DWRUtil.getValues("form1");
+                    if(!confirm("你确认要删除吗？")) return false;
+                    DwrComm.parseIN('IN1018',formMap,'delete',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                     }else{
+                        var record = grid_process.getSelectionModel().getSelected();
+                         processDetailstore.remove(record); 
+                     }
+                    },async:false});
+                    
+                }}               
+                
+            ]);
+            treeMenu.showAt(e.getPoint());
+      }); 
+   
+});
+
+</script>
+<form action="" method="post" name="form1" id="form1">
+<input type="hidden" name="d_Id">
+<input type="hidden" name="d_Brand_Name">
+<input type="hidden" name="d_Brand_ChnName">
+<input type="hidden" name="d_Brand_Tel">
+<input type="hidden" name="d_Brand_Fax">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><img
+					src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">物流单价列表</td>
+			</tr>
+  <tr>
+    <td >
+      <table width="100%" border="0">
+        <tr>
+          <td width="50%"><table width="100%" border="0" cellspacing="0" cellpadding="0" bordercolor="#000000">
+      
+      <tr>
+        <td width="50%">&nbsp;</td>
+        <td width="50%">&nbsp;</td>
+        <td width="100%">&nbsp;</td>
+        <td width="100%"><input type="button" name="BtnAddProcess" value="添加" /></td>
+      </tr>
+      <tr>
+        <td colspan="4"><div id="ProcessList"></div></td>
+      </tr>
+      
+    </table></td>
+          <td  width="50%">
+		      <table width="100%" border="0">
+        <tr>
+          <td><table width="100%" border="0" cellspacing="0" cellpadding="0" bordercolor="#000000">
+      
+      <tr>
+        <td></td>
+        </tr>
+      <tr>
+        <td><div id="ReasonList"></div></td>
+      </tr>
+      
+    </table>
+		  </td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+</form>
+</body>
+</html>

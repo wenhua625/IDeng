@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<link rel="stylesheet" type="text/css" href="css/style1.css" />
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript></script>
+<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+</object> 
+<title>生产工序管理</title>
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+	
+    //生产小组列表
+    var reasonDetailstore = new Ext.data.JsonStore({
+        url:"work?proname=MJP047",
+        root:"root",
+        fields: ['bm','mc','bz','fzr','qy_flag','pxh']
+    });
+	
+	//生产工艺列表
+    var processDetailstore = new Ext.data.JsonStore({
+        url:"work?proname=MJP048",
+        root:"root",
+        fields: ['bm','mc','zb','jjfs','dj','czr','bz','fzr','qy_flag']
+    });
+	//生产人列表
+    var manDetailstore = new Ext.data.JsonStore({
+        url:"work?proname=MJP061",
+        root:"root",
+        fields: ['yhh','yhxm']
+    });
+   
+    //工序列表
+    var cm = new Ext.grid.ColumnModel([
+        new Ext.grid.RowNumberer(),//自动行号
+        {header:'工序名称',dataIndex:'mc',width: 155,editor: new Ext.form.TextField({ allowBlank: true })}
+        
+       ]);
+    
+    cm.defaultSortable = false;
+    
+    var summary = new Ext.ux.grid.GridSummary();
+    var grid_process = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'processList',
+    	width:300, 
+    	height:380,
+    	title:'基本工序列表',
+    	ds: processDetailstore,
+        cm: cm,
+        plugins: summary,
+        frame:false,
+        clicksToEdit:2,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid_process.render();
+    //processDetailstore.load();
+  
+    //生产小组列表
+	
+    var cm1 = new Ext.grid.ColumnModel([
+        {header:'名称',dataIndex:'mc',width: 115,editor: new Ext.form.TextField({ allowBlank: true })},
+        {header:'排序号',dataIndex:'pxh',width: 55,editor: new Ext.form.TextField({ allowBlank: true })}
+       ]);
+    
+   
+    var grid_reason = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'reasonList',
+    	width:200, 
+    	height:380,
+    	title:'生产小组列表',
+    	ds: reasonDetailstore,
+        cm: cm1,
+        //plugins: summary,
+        frame:false,
+        clicksToEdit:2,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid_reason.render();
+    reasonDetailstore.load();
+	
+	//生产人列表
+	
+    var cm2 = new Ext.grid.ColumnModel([
+	     new Ext.grid.RowNumberer(),//自动行号
+        {header:'姓名',dataIndex:'yhxm',width: 105}
+
+       ]);
+    
+   
+    var grid_man = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'manList',
+    	width:200, 
+    	height:380,
+    	title:'生产小组列表',
+    	ds: manDetailstore,
+        cm: cm2,
+        
+        frame:false,
+        
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid_man.render();
+    
+ 
+    //增加生产工艺
+    Ext.get("BtnAddProcess").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+        DwrComm.parseIN('INP015',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+               processDetailstore.load({params:{ZB:encodeURIComponent(Ext.get('d_Process_Dept').dom.value)}});
+           }
+       },async:false});   
+   });
+   //修改生产工艺
+   grid_process.on("afteredit", afterEdit, grid_process); 
+   
+   function afterEdit(e) { 
+   var record = e.record;// 被编辑的记录  
+   
+   DWRUtil.setValue("d_Id",e.record.get("bm"));
+   
+  
+   //DWRUtil.setValue("d_Process_Domain",e.record.get("process_domain"));
+   
+   DWRUtil.setValue("d_Process_Name",e.record.get("mc"));
+   //DWRUtil.setValue("d_Price_Mode",e.record.get("pxh"));
+	
+   //DWRUtil.setValue("d_Process_Price",e.record.get("process_price"));
+   //DWRUtil.setValue("d_Process_Dept",e.record.get("process_dept"));
+   
+
+   formMap = DWRUtil.getValues("form1");
+  
+   DwrComm.parseIN('INP015',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }
+       },async:false});
+   };
+   //删除生产工艺
+  /* grid_process.on("rowcontextmenu",function(grid_process,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             if('@@View,'=='View') {return;}
+             var treeMenu = new Ext.menu.Menu
+            ([       
+                {xtype:"button",text:"删除",icon:"images/webtype/del.gif",pressed:true, handler:function(){
+                    DWRUtil.setValue("d_Id",processDetailstore.getAt(rowIndex).get('bm'));
+                    formMap = DWRUtil.getValues("form1");
+                    DwrComm.parseIN('INP015',formMap,'delete',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                     }else{
+                        var record = grid_process.getSelectionModel().getSelected();
+                         processDetailstore.remove(record); 
+                     }
+                    },async:false});
+                    
+                }}               
+                
+            ]);
+            treeMenu.showAt(e.getPoint());
+      }); */
+    //点击生产小组  
+   grid_reason.on("rowclick",function(grid_reason,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             var record = grid_reason.getSelectionModel().getSelected();
+             DWRUtil.setValue("d_Process_Dept",record.get("bm"));
+            
+             processDetailstore.load({params:{ZB:encodeURIComponent(Ext.get('d_Process_Dept').dom.value)}});
+			 manDetailstore.load({params:{ZB:encodeURIComponent(Ext.get('d_Process_Dept').dom.value)}});
+           
+   });
+   //增加生产小组
+    Ext.get("BtnAddReason").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+        DwrComm.parseIN('INP014',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+               reasonDetailstore.load();
+           }
+       },async:false});   
+   });
+   
+    //修改原因
+   grid_reason.on("afteredit", afterEditReason, grid_reason); 
+   
+   function afterEditReason(e) { 
+   var record = e.record;// 被编辑的记录  
+   DWRUtil.setValue("d_Res_Id",record.get("bm"));
+
+   DWRUtil.setValue("d_Process_Name",record.get("mc"));
+   DWRUtil.setValue("d_Price_Mode",e.record.get("pxh"));
+   formMap = DWRUtil.getValues("form1");
+  
+   DwrComm.parseIN('INP014',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }
+       },async:false});
+   };
+   //删除原因
+   /*grid_reason.on("rowcontextmenu",function(grid_reason,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             if('@@View,'=='View') {return;}
+             var treeMenu = new Ext.menu.Menu
+            ([       
+                {xtype:"button",text:"删除",icon:"images/webtype/del.gif",pressed:true, handler:function(){
+                    DWRUtil.setValue("d_Res_Id",reasonDetailstore.getAt(rowIndex).get('bm'));
+                    formMap = DWRUtil.getValues("form1");
+                    DwrComm.parseIN('INP014',formMap,'delete',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                     }else{
+                        var record = grid_reason.getSelectionModel().getSelected();
+                         reasonDetailstore.remove(record); 
+                     }
+                    },async:false});
+                    
+                }}               
+                
+            ]);
+            treeMenu.showAt(e.getPoint());
+      });*/
+      
+     //增加操作工人
+    Ext.get("BtnAddOprMan").on("click",function(){
+       
+        /*var row=grid_process.getSelectionModel().getSelected();
+      
+       if(row == null)  {alert("请选择要操作的工序！"); return false;}
+       
+       DWRUtil.setValue("d_Id",row.get("bm"));
+       formMap = DWRUtil.getValues("form1");
+       form1.d_Opr_Man.value="";
+       form1.d_Flag.value = "0";
+       var winSub=NewWinCustMD('display?proname=production/oprMan_list&tmp11='+Math.random(),window,400,600);
+       formMap = DWRUtil.getValues("form1");
+       if (Ext.get('d_Flag').dom.value == "1")
+       {
+          DwrComm.parseIN('INP016',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               		alert(data);
+           		}else{
+               		processDetailstore.load({params:{ZB:encodeURIComponent(Ext.get('d_Process_Dept').dom.value)}});
+           }
+       	 },async:false}); 
+       }*/
+       form1.action="display?proname=production/grgl.htm";
+       form1.submit();
+   }); 
+   
+});
+
+</script>
+<form action="" method="post" name="form1" id="form1">
+<input type="hidden" name="d_Id">
+<input type="hidden" name="d_Res_Id">
+<input type="hidden" name="d_Req_Time">
+<input type="hidden" name="d_Process_Desc"> 
+<input type="hidden" name="d_Process_Domain"> 
+<input type="hidden" name="d_Fact_Time">
+<input type="hidden" name="d_Process_Name">
+<input type="hidden" name="BtnAddProduct">
+<input type="hidden" name="Product_Code">
+<input type="hidden" name="d_Price_Mode">
+<input type="hidden" name="d_Process_Price">
+<input type="hidden" name="d_Process_Dept">
+<input type="hidden" name="d_Flag" value="0">
+<input type="hidden" name="d_Opr_Man">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr height="30">
+				<td
+									style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"
+									valign="top">
+									<img src="images/loadtree/mdmde.gif" WIDTH="18" HEIGHT="18">标准生产工序列表</td>
+			</tr>
+  <tr>
+    <td >
+	 <table width="100%" border="0">
+        <tr>
+          <td width="18%"><table width="100%" border="0" cellspacing="0" cellpadding="0" bordercolor="#000000">
+      
+      <tr>
+        <td><input type="button" name="BtnAddReason" value="添加生产小组" /></td>
+        </tr>
+      <tr>
+        <td><div id="ReasonList"></div></td>
+      </tr>
+      
+    </table>
+      </td>
+          <td  width="82%">
+		     
+	
+	<table width="100%" border="0">
+        <tr>
+          <td width="50%"><table width="100%" border="0" cellspacing="0" cellpadding="0" bordercolor="#000000">
+      
+      <tr>
+        <td width="22%">&nbsp;</td>
+        <td width="13%"><input type="button" name="BtnAddProcess" value="添加工艺" /></td>
+        <td width="17%" align="right"><input type="button" name="BtnAddOprMan" value="添加操作工人" /></td>
+        <td width="48%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="2"><div id="ProcessList"></div></td>
+        <td colspan="2"><div id="ManList"></div></td>
+        </tr>
+      
+    </table>
+		  </td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+</form>
+</body>
+</html>

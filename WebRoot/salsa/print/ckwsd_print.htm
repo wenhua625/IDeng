@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<script language="javascript" src="js/print/LodopFuncs.js"></script>
+<object  id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+       <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>
+</object>
+
+
+<script language="javascript" type="text/javascript"> 
+	 //声明为全局变量
+	function PrintMytable(){
+		  
+		var LODOP=getLodop(document.getElementById('LODOP_OB'),document.getElementById('LODOP_EM'));
+		LODOP.ADD_PRINT_TABLE(10,10,"95%",265,document.getElementById("div1").innerHTML);
+		
+		var ix=LODOP.PREVIEW();
+		//window.dialogArguments.document.getElementById('print_Flag').value=ix; 
+		   
+		window.close();			
+	};		
+</script>
+<title></title>
+
+
+</head>
+<body>
+
+<div id="div1">
+
+<table border=1 width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse" bordercolor="#000000">
+
+<thead>
+<tr>
+   <td colspan="8">
+<table width="100%" border="0">
+  <tr>
+				
+				<td width="27%" style="font-size:14px"> <p align="center" >第<font color="#0000FF" tdata="pageNO" format="#">#</font>页/总<font color="#0000FF" tdata="pageCount" format="#">##</font>页</p></td>
+				<td width="45%"></td>
+				<td width="28%" style="font-size:14px">&nbsp;
+					</td>
+		  </tr>
+			<tr>
+				<td width="27%">&nbsp;</td>
+				<td width="45%" align="center" >
+				  <strong>@@LS.SYSTEMBHD,委外送货单<br>
+			  </strong>				</td>
+				<td width="28%" class="style6">&nbsp;</td>
+			</tr>
+			<tr >
+			  <td colspan="3" align="center"><table width="90%" border="0" cellpadding="0" cellspacing="0">
+                <tr >
+                  <td width="2%" align="left" style="font-size:14px"><!--出仓类型：!!MJP037,25--></td>
+                  <td width="28%" align="left" style="font-size:14px">单号：!!MJP037,01</td>
+                  <td width="21%" align="left" style="font-size:14px">日期：!!MJP037,02</td>
+                  <td width="49%" align="left" style="font-size:14px">加工商：!!MJP037,05</td>
+                </tr>
+                <tr>
+                  <td colspan="4" align="left" style="font-size:14px">备注：!!MJP037,21</td>
+                  </tr>
+              </table></td>
+			</tr>
+</table></td>
+</tr>
+
+
+<tr align="center">
+
+										<td  nowrap="nowrap" style="font-size:14px">
+											序号										</td>
+										<td  nowrap="nowrap" style="font-size:14px">
+											型号及编码</td>
+										
+										<td  nowrap="nowrap" style="font-size:14px"> 名称</td>
+										<td  nowrap="nowrap" style="font-size:14px">规格</td>
+										
+										<td  nowrap="nowrap" style="font-size:14px">单位</td>
+										<td  nowrap="nowrap" style="font-size:14px">
+											数量										</td>
+										
+										<td  nowrap="nowrap" style="font-size:14px">备 注</td>
+	  </tr>
+</thead>
+<tr >
+
+										<td style="font-size:14px" align="center">
+											$$MJP033,20</td>
+										<td style="font-size:14px">
+											$$MJP033,17</td>	
+										
+										<td style="font-size:14px">
+											$$MJP033,03</td>
+										<td style="font-size:14px">$$MJP033,04</td>
+										
+										<td style="font-size:14px" align="center">$$MJP033,05</td>
+										<td style="font-size:14px" align="right">
+											$$MJP033,06</td>
+										<td style="font-size:14px">
+										$$MJP033,19 $$MJP033,13</td>
+	</tr>
+									<tr>
+										<td colspan="5" align="right" style="font-size:14px">
+											合计：										</td>
+										<td align="right" style="font-size:14px" >
+											!!MJP037,11										</td>
+										<td align="right">&nbsp;										</td>
+									</tr>
+
+									
+
+
+
+<tfoot>
+
+
+
+<tr>
+<td colspan="8">
+   <table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr class="style5" valign="bottom">
+				<td>
+					<table width="100%" border="0">
+						<tr>
+							<td width="20%" style="font-size:14px">
+								制单人：</td>
+							<td width="11%" style="font-size:14px">经办人： </td>
+							<td width="13%" style="font-size:14px">&nbsp;</td>
+							<td width="23%" style="font-size:14px">提货人：								</td>
+							<td width="33%" style="font-size:14px">
+								打印日期：@@LS.DATE,							</td>
+						</tr>
+					</table>				</td>
+			</tr>
+</table></td>
+</tr>
+</tfoot>
+</table>
+</div>
+
+
+
+<script language="javascript" type="text/javascript"> 
+	PrintMytable();	
+</script>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<link type="text/css" rel="stylesheet" href="css/ListRange.css">
+		<style>
+               p {margin:0px; padding:0px;}
+               .fc{color:#999}
+         </style>
+         <SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+         
+         <script type='text/javascript' src='dwr/engine.js'></script>
+         <script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+		<SCRIPT language=javascript>
+        function opr(url){
+          var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,650,850);
+          //refreshNum();
+          //form1.submit();
+          //window.document.location.reload();
+        }
+        function refreshNum(){
+             if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+             var formMap = DWRUtil.getValues("form1");
+            DwrComm.parseKey('MJ0K83',formMap,{callback:function(list){
+                 
+                document.getElementById("div_qg").innerHTML="("+list+")";   
+                },async:false});
+            DwrComm.parseKey('MJ0X02',formMap,{callback:function(list){
+                 
+                document.getElementById("div_qgsp").innerHTML="("+list+")";   
+                },async:false});
+        }
+       </SCRIPT>
+
+	</head>
+
+	<body>
+	<FORM name=form1 action=/CustomQueryAction.do method="post">
+       <DIV class=scroll_function_small_menuReport>
+									<DIV style="MARGIN-TOP: 5px">
+										<TABLE style="WIDTH: 540px" cellSpacing=0 cellPadding=0  border=0>
+											<TBODY>
+												<TR>
+													<TD align=middle width=90></TD>
+													<TD align=middle width=60>&nbsp;</TD>
+													<TD align=middle width=90></TD>
+													<TD align=middle width=60>&nbsp;													</TD>
+													<TD align=middle width=60></TD>
+													<TD align=middle width=60>&nbsp;</TD>
+													<TD align=middle width=90>
+														<P></P>
+												  </TD>
+													<TD align=middle width=60>&nbsp;													</TD>
+													<TD align=middle width=90> </TD>
+												    <TD align=middle width=90>&nbsp;</TD>
+												    <TD align=middle width=90></TD>
+												</TR>
+												<TR>
+													<TD align=middle height=60>&nbsp;												  </TD>
+													<TD align=middle>&nbsp;												  </TD>
+													<TD align=middle>												</TD>
+													<TD align=middle>&nbsp;												  </TD>
+													<TD align=middle>&nbsp;</TD>
+													<TD align=middle>&nbsp;</TD>
+													<TD align=middle></TD>
+													<TD align=middle>&nbsp;												  </TD>
+													<TD align=middle> </TD>
+												    <TD align=middle>&nbsp;</TD>
+												    <TD align=middle></TD>
+												</TR>
+												<TR>
+													<TD align=middle>!!QXGN15,</TD>
+													<TD align=middle>&nbsp;</TD>
+													<TD align=middle>!!QXGN06,</TD>
+													<TD align=middle>
+																										</TD>
+													<TD align=middle>
+													    !!QXGN19,
+													</TD>
+													<TD align=middle>&nbsp;</TD>
+													<TD align=middle>
+													   
+													</TD>
+													<TD align=middle>&nbsp;</TD>
+													<TD align=middle>
+														
+												  </TD>
+												    <TD align=middle></TD>
+												    <TD align=middle>
+												       
+												    </TD>
+												</TR>
+												
+												
+											</TBODY>
+										</TABLE>
+									</DIV>
+								</DIV>
+		
+      </FORM>
+
+	</body>
+</html>

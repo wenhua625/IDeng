@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>效果图上传</title>
+<base target="_self"/>
+
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" CONTENT="0">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+
+<script src="inc/dateams.js" type=text/javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/openWindow.js"></script>
+
+<link rel="stylesheet" type="text/css" href="js/huploadify/Huploadify.css"/>
+<script type="text/javascript" src="js/huploadify/jquery.js"></script>
+<script type="text/javascript" src="js/huploadify/jquery.Huploadify.js"></script>
+
+
+
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+
+<script type="text/javascript">
+       
+        $(document).ready(function() {
+			 if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+	
+    var formMap = DWRUtil.getValues("form1");
+			var s_sup;
+               DwrComm.parseMJ('MJP279',formMap,{callback:function(list){
+                   s_sup = list;  
+               },async:false});
+			   
+			 //  alert("s_sup:"+s_sup);
+			   if(s_sup.length==0)
+			   {
+				   $('#BtnClear').attr('disabled',"true");
+			   }
+			   
+			   for(var x=0;x<s_sup.length;x++)
+			   {
+				 //alert("path:"+s_sup[x].image_path);
+				 $("#divPreview").append($("<img src='" +s_sup[x].image_path + "'/>"));  
+			   }
+			  // alert("dd="+s_sup.length);
+			  
+			
+			  
+			  $("#BtnClear").click(function(){
+				  
+				  if(!confirm("清除掉后，图片将无法恢复，你确认要删除吗？")) return false;
+				  formMap = DWRUtil.getValues("form1");
+                 DwrComm.parseIN('IN0051',formMap,'delete',{callback:function(data){
+                    if (data != 'ok'){
+                      alert(data);
+                      }else{ 
+					   form1.submit();
+                     }
+                 },async:false});
+             });
+			   
+    
+			var up = $('#uploadify').Huploadify({
+		uploader:'@@LS.URL,/work?proname=UE0015&order_code=@@Order_Code,&Product_Id=@@Product_Id,',
+		auto:true,
+		fileTypeExts:'*.gif; *.jpg; *.png',
+		multi:true,
+		formData:{},
+		fileSizeLimit:1024,
+		showUploadedPercent:true,
+		showUploadedSize:true,
+		removeTimeout:1000,
+		buttonText:'上传效果图',
+		onUploadStart:function(file){
+			console.log(file.name+'开始上传');
+		},
+		onUploadSuccess: function(file, data, response) { 
+              
+				$("#divPreview").append($("<img src='" +data + "'/>"));
+        },
+		onInit:function(obj){
+			console.log('初始化');
+			console.log(obj);
+		},
+		onUploadComplete:function(file){
+			console.log(file.name+'上传完成');
+		},
+		onCancel:function(file){
+			console.log(file.name+'删除成功');
+		},
+		onClearQueue:function(queueItemCount){
+			console.log('有'+queueItemCount+'个文件被删除了');
+		},
+		onDestroy:function(){
+			console.log('destroyed!');
+		},
+		onSelect:function(file){
+			console.log(file.name+'加入上传队列');
+		},
+		onQueueComplete:function(queueData){
+			console.log('队列中的文件全部上传完成',queueData);
+		}
+	});
+			
+        });
+ 
+
+
+
+</script>
+</head>
+<body scroll="auto" style="BACKGROUND-COLOR: #cccccc;">
+<form action="display?proname=baseinfo/spgl_photo_md.htm" method="post" name="form1" >
+<input type="hidden" value="@@Order_Code," name="BM" id="BM">
+<input type="hidden" value="@@Product_Id," name="Product_Id" id="Product_Id">
+<input type="hidden" value="@@Image_Type," name="Image_Type" id="Image_Type">
+<table width="100%" border="0" cellSpacing=0 cellPadding=0>
+   <tr>
+      <td align="left" valign="top">
+      
+      <div id="divPreview" style="width: 750px; padding-bottom:10px;border:solid 0px #000;">
+                            
+                        </div>
+	 
+		
+      </td>
+    </tr>
+    
+  
+      <tr>
+       <td align="center">每张效果图最大1M，按上传顺序显示，弹窗后可以按Shift键上传多张图片(最多5张)
+       <div id="uploadify"></div>
+         <!-- <input type="file" name="uploadify" id="uploadify"> -->  <input type="button" name="BtnClear" id="BtnClear" value="清空图片" > <input type="button" name="BtnClose" value="关闭" onClick="closewin('xgt-win')"></td>
+    </tr>
+ </table>
+</form>
+</body>
+</html>

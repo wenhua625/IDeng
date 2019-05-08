@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+
+    var store = new Ext.data.JsonStore({
+        url:"work?proname=XL0061",
+        fields: ['value', 'name']
+    });
+    
+    var combo = new Ext.form.ComboBox({
+        store: store,
+        displayField:'name',
+        typeAhead: true,
+        mode: 'local',
+        forceSelection: true,
+        triggerAction: 'all',
+        emptyText:'请输入客户名称',
+        selectOnFocus:true,
+        valueField :'value',
+        applyTo: 'Cust_Name',
+        listeners:{select:function(){
+                form1.Cust_Code.value = combo.getValue();    
+             }
+           }
+    });
+    
+    Ext.get("AGENT_CODE").on("change",function(){
+       formMap = DWRUtil.getValues("form1");
+       store.load({params:{AGENT_CODE:Ext.get('AGENT_CODE').dom.value}});
+     
+   });
+   
+   if('@@LS.YHZEG,' == 'ywy'){
+      
+       form1.YWY.options.length=0; //清除下拉框的值
+       form1.YWY.options[0]=new Option('@@LS.XM,','@@LS.XM,');
+      }
+    
+});
+
+</script>
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr align="center" height="5"> 
+		<td>
+		
+		</td>
+	</tr>
+	<tr align="center">
+		<td>
+		<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><img
+					src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">订单明细表</td>
+				<td style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"></td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+	<td>
+	   <form name="form1" method="post" action="display?proname=agent/xs_list_content.htm" id="form1" target="cardframe">
+	  <table width="100%" border="0" cellpadding="5" cellspacing="0" >
+          <tr> 
+            <td width="8%" align="right">下仓时间：</td>
+            <td width="92%"><input type="text" name="ORDER_DATE1" size="10" value="@@LS.FIRSTDAYSOFCURMONTH," readonly onClick="javascript:ShowCalendar(this)">
+              -            
+              <input type="text" name="ORDER_DATE2" size="10" readonly value="@@LS.CURDATE," onClick="javascript:ShowCalendar(this)">
+              品名：
+              <input type="text" name="PRODUCT_NAME" size="20">
+              型号：
+              <input type="text" name="PRODUCT_CODE" size="20">
+              产品类别：
+              <select name="SERIES_CODE">
+                <option value="">全部</option>
+                <option>$$XL0002,</option>
+              </select>
+              规格：
+              <input type="text" name="PRODUCT_SIZE" size="">
+              <input type="hidden" name="Cust_Code">
+              <input type="hidden" name="Note_Type" value="XS">
+              <input type="submit" name="Submit" value="查询"></td>
+          </tr>
+        </table>
+	  </form>
+	</td>
+	</tr>
+	
+	<tr>
+      <td><IFRAME id="cardframe" name="cardframe"
+						src=""
+						frameBorder=0 width="100%" scrolling=auto height="430"></IFRAME>
+       
+      </td>
+    </tr>
+    <tr></tr>
+  </table>
+  
+
+</body>
+<script language="javascript">
+function go(){
+    if('@@LS.YHZEG,' == 'ywy'){
+      
+       form1.YWY.options.length=0; //清除下拉框的值
+       form1.YWY.options[0]=new Option('@@LS.XM,','@@LS.XM,');
+      }
+    form1.submit();
+}
+go();
+</script>
+</html>

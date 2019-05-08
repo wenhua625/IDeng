@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+</object>
+
+
+<script language="javascript" type="text/javascript"> 
+	 //声明为全局变量
+	function PrintMytable(){
+		
+		
+		
+		 
+		//var strStyle="<style> table,td,th {border-width: 1px;border-style: solid;border-collapse: collapse}</style>"
+        var table318 =document.getElementById("tb318");
+		var table477 =document.getElementById("tb477");
+		var tablelp =document.getElementById("tblp");
+		var tableqt =document.getElementById("tbqt");
+		var item = 1;
+		//LODOP.SET_PRINT_PAGESIZE(3,2150,2794, "A4+"); 
+
+
+		if(table318.rows.length >3){
+			
+		LODOP.ADD_PRINT_TABLE(180,1,"99.8%",254,document.getElementById("div318").innerHTML);
+		
+		LODOP.SET_PRINT_STYLEA(0,"Vorient",3);		
+		LODOP.ADD_PRINT_HTM(20,"2%","80%",169,document.getElementById("div1").innerHTML);
+		
+		LODOP.SET_PRINT_STYLEA(0,"ItemType",1);
+		LODOP.SET_PRINT_STYLEA(0,"LinkedItem",item);
+		
+	    LODOP.ADD_PRINT_HTM(437,2,"90%",84,document.getElementById("div3").innerHTML);
+		LODOP.SET_PRINT_STYLEA(0,"ItemType",1);
+		LODOP.SET_PRINT_STYLEA(0,"LinkedItem",item);
+		
+		item=item+3;
+		}
+		if(table477.rows.length >3){
+		LODOP.NewPageA();
+		
+		LODOP.ADD_PRINT_TABLE(180,1,"99.8%",254,document.getElementById("div477").innerHTML);
+		LODOP.SET_PRINT_STYLEA(0,"Vorient",3);		
+		LODOP.ADD_PRINT_HTM(20,"2%","80%",169,document.getElementById("div1").innerHTML);
+		
+		LODOP.SET_PRINT_STYLEA(0,"ItemType",1);
+		LODOP.SET_PRINT_STYLEA(0,"LinkedItem",item);
+		//LODOP.ADD_PRINT_BARCODE(70,600,148,126,"QRCode","!!MJP186,01");
+		LODOP.ADD_PRINT_HTM(437, 2, "90%", 84, document.getElementById("div3").innerHTML);
+		LODOP.SET_PRINT_STYLEA(0,"ItemType",1);
+		LODOP.SET_PRINT_STYLEA(0,"LinkedItem",item);
+		
+		item=item+3;
+		}
+		if(tablelp.rows.length >3){
+		LODOP.NewPageA();
+        
+		LODOP.ADD_PRINT_TABLE(180, 1, "99.8%", 254, document.getElementById("div_lp").innerHTML);
+		LODOP.SET_PRINT_STYLEA(0,"Vorient",3);		
+		LODOP.ADD_PRINT_HTM(20,"2%","80%",169,document.getElementById("div1").innerHTML);
+		LODOP.SET_PRINT_STYLEA(0,"ItemType",1);
+		LODOP.SET_PRINT_STYLEA(0,"LinkedItem",item);
+		LODOP.ADD_PRINT_HTM(437, 2, "90%", 84, document.getElementById("div3").innerHTML);
+		LODOP.SET_PRINT_STYLEA(0,"ItemType",1);
+		LODOP.SET_PRINT_STYLEA(0,"LinkedItem",item);
+		
+		item=item+3;
+		}
+		
+		if(tableqt.rows.length >3){
+		LODOP.NewPageA();
+       
+		LODOP.ADD_PRINT_TABLE(180, 1, "99.8%", 254, document.getElementById("div_qt").innerHTML);
+		LODOP.SET_PRINT_STYLEA(0,"Vorient",3);		
+		LODOP.ADD_PRINT_HTM(20,"2%","80%",169,document.getElementById("div1").innerHTML);
+		LODOP.SET_PRINT_STYLEA(0,"ItemType",1);
+		LODOP.SET_PRINT_STYLEA(0,"LinkedItem",item);
+		LODOP.ADD_PRINT_HTM(437, 2, "90%", 84, document.getElementById("div3").innerHTML);
+		LODOP.SET_PRINT_STYLEA(0,"ItemType",1);
+		LODOP.SET_PRINT_STYLEA(0,"LinkedItem",item);
+		
+		item=item+3;
+		}
+        	
+        LODOP.ADD_PRINT_HTM(1,550,400,100,"第!!MJP186,18次打印    第<font color='#0000FF' tdata='pageNO' format='#'>#</font>页/总<font color='#0000FF' tdata='pageCount' format='#'>##</font>页");
+        LODOP.SET_PRINT_STYLEA(0,"ItemType",1);
+		
+		LODOP.ADD_PRINT_BARCODE(70,630,148,126,"QRCode","!!MJP186,01");
+		//LODOP.SET_PRINT_STYLEA(0,"GroundColor","#0080FF")
+	    LODOP.SET_PRINT_STYLEA(0,"ItemType",1);
+		
+       
+
+		//LODOP.ADD_PRINT_TABLE(10,1,"99.8%",550,document.getElementById("div1").innerHTML);
+		
+		var ix=LODOP.PREVIEW();
+		window.dialogArguments.document.getElementById('print_Flag').value=ix; 
+		   
+		window.close();			
+	};		
+</script>
+<title>配货单打印中，请稍等。。。</title>
+</head><body>
+  <div id="div1">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          
+          <tr>
+            <td width="27%"><img src="images/logon/Fsilon.gif" width="243" height="57" /></td>
+            <td width="45%" align="center" style="font-size:20px"><strong>@@LS.SYSTEMBHD,<br>
+              配货单  </strong></td>
+            <td width="28%" class="style6"><br>
+              NO:!!MJP186,01 </td>
+          </tr>
+          <tr>
+            <td colspan="3" style=" font-size:16px"><table width="100%" border="0">
+                <tr>
+                  <td width="16%" align="right"> 订货单位： </td>
+                  <td width="36%"> !!MJP186,04(!!MJP186,03) </td>
+                  <td> 配货日期：!!MJP186,02 </td>
+                  <td rowspan="4" valign="top"><div id="ewm"></div></td>
+                </tr>
+                <tr >
+                  <td align="right" style="font-size:16px">联系人： </td>
+                  <td align="left" style="font-size:16px">!!MJP186,13</td>
+                  <td><span style="font-size:16px">联系电话：!!MJP186,14 </span></td>
+                </tr>
+                <tr>
+                  <td align="right">送货地址：</td>
+                  <td colspan="2">!!MJP186,12 (!!MJP186,15)</td>
+                </tr>
+                <tr>
+                  <td align="right">备注：</td>
+                  <td colspan="2">!!MJP186,17</td>
+                </tr>
+              </table></td>
+          </tr>
+    </table>
+</div>
+  <div id="div318">
+  <table border=1 width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse" bordercolor="#000000" id="tb318">
+    <thead>
+    <tr align="center" style="font-size:18px; height:25px">
+            <td  nowrap="nowrap">订单号 </td>
+            <td nowrap="nowrap">名称</td>
+            <td nowrap="nowrap">型号</td>
+            <td nowrap="nowrap">规格</td>
+            <td nowrap="nowrap">单位</td>
+            <td  nowrap="nowrap"> 数量 </td>
+            <td  nowrap="nowrap">复核</td>
+            <td  nowrap="nowrap"> 备 注 </td>
+     </tr>
+    
+     <tr align="left" style="font-size:18px; height:25px">
+            <td colspan="8">!!MJP189,01</td>
+     </tr>
+      </thead>
+          <tr align="center" style="font-size:16px; height:25px">
+            <td align="center" width="3%">$$MJP189,09</td>
+            <td align="left"width="23%">$$MJP189,02</td>
+            <td align="left" width="20%">$$MJP189,04</td>
+            <td align="left" width="15%">$$MJP189,03</td>
+            <td width="5%">$$MJP189,05</td>
+            <td width="10%"> $$MJP189,06 </td>
+            <td width="3%">&nbsp;</td>
+            <td align="left" width="20%"> $$MJP189,07 </td>
+          </tr>
+          <tr align="center" style="font-size:16px; height:25px">
+            <td colspan="5" align="right">合计：</td>
+            <td width="10%"> $$MJH189,01 </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        
+    </table>
+    </div>
+    
+    <div id="div477">
+      <table border=1 width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse" bordercolor="#000000" id="tb477">
+    <thead>
+    <tr align="center" style="font-size:18px; height:25px">
+            <td  nowrap="nowrap">订单号</td>
+            <td nowrap="nowrap">名称</td>
+            <td nowrap="nowrap">型号</td>
+            <td nowrap="nowrap">规格</td>
+            <td nowrap="nowrap">单位</td>
+            <td  nowrap="nowrap"> 数量 </td>
+            <td  nowrap="nowrap">复核</td>
+            <td  align="left" nowrap="nowrap"> 备 注 </td>
+     </tr>
+    
+     <tr align="left" style="font-size:18px; height:25px">
+            <td colspan="8">!!MJP190,01</td>
+     </tr>
+      </thead>
+          <tr align="center" style="font-size:16px; height:25px">
+            <td align="center" width="3%">$$MJP190,09</td>
+            <td align="left"width="23%">$$MJP190,02</td>
+            <td align="left" width="20%">$$MJP190,04</td>
+            <td align="left" width="15%">$$MJP190,03</td>
+            <td width="5%">$$MJP190,05</td>
+            <td width="10%"> $$MJP190,06 </td>
+            <td width="3%">&nbsp;</td>
+            <td align="left" width="20%"> $$MJP190,07 </td>
+          </tr>
+           <tr align="center" style="font-size:16px; height:25px">
+            <td colspan="5" align="right">合计：</td>
+            <td width="10%"> $$MJH190,01 </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+     </table> 
+    </div>
+     <div id="div_lp">
+       <table border=1 width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse" bordercolor="#000000" id="tblp">
+    <thead>
+    <tr align="center" style="font-size:18px; height:25px">
+            <td  nowrap="nowrap">订单号</td>
+            <td nowrap="nowrap">名称</td>
+            <td nowrap="nowrap">型号</td>
+            <td nowrap="nowrap">规格</td>
+            <td nowrap="nowrap">单位</td>
+            <td  nowrap="nowrap"> 数量 </td>
+            <td  nowrap="nowrap">复核</td>
+            <td  nowrap="nowrap"> 备 注 </td>
+     </tr>
+    
+     <tr align="left" style="font-size:18px; height:25px">
+            <td colspan="8">!!MJP191,01</td>
+     </tr>
+      </thead>
+          <tr align="center" style="font-size:16px; height:25px">
+            <td align="center" width="3%">$$MJP191,09</td>
+            <td align="left"width="23%">$$MJP191,02</td>
+            <td align="left" width="20%">$$MJP191,04</td>
+            <td align="left" width="15%">$$MJP191,03</td>
+            <td width="5%">$$MJP191,05</td>
+            <td width="10%"> $$MJP191,06 </td>
+            <td width="3%">&nbsp;</td>
+            <td align="left" width="20%"> $$MJP191,07 </td>
+          </tr>
+           <tr align="center" style="font-size:16px; height:25px">
+            <td colspan="5" align="right">合计：</td>
+            <td width="10%"> $$MJH191,01 </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+     </table>
+    </div>
+     
+     <div id="div_qt">
+        <table border=1 width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse" bordercolor="#000000" id="tbqt">
+    <thead>
+    <tr align="center" style="font-size:18px; height:25px">
+            <td  nowrap="nowrap">订单号</td>
+            <td nowrap="nowrap">名称</td>
+            <td nowrap="nowrap">型号</td>
+            <td nowrap="nowrap">规格</td>
+            <td nowrap="nowrap">单位</td>
+            <td  nowrap="nowrap"> 数量 </td>
+            <td  nowrap="nowrap">复核</td>
+            <td  nowrap="nowrap"> 备 注 </td>
+     </tr>
+    
+     <tr align="left" style="font-size:18px; height:25px">
+            <td colspan="8">!!MJP192,01</td>
+     </tr>
+      </thead>
+          <tr align="center" style="font-size:16px; height:25px">
+            <td align="center" width="3%">$$MJP192,09</td>
+            <td align="left"width="23%">$$MJP192,02</td>
+            <td align="left" width="20%">$$MJP192,04</td>
+            <td align="left" width="15%">$$MJP192,03</td>
+            <td width="5%">$$MJP192,05</td>
+            <td width="10%"> $$MJP192,06 </td>
+            <td width="3%">&nbsp;</td>
+            <td width="20%"> $$MJP192,07 </td>
+          </tr>
+           <tr align="center" style="font-size:16px; height:25px">
+            <td colspan="5" align="right">合计：</td>
+            <td width="10%"> $$MJH192,01 </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+     </table>
+     </div>
+    
+    <div id="div3">
+    <table width="100%" border="0">
+            
+            <tr >
+              <td style="font-size:16px; font-weight:bold">注:收到货物后请认真核对出库单与实物是否相符，品尚系列，定制产品公司承诺8天内发货。客服电话:0573-86116777;0573-86180711</td>
+            </tr>
+            
+           
+      </table>
+   </div>
+<script language="javascript" type="text/javascript"> 
+	PrintMytable();	
+</script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+</object>
+<link href="css/style011.css" rel="stylesheet" type="text/css" />
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+
+<script language="javascript">
+   function printView(){
+   
+        LODOP.SET_PRINT_STYLEA(0,"FontSize",6);
+        			
+        LODOP.ADD_PRINT_BARCODE(5,768,257,36,"128A",'@@Agent_Code,');
+        LODOP.ADD_PRINT_URL(10,20,"80%","96%",'@@LS.URL,/display?proname=report/fhdzd_result_print.htm&Agent_Code=@@Agent_Code,&ORDER_DATE1=@@ORDER_DATE1,&ORDER_DATE2=@@ORDER_DATE2,');	
+        
+        LODOP.SET_PRINT_PAGESIZE(2, 0, 0, "A4");	
+		LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,""); //按适宽模式显示
+		LODOP.PREVIEW();
+		
+   }
+</script>
+<title>Untitled Document</title>
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+	   
+	</td>
+  </tr>
+  <tr>
+    <td>
+	    <table width="100%" border="1" style="border-collapse:collapse" bordercolor="#000000" id="content">
+          <tr align="center" bgcolor="#BFBFBF" style="font-size: 9pt;"> 
+            <td rowspan="2" nowrap><b>日期</b></td>
+            <td rowspan="2" nowrap><b>销售单号及摘要</b></td>
+            <!--  <td rowspan="2" nowrap><strong>期初结余</strong></td>-->
+            <td rowspan="2" nowrap><b>汇款金额</b></td>
+            <td colspan="6" nowrap><b>补贴费用</b></td>
+            <td colspan="5"><strong>发货明细金额</strong></td>
+            
+            
+            <td rowspan="2" nowrap><strong>期末结余</strong></td>
+          </tr>
+          <tr align="center" bgcolor="#BFBFBF" style="font-size: 9pt;">
+            <td nowrap><b>装修补贴</b></td>
+            <td nowrap><b>广告补贴</b></td>
+            <td nowrap><b>上样补贴</b></td>
+            <td nowrap><strong>折扣返利</strong></td>
+            <td nowrap><strong>退货冲款</strong></td>
+            <td nowrap><b>其他补贴</b></td>
+            <td><b>货款(返利)</b></td>
+            <td><b>货款(不返利)</b></td>
+            <td><b>出样</b></td>
+            <td><b>工程</b></td>
+            <td><strong nowrap>代垫运费</strong></td>
+          </tr>
+          <tr style="font-size: 9pt;"> 
+            <td >!!MJP075,01</td>
+            <td  colspan="13">上期结余</td>
+            
+            
+            <td align="right"  >!!MJP075,16</td>
+          </tr>
+          <tr style="font-size: 9pt;"> 
+            <td nowrap >$$MJP075,01</td>
+            <td nowrap >$$MJP075,02</td>
+            <!--<td align="right" nowrap >$$MJP075,13</td>-->
+            <td align="right" nowrap >$$MJP075,03</td>
+            <td align="right" nowrap >$$MJP075,04</td>
+            <td align="right" nowrap >$$MJP075,05</td>
+            <td align="right" nowrap >$$MJP075,06</td>
+            <td align="right" nowrap >$$MJP075,07</td>
+            <td align="right" nowrap >$$MJP075,08</td>
+            <td align="right" nowrap >$$MJP075,15</td>
+            <td align="right" nowrap >$$MJP075,10</td>
+            
+            <td align="right" nowrap >$$MJP075,11</td>
+            <td align="right" nowrap >$$MJP075,13</td>
+            <td align="right" nowrap >$$MJP075,12</td>
+            <td align="right" nowrap >$$MJP075,14</td>
+            <td align="right" nowrap >$$MJP075,17</td>
+          </tr>
+          <tr style="font-size: 9pt;font:bold;"> 
+            <td colspan="2" align="right">合计：</td>
+             <td align="right">!!MJH075,01</td>
+            <td align="right">!!MJH075,02</td>
+            <td align="right">!!MJH075,03</td>
+            <td align="right">!!MJH075,13</td>
+            <td align="right">!!MJH075,04</td>
+            <td align="right">!!MJH075,06</td>
+            <td align="right">!!MJH075,13</td>
+            <td align="right">!!MJH075,08</td>
+            <td align="right">!!MJH075,09</td>
+            <td align="right">!!MJH075,11</td>
+            <td align="right">!!MJH075,10</td>
+            <td align="right">!!MJH075,12</td>
+            <td align="right">&nbsp;</td>
+          </tr>
+        </table>
+	
+	</td>
+  </tr>
+  <tr>
+    <td>
+	    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+     
+	
+	  <tr>
+      
+    <td align="center" > 
+
+      <input type="button" name="BtnPrint" value="打 印" onClick="printView()">
+      $$EXP075,
+    </td>
+    </tr>
+  </table>
+	   
+	</td>
+  </tr>
+</table>
+
+
+		
+		
+</body>
+</html>

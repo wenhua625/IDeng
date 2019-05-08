@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>Untitled Document</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<meta http-equiv="expires" content="30">
+		<link href="css/style011.css" rel="stylesheet" type="text/css">
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<SCRIPT LANGUAGE="JavaScript" src="inc/sort.js"></SCRIPT>
+		<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+		<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/openWindow.js"></script>
+        <script language="javascript">
+        function opr(djid){
+             
+			  var url=('display?proname=production/ckd.htm&ID='+djid);
+				    
+					   openWindow("b-win","出库单明细",url,835, 580,function(){    });
+          }
+      </script>
+	</head>
+
+	<body style="margin-left: 0px;">
+		<div >
+			<table width="100%" border="0">
+				
+				<tr>
+					<td >
+						<table width="100%" border="1" style="border-collapse:collapse" bordercolor="#000000"  id="PowerTable">
+        <tr align="center" bgcolor="#BFBFBF"> 
+         
+          <td>单号</td>
+          <td>出库日期</td>
+          <!-- <td>领用人</td> -->
+          <td>制单人</td>
+          <td>审核人</td>
+          <td>总数量</td>
+          <td>总金额</td>
+          <!-- <td>凭证号</td> -->
+          <td>摘要</td>
+          <td>出库类型</td>
+          </tr>
+        <tr > 
+          <td><a href="#" onClick="opr('$$MJP280,01')">$$MJP280,01</a></td>
+          <td>$$MJP280,02</td>
+          
+         <!--  <td >$$MJP280,03</td> -->
+          <td >$$MJP280,04</td>
+          <td >$$MJP280,05</td>
+          <td align="right">$$MJP280,06</td>
+          <td align="right">$$MJP280,07</td>
+         <!--  <td >$$MJP280,08</td> -->
+          <td>$$MJP280,09</td>
+          <td>$$MJP280,10</td>
+          </tr>
+      </table>
+					</td>
+				</tr>
+				$$page,		
+			</table>
+
+		</div>
+		<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+      
+    <td align="center"> 
+	
+	$$EXP280,    </td>
+    </tr>
+  </table>
+	</body>
+</html>

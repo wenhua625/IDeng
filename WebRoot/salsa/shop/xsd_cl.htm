@@ -1,0 +1,294 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>产品信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+</object> 
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+
+</head>
+
+<body >
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    Ext.get('BtnGenCode').dom.style.visibility='hidden';
+	if ('@@Back_Code,' != ''){
+       	
+    	
+    	DWRUtil.setValue("Back_Code","!!MJZ003,01");
+		DWRUtil.setValue("Agent_Name","!!MJZ003,02");
+		 DWRUtil.setValue("Arr_Man","!!MJZ003,03");
+        DWRUtil.setValue("Arr_Tel","!!MJZ003,04");
+        DWRUtil.setValue("Arr_Address","!!MJZ003,05");
+    	DWRUtil.setValue("Order_Src","!!MJZ003,06");
+    	DWRUtil.setValue("Ht_Amount","!!MJZ003,07");
+		DWRUtil.setValue("Fk_Amount1","!!MJZ003,08");
+		 DWRUtil.setValue("YWY","!!MJZ003,09");
+		DWRUtil.setValue("Arr_Date","!!MJZ003,10");
+       
+		
+       
+        
+          
+    }else{
+        Ext.get('BtnGenCode').dom.style.visibility='visible';  
+   
+    } 
+	
+    Ext.get("BtnGenCode").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       DwrComm.parseKey('MJZ002',formMap,{callback:function(data){
+                   alert("生产的销售单号为："+data);
+                   form1.Back_Code.value=data;
+                   
+                   formMap = DWRUtil.getValues("form1");
+                   DwrComm.parseIN('INZ001',formMap,'insert',{callback:function(data){if (data != 'ok'){alert(data);}else{ 
+
+                        
+                   }},async:false});
+                  
+                },
+                async:false});
+      
+    }); 
+	function checkAndSave(){
+     if(form1.Back_Code.value.length==0 || form1.Back_Code.value == "")
+	  {
+	      alert("无效的单据，请先点击【生成】生成订单编号!");
+		  return false;
+	  }
+	  
+	  if(form1.Agent_Name.value.length==0)
+	  {
+	      alert("客户名称不能为空，请输入!");
+		  form1.Agent_Name.focus();
+		  return false;
+	  }
+	  if(form1.Arr_Man.value.length==0)
+	  {
+	      alert("联系人不能为空!");
+		  form1.Arr_Man.focus();
+		  return false;
+	  }
+	   if(form1.Arr_Tel.value.length==0)
+	  {
+	      alert("联系电话不能为空!");
+		  form1.Arr_Tel.focus();
+		  return false;
+	  }
+	   if(form1.Arr_Address.value.length==0)
+	  {
+	      alert("地址不能为空!");
+		  form1.Arr_Addr.focus();
+		  return false;
+	  }
+	  
+	  if(form1.Ht_Amount.value.length==0)
+	  {
+	      form1.Ht_Amount.value=0;
+		  
+	  }
+	   if(form1.Fk_Amount1.value.length==0)
+	  {
+	      form1.Fk_Amount1.value=0;
+		  
+	  }
+       formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('INZ001',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              
+             
+           }
+       },async:false}); 
+       return true;
+   }
+   //保存
+   Ext.get("BtnSave").on("click",function(){
+       if(checkAndSave()){
+	      alert("操作成功!");
+		   dialogArguments.document.getElementById('d_Flag').value="1";   
+              window.close();
+	   }
+        
+   });
+	
+	
+	 Ext.get("BtnDelete").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+        if (DWRUtil.getValue("Back_Code").length == 0){
+            alert("友情提醒:不能删除无效的单据!");
+            return false;
+       }
+        if (confirm('友情提示：删除后，数据不能恢复，确认要删除吗？')){
+        DwrComm.parseIN('INZ001',formMap,'delete',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              
+             alert("友情提示：已成功删除!");
+            dialogArguments.document.getElementById('d_Flag').value="1";   
+              window.close();
+             
+             
+                        
+              
+           }
+       },async:false});
+       }else return ; 
+       
+        
+   }); 
+   
+   Ext.get("BtnPrint").on("click",function(){
+       if('@@View,' != 'View')
+          if ( !checkAndSave()) return false;
+            
+       LODOP.ADD_PRINT_URL(10,10,"100%","95%",'@@LS.URL,/display?proname=print/cld_print.htm&Back_Code='+Ext.get('Back_Code').dom.value+'&BACK_CODE='+Ext.get('Back_Code').dom.value);	
+		//LODOP.SET_PRINT_PAGESIZE(2,2100,2970,""); 
+		LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,""); //按适宽模式显示
+		
+		LODOP.PREVIEW();
+		//window.close();	
+	   //LODOP.PRINT();	
+       
+        
+   }); 
+   //提交下单
+     Ext.get("BtnSubmit").on("click",function(){
+          form1.Order_Sts.value='1';
+          formMap = DWRUtil.getValues("form1");
+          DwrComm.parseIN('INZ002',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else
+           {
+              alert("下单成功!");
+              window.close();
+              
+           }
+         },async:false}); 
+             
+              
+          
+       
+        
+   });  
+});
+
+</script>
+<form name="form1" method="post" action="" id="form1">
+  <input type="hidden" name="Note_Type" value="Z">
+  <input type="hidden" name="Order_Sts" value="">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center" style="font-size:18px"><b>客户信息</b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;客户基本信息</td>
+          </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">订单编号：</td>
+            <td bgcolor="#FFFFFF"><input type="text" name="Back_Code" value="" class="TEXTDISABLED" readonly="true">
+            <input type="button" name="BtnGenCode" value="生成"></td>
+          </tr>
+          <tr>
+		    <td bgcolor="#C4DFDC" class="tableleft" align="right">客户名称： </td>
+		    <td bgcolor="#FFFFFF"><input
+					type="text" name="Agent_Name" value="" size="30">		      
+		      <font color="red">*
+		      
+		      </font></td>
+          </tr>
+		  <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">联系人：</td>
+            <td bgcolor="#FFFFFF">
+              <input type="text" name="Arr_Man"
+					 size="10">
+              <font color="red">*</font>
+              联系电话：
+              <input type="text" name="Arr_Tel" size="25">
+              <font color="red">*</font></td>
+          </tr>
+	      <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+              联系地址：            </td>
+            <td bgcolor="#FFFFFF"><input type="text" name="Arr_Address" size="43" value="">
+            <font color="red">*</font></td>
+          </tr>
+	      
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">&nbsp;</td>
+            <td bgcolor="#FFFFFF">&nbsp;</td>
+          </tr>
+         
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;订单信息</td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">客户来源：</td>
+            <td bgcolor="#FFFFFF"><select name="Order_Src">
+              <option value="101">网络</option>
+              <option value="102">门店</option>
+                        </select></td>
+          </tr>
+         <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">合同金额：</td>
+            <td bgcolor="#FFFFFF">
+              <input type="text" name="Ht_Amount"   size="15" style ="color:#FF0000" value="0"></td>
+          </tr>
+		  <tr>
+		    <td bgcolor="#C4DFDC" class="tableleft" align="right">定金：</td>
+		    <td bgcolor="#FFFFFF"><input type="text" name="Fk_Amount1" size="15" style ="color:#FF0000" value="0">
+		      （第一次付款）</td>
+	      </tr>
+		  <tr>
+		    <td bgcolor="#C4DFDC" class="tableleft" align="right">业务员：</td>
+		    <td bgcolor="#FFFFFF"><input type="text" name="YWY"   size="15" ></td>
+	      </tr>
+		  <tr>
+		    <td bgcolor="#C4DFDC" class="tableleft" align="right">要求测量日期：</td>
+		    <td bgcolor="#FFFFFF"><input type="text" name="Arr_Date"
+					readonly size="15" value="@@LS.CURDATE," onClick="javascript:ShowCalendar(this)"></td>
+	      </tr>
+		  <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">备注：</td>
+            <td bgcolor="#FFFFFF"><textarea name="Demo" cols="58" rows="3">!!MJZ003,11</textarea></td>
+          </tr>
+		 
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="90%" height="40" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" valign="bottom"><div align="center"> 
+          <input name="BtnSave" type="button" class="ImgButton" value="保  存" >
+          <input type="button" name="BtnPrint" value="打 印">
+          <input type="button" name="BtnSubmit" value="提交测量">
+          <input type="button" name="BtnUpload" value="上传测量图纸">
+          <input type="button" name="BtnTJSJ" value="提交设计">
+          &nbsp;&nbsp;&nbsp;&nbsp; 
+		   <input name="BtnDelete" type="button" class="ImgButton" value="删除单据" >
+		   &nbsp;&nbsp;&nbsp;&nbsp;
+          <input name="Submit2" type="reset" class="ImgButton" onClick="window.close()" value="关 闭">
+        </div></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

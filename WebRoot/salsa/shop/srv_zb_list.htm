@@ -1,0 +1,414 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>售后记录</title>
+		<base target="_self">
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<meta http-equiv="expires" content="30">
+		<link href="css/style011.css" rel="stylesheet" type="text/css">
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		
+		<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+</object> 
+		<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+		<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+        <script language="javascript">
+        function opr(url){
+		        if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+               var formMap = DWRUtil.getValues("form1");
+		       form1.Srv_Id.value=url;
+               formMap = DWRUtil.getValues("form1");
+               var s_sup;
+               DwrComm.parseMJ('MJZ006',formMap,{callback:function(list){
+                   s_sup = list;  
+               },async:false});
+               DWRUtil.setValue("Srv_Memo",s_sup[0].srv_memo);
+               DWRUtil.setValue("Srv_Result",s_sup[0].srv_result);
+               DWRUtil.setValue("Srv_Amount",s_sup[0].srv_amount);
+               DWRUtil.setValue("Srv_Man",s_sup[0].srv_mantel);
+			    DWRUtil.setValue("Srv_Date",s_sup[0].srv_date);
+			   DWRUtil.setValue("Srv_Sts",s_sup[0].srv_sts);
+			   DWRUtil.setValue("Srv_YjDate",s_sup[0].srv_yjdate);
+				DWRUtil.setValue("Srv_YjTime",s_sup[0].srv_yjtime);
+				 DWRUtil.setValue("Srv_SjDate",s_sup[0].srv_sjdate);
+              
+          }
+      </script>
+	</head>
+
+	<body style="margin-left: 0px;">
+	<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+   
+	
+	if ('@@Back_Code,' != ''){
+       	
+    	
+    	DWRUtil.setValue("Order_Code","!!MJZ003,01");
+		DWRUtil.setValue("Arr_Man","!!MJZ003,03");
+        DWRUtil.setValue("Arr_Tel","!!MJZ003,04");
+        DWRUtil.setValue("Arr_Address","!!MJZ003,05");    
+    } 
+	
+	Ext.get("BtnPD").on("click",function(){
+		 if(form1.Srv_Id.value==""){
+		    alert("请选择维修记录！");
+			return false;
+		}  
+		
+	    if(form1.Srv_Man.value == "")
+		{
+		   alert("请选择维修师傅!");
+		   return false;
+		}
+		
+		var kjm="insert";
+	  
+       formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('INZ005',formMap,kjm,{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+			   alert("派单成功，维修师傅手机将收到信息！");
+              form1.submit();
+             
+           }
+       },async:false}); 
+		
+		
+      
+    });
+	
+	
+	Ext.get("BtnTZDP").on("click",function(){
+		 if(form1.Srv_Id.value==""){
+		    alert("请选择维修记录！");
+			return false;
+		}  
+		
+	     if(form1.Srv_Memo.value.length==0)
+	  {
+	      alert("服务描述不能为空，请输入!");
+		  form1.Srv_Memo.focus();
+		  return false;
+	  }
+	 
+	  if(!confirm("你确认要通知所在的店铺去维修吗？")) return false;
+		
+		/*var kjm="insert";
+	  
+       formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('INZ005',formMap,kjm,{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+			   alert("派单成功，维修师傅手机将收到信息！");
+              form1.submit();
+             
+           }
+       },async:false}); */
+		
+		
+      
+    });
+	
+	//完工确认
+	Ext.get("BtnWanGong").on("click",function(){
+	    
+		
+		 if(form1.Srv_Id.value==""){
+		    alert("请选择维修记录！");
+			return false;
+		}  
+		
+		if(form1.Srv_Result.value == "")
+		{
+		   alert("请输入服务的结果!");
+		   form2.Srv_Result.focus();
+		   return false;
+		}
+		if(form1.Srv_SjDate.value == "")
+		{
+		   alert("请选择实际完工日期!");
+		   return false;
+		}
+		
+		if(!confirm("你确认该单已经完工了吗？")) return false;
+		
+		var kjm="update";
+	  
+       formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('INZ005',formMap,kjm,{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+			   alert("改单已完工，维修师傅手机会收到完工信息！");
+              form1.submit();
+             
+           }
+       },async:false}); 
+		
+		
+      
+    });
+	
+	Ext.get("BtnSave").on("click",function(){
+	    if(checkAndSave())
+		{
+		   alert("操作成功!");
+		   form1.submit();
+		}
+      
+    });
+	
+	function checkAndSave(){
+     
+	  if(form1.Srv_Memo.value.length==0)
+	  {
+	      alert("服务描述不能为空，请输入!");
+		  form1.Srv_Memo.focus();
+		  return false;
+	  }
+	 
+	  
+	  if(form1.Srv_Amount.value.length==0)
+	  {
+	      form1.Srv_Amount.value=0;
+		  
+	  }
+	  var kjm="insert";
+	  if(form1.Srv_Id.value !=""){
+	     kjm="update";
+	  }
+       formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('INZ006',formMap,kjm,{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              
+             
+           }
+       },async:false}); 
+       return true;
+   }
+	
+ Ext.get("BtnPrint").on("click",function(){
+       
+        if(form1.Srv_Id.value==""){
+		    alert("请选择维修记录！");
+			return false;
+		}  
+		if(form1.Srv_Man.value == ""){
+		    alert("没有指派维修工人，无法打印派遣单！");
+			return false;
+		}
+       //LODOP.ADD_PRINT_URL(10,10,"100%","95%",'@@LS.URL,/display?proname=print/srv_print.htm&Srv_Id='+Ext.get('Srv_Id').dom.value);	
+		
+		//LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,""); //按适宽模式显示
+		
+		//LODOP.PREVIEW();
+		 NewWinCustMD('@@LS.URL,/display?proname=print/srv_print.htm&Srv_Id='+Ext.get('Srv_Id').dom.value,window,650,850);	
+			
+       
+        
+   }); 	
+   
+    Ext.get("BtnAZ").on("click",function(){
+       
+        NewWinCustMD('display?proname=shop/xsdView.htm&View=View&Back_Code='+Ext.get('Order_Code').dom.value+'&BACK_CODE='+Ext.get('Order_Code').dom.value+'&tmp11='+Math.random(),window,750,950);	
+       
+        
+   }); 
+   
+    Ext.get("BtnDelete").on("click",function(){
+       
+       if(form1.Srv_Id.value==""){
+		    alert("请选择维修记录！");
+			return false;
+	   } 
+	    if(form1.Srv_Sts.value=="2"){
+		    alert("已完工，无法删除！");
+			return false;
+	   }
+	   if(form1.Srv_Amount.value==""){
+		   form1.Srv_Amount.value="0";
+	   }
+	   if(!confirm('你确认要删除维修记录吗？')) return false;   
+        formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('INZ006',formMap,'delete',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              alert("删除成功！")
+              form1.submit();
+           }
+       },async:false}); 
+        
+   }); 
+	
+	 
+});
+
+</script>
+
+		<form name="form1" method="post" action="" id="form1" >
+			<table width="100%" border="0">
+				<tr>
+				    <td align="center"><table width="80%" border="0">
+  <tr>
+    <td colspan="3" align="center"><b>售后记录</b></td>
+    </tr>
+  <tr>
+    <td width="25%">客户名称：
+      <input type="text" name="Arr_Man" size="10" class="TEXTDISABLED" readonly></td>
+    <td width="43%">地址：
+      <input type="text" name="Arr_Address" size="25" class="TEXTDISABLED" readonly></td>
+    <td width="32%">联系电话：
+      <input type="text" name="Arr_Tel" size="12" class="TEXTDISABLED" readonly></td>
+  </tr>
+  <tr>
+    <td colspan="2">报修记录：
+      
+      <textarea name="Srv_Memo" cols="40"></textarea></td>
+    <td>登记日期：
+      <input type="text" name="Srv_Date" value="@@LS.CURDATE," readonly size="12" class="TEXTDISABLED"></td>
+  </tr>
+  <tr>
+    <td colspan="3">处理结果：      
+      <textarea name="Srv_Result" cols="45"></textarea>
+      处理状态：
+      <select name="Srv_Sts">
+        <option value="0">处理中</option>
+        <option value="1">已派单</option>
+		<option value="2">已完工</option>
+      </select>      </td>
+    </tr>
+  <tr>
+    <td colspan="3">安排解决人：
+      <select name="Srv_Man" id="Srv_Man">
+         <option value="">选择</option>
+        <option>$$XLP010,</option>
+      </select>
+      预计解决日期： <input type="text" name="Srv_YjDate"
+														id="Srv_YjDate" size="10" readonly
+														onClick="javascript:ShowCalendar(this)"
+														value="@@LS.CURDATE,">
+      时间： <select name="Srv_YjTime" id="Srv_YjTime">
+        <option value="8:00">8:00</option>
+        <option value="8:30">8:30</option>
+        <option value="9:00">9:00</option>
+        <option value="9:30">9:30</option>
+        <option value="10:00">10:00</option>
+        <option value="10:30">10:30</option>
+        <option value="11:00">11:00</option>
+        <option value="11:30">11:30</option>
+        <option value="12:00">12:00</option>
+        <option value="12:30">12:30</option>
+        <option value="13:00">13:00</option>
+        <option value="13:30">13:30</option>
+        <option value="14:00">14:00</option>
+        <option value="14:30">14:30</option>
+        <option value="15:00">15:00</option>
+        <option value="15:30">15:30</option>
+        <option value="16:00">16:00</option>
+        <option value="16:30">16:30</option>
+        <option value="17:00">17:00</option>
+        <option value="17:30">17:30</option>
+        <option value="18:00">18:00</option>
+        <option value="18:30">18:30</option>
+        <option value="19:00">19:00</option>
+        <option value="19:30">19:30</option>
+        <option value="20:00">20:00</option>
+        <option value="20:30">20:30</option>
+        <option value="21:00">21:00</option>
+        <option value="21:30">21:30</option>
+        <option value="22:00">22:00</option>
+        <option value="22:30">22:30</option>
+        <option value="23:00">23:00</option>
+        <option value="23:30">23:30</option>
+        <option value="01:00">01:00</option>
+        <option value="01:30">01:30</option>
+        <option value="02:00">02:00</option>
+        <option value="02:30">02:30</option>
+        <option value="03:00">03:00</option>
+        <option value="03:30">03:30</option>
+        <option value="04:00">04:00</option>
+        <option value="04:30">04:30</option>
+        <option value="05:00">05:00</option>
+        <option value="05:30">05:30</option>
+        <option value="06:00">06:00</option>
+        <option value="06:30">06:30</option>
+        <option value="07:00">07:00</option>
+        <option value="07:30">07:30</option>
+        
+      </select>
+      
+      <input type="hidden" name="BtnPD" value="2.派单">
+      <input type="hidden" name="BtnPrint" value="3.打印派遣单">
+<input type="hidden" name="Order_Code" value="@@Back_Code,">
+      <input type="hidden" name="Srv_Id"></td>
+    </tr>
+     <tr>
+    <td colspan="3">收费：
+      <input type="text" name="Srv_Amount" size="10">实际解决日期：<input type="text" name="Srv_SjDate"
+														id="Srv_SjDate" size="15" readonly
+														onClick="javascript:ShowCalendar(this)"
+														value=""> <input type="hidden" name="BtnWanGong" value="4.完工确认">
+      <input type="hidden" name="BtnAZ" value="安装清单"></td>
+    </tr>
+  
+    
+    
+  <tr>
+    <td colspan="3" align="center"><input type="button" name="BtnSave" value="1.保存">
+    
+    <input type="button" name="BtnTZDP" value="2.通知店铺">      <input type="button" name="BtnDelete" value="删除"></td>
+    </tr>
+</table>
+</td>
+				</tr>	
+				<tr>
+					<td >
+						<table width="100%" border="1" style="border-collapse:collapse" bordercolor="#000000" id="PowerTable">
+        <tr align="center" bgcolor="#BFBFBF"> 
+         
+          <td>服务号</td>
+          <td>客户名称</td>
+          <td>联系电话</td>
+          <td>地址</td>
+          <td>服务金额</td>
+          <td>预计服务时间</td>
+          <td>预计服务人</td>
+          <td>实际服务时间</td>
+          <td>状态</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr >
+          
+          <td>$$MJZ005,01</td>
+          <td>$$MJZ005,04</td>
+          <td >$$MJZ005,05</td>
+          <td >$$MJZ005,06</td>
+          <td align="right">$$MJZ005,09</td>
+          <td>$$MJZ005,13</td>
+          <td>$$MJZ005,07</td>
+          <td>$$MJZ005,11</td>
+          <td>$$MJZ005,12</td>
+          <td>【<a href="#" onClick="javascript:opr('$$MJZ005,01')">维修信息</a>】</td>
+        </tr>
+      </table>
+					</td>
+				</tr>
+				
+			</table>
+
+		</form>
+		
+	</body>
+</html>

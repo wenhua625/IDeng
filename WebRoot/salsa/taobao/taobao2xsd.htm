@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base target="_self"/>
+<title>销售明细</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+
+
+
+<script src="http://a.tbcdn.cn/apps/top/x/sdk.js?appkey=21267173" ></script>
+
+
+
+</head>
+
+<body>
+
+
+<form name="form1" method="post" action="" id="form1">
+
+<script>
+  TOP.api('rest','get',{
+       method:'taobao.user.buyer.get',
+       session:'usersession',
+       timestamp:'1131333445560',
+       fields:'nick,user_id,avatar,alipay_account,buyer_credit,seller_credit,location,last_visit,birthday,sex'
+},function(resp){
+       
+     alert('success!');
+       
+} ); 
+  
+
+</script>
+
+
+</form>
+
+</body>
+</html>

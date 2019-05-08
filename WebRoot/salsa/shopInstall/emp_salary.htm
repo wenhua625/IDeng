@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<title>工资计划单</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js" ></script>
+ <script type="text/javascript" src="js/extjs/BufferView.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript></script>
+ 
+<style>
+.x-grid3-col {   
+    border-left:  1px solid #EEEEEE;   
+    border-right: 1px solid #D2D2D2;   
+}   
+.x-grid3-row td,.x-grid3-summary-row td{
+    line-height:18px;//控制GRID单元格高度
+    vertical-align:top;//单元格垂直居中
+    border-right: 1px solid #eceff6;//控制表格列线
+    border-top: 1px solid #eceff6;//控制表格行线
+    padding-left: 0px;   
+    padding-right: 0px;   
+}
+
+</style>
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+
+	//javascript:(function() { function R(a){ona = "on"+a; if(window.addEventListener) window.addEventListener(a, function (e) { for(var n=e.originalTarget; n; n=n.parentNode) n[ona]=null; }, true); window[ona]=null; document[ona]=null; if(document.body) document.body[ona]=null; } R("contextmenu"); R("click"); R("mousedown"); R("mouseup"); R("selectstart");})()
+
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+	form1.Year.value = "@@LS.YEAR,";
+    //生产工艺列表
+    var processDetailstore = new Ext.data.JsonStore({
+        url:"work?proname=MJP274",
+        root:"root",
+        fields: ['id','a_year','m1','m2','m3','m4','m5','m6','m7','m8','m9','m10','m11','m12','agent_code','agent_name','users_name','memo','m_total']
+    });
+    
+    
+	
+	 // var sm = new Ext.grid.CheckboxSelectionModel();
+    var cm = new Ext.grid.ColumnModel({ 
+	     defaults: {
+            sortable: true // columns are not sortable by default           
+        },
+        columns: [
+		new Ext.grid.RowNumberer(),//自动行号
+        {header:'单位名称',dataIndex:'agent_name',width:185,summaryRenderer: function(v, params, data){
+				return "合计：";
+		},hidden:true},
+        {header:'员工姓名',dataIndex:'users_name',width:100,summaryRenderer: function(v, params, data){
+				return "合计：";
+		}},
+        {header:'一月',dataIndex:'m1',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'二月',dataIndex:'m2',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'三月',dataIndex:'m3',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'四月',dataIndex:'m4',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'五月',dataIndex:'m5',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'六月',dataIndex:'m6',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'七月',dataIndex:'m7',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'八月',dataIndex:'m8',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'九月',dataIndex:'m9',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'十月',dataIndex:'m10',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'十一月',dataIndex:'m11',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'十二月',dataIndex:'m12',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+        {header:'小计',dataIndex:'m_total',width: 70,summaryType:'sum'},
+        {header:'备注',dataIndex:'memo',width: 100,editor: new Ext.form.TextField({ 
+              allowBlank: true// 不能为空 
+          })}
+		
+		
+	   
+       ]});
+    
+    cm.defaultSortable = true;
+     
+    
+  
+   // cm.defaultSortable = true;
+ //  alert("document.body.clientHeight:"+document.body.clientHeight);
+    var summary = new Ext.ux.grid.GridSummary();
+    var grid_process = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'ProcessList',
+    	/* width:document.body.clientWidth-15, 
+    	height:430, */
+    	width : document.body.clientWidth - 18, //设置宽度
+		height : 430 ,//设置高度
+    	title:'',
+    	ds: processDetailstore,
+        cm: cm,
+        plugins: summary,
+        frame:false,
+		enableHdMenu:false,
+        forceFit:true,
+		 view: new Ext.ux.grid.BufferView({
+             scrollDelay: false,
+			// forceFit: true
+			getRowClass:function(record,index,p,ds) {
+                  var cls = '';
+				 
+				  return cls;
+            }
+			
+        }),
+        clicksToEdit:1,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid_process.render();
+    processDetailstore.load({params:{Year:Ext.get('Year').dom.value}});
+   
+    //修改年份
+    Ext.get("Year").on("change",function(){
+    
+        processDetailstore.load({params:{Year:Ext.get('Year').dom.value}});
+        
+   });
+   
+  
+   //添加计划
+     Ext.get("BtnAdd").on("click",function(){
+		 
+		 if(!confirm("你确认要添加没有存在此表的员工？")) return false;
+       formMap = DWRUtil.getValues("form1");
+      
+       
+       DwrComm.parseIN('INP082',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              alert("添加成功！")
+              processDetailstore.load({params:{Year:Ext.get('Year').dom.value}});
+           }
+       },async:false}); 
+       
+        
+   });
+   
+    
+   //修改计划
+   grid_process.on("afteredit", afterEdit, grid_process); 
+   
+   function afterEdit(e) { 
+   var record = e.record;// 被编辑的记录  
+   
+   DWRUtil.setValue("d_Id",e.record.get("id"));
+   DWRUtil.setValue("d_M1",e.record.get("m1"));
+   DWRUtil.setValue("d_M2",e.record.get("m2"));
+   DWRUtil.setValue("d_M3",e.record.get("m3"));
+   DWRUtil.setValue("d_M4",e.record.get("m4"));
+   DWRUtil.setValue("d_M5",e.record.get("m5"));
+   DWRUtil.setValue("d_M6",e.record.get("m6"));
+   DWRUtil.setValue("d_M7",e.record.get("m7"));
+   DWRUtil.setValue("d_M8",e.record.get("m8"));
+   DWRUtil.setValue("d_M9",e.record.get("m9"));
+   DWRUtil.setValue("d_M10",e.record.get("m10"));
+   DWRUtil.setValue("d_M11",e.record.get("m11"));
+   DWRUtil.setValue("d_M12",e.record.get("m12"));
+   
+   DWRUtil.setValue("d_Memo",e.record.get("memo"));
+   var m_total = e.record.get("m1")+e.record.get("m2")+
+                 e.record.get("m3")+e.record.get("m4")+
+                 e.record.get("m5")+e.record.get("m6")+
+                 e.record.get("m7")+e.record.get("m8")+
+                 e.record.get("m9")+e.record.get("m10")+
+                 e.record.get("m11")+e.record.get("m12");
+   e.record.set("m_total",m_total);
+
+   formMap = DWRUtil.getValues("form1");
+  
+   DwrComm.parseIN('INP082',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }
+       },async:false});
+   };
+   //删除计划on 
+   grid_process.on("rowcontextmenu",function(grid_process,rowIndex,e){
+ 
+             e.preventDefault();
+             if(rowIndex<0){return;}
+             var treeMenu = new Ext.menu.Menu
+            ([{		
+            		xtype:"button",
+	     			text:"删除",
+	     			icon:"images/webtype/del.gif",
+	       			iconCls:'leaf',
+	       			handler:function(){
+		       			DWRUtil.setValue("d_Id",processDetailstore.getAt(rowIndex).get('id'));
+		                    formMap = DWRUtil.getValues("form1");
+		                    DwrComm.parseIN('INP082',formMap,'delete',{callback:function(data){
+		                     if (data != 'ok'){
+		                         alert(data);
+		                     }else{
+		                        var record = grid_process.getSelectionModel().getSelected();
+		                         processDetailstore.remove(record); 
+		                     }
+	                    },async:false});
+	       			}
+			}]);
+            treeMenu.showAt(e.getPoint());
+      }); 
+   
+  
+      
+   
+    
+   
+   //打印计划
+   Ext.get("BtnPrint").on("click",function(){
+    
+        if ('@@View,'!='View'){
+             if(!checkAndSave()) return false;
+        }
+        LODOP.ADD_PRINT_URL(10,10,781,531,'@@LS.URL,/display?proname=quickorder/scd_print.htm&Back_Code='+Ext.get('Back_Code').dom.value+'&BACK_CODE='+Ext.get('Back_Code').dom.value);	
+		LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,""); //按适宽模式显示
+		LODOP.PREVIEW();
+        
+   }); 
+   //导出Excel
+   Ext.get("exportE").on("click",function(){
+    
+        window.location.href='downLoad?proname=EXP274&inexcel=1&Year='+Ext.get('Year').dom.value;
+        
+   }); 
+   
+    //查询
+   Ext.get("BtnCx").on("click",function(){
+       if(form1.Users_Name.value == "")
+	   {
+		   alert("请输入员工名称！");
+		   return false;
+	   }
+       processDetailstore.load({params:{Year:Ext.get('Year').dom.value,Users_Name:encodeURI(Ext.get('Users_Name').dom.value)}});
+        
+   }); 
+     
+    Ext.get("BtnREF").on("click",function(){
+     
+       processDetailstore.load({params:{Year:Ext.get('Year').dom.value}});
+        
+   }); 
+     
+   
+   
+ 
+   
+});
+
+</script>
+<form action="" method="post" name="form1" id="form1">
+<input type="hidden" name="d_Id" id="d_Id" />
+<input type="hidden" name="d_M1" id="d_M1" />
+<input type="hidden" name="d_M2" id="d_M2" />
+<input type="hidden" name="d_M3" id="d_M3" />
+<input type="hidden" name="d_M4" id="d_M4" />
+<input type="hidden" name="d_M5" id="d_M5" />
+<input type="hidden" name="d_M6" id="d_M6" />
+<input type="hidden" name="d_M7" id="d_M7" />
+<input type="hidden" name="d_M8" id="d_M8" />
+<input type="hidden" name="d_M9" id="d_M9" />
+<input type="hidden" name="d_M10" id="d_M10" />
+<input type="hidden" name="d_M11" id="d_M11" />
+<input type="hidden" name="d_M12" id="d_M12" />
+<input type="hidden" name="d_Memo" id="d_Memo" />
+<input type="hidden" name="d_Year" id="d_Year" />
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr height="5">
+    <td width="70%" align="center">&nbsp;</td>
+    <td width="30%" align="center"><input type="hidden" name="BtnExportExcel" id="BtnExportExcel" value="【导出】" /><input type="hidden" name="BtnPrint" id="BtnPrint" value="打印" />
+      </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" style="font-size: 16pt; COLOR: #124164; FONT-WEIGHT: bold;" scope="col"><select name="Year" id="Year">
+      <option>$$XLS014,</option>
+    </select>
+      年度工资表</td>
+  </tr>
+  <tr>
+    <td  scope="col">员工名称：
+      <input type="text" name="Users_Name" id="Users_Name" />
+      <input type="button" name="BtnCx" id="BtnCx" value="查询" />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="button" name="BtnAdd" id="BtnAdd" value="添加" />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      
+      $$EXP274,
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="button" name="BtnREF" id="BtnREF" value="刷新" />
+      </td>
+    <td scope="col">单位：元</td>
+  </tr>
+  <tr>
+    <td colspan="2" scope="col"><table width="100%" border="0" cellspacing="0" cellpadding="0" bordercolor="#000000">
+      
+     
+     
+     
+      <tr>
+        <td width="100%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="100%"><div id="ProcessList"></div></td>
+            </tr>
+        </table></td>
+      </tr>
+      
+    </table></td>
+  </tr>
+</table>
+</form>
+</body>
+
+</html>

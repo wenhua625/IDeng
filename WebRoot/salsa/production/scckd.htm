@@ -1,0 +1,516 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>出库明细</title>
+		<base target="_self"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<link href="css/style1.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+        <object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+        </object> 
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<script src="inc/dateams.js" type=text/javascript></script>
+		<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+		
+		<script type='text/javascript' src='dwr/engine.js'></script>
+		<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+
+	</head>
+
+	<body>
+		<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    
+     form1.BtnNoAudit.disabled = true;
+     //form1.BtnPrint.disabled = true;
+    if("@@ID," != "")
+    {
+        DWRUtil.setValue("ID","!!MJP037,01");
+        DWRUtil.setValue("RQ","!!MJP037,02");
+        DWRUtil.setValue("CK","!!MJP037,03");
+        DWRUtil.setValue("JBRBM","!!MJP037,06");
+        DWRUtil.setValue("JSFSBM","!!MJP037,07");
+        DWRUtil.setValue("ZDR","!!MJP037,08");
+        DWRUtil.setValue("SHR","!!MJP037,09");
+        DWRUtil.setValue("ZDZK","!!MJP037,10");
+        DWRUtil.setValue("ZSL","!!MJP037,11");
+        DWRUtil.setValue("ZJE","!!MJP037,12");
+        DWRUtil.setValue("ZHJ","!!MJP037,13");
+        DWRUtil.setValue("TJE","!!MJP037,14");
+        DWRUtil.setValue("YJS","!!MJP037,15");
+        DWRUtil.setValue("BCXF","!!MJP037,16");
+        DWRUtil.setValue("EJS","!!MJP037,17");
+        DWRUtil.setValue("WJS","!!MJP037,18");
+        DWRUtil.setValue("ZZK","!!MJP037,19");
+        DWRUtil.setValue("ZY","!!MJP037,20");
+        
+        DWRUtil.setValue("ID_RWD","!!MJP037,24");
+		DWRUtil.setValue("PJLX","!!MJP037,25");
+         if('!!MJP037,22' == "T")//对于审核通过的单子
+		 {
+		     form1.CK.disabled = true;
+		     
+		     form1.ZTJ.disabled = true;
+		     form1.BCXF.disabled = true;
+		     form1.JBRBM.disabled = true;
+		     form1.BZ.disabled = true;
+		     form1.BtnImport.disabled = true;
+		     
+		     form1.BtnDelRecord.disabled = true;
+		     form1.BtnSave.disabled = true;
+		     form1.BtnNoAudit.disabled = false;
+		     form1.BtnAudit.disabled = true;
+		     form1.BtnDel.disabled = true;
+		     //form1.BtnPrint.disabled = false;
+		 }else//对于取消审核的单子
+		 {
+		     form1.CK.disabled = false;
+		     
+		     form1.ZTJ.disabled = false;
+		     form1.BCXF.disabled = false;
+		     form1.JBRBM.disabled = false;
+		     form1.BZ.disabled = false;
+		     form1.BtnImport.disabled = false;
+		     
+		     form1.BtnDelRecord.disabled = false;
+		     form1.BtnSave.disabled = false;
+		     form1.BtnNoAudit.disabled = true;
+		     form1.BtnAudit.disabled = false;
+		     form1.BtnDel.disabled = false;
+		    // form1.BtnPrint.disabled = true; 
+		 }
+            
+    }
+    //产品列表存储
+    var orderDetailstore = new Ext.data.JsonStore({
+         url:"work?proname=MJP033",
+        root:"root",
+        fields: ['code','spbm','spmc','xhgg','jldw','sl','yj','dj','je','zk','pfj','lsj','bz','zkje','ref_id','sccj','psid','kcsl','ysmc']
+    });
+
+    
+    //产品列表表格
+     var cm = new Ext.grid.ColumnModel([
+         new Ext.grid.RowNumberer(),//自动行号
+        {header:'编码',dataIndex:'psid',width: 90},
+        {header:'名称',dataIndex:'spmc',width: 100},
+        {header:'型号',dataIndex:'ysmc',width: 95},
+		{header:'规格',dataIndex:'xhgg',width: 95},
+        {header:'单位',dataIndex:'jldw',width: 50,summaryRenderer: function(v, params, data){return  '合计：';}},
+        {header:'库存',dataIndex:'kcsl',width: 50,summaryType:'sum',align:"right"},
+        {header:'数量',dataIndex:'sl',width: 50,summaryType:'sum',align:"right",editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 0, // 默认的小数点位数   
+                    allowDecimals: false, // 不允许为负数   
+                    maxValue: 100000, // 最大值为10万 ,
+                    selectOnFocus:true
+                            
+        })},
+        {header:'单价',dataIndex:'dj',width: 70,renderer:Ext.util.Format.usMoney,align:"right"},
+        {header:'金额',dataIndex:'je',width: 85,renderer:Ext.util.Format.usMoney,summaryType:'sum',align:"right"},
+        {header:'备注',dataIndex:'bz',width: 100,editor: new Ext.form.TextField({ 
+              allowBlank: true// 不能为空 
+          })}
+       
+       ]);
+    //商品列表表格
+    var summary = new Ext.ux.grid.GridSummary(); 
+    var grid = new Ext.grid.EditorGridPanel({
+    	el: 'productList',
+    	width:document.body.clientWidth-25, 
+    	height:350,
+    	title:'出库清单',
+    	ds: orderDetailstore,
+        cm: cm,
+        frame:false,
+        plugins: summary,
+        clicksToEdit:1,
+        stripeRows:true,
+        columnLines: true,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+        
+        
+    });
+    grid.render();
+    orderDetailstore.load({params:{ID:Ext.get('ID').dom.value}});
+
+   //表格编辑前 
+   grid.on("beforeedit", beforeEdit, grid); 
+   function beforeEdit(e) { 
+      var record = e.record;// 被编辑的记录 
+      if('!!MJP037,22' == 'T') return false;
+       formMap = DWRUtil.getValues("form1");
+      
+    }
+    
+  
+   //表格编辑后
+   grid.on("afteredit", afterEdit, grid); 
+   
+   function afterEdit(e) { 
+   var record = e.record;// 被编辑的记录  
+       e.record.set("je",parseFloat(e.record.get("sl"))*parseFloat(e.record.get("dj")));
+       updateData();
+   
+   };
+   
+   //保存
+  Ext.get("BtnSave").on("click",function(){
+       if(checkAndSave()) {alert("保存成功!");}
+   }); 
+    //删除单据
+  Ext.get("BtnDel").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       if(!confirm("你确认要将整张单据删除吗？")) return false;
+       DwrComm.parseIN('INP009',formMap,'delete',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                         
+                     }else
+                     {
+                        dialogArguments.document.getElementById('d_Flag').value="1";
+                        window.close();
+                     }
+                    },async:false});
+   });
+    //删除记录
+  Ext.get("BtnDelRecord").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       var record = grid.getSelectionModel().getSelected();
+       if(record == null)
+       {
+          alert("请选择要删除的记录!");
+          return false;
+       }
+       grid.store.remove(record);
+       updateData();
+   }); 
+   
+    //审核通过
+  Ext.get("BtnAudit").on("click",function(){
+       form1.SH_FLAG.value='T';
+       if(!checkAndSave()) return false;
+       form1.BtnAudit.disabled = true;
+       DwrComm.parseIN('INP009',formMap,'call',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                         
+                     }else
+                     {
+                         /*LODOP.ADD_PRINT_BARCODE(5,508,257,36,"Code39",Ext.get('ID').dom.value);
+                         LODOP.ADD_PRINT_URL(10,10,"100%","95%",'@@LS.URL,/display?proname=print/ckd_print.htm&ID='+form1.ID.value);
+        				 //LODOP.SET_PRINT_PAGESIZE(1,2100,2970,""); 
+		                 LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,""); //按适宽模式显示
+		                 var result = LODOP.PREVIEW();*/
+		                  NewWinMD('@@LS.URL,/display?proname=print/ckd_print.htm&ID='+form1.ID.value+'&time='+Math.random(),window);
+                         dialogArguments.document.getElementById('d_Flag').value="1";
+                         window.close();
+                     }
+                    },async:false});
+       
+   }); 
+      //取消审核
+  Ext.get("BtnNoAudit").on("click",function(){
+       var dj="@@LS.QXDJ,";
+        //if (dj.indexOf("002")== -1)
+        //{
+            //alert("你没有反审核的权限！");
+            //return false;
+        //}
+       form1.SH_FLAG.value='F';
+       //if(!checkAndSave()) return false;
+       form1.BtnNoAudit.disabled = true;
+       formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('INP009',formMap,'call',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                         
+                     }else
+                     {
+                        form1.action="display?proname=production/scckd.htm&ID="+form1.ID.value;
+                        form1.submit();
+                     }
+                    },async:false});
+       
+   });
+       //补打
+  Ext.get("BtnPrint").on("click",function(){
+       /*LODOP.ADD_PRINT_BARCODE(5,508,257,36,"Code39",Ext.get('ID').dom.value);
+                         LODOP.ADD_PRINT_URL(10,10,"100%","95%",'@@LS.URL,/display?proname=print/ckd_print.htm&ID='+form1.ID.value+"&PView=补打");
+        				 //LODOP.SET_PRINT_PAGESIZE(1,2100,2970,""); 
+		                 LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,""); //按适宽模式显示
+		                 var result = LODOP.PREVIEW();*/
+		 NewWinMD('@@LS.URL,/display?proname=print/ckd_print.htm&ID='+form1.ID.value+'&time='+Math.random(),window);
+       
+   });
+   //保存数据，公用
+  function checkAndSave()
+  {
+       updateData();
+       var vRecords = grid.store.data.items;
+       var vCount = vRecords.length; //得到记录长度
+       //订单没有数据
+       if(vCount == 0)
+       {
+          
+          return false;
+       } 
+       if(form1.ZJE.value == "") form1.ZJE.value=0; 
+       if(form1.ZTJ.value == "") form1.ZTJ.value=0;
+       if(form1.BCXF.value == "") form1.BCXF.value=0 ;
+	   if (vCount > 0) {
+        //begin 将记录对象转换为字符串（json格式的字符串）
+        form1.ZY.value = '出库['+vRecords[0].get("spmc")+']';
+        var d_check="0";
+        var vDatas = '[';
+        for (var i = 0; i < vCount; i++) {
+            if(vRecords[i].get("sl") == "0"){
+                alert("第 "+(i+1)+" 行的【数量】输入无效，请重输！");
+                d_check="1";
+                break;
+            }
+            vDatas += Ext.util.JSON.encode(vRecords[i].data) + ',';
+
+        }
+        if(d_check =="1") return false;
+        vDatas = vDatas.substr(0, vDatas.length - 1) + ']';
+
+        //end 将记录对象转换为字符串（json格式的字符串）
+      }
+       form1.d_JsonData.value=vDatas;
+	   //alert(vDatas);
+	   formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('INP008',formMap,'insert',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                         return false;
+                     }else
+                     {
+                        return true;
+                     }
+                    },async:false});
+     return true;
+  } 
+   //关闭
+  Ext.get("BtnClose").on("click",function(){
+        dialogArguments.document.getElementById('d_Flag').value="1";
+       window.close();
+    
+   }); 
+   
+   //选择物料
+  Ext.get("BtnImport").on("click",function(){
+       	
+       	// if(!confirm("计划外发料，你经过领导授权了吗？")) return false;
+       	   form1.d_Flag.value ="0";
+           var win=NewWinCustMD('display?proname=order/order_sel.htm&tmp='+Math.random(),window,500,650);
+		   
+		   
+		   if(form1.d_Flag.value=="1")
+		   {
+		       //var len=grid.store.data.items.length;
+		       var s_sup;
+			   formMap = DWRUtil.getValues("form1");
+			   var kjm="MJP036";
+			   //整单插入
+			   //if(form1.d_SPBM.value=="all") kjm="MJP035";
+			   
+               DwrComm.parseMJ(kjm,formMap,{callback:function(list){
+                    s_sup = list;  
+               },async:false});
+                  
+			  if(s_sup.length>0)
+			  {
+			    var keys = grid.store.fields.keys;
+				for(var row=0;row<s_sup.length;row++)
+			    {
+			       record = new grid.store.recordType();
+			       record.data = {};
+			       for(var i=0;i<keys.length;i++)
+			       {
+			        var key=keys[i];
+			        record.data[key] = s_sup[row][key]; 
+			       }
+			       grid.store.add(record); 
+			    }
+			  }
+			  
+			  updateData();
+		}     
+       	  
+    
+   });
+
+    //导入Excel
+  Ext.get("BtnImportExcel").on("click",function(){
+      
+       var oXL = new ActiveXObject("Excel.Application");
+ 	  try{
+    		var oWB = oXL.Workbooks.open("E:\\test.xls");
+ 		}catch(e){
+  		alert('打开文件失败！');
+ 	  }
+      	  
+    
+   });
+  
+  
+   //更新基本数据
+   function updateData()
+   {
+      form1.ZJE.value=grid.store.sum("je");
+	  form1.ZSL.value=grid.store.sum("sl");
+	  form1.ZZK.value=grid.store.sum("zkje");
+	  form1.YJS.value=form1.ZJE.value-form1.ZTJ.value;
+	  form1.WJS.value=form1.YJS.value-form1.BCXF.value;
+   } 
+   
+});
+</script>
+		<form name="form1" method="post" action="" id="form1">
+            <input type="hidden" name="d_Flag" value="0">
+			<input type="hidden" name="d_JsonData" value="">
+			<input type="hidden" name="d_SPBM">
+			<input type="hidden" name="SH_FLAG">
+			<input type="hidden" name="ref_id">
+			<input type="hidden" name="PRODUCT_ID">
+			<input type="hidden" name="P_NUM">
+			
+
+			<table width="100%" border="0">
+				<tr>
+					<td colspan="2">
+						<table width="100%" border="0" align="center" cellpadding="1"
+							cellspacing="0">
+
+							<tr>
+								<td colspan="12" align="center">
+									<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+										<tr height="30">
+											<td align="center"
+												style="font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">成品出库单											</td>
+										</tr>
+									</table>								</td>
+							</tr>
+							<tr class="tabletoptitle">
+								<td align="right" width="10%">单号：</td>
+							  <td width="19%"><input type="text" name="ID" value="!!MJP034,01" readonly
+										class="TEXTDISABLED">
+								<input type="hidden" name="CK" value="">
+								</td>
+								<td align="right">日期：</td>
+								<td><input type="text" name="RQ" value="@@LS.CURDATE," readonly
+										class="TEXTDISABLED" size="15"></td>
+								<td align="right">制单人：</td>
+								<td><input type="text" name="ZDR" value="@@LS.XM,"
+										readonly size="15" class="TEXTDISABLED"></td>
+							</tr>
+							<tr>
+								<td align="right">摘要：</td>
+								<td align="left"><input type="text" name="ZY" value="" readonly
+										size="28" class="TEXTDISABLED"></td>
+								<td width="10%" align="right">出库类型：</td>
+							  <td width="22%"><select name="PJLX" id="PJLX">
+								     <option value="厂内领用">厂内领用</option>
+									 <option value="其他出库">其他出库</option>
+									
+								  </select>                                </td>
+								<td width="10%" align="right">
+									审核人：								</td>
+								<td width="29%" align="left">
+									<input type="text" name="SHR" value="" readonly  size="15" class="TEXTDISABLED"
+										>								</td>
+							</tr>
+							<tr class="tabletoptitle">
+								<td align="right" width="10%">
+									备注：								</td>
+								<td colspan="5">
+									<textarea name="BZ" cols="55">!!MJP037,21</textarea>
+									领用人：<select name="JBRBM">
+										<option value=""></option>
+										<option>$$XLS005,</option>
+									</select>								</td>
+							</tr>
+						</table>					</td>
+				</tr>
+
+				<tr>
+					<td colspan="2">
+						<table width="100%" border="0">
+							<tr class="tabletoptitle">
+							  <td width="41%" align="center">
+						      <input type="button" name="BtnImport" value="选择成品">
+						      </td>
+								<td width="59%">
+									<input type="hidden" name="BtnImportExcel" value="导入Excel">
+									<input type="button" name="BtnDelRecord" value="删除记录">
+										
+									<input type="button" name="BtnSave" value="保  存">
+									<input type="button" name="BtnClose" value="关  闭">
+									<input type="button" name="BtnDel" value="删除单据">	
+							  <input type="button" name="BtnPrint" value="打  印">						</td>
+							</tr>
+						</table>					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div id='productList'></div>					</td>
+				</tr>
+				
+
+				<tr height="10">
+					<td colspan="2">
+						<table width="100%" border="0" cellpadding="1" cellspacing="0">
+							<tr>
+								<td width="73%">
+									<table width="100%" border="0">
+										<tr>
+											<td width="17%" align="right">&nbsp;</td>
+											<td width="15%">
+												<input type="hidden" name="ZJE" size="13" value="" readonly class="TEXTDISABLED">											<input type="hidden" name="JSFSBM" value="1">
+												<input type="hidden" name="JSFSMC" value="现  金"></td>
+											<td width="8%" align="right">&nbsp;</td>
+											<td width="16%">
+												<input type="hidden" name="ZTJ" size="13"  value="" onKeyDown="valNum(event);" onpaste="clip(event);">											</td>
+											<td width="9%" align="right">&nbsp;</td>
+											<td width="35%">
+												<input type="hidden" name="YJS" size="13"  value="" readonly class="TEXTDISABLED">											</td>
+										</tr>
+										<tr>
+											<td align="right">&nbsp;</td>
+											<td>
+												<input type="hidden" name="BCXF" size="13"  value="" onKeyDown="valNum(event);" onpaste="clip(event);">											</td>
+											<td>&nbsp;										  </td>
+											<td>&nbsp;										  </td>
+											<td>&nbsp;										  </td>
+											<td><input type="hidden" name="WJS" value="0">
+										    <input type="hidden" name="ZZK" value="0">
+										    <input type="hidden" name="ZDZK" value="100"><input type="hidden" name="ZSL" value="0"></td>
+										</tr>
+									</table>							  </td>
+								<td width="27%" valign="top">
+									<table width="100%" border="0">
+										
+										<tr>
+											<td>
+												<input type="button" name="BtnAudit" value="审核通过">
+												<input type="button" name="BtnNoAudit" value="取消审核"></td>
+										</tr>
+									</table>							  </td>
+							</tr>
+						</table>					</td>
+				</tr>
+			</table>
+
+		</form>
+
+	</body>
+</html>

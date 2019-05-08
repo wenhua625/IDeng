@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>终端人员管理</title>
+<base target="_self">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script language="javascript">
+        function opr(url,yhh,yhxm,sts,sj,yhjb,zw){
+		        if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+               var formMap = DWRUtil.getValues("form1");
+		       form1.YHID.value=url;
+			   document.getElementById("YHH").readOnly=true
+			   document.getElementById('BtnGenCode').style.visibility='hidden';
+			
+			   form1.YHH.value=yhh;
+			   form1.YHXM.value=yhxm;
+			   form1.STS.value=sts;
+			   form1.SJ.value=sj;
+			   form1.YHJB.value=yhjb;
+			   form1.isInsert.value="1";
+			   form1.ZW.value=zw;
+              
+              
+          }
+      </script>
+
+
+
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+   
+	
+	
+	
+	Ext.get("BtnSave").on("click",function(){
+	    if(checkAndSave())
+		{
+		   alert("操作成功!");
+		}
+      
+    });
+	
+	function checkAndSave(){
+     
+	  if(form1.YHH.value.length==0)
+	  {
+	      alert("系统登陆号不能为空，请输入!");
+		  return false;
+	  }
+	 
+	   if(form1.SJ.value.length==0)
+	  {
+	      alert("用户手机号码不能为空");
+		  return false;
+		  
+	  }
+	  if(form1.YHXM.value.length==0)
+	  {
+	      alert("用户姓名不能为空");
+		  return false;
+		  
+	  }
+	  var action;
+	  if (form1.isInsert.value == "1") 
+	      action="update"; else action="insert"
+	   var check="0";
+       formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('IN0045',formMap,action,{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+			   check ="1";
+			   
+           }else{
+              form1.submit();
+             
+           }
+       },async:false}); 
+	   
+	   if(check == "1")
+	     return false;
+		else
+       return true;
+   }
+	
+	
+   
+ 
+   
+    Ext.get("BtnDelete").on("click",function(){
+       
+       if(form1.YHH.value==""){
+		    alert("请选择用户信息！");
+			return false;
+	   } 
+	    
+	   if(!confirm('你确认要删除该用户记录吗？')) return false;   
+        formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('INP046',formMap,'delete',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              alert("删除成功！")
+              form1.submit();
+           }
+       },async:false}); 
+        
+   }); 
+   Ext.get("BtnInitPwd").on("click",function(){
+       
+       if(form1.YHH.value==""){
+		    alert("请选择用户信息！");
+			return false;
+	   } 
+	    
+	   if(!confirm('你确认要将该用户的密码初始化吗？')) return false;   
+        formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('IN0S04',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              alert("初始化成功，默认密码为：zz！")
+              form1.submit();
+           }
+       },async:false}); 
+        
+   });
+    
+	
+    Ext.get("BtnGenCode").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       DwrComm.parseKey('MJP154',formMap,{callback:function(data){form1.YHH.value=data;},async:false});
+	   form1.YHXM.valu="";
+    }); 	
+	 
+});
+
+</script>
+<form name="form1" method="post" action="" id="form1">
+<input name="DEPT" id="DEPT" type="hidden" value="@@AGENT_CODE,">
+<input name="YHID" id="YHID" type="hidden" value="">
+<input name="SJBM" id="SJBM" type="hidden" value="@@SJBM,">
+<input name="Brand_Code" id="Brand_Code" type="hidden" value="@@Brand_Code,">
+<input name="isInsert" id="isInsert" type="hidden" value="">
+<input name="Agent_Name" id="Agent_Name" type="hidden" value="@@AGENT_NAME,">
+
+<table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center" ><b> 请填写终端用户信息</b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">系统登陆号：            </td>
+            <td bgcolor="#FFFFFF"><input name="YHH" id="YHH" type="text"  maxlength="6" size="15" >
+              <span class="tableleft">
+              <input type="button" name="BtnGenCode" value="自动产生" id="BtnGenCode">
+             </span></td>
+           </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">员工姓名：           </td>
+            <td bgcolor="#FFFFFF"><input name="YHXM"  id="YHXM" type="text" class="input" size="15"></td>
+          </tr>
+		  <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">手机号码： </td>
+            <td bgcolor="#FFFFFF">
+            <input name="SJ"  id="SJ" type="text" style="height:25;  font-size:18px; color:#008040" maxlength="11" size="12">
+            (必输项)手机端登录号</td>
+          </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">门店简称：</td>
+            <td bgcolor="#FFFFFF"><input name="DZ"  id="DZ" type="text" class="input" ></td>
+          </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">门店地址：</td>
+            <td bgcolor="#FFFFFF"><input name="DZJC"  id="DZJC" type="text" class="input" size=35></td>
+          </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">职务：</td>
+            <td bgcolor="#FFFFFF"><select name="ZW" id="ZW" >
+              <option value="8888">老板</option>
+              <option value="8889">员工</option>
+            </select>
+            性质：<select name="YHJB" id="YHJB" >
+              <option value="老板">老板</option>
+            </select></td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">状态： </td>
+            <td bgcolor="#FFFFFF">
+              <select name="STS">
+                <option value="0">正常</option>
+                <option value="1">禁用</option>
+              </select>
+           </td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center"  class="tableleft"><input name="BtnSave"  id="BtnSave" type="button"  value="保 存" >
+               <input name="BtnClose"  id="BtnClose" type="button" class="ImgButton" onClick="window.close()" value="关  闭">
+               <input type="button" name="BtnDelete" id="BtnDelete"  value="删除用户" style="color:red">
+		     <input type="button" name="BtnInitPwd" id="BtnInitPwd"  value="密码初始化" style="color:blue"></td>
+          </tr>
+          <tr>
+            <td colspan="2" align="left" class="tableleft" >&nbsp;</td>
+          </tr>
+          <tr>
+            <td colspan="2" align="left" class="tableleft" bgcolor="#C4DFDC">已存在的终端用户列表：</td>
+          </tr>
+          <tr>
+            <td colspan="2"  class="tableleft"><table width="100%" border="1" style="border-collapse:collapse" bordercolor="#000000">
+              <tr  bgcolor="#BFBFBF">
+                <td>系统登陆号</td>
+                <td>姓名</td>
+                <td>手机号码</td>
+                <td>职务</td>
+                <td>状态</td>
+                <td>操作</td>
+              </tr>
+              <tr>
+                <td>$$MJP155,01</td>
+                <td>$$MJP155,02</td>
+                <td>$$MJP155,07</td>
+                <td>$$MJP155,08</td>
+                <td>$$MJP155,06</td>
+                <td>【<a href="#" onClick="opr('$$MJP155,04','$$MJP155,01','$$MJP155,02','$$MJP155,05','$$MJP155,07','$$MJP155,08','$$MJP155,09')">详细信息</a>】</td>
+              </tr>
+            </table></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+ 
+  
+</form>
+</body>
+</html>

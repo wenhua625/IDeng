@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>Untitled Document</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<meta http-equiv="expires" content="30">
+		<link href="css/style011.css" rel="stylesheet" type="text/css">
+		<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+        </object> 
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<SCRIPT LANGUAGE="JavaScript" src="inc/sort.js"></SCRIPT>
+		<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+        <script language="javascript">
+        function opr(url,h,w){
+             var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,h,w);
+          }
+		function printDZ(){
+		    LODOP.ADD_PRINT_URL(10,10,"100%","95%",'@@LS.URL,/display?proname=print/dzd_print.htm&ORDER_DATE1=@@ORDER_DATE1,&ORDER_DATE2=@@ORDER_DATE2,');	
+		//LODOP.SET_PRINT_PAGESIZE(1,2100,2970,""); 
+		LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,""); //按适宽模式显示
+		
+		LODOP.PREVIEW();
+		}
+      </script>
+	</head>
+
+	<body style="margin-left: 0px;">
+		<div >
+			<table width="100%" border="0">
+				
+				<tr>
+					<td >
+						<table width="100%" border="1" style="border-collapse:collapse" bordercolor="#000000" id="PowerTable">
+        <tr align="center" bgcolor="#BFBFBF"> 
+          <td>客户名称</td>
+          <td>下单日期</td>
+          <td>货号</td>
+          <td>名称</td>
+         
+          <td>规格</td>
+           <td>长度</td>
+          <td>单位</td>
+          <td>数量</td>
+          <!--<td>托运单号</td>
+          
+        --></tr>
+        <tr >
+          <td>$$MJP087,01</td> 
+          <td>$$MJP087,02</td>
+          <td>$$MJP087,03</td>
+          <td>$$MJP087,04</td>
+          <td >$$MJP087,05</td>
+          <td >$$MJP087,08</td>
+          <td>$$MJP087,06</td>
+          <td align="right">$$MJP087,07</td>
+          </tr>
+        <tr style="font:bold;"> 
+          <td colspan="7" align="right">合计：</td>
+          <td align="right">!!MJH087,01</td>
+          </tr>
+      </table>
+					</td>
+				</tr>
+				
+			</table>
+
+		</div>
+		<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+      
+    <td align="center"> 
+	
+	$$EXP087,
+	  <input type="button" name="BtnPrint" value="打印特殊定制单" onClick="printDZ()">    </td>
+    </tr>
+  </table>
+	</body>
+</html>

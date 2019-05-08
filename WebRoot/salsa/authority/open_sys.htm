@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>开通片区管理系统</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script lanuage="javascript">
+  function checkInput()
+  {
+      if(form1.YHH.value==null || form1.YHH.value.length==0)
+	  {
+	      alert("请输入用户号!");
+		  form1.YHH.focus();
+		  return false;
+	  }
+	   if(form1.IpMac.value==null || form1.IpMac.value.length==0)
+	  {
+	      alert("请输入电脑备案号!");
+		  form1.IpMac.focus();
+		  return false;
+	  }
+	 if(form1.PASSWORD.value==null || form1.PASSWORD.value.length==0)
+	  {
+	      alert("请输入密码!");
+		  form1.PASSWORD.focus();
+		  return false;
+	  }
+	  if(form1.PASSWORD.value!= form1.REMM.value)
+	  {
+	      alert("两次输入的密码不一样，请重输!");
+		  form1.REMM.focus();
+		  return false;
+	  }
+	  
+	  return true;
+  }
+</script>
+
+<script type="text/javascript">
+function work(){
+if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+DwrComm.parseIN('IN0010',formMap,'update',{callback:function(data){if (data != 'ok'){alert('系统登陆号已存在！');}else{ 
+                        
+                        DwrComm.parseIN('IN0010',formMap,'insert',{callback:function(data){if (data!='ok'){alert(data);}else{
+                          alert("开通成功!");
+                    	  //dialogArguments.document.location.reload;
+                    	  window.close();
+                        
+                        }} });
+                        
+                        
+                   }},async:false});
+               }
+
+</script>
+<script type="text/javascript">
+	function add(){
+		if(checkInput()){
+			work();		
+		}
+		
+	}
+</script>
+</head>
+
+<body>
+<form name="form1" method="post" action="" id="form1">
+
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0" >
+    <tr> 
+      <td align="center"><b> 开通片区系统 </b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr align="center"> 
+            <td  height="17"> 
+              <table width="100%" border="0">
+                <tr> 
+                  <td align="right" class="WHS">系统登陆号：</td>
+                  <td class="WHS"> 
+                    <input type="text" name="YHH">
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right" class="WHS">用户名称：</td>
+                  <td class="WHS"> 
+                    <input type="text" name="YHXM">
+                  </td>
+                </tr>
+                 <tr> 
+                  <td align="right" class="WHS">电脑备案号：</td>
+                  <td class="WHS"> 
+                    <input type="text" name="IpMac">
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right" class="WHS">密码：</td>
+                  <td class="WHS"> 
+                    <input type="password" name="PASSWORD" size="15">
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right" class="WHS">确认密码：</td>
+                  <td class="WHS"> 
+                    <input type="password" name="REMM" size="15">
+                    <input name="STS" type="hidden" value="0">
+                    <input name="YHZ" type="hidden" value="agent">
+                    <input name="DEPT" type="hidden" value="@@Agent_Code,">
+                    <input name="Agent_Name" type="hidden" value="@@Agent_Name,">
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right" class="WHS">所属部门：</td>
+                  <td class="WHS"> 
+                    <input type="input" name="DEPT1" size="15" value="@@Agent_Name," readonly>
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right" class="WHS">联系方式：</td>
+                  <td class="WHS"> 
+                    <input type="text" name="LXFS">
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right" class="WHS">买入价：</td>
+                  <td class="WHS"> 
+                    <select name="AGENT_TYPE" >
+		  				 <option>$$XL0018,</option>
+		  				
+        			</select>
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right" class="WHS">卖出价：</td>
+                  <td class="WHS"> 
+                    <select name="Sale_Type" >
+		  				<option value="shop">零售价</option>
+		  				<option value="agent">出厂价</option>
+		  				
+        			</select>
+                  </td>
+                </tr>
+              </table>
+              <input type="button" name="Submit4" value="提交" onClick="add()">
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  
+</form>
+<script language="javascript">
+ function update()
+   {
+       form1.AGENT_TYPE.value='@@AGENT_TYPE,';
+
+   }
+ update();
+</script>
+</body>
+</html>

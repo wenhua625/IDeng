@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base target="_self">
+<title>产品选择</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+
+
+		
+<script type="text/javascript" src="js/extjs/openWindow.js"></script>
+
+<script>
+  
+  function selected()
+  {
+      
+       var New=document.getElementsByName("SPBM");  
+     // alert("New:"+New);
+	   var strNew="";  
+	   var s_New="";
+	   for(var i=0;i<New.length;i++)   
+	   {     
+	         
+		   if(New[i].checked){         
+		      strNew=New[i].value
+			  //var aNew = strNew.split('|');
+			  //s_New=s_New+"'"+aNew[0]+"',";
+			  s_New=s_New+"'"+strNew+"',";
+			}else  continue;  
+	   }
+	   
+      
+      if(s_New ==""){
+	      alert("请选择!");
+		  return false;
+	  }
+	  s_New = s_New.substring(0,s_New.length-1);
+	   
+	  
+	   /*     parent.frames["b-win"].document.getElementById('d_Flag').value = "1";
+	   parent.frames["b-win"].document.getElementById('d_SPBM').value = s_New;
+	  */
+  
+      
+	  closewin("o-win");
+  }
+ 
+
+  function sel(obj)
+  {
+	  //alert("dfdfd")
+	  if(obj.checked){
+	     //alert("aa"+obj.checked+" value="+obj.value);
+		 parent.selarrar.push("'"+obj.value+"'");  
+	  }else{
+		   //alert("bb"+obj.checked+" value="+obj.value);
+	     parent.selarrar.remove("'"+obj.value+"'")
+	  }
+	  
+  }
+  function BindEnter(obj)
+  {    
+	 if(obj.keyCode == 27)        
+     {            
+          closewin('o-win');
+     } 
+
+   }
+ 
+</script>
+
+</head>
+
+<body >
+<form name="form1" method="post" action="" id="form1">
+  <table width="100%" border="1">
+<!--   <tr>
+    <td><input type="button" name="Submit" id="Submit"  value="选中" onClick="selected()" ></td>
+    <td align="right"><font color="red">【操作提示：】</font></td>
+    <td><font color="blue">按ESC键退出</font></td>
+    <td>&nbsp;</td>
+    
+  </tr> -->
+</table>
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    
+
+
+	<tr>
+      <td height="0">
+          
+        <table width="100%" border="1" style="border-collapse:collapse" bordercolor="#000000"  >
+          <tr align="center" bgcolor="#BFBFBF"> 
+            <td>选择</td>
+            <td>名称</td>
+            <td>规格</td>
+            <td>单位</td>
+            <td>订货数量</td>
+            <td>订单号</td>
+            <td>客户名称</td>
+          </tr>
+          <tr >
+            <td>
+            <input type="checkbox" name="SPBM"  value="$$MJ0066,01" id="SPBM"   onclick="sel(this)">           </td> 
+            <td>$$MJ0066,02</td>
+            <td>$$MJ0066,03</td>
+            <td>$$MJ0066,04</td>
+           
+            <td >$$MJ0066,05</td>
+            <td>$$MJ0066,06</td>
+            <td>$$MJ0066,07</td>
+          </tr>
+        </table>
+        $$page,      </td>
+    </tr>
+  </table>
+  
+</form>
+</body>
+</html>

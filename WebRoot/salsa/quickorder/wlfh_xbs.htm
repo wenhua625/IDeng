@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>箱包数</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+
+
+
+</head>
+
+<body>
+<script language="javascript">
+Ext.onReady(function(){
+    
+     if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+     var formMap = DWRUtil.getValues("form1");
+     var cm = new Ext.grid.ColumnModel([
+        new Ext.grid.RowNumberer(),//自动行号
+        {header:'箱包类型',dataIndex:'zy',width: 180},
+		{header:'数量',dataIndex:'sl',width: 80,summaryType:'sum'}
+       ]);
+    
+    cm.defaultSortable = true;
+    
+    var orderDetailstore = new Ext.data.JsonStore({
+         url:"work?proname=MJP210",
+        root:"root",
+        fields: ['zy','sl']
+    });
+    
+    var grid = new Ext.grid.EditorGridPanel({
+    	el: 'productList',
+    	width:298, 
+    	height:230,
+    	title:'箱包数汇总',
+    	ds: orderDetailstore,
+        cm: cm,
+        frame:false,
+		plugins: new Ext.ux.grid.GridSummary(),
+		 columnLines: true,
+        clicksToEdit:1,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid.render();
+    orderDetailstore.load({params:{id:'@@id,'}});
+    
+
+
+    
+   
+   
+ 
+    
+
+});
+</script>
+<form name="form1" method="post" action="" id="form1">
+  
+ 
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+		 
+        
+          
+          <tr> 
+           
+            <td  > 
+              <div id='productList'></div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="90%" height="40" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" valign="bottom"><div align="center">          &nbsp;&nbsp;&nbsp;&nbsp; 
+          <input name="Submit2" type="reset" class="ImgButton" onClick="window.close()" value="关 闭">
+        </div></td>
+    </tr>
+  </table>
+</form>
+</body>
+
+</html>

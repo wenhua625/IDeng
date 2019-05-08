@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>-州创ERP系统-</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+		<style type="text/css">
+  body {
+    font-family: "Arial", "Helvetica", "san-serif";
+    background-color: #EEF2EB;
+    margin-left: 6px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    font-size: 9pt;
+    color: black;
+    line-height:12pt;}
+</style>
+
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<script src="inc/dateams.js" type=text/javascript></script>
+		<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+
+		
+		<script type='text/javascript' src='dwr/engine.js'></script>
+		<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+		<script type='text/javascript'>
+Ext.onReady(function(){
+    Ext.QuickTips.init();//支持tips提示
+    Ext.form.Field.prototype.msgTarget='side';//
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    
+    Ext.get("Submit").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       
+        //add.show();
+       NewWinMD('display?proname=metails/metails_add.htm&PRODUCT_CODE=-1&SERIES_CODE=204'+'&tmp11='+Math.random(),window);
+       form1.submit();
+        
+   });
+  
+});
+
+
+
+
+</script>
+
+	</head>
+
+	<body>
+
+		<form name="form1" method="post" action="display?proname=metails/metailsinfo.htm" id="form1" target="s_main">
+		<input type="hidden" name="SERIES_CODE" value="204">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+							<tr height="30">
+								<td
+									style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid;font-size: 12pt;COLOR: #124164;FONT-WEIGHT: bold;">
+									<img src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">
+									半成品管理
+								</td>
+								<td align="right"
+									style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid;font-size: 12pt;COLOR: #124164;FONT-WEIGHT: bold;">
+
+
+									<input name="Submit" type="button" class="ImgButton" value="增  加">
+									&nbsp;&nbsp;&nbsp;&nbsp;
+
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<iframe name="s_main" id="s_main" marginheight="0" marginwidth="0"
+							frameborder="0" width="100%" height="500" scrolling="auto"
+							src="display?proname=metails/metailsinfo.htm&SERIES_CODE=204"></iframe>
+					</td>
+				</tr>
+			</table>
+		</form>
+
+	</body>
+</html>

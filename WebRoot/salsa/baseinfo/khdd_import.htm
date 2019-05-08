@@ -1,0 +1,359 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>意向客户导入</title>
+		<base target="_self"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<link href="css/style1.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+        <object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+        </object> 
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<script src="inc/dateams.js" type=text/javascript></script>
+         <script src="http://oss.sheetjs.com/js-xlsx/xlsx.full.min.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+		<script type="text/javascript" src="js/extjs/openWindow.js"></script>
+		<script type='text/javascript' src='dwr/engine.js'></script>
+		<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+        
+
+	</head>
+
+	<body>
+		<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+   
+    //产品列表存储
+    var orderDetailstore = new Ext.data.JsonStore({
+         url:"work?proname=EJQ010",
+        root:"root",
+        fields: ['业主姓名','手机号码','房屋住址','户型','面积','客户来源','报备日期','最后一次跟进日期','跟单员姓名','跟单员手机号','备注']
+    });
+
+    
+    //产品列表表格
+     var cm = new Ext.grid.ColumnModel([
+         new Ext.grid.RowNumberer(),//自动行号
+      
+        {header:'业主姓名',dataIndex:'业主姓名',width: 75},
+        {header:'手机号码',dataIndex:'手机号码',width: 85},
+		{header:'房屋住址',dataIndex:'房屋住址',width: 155},
+		{header:'客户来源',dataIndex:'客户来源',width: 85},
+		{header:'户型',dataIndex:'户型',width: 65},
+		{header:'面积',dataIndex:'面积',width: 65},
+		{header:'报备日期',dataIndex:'报备日期',width: 85},
+		{header:'最后一次跟进日期',dataIndex:'最后一次跟进日期',width: 125},
+		{header:'跟单员姓名',dataIndex:'跟单员姓名',width: 75},
+		{header:'跟单员手机号',dataIndex:'跟单员手机号',width: 95},
+		
+		{header:'备注',dataIndex:'备注',width: 205}
+      
+       
+       ]);
+    //商品列表表格
+    var summary = new Ext.ux.grid.GridSummary(); 
+    var grid = new Ext.grid.EditorGridPanel({
+    	el: 'productList',
+    	width:document.body.clientWidth-25, 
+    	height:325,
+    	title:'客户数据导入',
+    	ds: orderDetailstore,
+        cm: cm,
+        frame:false,
+		enableHdMenu:false,
+		viewConfig: {
+            forceFit: true,
+			getRowClass:function(record,index,p,ds) {
+                  var cls = '';
+				 
+				  if(record.data.product_attr == "特价品")
+				  {
+					  cls="x-grid-record-red";
+					 
+				  }
+				  return cls;
+            }
+        },
+        plugins: summary,
+        clicksToEdit:1,
+        stripeRows:true,
+        columnLines: true,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+        
+        
+    });
+    grid.render();
+   // orderDetailstore.load({params:{ID:Ext.get('ID').dom.value}});
+
+   //表格编辑前 
+   grid.on("beforeedit", beforeEdit, grid); 
+   function beforeEdit(e) { 
+      var record = e.record;// 被编辑的记录 
+      if('!!MJQ064,22' == 'T') return false;
+       formMap = DWRUtil.getValues("form1");
+      
+    }
+	
+	
+	 this.uploadreload=function(s_json){
+	   
+	  // alert("fdfdfdfd="+s_json);
+	   var data=Ext.util.JSON.decode(s_json);//字符串转json对象
+	    var store=new Ext.data.JsonStore(  {
+	        data: data,
+	        autoLoad:true,
+	        root:'root',
+	        fields: ['业主姓名','手机号码','房屋住址','户型','面积','客户来源','报备日期','最后一次跟进日期','跟单员姓名','跟单员手机号','备注']
+	    });
+		
+		store.each(function (record) {
+            grid.store.add(record);
+         });
+
+      } 
+    
+  
+   //表格编辑后
+   grid.on("afteredit", afterEdit, grid); 
+   
+   function afterEdit(e) { 
+   var record = e.record;// 被编辑的记录  
+       e.record.set("sl",parseFloat(e.record.get("spsl"))-parseFloat(e.record.get("zmsl")));
+       e.record.set("je",parseFloat(e.record.get("sl"))*parseFloat(e.record.get("dj")));
+       updateData();
+   
+   };
+   
+   //保存
+  Ext.get("BtnSave").on("click",function(){
+       if(checkAndSave()) {alert("保存成功!");}
+   }); 
+    //删除单据
+  Ext.get("BtnDel").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       if(!confirm("你确认要将整张单据删除吗？")) return false;
+       DwrComm.parseIN('INP026',formMap,'delete',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                         
+                     }else
+                     {
+                        dialogArguments.document.getElementById('d_Flag').value="1";
+                        window.close();
+                     }
+                    },async:false});
+   });
+    //删除记录
+  Ext.get("BtnDelRecord").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       var record = grid.getSelectionModel().getSelected();
+       if(record == null)
+       {
+          alert("请选择要删除的记录!");
+          return false;
+       }
+       grid.store.remove(record);
+       //updateData();
+   }); 
+   
+   
+    
+   
+   //保存数据，公用
+  function checkAndSave()
+  {
+      
+       var vRecords = grid.store.data.items;
+       var vCount = vRecords.length; //得到记录长度
+       //订单没有数据
+       if(vCount == 0)
+       {
+          form1.SPBM.focus();
+          return false;
+       } 
+       
+	   if (vCount > 0) {
+        //begin 将记录对象转换为字符串（json格式的字符串）
+      
+        var d_check="0";
+        var vDatas = '[';
+        for (var i = 0; i < vCount; i++) {
+            if(vRecords[i].get("业主姓名") == ""){
+                alert("第"+(i+1)+"行的【业主姓名】没有填写,请填写或者删除该记录！");
+                d_check="1";
+                break;
+            }
+            vDatas += Ext.util.JSON.encode(vRecords[i].data) + ',';
+
+        }
+        if(d_check =="1") return false;
+        vDatas = vDatas.substr(0, vDatas.length - 1) + ']';
+
+        //end 将记录对象转换为字符串（json格式的字符串）
+      }
+       form1.d_JsonData.value=vDatas;
+	   //alert(vDatas);
+	   formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('INP055',formMap,'insert',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                         return false;
+                     }else
+                     {
+                        return true;
+                     }
+                    },async:false});
+     return true;
+  } 
+   //关闭
+  Ext.get("BtnClose").on("click",function(){
+       window.close();
+    
+   }); 
+   
+   Ext.get("BtnSCWJ").on("click",function(){
+	  
+         var win=NewWinCustMD('display?proname=order/file_upload.htm&SRC=KHDD&tmp='+Math.random(),window,450,650);
+		
+		 if(form1.d_Flag.value=="1")
+		{
+		   
+		   grid.store.proxy.conn.url="work?proname=EJ0001" ;
+		   grid.store.load({params:{d_SPBM:Ext.get('d_SPBM').dom.value}});
+		   
+		}  
+        
+   });  
+   
+     //结算
+    Ext.get("BtnJS").on("click",function(){
+		
+		
+		
+		  
+		    var vRecords = grid.store.data.items;
+            var vCount = vRecords.length; //得到记录长度
+       //订单没有数据
+       if(vCount == 0)
+       {
+          alert("客户数据未导入，请导入后在操作！");
+          return false;
+       } 
+		   if(!checkAndSave()) {alert("保存失败!"); return;}
+		   
+		   
+           if(!confirm("手机号码已存在的客户将不会导入到系统，你确认要导入吗？")) return false;
+		   formMap = DWRUtil.getValues("form1");
+		 
+		   Ext.get('BtnJS').dom.disabled = true;
+		   form1.BtnJS.value="正在处理...";
+		  DwrComm.parseIN('INP055',formMap,'call',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+			    Ext.get('BtnJS').dom.disabled = false;
+		       form1.BtnJS.value="同步到手机";
+           }else{
+		      alert("导入成功，你可以到手机端查看客户情况！");
+			   Ext.get('BtnJS').dom.disabled = false;
+		       form1.BtnJS.value="同步到手机";
+			   window.location.href="display?proname=authority/my_bbgj.htm";
+		   }
+       },async:false});
+        
+   });
+  
+  
+  
+  
+   
+});
+</script>
+		<form name="form1" method="post" action="" id="form1">
+            <input type="hidden" name="d_Flag" value="0">
+			<input type="hidden" name="d_JsonData" value="">
+			<input type="hidden" name="d_SPBM">
+			<input type="hidden" name="SH_FLAG">
+            <input type="hidden" name="ID" value="@@LS.DWDM,">
+			
+
+			<table width="100%" border="0" cellpadding="1" 
+							cellspacing="0">
+				<tr >
+					<td colspan="2" >
+						<table width="100%" border="0" align="center" cellpadding="0"
+							cellspacing="0">
+
+							<tr>
+								<td colspan="10" align="center">
+									<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+										<tr height="30">
+											<td align="center"
+												style="font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">意向客户批量导入</td>
+										</tr>
+									</table>								</td>
+							</tr>
+							<tr>
+								<td align="right">&nbsp;</td>
+								<td width="94%" colspan="3" align="left">&nbsp;</td>
+							</tr>
+							<tr class="tabletoptitle">
+								<td align="right" width="6%">&nbsp;</td>
+								<td colspan="3">门店从房产公司，或者其他中介渠道获取了大批量的客户数据，通过如下功能导入，导入后，通过手机端可以分配给业务员，并进行跟进。</td>
+							</tr>
+						</table>					</td>
+				</tr>
+
+				<tr>
+					<td colspan="2">
+						<table width="100%" border="0">
+							<tr class="tabletoptitle">
+								
+							  <td width="62%">
+                               <input type="file" onchange="importf(this)" id="BtnImportExcel" />  <a href="salsa/download/KHDD.xls" target="_blank">【下载模板】</a>
+									<input type="hidden" name="BtnSCWJ" id="BtnSCWJ"  value="选择Excel">
+									<input type="hidden" name="BtnClose" id="BtnClose" value="关  闭">
+									<input type="hidden" name="BtnDel"  id="BtnDel" value="删除单据">
+									</td>
+                                    <td width="38%"><input type="button" name="BtnDelRecord" id="BtnDelRecord" value="删除记录"></td>
+							</tr>
+						</table>					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div id='productList'></div>					</td>
+				</tr>
+				
+
+				<tr height="10">
+					<td colspan="2">
+						<table width="100%" border="0" cellpadding="1" cellspacing="0">
+							<tr>
+								<td width="73%">&nbsp;</td>
+								<td width="27%"><table width="100%" border="0">
+									<tr>
+											<td>
+										  </td>
+										</tr>
+										<tr>
+											<td>
+												<input type="hidden" name="BtnSave" id="BtnSave" value="保  存">
+												<input type="button" name="BtnJS" id="BtnJS" size="10"  value="导入到系统" >		
+												</td>
+										</tr>
+									</table>							  </td>
+							</tr>
+						</table>					</td>
+				</tr>
+			</table>
+
+		</form>
+
+	</body>
+</html>

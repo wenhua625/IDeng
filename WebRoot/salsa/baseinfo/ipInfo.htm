@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" src="inc/sort.js"></SCRIPT>
+<script type="text/javascript" src="js/dojo/dojo.js"></script>
+<script type="text/javascript">
+    dojo.require("dojo.io.*");
+</script>
+<script type="text/javascript">
+ function work(id){
+    var formObj = dojo.byId("form1");
+     dojo.io.bind({
+                formNode:formObj,
+                url:"work?proname=IN8012&action=delete&Ip_Id="+id,
+                method:formObj.method,
+                load:function(type , data ,evt){
+                    if(data == "ok"){
+                    	alert("操作成功!");
+                    	window.location.reload();
+                    }else{
+                    	alert(data);
+                    }
+                },
+                error:function(type,error){
+                    alert(type);
+                }
+		
+            })
+        }
+</script>
+<script language="javascript">
+  function checkDel(id,user)
+  {
+      if (user == "服务器"){
+          alert("对不起，服务器不能删除!");
+          return false;
+      }
+      if(confirm('删除后将不在恢复! \n您确定删除吗?'))
+	  {
+	     
+		work(id);
+	  }
+	  else return;
+  }
+</script>
+</head>
+
+<body>
+<form name="form1" method="post" action="display?proname=baseinfo/ipInfo.htm" id="form1">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    	<tr align="center" height="10"> 
+		<td>
+		
+		</td>
+	</tr>
+    	<tr> 
+            <td> 
+              <table cellSpacing=0 cellPadding=0 border="0" width="100%">
+							<tr height="30">
+								<td style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid;font-size: 12pt;COLOR: #124164;FONT-WEIGHT: bold;"><img src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24"> 访问控制 </td>
+								
+							</tr>
+				</table>
+            </td>
+          </tr>
+		  <tr> 
+            <td height="30"  colspan="9"> 
+             机主姓名：<input type="text" name="Ip_Owner">
+        <input type="submit" name="Query" value="查询">
+      </td>
+          </tr>
+	<tr>
+	
+      <td>
+        <table width="100%" border="1" cellpadding="2" cellspacing="0" id="PowerTable">
+          <tr align="center" bgcolor="#BFBFBF"> 
+            <td class="tableleft" height="17">机主姓名</td>
+            
+            <td class="tableleft" height="17">MAC地址</td>
+            <td class="tableleft" height="17">操作</td>
+          </tr>
+          <tr > 
+            <td>$$MJ0K01,02</td>
+            
+            <td>$$MJ0K01,04</td>
+            <td> 
+			[<a href='#' onClick="return checkDel('$$MJ0K01,01','$$MJ0K01,02')">删除</a>]
+             
+            </td>
+          </tr>
+         
+        </table>
+      </td>
+    </tr>
+     <tr align="right">
+         <td><table>$$page,</table></td>
+      </tr>
+  </table>
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+      <td height="30"><div align="center">
+          <input name="Submit" type="button" class="ImgButton" value="增  加" onClick="NewWinCustomer('display?proname=baseinfo/ip_add.htm',300,550)">
+        
+          </div>
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

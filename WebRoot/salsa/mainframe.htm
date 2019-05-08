@@ -1,0 +1,175 @@
+<html>
+<head>
+<title>@@LS.SYSTEMBHD,服务系统</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<link type="text/css" rel="stylesheet" href="css/style1.css">
+
+<link rel="stylesheet" type="text/css" href="css/easyui/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/easyui/icon.css">
+<link type="text/css" rel="stylesheet" href="css/ztree/zTreeStyle/zTreeStyle.css">
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/ztree/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script> 
+       var setting = {
+            view: {
+                dblClickExpand: false,
+				showLine: false
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				onClick: onClick
+			}
+		};
+        
+       $.post("work?proname=JREE05", function(rsp) {
+              $(document).ready(function(){
+			        $.fn.zTree.init($("#deeptree"), setting,eval("("+rsp+")"));
+		      });
+              
+         });
+         
+         function onClick(e,treeId, treeNode) {
+			var zTree = $.fn.zTree.getZTreeObj("deeptree");
+			zTree.expandNode(treeNode);
+		}
+		var s_msg="";
+		var s_msg1=""
+		var is_show="0";
+		
+		
+		function showMsg(){
+		
+		
+		DwrComm.parseTip("000",{callback:function(list){if(list.length>0){s_msg = list;}},async:false});
+	   
+	   if(s_msg.length >0 ){
+		$.messager.show({
+				title:'系统提醒',
+				msg:s_msg,
+				timeout:10000,
+				height:'100%',  
+				showType:'fade'
+			});
+			s_msg1 =s_msg;
+		}
+	   }
+	   
+	   
+	   function divShow(msg)
+	   {
+	     $.messager.show({
+				title:'系统提醒',
+				msg:msg,
+				timeout:10000,
+				height:'100%',  
+				showType:'fade'
+			});  
+	   }
+	   
+	   $(document).ready(function(){ 
+         showMsg(); 
+         window.setInterval("showMsg()",60000);//半分钟刷新1次 
+      }); 
+		
+				
+</script>
+
+
+
+</head>
+
+<body bgcolor="#e8f0ec" class="easyui-layout" onLoad="dwr.engine.setActiveReverseAjax(true)">
+
+<div data-options="region:'north',split:false" title="" style="height:98px;padding:0px;">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr bgcolor="#5D82A8">
+    <td align=left>&nbsp;</td>
+    <td width="240">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="w01_11px_grey">
+        <tr>
+          <!--<td align="center" width="10"><img src="images/frame/arr_red.gif" border="0"></td>	
+          <td>&nbsp;<span class="w01_11px_white" onMouseOver="this.style.cursor='hand'" onClick="javascript:void window.open('display?proname=authority/bulletin.htm','main');">公告管理</span></td>        
+          --><td align="center" width="10"><img src="images/frame/arr_red.gif" border="0"></td>	
+          <td><input type="hidden" id="AA" value="">&nbsp;<span class="w01_11px_white" onMouseOver="this.style.cursor='hand'" onClick="javascript:void window.open('display?proname=authority/password_update.htm','main');">修改密码</span></td>        
+          <td align="center" width="10"><img src="images/frame/arr_red.gif" border="0"></td>
+          <td>&nbsp;<span class="w01_11px_white" onMouseOver="this.style.cursor='hand'" onClick="javascript: if( confirm('确实要退出平台吗?') ){ location='work?proname=QUIT'}">退出平台</span></td>
+          <td width="1">&nbsp;</td>
+        </tr>
+      </table>
+    </td>    
+  </tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" id="title">
+  <tr>
+    <td width="234"><img src="images/logon/main_02_salsa.gif" width="234" height="57"></td>
+    <td background="images/frame/main_03.gif">&nbsp;</td>
+  </tr>
+</table>
+
+<table width="100%" height="23" border="0" cellpadding="0" cellspacing="0" class="w01_13px_black" background="images/frame/menu_bg.gif">
+  <tr>
+    <td width="15%" background="images/frame/menu_bg.gif" align="center">
+	
+	    
+    		@@LS.DATE,  @@LS.DAYCN,
+    </td>
+    <td width="84%">&nbsp;
+    	
+    </td>
+    <td width="1%" nowrap align="right">&nbsp;</td>
+  </tr>
+</table>
+</div>
+<div data-options="region:'west',iconCls:'icon-reload',split:false" title="功能菜单" style="width:180px;background-color: #EEF2EB;">
+      <!--<iframe name="resource" marginheight="0" marginwidth="0" frameborder="0" width="100%" height="100%" scrolling="auto" src="display?proname=menuTree.htm"></iframe>-->
+	  <div >
+		<ul id="deeptree" class="ztree"></ul>
+	</div>
+	  </div>
+    <div data-options="region:'center'" title="" style="overflow:hidden;padding: 5px 5px 5px 5px;background-color: #EEF2EB;">
+       <iframe name="main" marginheight="0" marginwidth="0" frameborder="0" width="100%" height="100%" scrolling="auto" src="display?proname=firstpage.htm"></iframe> 
+	   </div>
+
+<div data-options="region:'south',split:false" title="" style="height:24px;padding:0px;background=url(images/frame/footer_bg.gif)">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#5D82A8" background="images/frame/footer_bg.gif" class="w01_11px_grey" height="22">
+<tr valign="middle">
+  <td>
+  	<table class="w01_11px_grey" border="0">
+  		<tr>
+  				<td><img src="images/frame/person.gif" alt="登录名称"></td>
+					<td>名称:</td>
+					<td valign="bottom">@@LS.XM,</td>
+					<td><img src="images/frame/role.gif" alt="所属角色"></td>
+					<td>角色:</td>
+					<td valign="bottom">@@LS.YHZ,</td>
+					
+					<td><img src="images/frame/org.gif" alt="所在机构"></td>
+					<td>机构:</td>
+					<td>@@LS.AGENT,</td>
+					
+					<td>&nbsp;</td>
+  		</tr>
+    </table>
+  </td>
+  <td valign="middle" align="right"><font color="#3c3c3c">艾登软件(上海)有限公司&nbsp;&copy;&nbsp;@@LS.YEAR, 版权所有&nbsp;&nbsp;&nbsp;</font></td>
+</tr>
+</table>
+</div>
+</body>
+
+    
+</html>

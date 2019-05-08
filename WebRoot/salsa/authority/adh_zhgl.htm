@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+		<title>艾订货账号管理</title>
+		<base target="_self" />
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<link href="css/style1.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+		<object id="LODOP"
+			classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+		</object>
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<script src="inc/dateams.js" type=text/javascript></script>
+		<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+		<script type='text/javascript' src='dwr/engine.js'></script>
+		<script type='text/javascript' src='dwr/util.js'></script>
+		<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+          <script>
+		      //弹出窗口
+   function opr(url){
+        var s=NewWinCustMD(url+'&LX=1&tmp11='+Math.random(),window,500,600);
+        
+    } 
+		</script>
+	</head>
+	<body>
+		<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    //form1.SPBM.focus();
+     
+  
+	
+	 //产品信息
+    var orderDetailstore1 = new Ext.data.JsonStore({
+         url:"work?proname=MJP224",
+        root:"root",
+        fields: ['contact_man','agent_code','agent_name','agent_tel','open_flag','brand_code','bzj_amount','join_date','end_date','taf_company','isaddtaf','device_token','agent_type','agent_mobile1','domain_man']
+    });
+
+    //产品信息列
+     var cm1 = new Ext.grid.ColumnModel([
+         //new Ext.grid.RowNumberer(),//自动行号
+		{header:'品牌',dataIndex:'brand_code',width: 105},
+        {header:'客户编码',dataIndex:'agent_code',width: 85},
+		{header:'联系人',dataIndex:'contact_man',width: 85},
+        {header:'手机号码',dataIndex:'agent_tel',width: 125},
+		{header:'详细信息',dataIndex:'agent_name',width: 225},
+        {header:'状态',dataIndex:'open_flag',width: 60},
+        {header:'余额',dataIndex:'bzj_amount',width: 80},
+       // {header:'职位',dataIndex:'agent_type',width: 80},
+		{header:'注册日期',dataIndex:'join_date',width: 120},
+		{header:'到期日期',dataIndex:'end_date',width: 120}
+       ]);
+   
+     //产品信息表格
+    var grid1 = new Ext.grid.EditorGridPanel({
+    	el: 'List',
+    	width:document.body.clientWidth-15, 
+    	height:document.body.clientHeight-65,
+    	title:'客户列表',
+    	ds: orderDetailstore1,
+        cm: cm1,
+		plugins: new Ext.ux.grid.GridSummary(),
+        frame:false,
+        clicksToEdit:1,
+		enableHdMenu:false,
+        stripeRows:true,
+        columnLines: true,
+		viewConfig: {
+            forceFit: true
+			
+        },
+		bbar: new Ext.PagingToolbar({  
+                 store: orderDetailstore1,  
+                 pageSize: 15,  
+                 displayInfo: true,  
+                 displayMsg: "本页显示第{0}条到第{1}条记录,一共{2}条",  
+                 emptyMsg: "没有记录"  
+             }),
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+        
+    });
+    grid1.render();
+	orderDetailstore1.on('beforeload',function(){
+		Ext.apply(
+			this.baseParams, {
+				start:0, limit:15,
+				contact_man:encodeURI(Ext.get('contact_man').dom.value),
+				ORDER_DATE1:Ext.get('ORDER_DATE1').dom.value,
+				ORDER_DATE2:Ext.get('ORDER_DATE2').dom.value,
+				Brand_Code:Ext.get('Brand_Code').dom.value,
+				Open_Flag:encodeURI(Ext.get('Open_Flag').dom.value),
+				AGENT_TEL:Ext.get('cs').dom.value
+			});
+	});
+	
+    orderDetailstore1.load();
+	
+   //搜索成品
+   Ext.get("Btncx").on("click",function(){
+       orderDetailstore1.load();
+   });
+   
+/*    //导出Excel
+   Ext.get("BtnExport").on("click",function(){
+     //  window.location.href='downLoad?proname=EXP224&inexcel=1&AGENT_TEL='+Ext.get('AGENT_TEL').dom.value+"&Open_Flag="+Ext.get('Open_Flag').dom.value+"&ORDER_DATE1="+Ext.get('ORDER_DATE1').dom.value+"&ORDER_DATE2="+Ext.get('ORDER_DATE2').dom.value+"&CONTACT_MAN="+Ext.get('CONTACT_MAN').dom.value+"&brand_code="+Ext.get('brand_code').dom.value;
+     window.location.href='downLoad?proname=EXP224&inexcel=1&brand_code='+Ext.get('brand_code').dom.value+"&Open_Flag="+Ext.get('Open_Flag').dom.value+"&ORDER_DATE1="+Ext.get('ORDER_DATE1').dom.value+"&ORDER_DATE2="+Ext.get('ORDER_DATE2').dom.value+"&CONTACT_MAN="+Ext.get('CONTACT_MAN').dom.value;
+     
+   });
+    */
+   //双击列表，显示详情
+     grid1.on("rowdblclick",function(grid1,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+              //获取点击行的数据
+             var record = grid1.getSelectionModel().getSelected();
+             //获取改行的某一个值字段
+			var agent_tel= record.get("agent_tel");
+			form1.d_Flag.value = "0";
+			//双击调到某个页面
+            opr('display?proname=authority/adhupdate_zb.htm&AGENT_TEL='+agent_tel);//一个条件参数
+             // opr('display?proname=authority/adhupdate.htm&AGENT_TEL='+agent_code+'&CONTACT_MANS='+contact_man);//两个条件参数
+			 if(form1.d_Flag.value == "1")
+            {
+               orderDetailstore1.load();
+           }
+   });
+
+    //根据条件导出EXCEL
+    Ext.get("exportE").on("click",function(){
+        window.location.href='downLoad?proname=EXP224&inexcel=1&ORDER_DATE1='+Ext.get('ORDER_DATE1').dom.value+
+        "&ORDER_DATE2="+Ext.get('ORDER_DATE2').dom.value+
+        "&contact_man="+encodeURI(Ext.get('contact_man').dom.value)+
+        "&Brand_Code="+encodeURI(Ext.get('Brand_Code').dom.value)+
+        "&Open_Flag="+encodeURI(Ext.get('Open_Flag').dom.value)+
+        "&cs="+Ext.get('cs').dom.value;
+    });
+
+});
+</script>
+		<form name="form1" method="post" action="" id="form1">
+		<input type="hidden" name="d_Flag" id="d_Flag" value="0">
+		 <input type="hidden" name="AGENT_TEL">
+			<table width="100%" border="0">
+				<tr>
+					<td>
+						<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+							<tr height="30">
+								<td
+									style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">
+									<img src="images/loadtree/mdmde.gif" WIDTH="18" HEIGHT="18">
+									艾订货账号查询
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table width="100%" border="0" cellpadding="0"
+													cellspacing="0">
+							<tr valign="top">
+								<td width="45%">
+									<table width="100%" border="0">
+										<tr>
+											<td>
+												<table width="100%" border="0" cellpadding="0"
+													cellspacing="0">
+													<tr>
+														<td >
+                                                         
+客户名称:
+<input type="text" name="contact_man" id="contact_man" size="15">
+品牌：
+              <select name="Brand_Code" id="Brand_Code">
+                <option>$$XLP012,</option>
+              </select>
+          状态：
+              <select name="Open_Flag" id="Open_Flag">
+                 <option value="">全部</option>
+                 <option value="启用">启用</option>
+                 <option value="禁用">禁用</option>
+              </select>
+              手机号码：<input type="text" name="cs" id="cs" size="15">
+     注册日期：  
+           <input type="text" name="ORDER_DATE1" id="ORDER_DATE1" size="10" readonly onClick="javascript:ShowCalendar(this)" value="">
+              - 
+ <input type="text" name="ORDER_DATE2" id="ORDER_DATE2"size="10" readonly onClick="javascript:ShowCalendar(this)" value="">
+															<input name="Btncx" id="Btncx" value="查询" type="button"> $$EXP224,
+															<!-- <input name="BtnExport" id="BtnExport" value="导出Excel" type="button"> -->
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div id="List"></div>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

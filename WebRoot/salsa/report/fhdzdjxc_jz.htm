@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="css/ColumnHeaderGroup.css" />
+<link rel="stylesheet" type="text/css" href="js/calendar/tcal.css" />
+
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script src="inc/Calendar1.js" type=text/javascript language=javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base3.4.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all3.4.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type="text/javascript" src="js/extjs/ColumnHeaderGroup.js"></script>
+
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+ <script type="text/javascript" src="js/extjs/BufferView.js"></script>
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type="text/javascript"> src="js/calendar/tcal.js"</script>
+<script type="text/javascript">
+    //弹出窗口
+   function opr(url){
+        var s=NewWinCustMD(url+'&LX=1&tmp11='+Math.random(),window,450,650);
+        
+    }  
+     
+    
+</script>
+
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    var orderDetailstore = new Ext.data.JsonStore({
+         url:"work?proname=MJP207",
+        root:"root",
+        fields: ['客户名称','期初结余','货款','装修补贴','市场活动','其他补贴','折扣返利','退货冲款','调账','货款1','货款2','出样','工程','代垫运费','代垫手续费','期末结余','片区','保证金结余','区域经理']
+    });
+	
+	
+	
+	var rowhead = new Ext.ux.grid.ColumnHeaderGroup({
+         rows: [
+						[{ header:"",
+						   align:"center",
+						   colspan:4},
+						{
+						   header:"补贴费用",
+						   align:"center",
+						   colspan:6
+						},
+						{
+						   header:"发货明细金额",
+						   align:"center",
+						   colspan:5
+						},
+						{
+						   header:"",
+						   align:"center",
+						   colspan:1
+						}
+						]],
+						hierarchicalColMenu : false  
+    });
+
+   // var sm = new Ext.grid.CheckboxSelectionModel();
+    var cm = new Ext.grid.ColumnModel({ 
+	     defaults: {
+            sortable: true // columns are not sortable by default           
+        },
+        columns: [
+        //new Ext.grid.RowNumberer(),//自动行号
+        //sm,
+        
+		
+	
+        
+		
+		{header:'客户名称',dataIndex:'客户名称',width: 15},
+		{header:'区域经理',dataIndex:'区域经理',width: 10},
+		{header:'期初结余',dataIndex:'期初结余',width: 10,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'汇款金额',dataIndex:'货款',width: 10,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'装修补贴',dataIndex:'装修补贴',width: 10,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'广告补贴',dataIndex:'市场活动',width: 10,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'上样补贴',dataIndex:'其他补贴',width: 10,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'折扣返利',dataIndex:'折扣返利',width: 10,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'退货返款',dataIndex:'退货冲款',width: 10,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'其他',dataIndex:'调账',width: 10,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'货款(正品)',dataIndex:'货款1',width: 10,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'货款(特价)',dataIndex:'货款2',width: 10,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'出样',dataIndex:'出样',width: 10,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'工程',dataIndex:'工程',width: 10,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'代垫运费',dataIndex:'代垫运费',width: 10,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'期末结余',dataIndex:'期末结余',width: 10,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')}
+		
+		
+		
+		
+	   
+       ]});
+    
+    cm.defaultSortable = true;
+  
+    var grid = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'backDetails',
+    	width:document.body.clientWidth-35, 
+    	height:document.body.clientHeight-75,
+    	title:'',
+    	ds: orderDetailstore,
+        cm: cm,
+		enableHdMenu:false,
+        plugins: [new Ext.ux.grid.GridSummary(),rowhead],
+        view: new Ext.ux.grid.BufferView({
+             scrollDelay: false,
+			 forceFit: true
+			
+        }),
+		
+        frame:false,
+        clicksToEdit:2,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid.render();
+	orderDetailstore.on('beforeload',function(){
+		Ext.apply(
+			this.baseParams, {
+				Sjbm:encodeURI(Ext.get('Sjbm').dom.value),
+				AGENT:encodeURI(Ext.get("AGENT").dom.value),
+				ORDER_DATE1:encodeURI(Ext.get("ORDER_DATE1").dom.value),
+				ORDER_DATE2:encodeURI(Ext.get("ORDER_DATE2").dom.value)
+			});
+	});
+    //orderDetailstore.load();
+
+     Ext.get("BtnCX").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       orderDetailstore.load();
+	   
+    });
+	
+
+	
+	
+	 Ext.get("exportE").on("click",function(){
+		
+      window.location.href='downLoad?proname=EXP207&inexcel=1&Sjbm='+Ext.get('Sjbm').dom.value+"&AGENT="+Ext.get('AGENT').dom.value+"&ORDER_DATE1="+Ext.get('ORDER_DATE1').dom.value+"&ORDER_DATE2="+Ext.get('ORDER_DATE2').dom.value;
+	   
+    });
+	 
+
+});
+
+</script>
+
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td> <table cellSpacing=0 cellPadding=0 border="0" width="100%">
+							<tr height="30">
+								<td style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid;font-size: 12pt;COLOR: #124164;FONT-WEIGHT: bold;"><img src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">客户销售累计表</td>
+							</tr>
+		</table></td>
+   </tr>
+	
+	<tr>
+    
+	<td height="25">
+	   
+	   
+	  <table width="100%" border="0" cellpadding="5" cellspacing="0" >
+           <tr> 
+            <td width="15%" align="right">所属省份： </td>
+            <td width="85%">  
+              <select name="Sjbm" id="Sjbm">
+          		<option value="">全部</option>
+		  		<option>$$XL0065,</option>
+        	</select>
+           
+          
+            客户名称：
+           
+         			<input type="text" name="AGENT" id="AGENT" size="20"> 
+            
+        
+		  
+         
+           统计周期： 
+            
+ <input type="text" name="ORDER_DATE1" id="ORDER_DATE1" size="10" readonly onClick="javascript:ShowCalendar(this)" value="@@LS.FIRSTDAYSOFCURMONTH,">
+              - 
+ <input type="text" name="ORDER_DATE2" id="ORDER_DATE2"size="10" readonly onClick="javascript:ShowCalendar(this)" value="@@LS.CURDATE,">
+            
+          
+               
+                
+                <input type="button" name="BtnCx" id="BtnCx" value="查询">
+            $$EXP207,</td>
+            
+          </tr>
+          
+         
+        </table>
+	
+	</td>
+	</tr>
+	
+	<tr>
+      <td>
+		<div id="backDetails"></div>
+		 
+       
+      </td>
+    </tr>
+    
+  </table>
+ 
+
+</body>
+
+</html>

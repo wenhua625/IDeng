@@ -1,0 +1,405 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base target="_self"/>
+<title>销售明细</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript></script>
+
+<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+</object> 
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+
+
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    Ext.get('Brand_Code').dom.disabled = true;
+    Ext.get('YWY').dom.disabled = true;
+    if ('@@BACK_CODE,' != ''){
+       	DWRUtil.setValue("Agent_Name","!!MJ0T06,02");
+    	DWRUtil.setValue("Agent_Code","!!MJ0T06,06");
+    	DWRUtil.setValue("Back_Code","!!MJ0T06,01");
+    	DWRUtil.setValue("Arr_Date","!!MJ0T06,04");
+    	DWRUtil.setValue("Brand_Code","!!MJ0T06,29");
+    	DWRUtil.setValue("Note_Type","!!MJ0T06,10");
+    	DWRUtil.setValue("Opr_Man","!!MJ0T06,08");
+    	DWRUtil.setValue("Audit_Man","!!MJ0T06,09");
+        DWRUtil.setValue("Order_Num","!!MJ0T06,07");
+        DWRUtil.setValue("Order_Amount","!!MJ0T06,11");
+        
+        DWRUtil.setValue("YWY","!!MJ0T06,15");
+        DWRUtil.setValue("SFSF","!!MJ0T06,14");
+        DWRUtil.setValue("JSDH","!!MJ0T06,16");
+        DWRUtil.setValue("Arr_Man","!!MJ0T06,18");
+        DWRUtil.setValue("Arr_Tel","!!MJ0T06,19");
+        DWRUtil.setValue("Arr_Address","!!MJ0T06,20");
+        DWRUtil.setValue("Dis_Amount","!!MJ0T06,21");
+        DWRUtil.setValue("Dised_Amount","!!MJ0T06,22");
+        DWRUtil.setValue("Tis_Amount","!!MJ0T06,23");
+        DWRUtil.setValue("Account_Amount","!!MJ0T06,24");
+        DWRUtil.setValue("Taf_Amount","!!MJ0T06,25");
+        DWRUtil.setValue("Accounting_Amount","!!MJ0T06,26");
+        DWRUtil.setValue("Agent_Amount","!!MJ0T06,28");
+        DWRUtil.setValue("Brand_Code","!!MJ0T06,29");
+         
+        DWRUtil.setValue("Gg_Amount","!!MJ0T06,30");
+        DWRUtil.setValue("Cx_Amount","!!MJ0T06,31");
+        DWRUtil.setValue("Tj_Amount","!!MJ0T06,32");
+        DWRUtil.setValue("Cd_Amount","!!MJ0T06,33");
+        DWRUtil.setValue("Qt_Amount","!!MJ0T06,34");
+               
+        DWRUtil.setValue("Ht_Amount","!!MJZ003,07");
+		DWRUtil.setValue("Fk_Amount1","!!MJZ003,08");
+		DWRUtil.setValue("Fk_Amount2","!!MJZ003,14");
+		DWRUtil.setValue("Fk_Amount3","!!MJZ003,15");
+		
+		DWRUtil.setValue("Order_MJ","!!MJZ003,16");
+		DWRUtil.setValue("AZ_Man","!!MJZ003,17");
+     
+       
+        
+        if('@@View,'=='View'){
+           
+           Ext.get('JSDH').dom.disabled = true;
+           Ext.get('SFSF').dom.disabled = true;
+           Ext.get('YWY').dom.style.visibility='visible';
+           Ext.get('Arr_Man').dom.disabled = true;
+           Ext.get('Arr_Tel').dom.disabled = true;
+           Ext.get('Arr_Address').dom.disabled = true;
+           Ext.get('Ht_Amount').dom.disabled = true;
+           Ext.get('Fk_Amount1').dom.disabled = true;
+           Ext.get('Fk_Amount1').dom.disabled = true;
+           Ext.get('Fk_Amount3').dom.disabled = true;
+           Ext.get('Order_MJ').dom.disabled = true;
+           Ext.get('AZ_Man').dom.disabled = true;
+           
+         
+        }
+        
+        Ext.get('Agent_Name').dom.disabled = true;
+        
+        formMap = DWRUtil.getValues("form1");
+        
+          
+    }
+    
+    
+    var orderDetailstore = new Ext.data.JsonStore({
+         url:"work?proname=MJP085",
+        root:"root",
+        fields: ['product_code', 'product_name','product_size','product_color','product_untl','back_num','product_price','back_amount','back_type','price_type','back_reason','id','store_num','disaccount_price','fact_num','product_id','zk']
+    });
+    
+    var pricestore = new Ext.data.JsonStore({
+         url:"work?proname=MJ1018",
+        root:"root",
+        fields: ['value', 'name']
+    });
+  
+   
+    var cm = new Ext.grid.ColumnModel([
+        new Ext.grid.RowNumberer(),//自动行号
+        
+      
+        {header:'型号',dataIndex:'product_code',width: 95},
+        {header:'品名',dataIndex:'product_name',width: 170,summaryRenderer: function(v, params, data){
+					return '合计：';
+				}},
+        {header:'类型',dataIndex:'product_size',width: 70},
+        {header:'单位',dataIndex:'product_untl',width: 40},
+        //{header:'库存',dataIndex:'store_num',width: 50},
+        {header:'数量',dataIndex:'back_num',width: 50,summaryType:'sum'},
+        {header:'单价',dataIndex:'disaccount_price',width: 50,renderer:Ext.util.Format.usMoney,hidden:true},
+        {header:'折扣',dataIndex:'zk',width: 50,renderer:Ext.util.Format.usMoney,hidden:true},
+        {header:'折后价',dataIndex:'product_price',width: 50,renderer:Ext.util.Format.usMoney,hidden:true},
+        
+        {header:'小计',dataIndex:'back_amount',width: 85,sortable:true,summaryType:'sum',renderer:Ext.util.Format.usMoney,hidden:true},
+        {header:'备注',dataIndex:'back_reason',width: 150},
+        {header:'预订数',dataIndex:'fact_num',width: 70,summaryType:'sum',hidden:true}
+        
+       
+       ]);
+ 
+    
+    var grid = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'productList',
+    	width:document.body.clientWidth-25, 
+    	height:document.body.clientHeight-245,
+    	title:'商品明细',
+    	ds: orderDetailstore,
+        cm: cm,
+		forceFit:true,
+		viewConfig: {
+            forceFit: true
+        },
+        plugins: new Ext.ux.grid.GridSummary(),
+        frame:false,
+        columnLines: true,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid.render();
+    orderDetailstore.load({params:{Back_Code:Ext.get('Back_Code').dom.value}});
+    
+    
+    
+     
+    
+    
+ 
+    var productStore = new Ext.data.JsonStore({
+        fields: ['product_name', 'product_code','product_num','abs_num']
+    });
+	
+	//点击产品 
+   grid.on("rowclick",function(grid1,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             var record = grid.getSelectionModel().getSelected();
+             
+             form1.Product_Id.value=record.get("product_id");
+   		   formMap = DWRUtil.getValues("form1");
+   		   DwrComm.parseMJ('MJP077',formMap,{callback:function(list){productStore.loadData(list)},async:false});
+    	   form1.Store_Num.value=productStore.getAt(0).get('product_num');
+             
+           
+   });
+	
+   
+  
+   
+  
+   
+
+   
+  
+   
+ 
+     
+   
+   
+  
+   
+   
+  
+   
+   
+   
+   
+   
+   
+  
+    Ext.get("BtnPrint").on("click",function(){
+      
+         
+            
+       LODOP.ADD_PRINT_URL(10,10,"100%","95%",'@@LS.URL,/display?proname=print/xsd_print.htm&Back_Code='+Ext.get('Back_Code').dom.value+'&BACK_CODE='+Ext.get('Back_Code').dom.value);	
+		//LODOP.SET_PRINT_PAGESIZE(1,2100,2970,""); 
+		LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,""); //按适宽模式显示
+		
+		LODOP.PREVIEW();
+		
+       
+        
+   }); 
+   Ext.get("BtnPrintPHD").on("click",function(){
+         var time=new Date().getTime();
+        NewWinMD('@@LS.URL,/display?proname=print/xsd_ph_print3.htm&Back_Code='+Ext.get('Back_Code').dom.value+'&BACK_CODE='+Ext.get('Back_Code').dom.value+"&time="+time,window);  
+            
+       /*LODOP.ADD_PRINT_URL(10,10,"100%","95%",'@@LS.URL,/display?proname=quickorder/xsd_ph_print.htm&Back_Code='+Ext.get('Back_Code').dom.value+'&BACK_CODE='+Ext.get('Back_Code').dom.value);	
+		//LODOP.SET_PRINT_PAGESIZE(1,2100,2970,""); 
+		LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,""); //按适宽模式显示
+		
+		LODOP.PREVIEW();*/
+		
+       
+        
+   }); 
+   
+   Ext.get("BtnPrintTYD").on("click",function(){
+      
+         
+            
+      
+		
+       
+        
+   }); 
+   
+    Ext.get("BtnPrintFHD").on("click",function(){
+        LODOP.ADD_PRINT_URL(10,10,"100%","85%",'@@LS.URL,/display?proname=quickorder/xsd_fh_print.htm&Back_Code='+Ext.get('Back_Code').dom.value+'&BACK_CODE='+Ext.get('Back_Code').dom.value);	
+		   // LODOP.ADD_PRINT_URL(10,10,781,531,print_url);
+           LODOP.SET_PRINT_PAGESIZE(1,2200,1400,""); 
+		   LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,""); //按适宽模式显示
+		   var ix=LODOP.PREVIEW();    
+   }); 
+   
+   
+    Ext.get("Backd").on("click",function(){
+           window.close();
+   });  
+   
+});
+
+</script>
+<form name="form1" method="post" action="" id="form1">
+<input type="hidden" name="Product_Id">
+<input type="hidden" name="d_Product_Id"><input type="hidden" name="d_Order_Amount"><input type="hidden" name="d_Product_Price"> <input type="hidden"
+	name="d_Product_Memo"> <input type="hidden" name="d_Order_Num"><input type="hidden" name="d_Flag" value="0"><input type="hidden" name="d_ZK" value="0">
+<input type="hidden" name="Note_Type" value='@@Note_Type,'><input type="hidden" name="OprType"><input type="hidden" name="S_BackSts"><input type="hidden" name="print_Flag" id="print_Flag">
+
+		<table width="100%" border="0" style="border-collapse:collapse" bordercolor="#000000">
+
+			<tr>
+				<td align="center">
+				<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+					<tr height="25">
+						<td align="center"
+							style="font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><input name="Brand_Code" value="FOBOT" type="hidden" size="10">销售单</td>
+					</tr>
+				</table>				</td>
+			</tr>
+			<tr>
+			   <td align="center">
+			      <table width="90%" border="0">
+  <tr class="tabletoptitle">
+				<td align="right" width="12%">客户名称：</td>
+				<td width="19%"><input type="hidden" name="Agent_Code" value=""><input
+					type="text" name="Agent_Name" value="" size="20"></td>
+				<td width="30%">单据号：
+			    <input type="text" name="Back_Code" value="" readonly
+					class="TEXTDISABLED" size="20"></td>
+				<td align="right" width="10%">制单日期：</td>
+				<td width="29%">				
+				  <input type="text" name="Arr_Date"
+					readonly size="15" value="@@LS.CURDATE," class="TEXTDISABLED"></td>
+			</tr>
+			
+			<tr class="tabletoptitle">
+				<td align="right" width="12%">送货地址：</td>
+				<td colspan="4"><input type="text" name="Arr_Address" size="43" value="">
+			    联系人：
+			    <input type="text" name="Arr_Man"
+					 size="10">
+			    联系电话：
+			    <input type="text" name="Arr_Tel" size="15"></td>
+				</tr>
+			<tr class="tabletoptitle">
+			  <td align="right">备注：</td>
+			  <td colspan="4"><textarea name="Demo" cols="42" rows="2">!!MJ0T06,05</textarea>
+		      业务员：
+		      <select name="YWY">
+                <option>$$XL0053,</option>
+              </select>
+		      <input type="hidden" name="SFSF" size="20" readonly class="TEXTDISABLED">
+		      打折文件单号：
+		      <input type="text" name="JSDH" size="10"></td>
+			  </tr>
+</table>
+
+			   </td>
+			</tr>
+			<tr>
+		<td>
+		<table width="100%" border="0">
+			<tr class="tabletoptitle">
+				<td align="right" width="10%"><!--货号：--></td>
+			  <td width="17%"><input type="hidden" name="spFlag"
+			value="0" id="spFlag"></td>
+				<td width="16%" align="right"><!-- 产品类型： -->
+				  <!--<select name="Back_Type"><option value="1">正品</option><option value="2">二等品</option></select>-->
+				  <input type="hidden" name="Store_Num" value="" size="5" readonly class="TEXTDISABLED" style="color:red">
+			  <input type="hidden" name="Back_Type" value="1">				  <!--退货数：--></td>
+			  <td width="57%">
+				
+				<input type="hidden" name="BtnPrint" id="BtnPrint" value="打印发货确认单"> 	
+				<input type="hidden" name="BtnPrintPHD" value="打印配货单" >
+				<input type="hidden" name="BtnPrintFHD" value="打印发货单" >
+				<input type="hidden" name="BtnPrintTYD" value="安装清单" >
+				<input type="button" name="Backd" value="关 闭">		    			  </td>
+			</tr>
+		</table>		</td>
+	</tr>
+	<tr>
+		<td >
+		   <div id='productList'></div>
+  		</td>
+	</tr>		
+	<tr>
+	   <td>
+	      <table width="100%" border="0">
+ <tr class="tabletoptitle">
+			   
+		       <td align="center"  style="color:blue">&nbsp;</td>
+	        <td colspan="4" align="left"  style="color:blue"> 合同金额 ：
+              <input type="text" name="Ht_Amount" size="10">
+已付定金：
+<input type="text" name="Fk_Amount1" size="10" readonly="true" class="TEXTDISABLED" >
+设计阶段付款：
+<input type="text" name="Fk_Amount2" size="10" readonly="true" class="TEXTDISABLED">
+结项阶段付款：
+<input type="text" name="Fk_Amount3" size="10" readonly="true" class="TEXTDISABLED">
+。
+<input type="hidden" name="Dis_Amount" value="" size="10"
+				readonly class="TEXTDISABLED" style="color:red">
+<input type="hidden" name="Dised_Amount" value="" size="10"
+				readonly class="TEXTDISABLED" ></td>
+          </tr>
+			<tr class="tabletoptitle">
+				
+				<td align="center"  style="color:blue" ></td>
+		      <td colspan="4" align="left"  style="color:blue" >工程面积：
+                <input type="text" name="Order_MJ" size="10">
+安装人：
+<input type="text" name="AZ_Man" size="15"></td>
+		    </tr>
+</table>
+
+	   </td>
+	</tr>
+			<tr>
+		<td >
+		<table border="0" width="100%">
+		    <td align="right" width="15%">开单人：</td>
+			<td width="10%"><input type="text" name="Opr_Man" value="@@LS.XM," readonly
+					class="TEXTDISABLED" size="15"></td>
+			<td align="right" width="10%">审核人：</td>
+			<td width="10%"><input type="text" name="Audit_Man" value="" readonly
+					class="TEXTDISABLED" size="15"></td>
+			<td width="15%" align="right">&nbsp;</td>
+			<td width="5%"><input type="hidden" name="Order_Num" value="" size="5"
+				readonly class="TEXTDISABLED" style="color:red"></td>
+			<td align="right"><input type="hidden" name="appedFlag"
+			value="0" id="appedFlag">
+			  <input type="hidden" name="appeds"
+			value="添加附加品"></td>
+			</table>		</td>
+	</tr>
+	<tr>
+		<td >
+		   <table width="100%">
+	
+</table>		</td>
+	</tr>		
+		</table>
+		
+
+
+</form>
+
+</body>
+</html>

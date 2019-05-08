@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/easyui/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/easyui/icon.css">
+
+
+
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script>
+		$(function(){
+		    $('#win').window('close'); 
+			$('#productList').datagrid({
+				title:'生产小组',
+				iconCls:'icon-edit',
+				width:"auto",
+				height:document.body.clientHeight-30,
+				nowrap: true,
+				autoRowHeight: false,
+				striped: true,
+				singleSelect:true,
+				collapsible:true,
+				url:'query?proname=MJS047',
+				remoteSort: false,
+				idField:'bm',
+				columns:[[
+					
+					{title:'生产小组名称',field:'mc',width:250}
+        			
+        			
+        			
+        			
+        			 
+    			]],
+				pagination:false,
+				rownumbers:true,
+				toolbar:[{
+					id:'btnadd',
+					text:'新增',
+					iconCls:'icon-add',
+					handler:function(){
+					    $('#bm').attr({ readonly:false });
+					    $('#form1').form('load',{mc:"",action:"insert"});
+					    $('#win').window('open');
+						//$('#btnsave').linkbutton('enable');
+						//alert('add')
+					}
+				},'-',{
+					id:'btnupdate',
+					text:'修改',
+					iconCls:'icon-edit',
+					handler:function(){
+					    var row = $('#productList').datagrid('getSelected'); 
+					    if(!row) 
+					    {
+					       $.messager.alert('提示信息','请先选择要更新的记录。','info'); 
+					       return false;
+					    }else
+					    {
+					        form1.bm.value=row.bm;
+					        $('#form1').form('load',row); 
+					        $('#win').window('open');
+					    }
+					    
+					}
+				}]
+			});
+			$('#form1').form({  
+                url:"work?proname=INS024",  
+    			onSubmit:function(){
+                    return $(this).form('validate');
+    			},  
+    		    success:function(data){  
+        		    if (data=="ok")
+        		    {
+        		      alert("操作成功!");
+        		      $('#win').window('close');
+        		      $("#productList").datagrid('reload');   
+        		    }else 
+        		    {  alert(data);}
+        		     
+    		    }  
+			});
+			
+
+			
+		});
+		function closewin(){
+			    $('#win').window('close'); 
+		}
+		function save(){
+			     $('#form1').submit(); 
+		 }
+		
+		
+</script>
+
+
+</head>
+
+<body>
+
+<input type="hidden" name="d_Flag" value="0">
+<table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td style="background-color:#FFFFFF">
+        <div id="productList" ></div></td>
+  </tr>
+  <tr></tr>
+</table>
+<div  id="win" class="easyui-window" title="生产小组基本信息"  icon="icon-save" style="width:350px;height:250px;">  
+    
+     <form id="form1" method="post">
+           <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;基本信息</td>
+          </tr>
+          <tr> 
+            <td width="200" align="right" bgcolor="#C4DFDC" class="tableleft"> 
+                          </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="action" id="action" type="hidden" value="update">
+              <input name="bm" id="bm"  type="hidden"></td>
+          </tr>
+         
+          <tr> 
+            <td width="200" align="right" bgcolor="#C4DFDC" class="tableleft"> 
+              小组名称：            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="mc" class="easyui-validatebox" type="text" size="30"> </td>
+          </tr>
+          
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">是否启用：</td>
+            <td bgcolor="#FFFFFF"> 
+                 <select name="qy_flag" >
+                <option value="T">启用</option>
+                <option value="F">停用</option>
+              </select>         </td>
+          </tr>
+        </table>
+            <div style="padding:5px;text-align:center;">  
+            <a  href="#" class="easyui-linkbutton" icon="icon-ok" onClick="save()">保存</a>  
+            <a  href="#" class="easyui-linkbutton" icon="icon-cancel" onClick="closewin()">取消</a>  
+        </div>
+   </form> 
+    
+</div>
+
+</body>
+
+</html>

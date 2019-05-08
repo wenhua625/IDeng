@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>欠款报表</title>
+<base target="_self" />
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA"
+	width=0 height=0> </object>
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+<script>
+	//弹出窗口1
+   function opr(url){
+        var s=NewWinCustMD(url+'&LX=1&tmp11='+Math.random(),window,614,819);
+        
+    } 
+	  //弹出窗口2
+   function opr1(url){
+        var s=NewWinCustMD(url+'&LX=1&tmp11='+Math.random(),window,550,819);
+    } 
+	  //弹出窗口3
+   function opr2(url){
+        var s=NewWinCustMD(url+'&LX=1&tmp11='+Math.random(),window,470,720);
+    } 	    
+</script>
+</head>
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    //form1.SPBM.focus();
+     
+	 //产品信息
+    var orderDetailstore1 = new Ext.data.JsonStore({
+         url:"work?proname=MJP259",
+        root:"root",
+       // fields: ['订单号','业主姓名','手机号码','房屋地址','订单类型','上报日期','预约安装日期','合同金额','定金金额','报单人','是否上报']
+       fields: ['agent_code','agent_name','xzkhs','jdkhs','cjkhs','jrhke','qdhte','lxwke','rzbxs','rzcys','yggz','agent_tel','msr'  ]
+    });
+    
+    //产品信息列
+     var cm1 = new Ext.grid.ColumnModel([
+         //new Ext.grid.RowNumberer(),//自动行号
+		{header:'店铺编码',dataIndex:'agent_code',width:85 },
+		
+        {header:'店铺名称',dataIndex:'agent_name',width: 135},
+        {header:'联系电话',dataIndex:'agent_tel',width: 85},
+       
+        {header:'新增客户数',dataIndex:'xzkhs',width: 95,summaryType:'sum',align:'right'},
+		{header:'进店客户数',dataIndex:'jdkhs',width: 95,summaryType:'sum',align:'right'},
+		{header:'成交数',dataIndex:'cjkhs',width: 95,summaryType:'sum',align:'right'},
+		{header:'成交金额',dataIndex:'qdhte',width: 95,summaryType:'sum',align:'right',renderer:Ext.util.Format.usMoney},
+		{header:'回款金额',dataIndex:'jrhke',width: 95,summaryType:'sum',align:'right',renderer:Ext.util.Format.usMoney},
+		{header:'累计欠款',dataIndex:'lxwke',width: 95,summaryType:'sum',align:'right',renderer:Ext.util.Format.usMoney},
+       
+		{header:'日志数',dataIndex:'rzbxs',width: 80},
+		{header:'毛收入',dataIndex:'msr',width: 80,summaryType:'sum',align:'right',renderer:Ext.util.Format.usMoney}
+		
+		
+       ]);
+   
+     //产品信息表格
+    var grid1 = new Ext.grid.EditorGridPanel({
+    	el: 'List',
+    	width:document.body.clientWidth-15, 
+    	height:document.body.clientHeight-65,
+    	title:'员工业绩表',
+    	ds: orderDetailstore1,
+        cm: cm1,
+		plugins: new Ext.ux.grid.GridSummary(),
+        frame:false,
+        clicksToEdit:1,
+		enableHdMenu:false,
+        stripeRows:true,
+        columnLines: true,
+		viewConfig: {
+            forceFit: true
+        },
+		bbar: new Ext.PagingToolbar({  
+                 store: orderDetailstore1,  
+                 pageSize: 15,  
+                 displayInfo: true,  
+                 displayMsg: "本页显示第{0}条到第{1}条记录,一共{2}条",  
+                 emptyMsg: "没有记录"  
+             }),
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+        
+    });
+    grid1.render();
+	orderDetailstore1.on('beforeload',function(){
+		Ext.apply(
+			this.baseParams, {
+				start:0, limit:15,date1:Ext.get('ORDER_DATE1').dom.value,date2:Ext.get('ORDER_DATE2').dom.value,Brand_Code:Ext.get('Brand_Code').dom.value,Agent_Name:encodeURI(Ext.get('Agent_Name').dom.value)
+			});
+	});
+    orderDetailstore1.load();
+	
+   //搜索成品
+   Ext.get("Btncx").on("click",function(){
+       orderDetailstore1.load();
+   });
+   
+   
+   
+   
+  		
+	 Ext.get("BtnProduct").on("click",function(e){
+		
+		 var record = grid1.getSelectionModel().getSelected();
+		 if(record == null) 
+		 {
+			  alert("请选择业主！");
+			  return;
+		 }
+		var bm=record.get("order_code");
+		form1.d_Flag.value = "0";
+		opr1('display?proname=production/orderdetails_mx.htm&ID='+bm);
+		if(form1.d_Flag.value == "1")
+		    orderDetailstore1.load();
+
+		 
+		
+      });
+   
+   
+   //导出Excel
+   Ext.get("BtnExport").on("click",function(){
+        window.location.href='downLoad?proname=EXP259&inexcel=1&date1='+Ext.get('ORDER_DATE1').dom.value+'&date2='+Ext.get('ORDER_DATE2').dom.value+'&Brand_Code='+Ext.get('Brand_Code').dom.value+'&Agent_Name='+encodeURI(Ext.get('Agent_Name').dom.value);	
+   });
+	
+  
+    
+});
+  
+</script>
+	<form name="form1" method="post" action="" id="form1">
+		<input type="hidden" name="D_ORDER_CODE" id="D_ORDER_CODE"> <input
+			type="hidden" name="D_DH_STS" id="D_DH_STS"> <input
+			type="hidden" name="d_Flag" value="0"> <input type="hidden"
+			name="d_JsonData" value=""> <input type="hidden"
+			name="d_SPBM"> <input type="hidden" name="SH_FLAG"> <input
+			type="hidden" name="ref_id"> <input type="hidden" name="ID">
+		<input type="hidden" name="SRC_ID">
+		<table width="100%" border="0">
+			<tr>
+				<td>
+					<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+						<tr height="25">
+							<td
+								style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">
+								<img src="images/loadtree/mdmde.gif" WIDTH="18" HEIGHT="18">业绩报表</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table width="100%" border="0" cellpadding="0" cellspacing="0">
+						<tr valign="top">
+							<td width="45%">
+								<table width="100%" border="0">
+									<tr>
+										<td>
+											<table width="100%" border="0" cellpadding="0"
+												cellspacing="0">
+												<tr>
+													<td>考核日期： 
+													  <input type="text" name="ORDER_DATE1"
+														id="ORDER_DATE1" size="10" readonly
+														onClick="javascript:ShowCalendar(this)"
+														value="@@LS.FIRSTDAYSOFCURMONTH,"> - <input
+														type="text" name="ORDER_DATE2" id="ORDER_DATE2" size="10"
+														readonly onClick="javascript:ShowCalendar(this)"
+														value="@@LS.LASTDAYSOFCURMONTH,">
+														品牌：
+              <select name="Brand_Code" id="Brand_Code">
+                <option>$$XLP012,</option>
+              </select> 门店名称：  <input name="Agent_Name" type="text" value="" size="20" id="Agent_Name">
+                              <input name="Btncx" value="查询" type="button">
+         <input
+														type="hidden" name="BtnProduct" id="BtnProduct" value="产品清单">                     
+                              
+                              <input
+														name="BtnExport" value="导出Excel" type="button"> 
+													</td>
+
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div id="List"></div>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>上传图片</title>
+<base target="_self"/>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" CONTENT="0">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<link href="js/uploadify/uploadify.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/uploadify/jquery.uploadify.min.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+
+<script type="text/javascript">
+       
+        $(document).ready(function() {
+            $("#photo_img").attr("src","salsa/product_photo/@@Photo,?tmp="+Math.random());
+            $("#uploadify").uploadify({
+                'swf'     : 'js/uploadify/uploadify.swf',
+                'uploader': '@@LS.URL,/work?proname=UE0003&BM=@@BM,',
+                
+                'buttonText':'上传图片',
+                'fileTypeDesc' : 'Image Files',         
+                'fileTypeExts' : '*.gif; *.jpg; *.png',
+                'progressData' : 'speed',
+                'width' : '200',
+				'height' : '20',
+                'onUploadSuccess' : function(file, data, response) { 
+                      
+                             alert("图片上传成功！");
+                            // $("#photo_img").attr("src",data+"?tmp="+Math.random()); 
+                            form1.ImagePath.value = data;
+							window.close();
+                       
+                       
+					
+					 
+					  
+					          
+                 }
+                
+               
+            });
+			
+			
+        });
+ 
+
+  //RESIZE 图片自适应图片宽度和高度
+//参数说明：
+//        obj是图片对象，this调用方法见下面示例
+//        maxW和maxH分别为约定的最大宽度和最大高度
+function resizeimg(obj,maxW,maxH)
+{
+         var imgW=obj.width;
+         var imgH=obj.height;
+         if(imgW>maxW||imgH>maxH)
+         {        
+                  var ratioA=imgW/maxW;
+                  var ratioB=imgH/maxH;                
+                  if(ratioA>ratioB)
+                  {
+                           imgW=maxW;
+                           imgH=maxW*(imgH/imgW);
+                  }
+                  else
+                  {
+                           imgH=maxH;
+                           imgW=maxH*(imgW/imgH);
+                  }   
+                  obj.width=imgW;
+                  obj.height=imgH;
+         }
+}
+
+</script>
+</head>
+<body scroll="no" style="BACKGROUND-COLOR: #cccccc;">
+<form action="" method="post" name="form1" >
+
+<table width="100%" height="100%" border="0" cellSpacing=0 cellPadding=0>
+   <tr>
+      <td align="center" valign="middle">
+		<div style="border:1px solid #009900; width:98%; height:340px;min-height:200px;overflow: scroll; ">
+					       <img src="salsa/product_photo/@@Photo,"  width="900"  id="photo_img"/>
+		 </div>
+      </td>
+    </tr>
+    <tr>
+       <td align="center"><input type="file" name="uploadify" id="uploadify"><input type="button" name="BtnClose" value="关闭" onClick="window.close()"></td>
+    </tr>
+ </table>
+</form>
+</body>
+</html>

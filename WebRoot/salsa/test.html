@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>@@LS.SYSTEMBHD,ERPÏµÍ³</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<link type="text/css" rel="stylesheet" href="css/style1.css">
+
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script  type='text/javascript' > 
+      
+       function test() {
+        var msg = null;
+        //msg = {msgId: '1', context: $("#msgContext").val()};
+        DwrComm.sendMsg("ºÅµÄ°¡£¬DWR");
+        
+    }
+		
+				
+</script>
+
+
+
+</head>
+
+<body bgcolor="#e8f0ec"  >
+     <input type="text" name="msgId" id="msgId" /> <br />
+       context : <input type="text" name="msgContext" id="msgContext" />
+       <input type="button" value="Send" onclick="test()"  />   
+
+</body>
+
+    
+</html>

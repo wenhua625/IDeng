@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>BOM设置</title>
+<base target="_self"/>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/easyui/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/easyui/icon.css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-webase.js"></script>
+<script type="text/javascript" src="js/easyui/json2.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.edatagrid.js"></script>
+<script type="text/javascript" src="js/easyui/easyui.plugin.hy.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0></object>
+</head>
+<body >
+<script type="text/javascript">
+$(function() 
+  {
+     //初始化表单数据
+    var $dg1=$('#orderDetails');
+    form1.SPBM.focus();
+   
+    //表格数据
+    $dg1.edatagrid({
+				width:'100%',
+				height:305,
+				nowrap: true,
+				autoRowHeight: false,
+				striped: true,
+				singleSelect:true,
+				collapsible:true,
+				url:'query?proname=MJS003&BM=@@BM,',
+				showFooter:true,
+				remoteSort: false,
+				idField:'id',
+				rownumbers:true,
+				fit:false,
+				fitColumns:true,
+				columns:[[
+				    
+        			{title:'编码',field:'spbm',width:85},
+        			{title:'名称',field:'spmc',width: 205},
+					{title:'规格',field:'xhgg',width: 125},
+        			{title:'单位',field:'jldw',width: 55},
+        			{title:'单耗',field:'sl',width: 65,align:"right",sum:"true",editor:{type:'numberbox',options:{precision:2}}}, 
+					{title:'单价',field:'dj',width: 65,align:"right"},
+        			{title:'金额',field:'je',width: 85,align:"right",sum:"true"} 
+        			
+    			]],
+    			onLoadSuccess:function(data){
+    			     $(this).edatagrid('statistics');
+    			},
+    			onAfterEdit:function(rowIndex,rowData,changes){
+    			    if(changes == undefined) return false;
+    			
+    			    if(changes.sl != undefined)
+    			    {
+    			      rowData['sl']=changes.sl;     
+    			    }
+    			    if(changes.dj != undefined)
+    			    {
+    			      rowData['dj']=changes.dj;     
+    			    } 
+				    rowData['je']=(rowData['sl']*rowData['dj']).toFixed(2);
+				    $(this).datagrid('refreshRow',rowIndex);
+    			    $(this).edatagrid('statistics');
+    			}
+			});	
+		
+
+	//添加记录
+   $("#SPBM").keydown(function(event){
+       if( event.keyCode==13){
+	       if(form1.SPBM.value == "") return ;
+		   form1.d_Flag.value ="0";
+           var win=NewWinCustMD('display?proname=order/order_wlsel.htm&SPBM='+form1.SPBM.value+'&tmp='+Math.random(),window,450,650);
+          
+		   form1.SPBM.value="";
+		   if(form1.d_Flag.value=="1")
+		   {
+		       
+		       $.post("query?proname=SJS015",{d_SPBM:form1.d_SPBM.value,id:form1.id.value}, function(rsp) {
+		             var rows=eval("("+rsp+")");
+		             $dg1.edatagrid('appendRow',rows[0]);
+		             var row_num = $dg1.edatagrid('getRows').length;
+		             $dg1.edatagrid('selectRow', row_num-1);
+					 $dg1.edatagrid('statistics');
+					 form1.SPBM.focus(); 
+    	       });
+		                                               
+		   }
+       }
+        
+   });
+   
+   //保存数据，公用
+   function checkAndSave()
+   {
+       $dg1.edatagrid('acceptChanges'); 
+       var rows=$dg1.edatagrid('getRows');
+       if (rows.length == 0) return false;
+       form1.d_JsonData.value=encodeURI(JSON.stringify(rows));
+      
+       if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+       var formMap = DWRUtil.getValues("form1");
+       var ret=false;
+       DwrComm.parseIN('INS018',formMap,'insert',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                         
+                     }else
+                     {
+                        ret= true;
+                     }
+                    },async:false});
+      return ret; 
+	  
+   }
+   
+   //删除记录
+   $("#BtnDelRecord").click(function(event){
+       deleteData($dg1);
+       $dg1.edatagrid('statistics');
+   });
+   //保存记录
+   $("#BtnSave").click(function(event){
+      if(checkAndSave()) {
+        alert("保存成功!");
+        dialogArguments.document.getElementById('d_Flag').value="1";
+        window.close();
+      }
+   });
+   //关闭窗口
+   $("#BtnClose").click(function(event){
+       //$dg1.edatagrid('acceptChanges'); 
+       var changes=$dg1.edatagrid('getChanges').length;
+       
+       if(changes){ if(!confirm('数据还没有保存，你确信要退出吗？')){return false;}}
+       window.close(); 
+   });
+   //删除单据
+   $("#BtnDel").click(function(event){
+       if(!confirm("你确认要将@@BM,的全部BOM信息删除吗？")) return false;
+       $('#form1').form('submit',{  
+                url:"work?proname=INS003&action=delete",  
+    			type:'post',
+    		    success:function(data){  
+        		    if (data!="ok")
+        		    {
+        		       alert(data);
+        		    }else 
+        		    {  
+        		       dialogArguments.document.getElementById('d_Flag').value="1";
+                       window.close();
+        		    }
+        		     
+    		    }  
+			});
+   });
+ });
+</script>
+<form name="form1" method="post" action="" id="form1" onsubmit="return false;">
+  <input type="hidden" name="d_Flag" value="0">
+  <input type="hidden" name="d_JsonData" value="">
+  <input type="hidden" name="d_SPBM">
+  <input type="hidden" name="SH_FLAG">
+  <input type="hidden" name="id" value="@@BM,"> 
+  <table width="100%" border="0">
+    <tr>
+      <td colspan="2"><table width="100%" border="0" align="center" cellpadding="0"
+							cellspacing="0">
+          <tr>
+            <td colspan="12" align="center"><table cellSpacing=0 cellPadding=0 border="0" width="100%">
+                <tr >
+                  <td align="center" style="font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">@@BM,!!MJS042,02 物料组成清单 </td>
+                </tr>
+              </table></td>
+          </tr>
+        </table></td>
+    </tr>
+    <tr>
+      <td colspan="2" style=" border-top:@@LS.BGCOLOR, 1px solid;"><table width="100%" border="0">
+          <tr class="tabletoptitle">
+            <td width="45%"  >物料编码：
+              <input type="text" name="SPBM" size="20" class="InputFocus" id="SPBM"></td>
+            <td width="55%"><input type="hidden" name="BtnImport" value="导入">
+              <input type="button" name="BtnSave" id="BtnSave" value="保  存">
+              <input type="button" name="BtnDelRecord" id="BtnDelRecord" value="删除记录">
+              <input type="button" name="BtnDel" id="BtnDel" value="清空BOM信息">
+              <input type="button" name="BtnClose" id="BtnClose" value="关  闭">
+            </td>
+          </tr>
+        </table></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+	     <div id="orderDetails"></div>
+	  </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

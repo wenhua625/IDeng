@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>产品类型信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type="text/javascript">
+ function work(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    var kjm="update";
+    
+    DwrComm.parseIN('IN0001',formMap,kjm,{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              alert("操作成功!");
+              window.opener.location.reload();
+              window.close();
+           }
+       },async:false});
+}
+
+</script>
+<script type="text/javascript">
+	function add(){
+		if(form1.SERIES_NAME.value.length == 0){
+				alert("类型名称不能为空!");
+				form1.SERIES_NAME.focus();
+				return false;		
+		}
+		work();
+	}
+</script>
+</head>
+
+<body>
+<form name="form1" method="post" action="" id="form1">
+<input type="hidden" name="SERIES_CODE" value='@@SERIES_CODE,' id="SERIES_CODE">
+  <table width="90%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="0">
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr> 
+            <td colspan="2" class="WHS"> 
+              <div align="center"><strong>产品类型信息</strong></div>
+            </td>
+          </tr>
+          
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">类型名称</div>
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="SERIES_NAME" type="text" class="input"  value="$$MJ0001,02" id="SERIES_NAME">
+            </td>
+          </tr>
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" align="right"> 
+                类型：
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <select name="Series_Type">
+                <option value="成品">成品</option>
+                <option value="物料">物料</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">状态</td>
+            <td bgcolor="#FFFFFF">
+               <select name="STS" id="STS">
+                <option value="0">正常</option>
+                <option value="1">禁用</option>
+              </select>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="90%" height="40" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" valign="bottom"><div align="center"> 
+          <input name="Submit" type="button" class="ImgButton" value="修  改" onClick="return add()">
+          &nbsp;&nbsp;&nbsp;&nbsp; 
+          <input name="Submit2" type="button" class="ImgButton" onClick="window.close()" value="关  闭">
+        </div></td>
+    </tr>
+  </table>
+</form>
+</body>
+<script language="javascript">
+function update()
+{
+   if('!!MJ0001,06'!=' ') form1.STS.value='!!MJ0001,06';
+    if('!!MJ0001,03'!=' ') form1.Series_Type.value='!!MJ0001,03';
+ }
+ update();
+</script>
+</html>

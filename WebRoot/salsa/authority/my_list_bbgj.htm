@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base target="_self"/>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+</head>
+<body>
+<script type='text/javascript'>
+
+//定义一个方法用来在添加之前，对输入框进行判断是否为空
+	function add(){
+	        if(form1.Track_Content.value==""){
+			   alert("请输入本次跟进内容！");
+			    return false;
+			}
+			//满足条件，侧调用修改的方法
+			work();		
+	}
+
+   //【订单】添加的方法
+   function work(){
+	if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+      var formMap = DWRUtil.getValues("form1");
+    DwrComm.parseIN('INP066',formMap,'insert',{callback:function(data){if (data != 'ok'){alert(data);}else{
+                      dialogArguments.document.getElementById('d_Flag').value="1";   
+                      window.close();   
+                   }},async:false});
+        }
+</script>
+<form name="form1" method="post" action="" id="form1">
+<table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" align="center" style="font-size: 16pt; COLOR: #124164; FONT-WEIGHT: bold;" >跟进记录</td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;【客户信息】</td>
+          </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">业主姓名：</td>
+            <td bgcolor="#FFFFFF">
+            <input id="CustName" name="CustName" value="!!MJP239,03" readonly class="TEXTDISABLED">
+            <input id="OrderCode" name="OrderCode" value="!!MJP239,01" type="hidden">
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">电话：</td>
+            <td bgcolor="#FFFFFF">
+              <input id="Cust_Tel" name="Cust_Tel" value="!!MJP239,04" readonly class="TEXTDISABLED"></td>
+          </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">沟通内容：</td>
+            <td bgcolor="#FFFFFF"><textarea name="Track_Content" id="Track_Content" cols="65" rows="10"></textarea></td>
+          </tr>
+         <!--  <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;【单据信息】</td>
+          </tr> -->
+          <!-- <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">记录编号：</td>
+            <td bgcolor="#FFFFFF">
+              <input type="text" id="track_id" name="track_id"></td>
+          </tr> -->
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">跟进人：</td>
+            <td bgcolor="#FFFFFF">
+              <input type="text" name="Track_Man" id="Track_Man" value="!!MJP240,03" size="15" readonly class="TEXTDISABLED"> 
+              <input type="hidden" name="Track_Tel" id="Track_Tel" value="!!MJP240,07" size="15">            
+              </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="90%" height="40" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" valign="bottom"><div align="center">
+	      <input type="button" name="Save" id="Save" value="保 存"  onClick="add()" >
+	      <input type="button" name="Backd" value="关闭" class="ImgButton" style="width:80px" onClick="window.close()">
+        </div></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>小区信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="js/extjs/openWindow.js"></script>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type="text/javascript">
+
+  function initpage(){
+  if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+	
+	DWRUtil.setValue("bm","!!MJ0011,01");
+	DWRUtil.setValue("housing_name","!!MJ0011,02");
+	DWRUtil.setValue("housing_address","!!MJ0011,03");
+	DWRUtil.setValue("jwd","!!MJ0011,04");
+  }
+ function work(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    var kjm="update";
+    
+    DwrComm.parseIN('INP080',formMap,kjm,{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              alert("操作成功!");
+              
+              parent.frames["main"].document.getElementById("d_Flag").value="1";              
+			  closewin('b-win');
+           }
+       },async:false});
+}
+
+</script>
+<script type="text/javascript">
+	function add(){
+		if(form1.housing_name.value.length == 0){
+				alert("小区名称不能为空!");
+				form1.housing_name.focus();
+				return false;		
+		}
+		if(form1.housing_address.value.length == 0){
+				alert("小区地址不能为空!");
+				form1.housing_address.focus();
+				return false;		
+		}
+		if(form1.jwd.value.length > 0){
+				var jwd = form1.jwd.value;
+			    var temp = jwd.split(",");   
+			    form1.lon.value =temp[0];
+			    form1.lat.value =temp[1];	
+		}
+		
+		work();
+	}
+</script>
+</head>
+
+<body onLoad="initpage()">
+<form name="form1" method="post" action="" id="form1">
+
+		<input type="hidden" name="lon">
+		<input type="hidden" name="lat">
+  <table width="90%" height="0" border="0" align="center" cellpadding="0" cellspacing="0" >
+    <tr> 
+      <td height="0">
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr> 
+            <td colspan="2" > 
+              <div align="center">住宅小区</div>
+            </td>
+          </tr>
+          
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" align="right"> 
+             小区名称：
+            </td>
+            <td bgcolor="#FFFFFF"> 
+             <input name="bm" type="hidden"   id="bm">
+              <input name="housing_name" type="text"   id="housing_name" size="30">
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" align="right">经纬度：</td>
+            <td bgcolor="#FFFFFF"><input name="jwd" type="text"   id="jwd" size="25"><a href="http://api.map.baidu.com/lbsapi/getpoint/index.html" target="_blank">坐标拾取</a></td>
+          </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" align="right">地址：</td>
+            <td bgcolor="#FFFFFF"><input name="housing_address" type="text"   id="housing_address" size="45"></td>
+          </tr>
+         
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="90%" height="40" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" valign="bottom"><div align="center"> 
+          <input name="Submit" type="button"  value="确  定" onClick="return add()">
+          
+          <input name="Submit2" type="button"  onClick="closewin('b-win')" value="关  闭">
+        </div></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

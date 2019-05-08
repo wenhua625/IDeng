@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<data>
+  <row>
+    <KJM>EX0001</KJM>
+    <SQL>SELECT  PRODUCT_CODE 货号,  b.SERIES_NAME 所属系统, PRODUCT_NAME 品名, PRODUCT_SIZE 规格, PRODUCT_COLOR 颜色,  PRODUCT_Untl 单位, PRODUCT_NUM 库存数, ABS_NUM 分配数,product_num*type_agent  金额,bad_num 二等品数量 FROM product_list a,series_list b WHERE a.SERIES_CODE=b.SERIES_CODE</SQL>
+    <KJSM>计划员库存导出</KJSM>
+  </row>
+  <row>
+    <KJM>EX0002</KJM>
+    <SQL>SELECT a.CustCode, b.ContactName, b.ContactSex, b.ContactPos, b.ContactTel, b.ContactMob, b.ContactFax, b.ContactMSN, b.ContactDept, b.ContactEmail, b.ContactQQ, b.ContactStatus, CustName, CustShortName, CustType, CustAddress, CustZip, CustSrc, CustTel, CustFax, CustArea, CustWWW, CustEmail, CompanyQue, CompanyBegDate, CompanyBegMan, CompanySize, CompanyEmpSize, CompanyInd, CompanySales, CompanyDemo, BillBank, BillName, BillBankAccount, BillTax, BillBank2, BillName2, BillBankAccount2, BillTax2, BillPay, BillCredit, BillLimit,Creater,dbo.getDateStr1(CreateDate),CustOwer,dbo.getDateStr1(OwerDate),Assigner,LastUser,dbo.getDateStr1(LastDate) FROM CrmCustBaseInfo a,CrmCustContactInfo b,CrmCustShareInfo c where a.CustCode = b.CustCode and b.isPrim = '1' and a.CustCode = c.CustCode and c.UserCode='@@LS.YHDM,'</SQL>
+    <KJSM>共享客户列表</KJSM>
+  </row>
+  
+</data>

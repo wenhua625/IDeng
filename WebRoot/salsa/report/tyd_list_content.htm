@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>Untitled Document</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<meta http-equiv="expires" content="30">
+		<link href="css/style011.css" rel="stylesheet" type="text/css">
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<SCRIPT LANGUAGE="JavaScript" src="inc/sort.js"></SCRIPT>
+		<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+        </object> 
+		<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+        <script language="javascript">
+        function opr(d_id){
+             //var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,750,1000);
+			  LODOP.ADD_PRINT_URL(10,10,"100%","85%",'@@LS.URL,/display?proname=print/tyd_print.htm&Back_Code='+d_id+'&BACK_CODE='+d_id);	
+		   // LODOP.ADD_PRINT_URL(10,10,781,531,print_url);
+           //LODOP.SET_PRINT_PAGESIZE(1,2200,1400,""); 
+		   LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,""); //按适宽模式显示
+		   var ix=LODOP.PREVIEW(); 
+          }
+      </script>
+	</head>
+
+	<body style="margin-left: 0px;">
+		<div >
+			<table width="100%" border="0">
+					
+				<tr>
+					<td >
+						<table width="100%" border="1" style="border-collapse:collapse" bordercolor="#000000" id="PowerTable">
+        <tr align="center" bgcolor="#BFBFBF"> 
+          <td>品牌</td>
+          <td>单据号</td>
+          <td>客户名称</td>
+          <td>订货日期</td>
+          <td>数量</td>
+          <td>下单日期</td>
+          <td>发货日期</td>
+          <td>开单人</td>
+          <td>状态</td>
+          <td>业务员</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr >
+          <td>$$MJ0X21,17</td> 
+          <td>$$MJ0X21,01</td>
+          <td>$$MJ0X21,02</td>
+          <td>$$MJ0X21,04</td>
+          <td align="right">$$MJ0X21,05</td>
+          <td>$$MJ0X21,03</td>
+          <td>$$MJ0X21,20</td>
+          <td>$$MJ0X21,07</td>
+          <td>$$MJ0X21,06</td>
+          <td>$$MJ0X21,14</td>
+          <td>【<a href="#" onClick="javascript:opr('$$MJ0X21,01')">详细信息</a>】</td>
+        </tr>
+        <tr >
+          <td colspan="4" align="right">合计：</td>
+          <td align="right">!!MJ1026,01</td>
+          <td colspan="6">&nbsp;</td>
+          </tr>
+      </table>
+					</td>
+				</tr>
+				$$page,	
+			</table>
+
+		</div>
+		
+	</body>
+</html>

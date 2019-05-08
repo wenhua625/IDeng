@@ -1,0 +1,454 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/ext-zt.js"></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type="text/javascript" src="js/extjs/gridpanelToExcel.js"></script>
+<script type="text/javascript" src="js/extjs/BufferView.js"></script>
+<script type="text/javascript" src="js/extjs/RowExpander.js"></script>
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+ <style type="text/css">
+.greenBack {
+      background: #006F00;
+}
+.yellowBack {
+      background: #D9D900;
+}
+.redBack {
+      background: #B6B4C0;
+}
+.blueBack {
+      background: #000099;
+}
+.x-selectable, .x-selectable * {        
+        -moz-user-select: text! important ;        
+        -khtml-user-select: text! important ; }
+</style> 
+
+
+<script type="text/javascript">
+     function opr(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,500,700);
+     }
+	   function opr1(url){
+        var s=NewWinCustMD(url+'&LX=1&tmp11='+Math.random(),window,550,720);
+    } 
+	 //跟进条数超过3条，则显示【查询所有】的按钮 
+	  function seeMore(order_code){
+		  opr('display?proname=authority/bbgj_mx.htm&ORDER_CODE='+order_code);
+	 }	 
+</script>
+</head>
+<body>
+	<script type='text/javascript'>
+Ext.onReady(function(){
+	Ext.QuickTips.init();
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+  
+     //单据查找列表
+    var processDetailstore = new Ext.data.JsonStore({
+        url:"work?proname=MJP248",
+        root:"root",
+        fields: ['order_code','arr_man','arr_tel','arr_address','order_src','groom_date','zjlxsj','order_amount','djje','ywy','dh_sts','sex','arr_address_detail','bxcs','cust_name','order_date','order_amount']
+   });
+
+		var etpl = new Ext.XTemplate(
+							'<div class="x-grid-group-title" style="margin-left:10%" >'
+									+ '<table width="100%" style="background-color:#e8f0ec">'
+									+ '<tpl for="details"><tr>'
+									+ '<td width="10%">{track_date}</td>'
+									+ '<td align="left" width="40%">【{track_memo}】{track_content}</td> <td align="left" width="40%">{srv_result}{srv_sjdate}</td> <td align="right" width="10%">{track_man}</td> '
+									+ '</tr>'
+									+ '</tpl>'
+									+ '<tpl if="bxcs &gt;3 ">'
+									+ '<tr>'
+									+ '<td colspan="4" align="center"><button id="MoreInfo" onclick=seeMore("{order_code}")>点击查看全部</button></td></tr>'
+									+ '</tpl>' + '</table>' + '</div>');
+
+					var expander = new Ext.ux.grid.RowExpander(
+							{
+								tpl : etpl,
+								lazyRender : true,
+								enableCaching : false,
+								toggleRow : function(row) {
+									if (typeof row == 'number') {
+										row = this.grid.view.getRow(row);
+									}
+									if (!Ext.fly(row).hasClass(
+											'x-grid3-row-collapsed')) {
+										this.collapseRow(row);
+										return;
+									}
+									var store = this.grid.store;
+									var record = this.grid.store
+											.getAt(row.rowIndex);
+									var _this = this;
+									var mark = new Ext.LoadMask(Ext.getBody(),
+											{
+												msg : '报修数据加载中...',
+												removeMask : true
+											});
+									mark.show();
+									Ext.Ajax
+											.request({
+												url : 'work?proname=MJP247',
+												params : {
+													'HYID' : record.get("order_code")
+												},
+												method : 'POST',
+												callback : function(option,
+														success, response) {
+													var rt = Ext.util.JSON
+															.decode(response.responseText);
+													if (success) {
+														record.set("details",
+																rt.root);
+														_this.expandRow(row.rowIndex);
+													} else {
+														handgoajax.ajaxError(rt.msg);
+													}
+													mark.hide();
+												}
+											});
+								}
+							});
+
+					var sm = new Ext.grid.CheckboxSelectionModel();
+					var cm = new Ext.grid.ColumnModel(
+							{
+								defaults : {
+									css : 'height:25px;font-size:10pt;'
+								},
+								columns : [
+										//sm,
+										expander,
+										{
+											header : '所属店铺',
+											dataIndex : 'cust_name',
+											width : 105
+										},
+										{
+											header : '订单日期',
+											dataIndex : 'order_date',
+											width : 85
+										},
+										{
+											header : '业主姓名',
+											dataIndex : 'arr_man',
+											width : 85
+										},
+										{
+											header : '性别',
+											dataIndex : 'sex',
+											width : 55
+										},
+										{
+											header : '电话',
+											dataIndex : 'arr_tel',
+											width : 105
+										},
+										{
+											header : '地址',
+											dataIndex : 'arr_address_detail',
+											width : 185
+										},
+										{
+											header : '合同金额',
+											dataIndex : 'order_amount',
+											width : 85,
+											renderer:Ext.util.Format.usMoney
+										},
+										{
+											header : '安装时间',
+											dataIndex : 'groom_date',
+											width : 85
+										},
+										{
+											header : '最后一次跟进时间',
+											dataIndex : 'zjlxsj',
+											width : 85,
+											hidden:true
+										},
+										{
+											header : '业务员',
+											dataIndex : 'ywy',
+											width : 85
+										},
+									 	{
+											header : '报修次数',
+											dataIndex : 'bxcs',
+											width : 55
+										}, 
+										{
+											header : "",
+											renderer : function(value, meta,record) { 
+												var formatStr = "<button  onclick='javscript:return false;' class='order_maintenance'>报修</button>   <button  onclick='javscript:return false;' class='order_hf'>回访</button>";
+												var resultStr = String
+														.format(formatStr);
+												return "<div class='controlBtn'>"
+														+ resultStr + "</div>";
+											}.createDelegate(this),
+											css : "text-align:center;"
+										}
+								]
+							});
+
+					//var summary = new Ext.ux.grid.GridSummary();
+					//工具栏
+					var pageBar = new Ext.PagingToolbar({
+						store : processDetailstore,//数据集来源  
+						pageSize : 15, //页大小
+						displayInfo : true,
+						displayMsg : "本页显示第{0}条到第{1}条记录,一共{2}条",
+						emptyMsg : "没有记录"
+
+					});
+					var grid_process = new Ext.grid.EditorGridPanel({
+						stripeRows : true,// 显示斑马线
+						el : 'productList',//设置数据显示区
+						width : document.body.clientWidth - 10, //设置宽度
+						height : document.body.clientHeight - 63,//设置高度
+						title : '',//标题
+						ds : processDetailstore,//设置表格对应的数据集
+						cm : cm,//设置表格的列 
+						sm : sm,//设置表格复选框
+						plugins : expander,
+						viewConfig : {// 自动充满表格  
+							forceFit : true
+						},
+						frame : false,
+						clicksToEdit : 1,//【设置编辑框触发事件】默认2次双击才触发编辑框事件  
+						selModel : new Ext.grid.RowSelectionModel({
+							singleSelect : false
+						}),
+						columnLines : true,//是否显示列分割线，默认为false 
+						enableHdMenu : false,//是否显示表头的上下文菜单，默认为true 
+						bbar : pageBar,// 设置工具栏 
+						autoScroll : true,// 当数据超查过表格宽度时，显示滚动条
+						loadMask : true,//是否在加载数据时显示遮罩效果，默认为false 
+						loadMask : {
+							msg : '正在加载数据...'
+						}
+					});
+					grid_process.render();//renderer可以格式化该列显示的数据格式或者按照你自定义的脚本显示最终数据样子
+
+					//列表刷新之前，先进行条件查询
+					processDetailstore
+							.on(
+									'beforeload',
+									function() {
+										Ext
+												.apply(
+														this.baseParams,
+														{
+															SJ : encodeURI(Ext
+																	.get('SJ').dom.value),
+															start : pageBar.cursor,
+															limit : 15,
+															Agent_Code:Ext.get('Agent_Code').dom.value
+														});
+									});
+
+					//设置默认展开【也就是刚点进来就就刷新【报备数据】】	
+					/* 	processDetailstore.on("load",function(store, records){  
+					 for(i=0;i<store.getCount();i++){  
+					 expander.toggleRow(i);  
+					 }  
+					 });  */
+
+					processDetailstore.load();//刷新列表
+
+					//将刷新列表封装成一个方法供调用
+					function searchMem() {
+						processDetailstore.load();
+					}
+
+					grid_process.on("afteredit", afterEdit, grid_process);
+
+					function afterEdit(e) {
+						var record = e.record;// 被编辑的记录 
+						/* form1.BM.value = record.get('bm');
+						form1.d_HYJBMC.value = record.get('hyjb');
+						formMap = DWRUtil.getValues("form1");
+						DwrComm.parseIN('INP037', formMap, 'update', {
+							callback : function(data) {
+								if (data != 'ok') {
+									alert(data);
+								}
+							},
+							async : false
+						}); */
+					};
+					
+					
+					 //点击二级 
+   grid_process.on("rowdblclick",function(grid_process,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             var record = grid_process.getSelectionModel().getSelected();
+            if(record == null) 
+		    {
+			  alert("请选择业主！");
+			  return;
+		    }
+		var bm=record.get("order_code");
+		form1.d_Flag.value = "0";
+		//opr1('display?proname=production/orderdetails.htm&order_code='+bm);
+		//if(form1.d_Flag.value == "1")
+		  //  grid_process.load();
+            
+ 
+           
+   });
+
+					//点击添加按钮执行
+					grid_process.on('cellclick', function(grid_process,rowIndex, columnIndex, e) {
+						var btn = e.getTarget('.controlBtn');
+						if (btn) {
+							var t = e.getTarget();
+							record = grid_process.getStore().getAt(rowIndex);
+							var control = t.className;
+							row = grid_process.getSelectionModel().getSelected(); //得到选择所有行
+							if (control == "order_bit") {
+								NewWinCustMD(
+										"display?proname=shop/srv_list.htm&BM="
+												+ row.get("order_code")+'&Back_Code='+row.get("order_code")
+												+ "&View=View&tmp11=" + Math.random(),
+										window, 750, 800);
+								expander.toggleRow(rowIndex);
+								expander.toggleRow(rowIndex);
+							}
+							if (control == "order_hf") {
+								NewWinCustMD(
+										"display?proname=production/bxd.htm&BM="
+												+ row.get("order_code")+'&Back_Code='+row.get("order_code")
+												+ "&View=View&tmp11=" + Math.random(),
+										window, 450, 680);
+								expander.toggleRow(rowIndex);
+								expander.toggleRow(rowIndex);
+							}
+							if (control == "order_maintenance") {
+								NewWinCustMD(
+										"display?proname=shop/maintenance_form.htm&BM="
+												+ row.get("order_code")+'&Back_Code='+row.get("order_code")
+												+ "&View=View&tmp11=" + Math.random(),
+										window, 550, 850);
+								expander.toggleRow(rowIndex);
+								expander.toggleRow(rowIndex);
+							}
+							
+						}
+					});
+					//查询按钮
+					Ext.get("BtnCX").on("click", function() {
+						searchMem();//刷新列表
+					});
+					//快速搜索成品
+			Ext.get("SJ").on("keydown",function(e){ 
+			      
+					if(e.keyCode==13){ 
+				       searchMem();
+					} 
+			});
+			
+			
+	 Ext.get("BtnProduct").on("click",function(e){
+		
+		 var record = grid_process.getSelectionModel().getSelected();
+		 if(record == null) 
+		 {
+			  alert("请选择业主！");
+			  return;
+		 }
+		var bm=record.get("order_code");
+		opr1('display?proname=production/orderdetails.htm&order_code='+bm);
+
+		 
+		
+      });
+
+
+					
+					  //客户报备按钮的点击事件
+     Ext.get("BtnAddKHBB").on("click",function(){
+          opr1('display?proname=report/my_list_add.htm');
+          if(form1.d_Flag.value == "1"){
+			orderDetailstore.load();
+		   }
+      }); 
+				});
+	</script>
+	<table width="100%" height="0" border="0" align="center"
+		cellpadding="0" cellspacing="0">
+		<tr align="center" height="5">
+			<td></td>
+		</tr>
+		<tr align="center">
+			<td>
+				<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+					<tr height="30">
+						<td width="100%"
+							style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><img
+							src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">售后管理</td>
+						<!-- <td width="79%"
+							style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">
+						</td> -->
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+
+				<table width="100%" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td align="left">
+						  业主姓名/电话/地址： <input name="SJ" type="text" value="" size="20"
+							id="SJ"> 
+                      门店：<select  name="Agent_Code" id="Agent_Code" >
+                    
+								   
+                                  <option>$$XL0008,</option>
+                              </select>      
+                            <input name="Btncx" value="查询" type="button"> 
+                            
+                          <input
+														type="hidden" name="BtnAddKHBB" id="BtnAddKHBB" value="客户报备">
+                                                        <input
+														type="hidden" name="BtnProduct" id="BtnProduct" value="产品清单">  
+                                                         
+						</td>
+					</tr>
+					<tr>
+						<td align="left"></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div id="productList">   </div>
+			</td>
+		</tr>
+		<tr></tr>
+	</table>
+	<form name="form1" method="post" action="" id="form1">
+		<input type="hidden" name="BM" id="BM"> <input type="hidden"
+			name="d_Pxh" id="d_Pxh"> <input type="hidden" name="d_HYJBMC"
+			id="d_HYJBMC"> <input type="hidden" name="d_Flag" value="0">
+		<input type="hidden" name="d_Qg_Id" value=""> <input
+			type="hidden" name="Buyer" value="">
+	</form>
+</body>
+</html>

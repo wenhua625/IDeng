@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base target="_self">
+<title>财务补贴选择</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/easyui/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/easyui/icon.css">
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+
+
+
+
+<script>
+
+   function sel()
+   {
+     var strNew=$("input[name='SPBM']:checked").val(); 
+		  if(strNew =="" || strNew == undefined){
+	          alert("请选择!");
+		      return false;
+	       }
+		   var n_str=strNew.split('|'); 
+		   var z_fhe=n_str[2];
+		   
+		  var fhe= Math.floor(parseFloat('@@Order_AM,')*n_str[3])
+		/* var fhe=n_str[2];
+		
+		 if(n_str[3] == "0.10")
+		 {
+		    fhe=Math.floor(parseFloat('@@Order_AM,')*0.10)
+		 }else if(n_str[3] == "0.60")
+		 {
+			fhe=Math.floor(parseFloat('@@Order_AM,')*0.60)
+		 }else if(n_str[3] == "0.05")
+		 { 
+			fhe=Math.floor(parseFloat('@@Order_AM,')*0.05)
+		 }else if(n_str[3] == "0.03")
+		 { 
+			fhe=Math.floor(parseFloat('@@Order_AM,')*0.03)
+		 }
+		 else if(n_str[3] == "0.02")
+		 { 
+			fhe=Math.floor(parseFloat('@@Order_AM,')*0.02)
+		 }
+		 else
+		  if(n_str[3] == "0.08")
+		 {
+		    fhe=Math.floor(parseFloat('@@Order_AM,')*0.08)
+		 }else{
+		    if(parseFloat('@@Order_AM,')<parseFloat(fhe))
+			{
+			  fhe  =parseFloat('@@Order_AM,');  
+			}
+		 }*/
+		 
+		  if(parseFloat('@@Order_AM,')<parseFloat(fhe))
+			{
+			  fhe  =parseFloat('@@Order_AM,');  
+			}
+	      if (parseFloat('@@Order_AM,')<=0)
+		  {
+			  alert("无需抵扣");
+			  return false;
+		  }
+		 
+		 if(z_fhe<fhe)
+		 {
+			 fhe=z_fhe;
+		 }
+		 
+		 $('#BCFHE').val(fhe);
+		 $('#win').window('open');   
+   }
+   function closewin(){
+		$('#win').window('close'); 
+	}
+  function conf()
+  {
+        var bcfhje=  $('#BCFHE').val();
+		 if(bcfhje == "0" || bcfhje == ""){
+		      alert("请输入本次返回额度");
+			  return false;
+		 } 
+	   
+	   var strNew1=$("input[name='SPBM']:checked").val();
+	   var n_str=strNew1.split('|');
+	  
+	  
+	  
+       dialogArguments.document.getElementById('Bt_Code').value=n_str[0];//bt_id  
+	    dialogArguments.document.getElementById('Bt_Amount').value=$('#BCFHE').val();;//bt_amount
+	   window.close(); 
+  }	
+  
+  
+  function BindEnter(obj)
+  {    
+     if(obj.keyCode == 13)        
+     {                 
+          conf();
+     } 
+	 if(obj.keyCode == 27)        
+     {                 
+          window.close();
+     } 
+
+   }
+
+ 
+</script>
+
+</head>
+
+<body >
+<form name="form1" method="post" action="" id="form1" >
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    
+	
+	
+	<tr>
+      <td height="0">
+        <table width="100%" border="1" style="border-collapse:collapse" bordercolor="#000000">
+          <tr align="center" bgcolor="#BFBFBF"> 
+             <td>选择</td>
+			<td>补贴单号</td>
+            
+            <td>补贴金额</td>
+            <td>已返还金额</td>
+            <td>剩余金额</td>
+            <td>返回规则</td>
+            <td>补贴类型</td>
+            <td>备注</td>
+           </tr>
+          <tr > 
+		     <td>  <input type="radio" name="SPBM"  value="$$MJ0064,01|$$MJ0064,03|$$MJ0064,06|$$MJ0064,08" id="SPBM">            </td>
+            <td>$$MJ0064,01</td>
+            
+            <td>$$MJ0064,02</td>
+            <td>$$MJ0064,05</td>
+            <td>$$MJ0064,06</td>
+            <td>$$MJ0064,07</td>
+            <td>$$MJ0064,03</td>
+            <td>$$MJ0064,04</td>
+         </tr>
+        </table>
+      </td>
+    </tr>
+    
+      
+  </table>
+  <table width="100%" border="1">
+  <tr>
+    <td align="right"><font color="red">【操作提示：】</font></td>
+    <td><font color="blue">按上，下键选择，按回车键选中；按ESC键退出</font></td>
+    <td>&nbsp;</td>
+    <td><input type="button" name="BtnSel"  id="BtnSel"value="选中"  onclick="sel()"></td>
+  </tr>
+</table>
+<div  id="win" class="easyui-window" title="输入本次返还金额：" closed="true"  icon="icon-save"  modal="true" minimizable="false"  maximizable="false" style="width:300px;height:250px;">  
+    
+    
+           <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          
+		  <tr> 
+            <td  align="right" bgcolor="#C4DFDC" class="tableleft"> 
+              本次订单金额：  
+			</td>
+            <td bgcolor="#FFFFFF">
+			  <input name="BC" id="BC" type="text" value="@@Order_AM," readonly class="TEXTDISABLED" size="10"> 
+              </td>
+          </tr>
+          <tr> 
+            <td  align="right" bgcolor="#C4DFDC" class="tableleft"> 
+              本次返还金额：  
+			</td>
+            <td bgcolor="#FFFFFF">
+			  <input name="BCFHE" id="BCFHE" type="text" class="easyui-numberbox" precision="2" style="text-align:right;" size="10"/> 
+              </td>
+          </tr>
+        
+        
+         
+        </table>
+            <div style="padding:5px;text-align:center;">  
+                 <a  href="#" class="easyui-linkbutton" icon="icon-ok" onClick="conf()">确认</a>  
+                <a  href="#" class="easyui-linkbutton" icon="icon-cancel" onClick="closewin()">取消</a>  
+           </div>
+  
+    
+</div>
+</form>
+
+
+</body>
+</html>

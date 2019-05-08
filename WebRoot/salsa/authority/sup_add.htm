@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>供应商信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type="text/javascript">
+ function work(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    var kjm="insert";
+    if('!!MJ1005,01' != ''){
+      kjm='update';
+    }
+    DwrComm.parseIN('IN1004',formMap,kjm,{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              alert("操作成功!");
+              //alert(dialogArguments.document.location);
+              dialogArguments.document.form1.submit();             
+              window.close();
+           }
+       },async:false});
+ }
+ function genCode()
+{
+   if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+   var formMap = DWRUtil.getValues("form1");
+   if (form1.AGENT_CODE.value != ""){
+     return;
+   }
+   DwrComm.parseKey('MJ1006',formMap,{callback:function(data){
+           
+              form1.AGENT_CODE.value=data;
+           
+       },async:false}); 
+}
+</script>
+<script type="text/javascript">
+	function add(){
+		if(checkFrom()){	
+		   work();
+        }	
+	}
+	 function checkFrom()
+   {
+     
+     if(form1.AGENT_CODE.value.length == 0)
+	 {
+	    alert("代号不能为空,请输入！");
+		form1.AGENT_CODE.focus();
+		return false;
+	 }
+	 if(form1.AGENT_NAME.value.length == 0)
+	 {
+	    alert("供应商名称不能为空,请输入！");
+		form1.AGENT_NAME.focus();
+		return false;
+	 }
+	 return true;
+  }
+</script>
+</head>
+
+<body>
+<form name="form1" method="post" action="" id="form1">
+<table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center" ><b> 供应商信息</b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">代号：</div>
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="AGENT_CODE" type="text" class="input" maxlength="4" size="10" value="!!MJ1005,01"><input type="button" name="GenCode" value="系统自动产生" onclick="genCode()">
+            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">客户名称：</div>
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="AGENT_NAME" type="text" class="input" value="!!MJ1005,02" size="25">
+            </td>
+          </tr>
+          <!--  <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">所属采购员：</td>
+            <td bgcolor="#FFFFFF">
+              <select name="DOMAIN_MAN">
+                <option>$$XL0003,</option>
+              </select>
+            </td>
+          </tr>-->
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">地址：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="AGENT_ADDRESS" type="text" class="input" value="!!MJ1005,07" size="30">
+            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">联系人：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="CONTACT_MAN" type="text" class="input" value="!!MJ1005,10" size="8">
+            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">手机一：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="Agent_Mobile1" type="text" class="input" value="!!MJ1005,11">
+            </td>
+          </tr>
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">手机二：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="Agent_Mobile2" type="text" class="input" value="!!MJ1005,12">
+            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">公司电话：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="AGENT_TEL" type="text" class="input" value="!!MJ1005,08">
+            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">传真：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="AGENT_FAX" type="text" class="input" value="!!MJ1005,09">
+            </td>
+          </tr> 
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">状态：</td>
+            <td bgcolor="#FFFFFF">
+              <select name="Open_Flag">
+                  <option value="启用">启用</option>
+                  <option value="禁用">禁用</option>
+              </select>
+            </td>
+          </tr> 
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    
+          <tr align="center"> 
+            <td>     
+        		<input type="button" name="Submit4" value="保 存" onClick="add()">
+        	</td>
+          </tr>
+        
+  </table>
+  
+</form>
+</body>
+<script language="javascript">
+ function update()
+   {
+      if('!!MJ1005,13'!=' ') form1.Open_Flag.value='!!MJ1005,13';
+	  //if('!!MJ1005,06'!=' ') form1.AGENT_TYPE.value='!!MJ1005,06';
+	  //if('!!MJ1005,11'!=' ') form1.Sjbm.value='!!MJ1005,11';
+	  //if ('!!MJ1005,13'=='1') form1.Submit5.disabled =true;
+	   if (form1.AGENT_CODE.value != ""){
+		    form1.AGENT_CODE.disabled = true;
+		    form1.GenCode.disabled = true;
+		 } 
+	  
+	  
+   }
+ update();
+</script>
+</html>

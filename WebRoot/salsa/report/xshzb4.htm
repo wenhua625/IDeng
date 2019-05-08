@@ -1,0 +1,280 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="css/ColumnHeaderGroup.css" />
+
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script src="inc/Calendar1.js" type=text/javascript language=javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base3.4.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all3.4.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type="text/javascript" src="js/extjs/ColumnHeaderGroup.js"></script>
+
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+ <script type="text/javascript" src="js/extjs/BufferView.js"></script>
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type="text/javascript">
+    //弹出窗口
+   function opr(url){
+        var s=NewWinCustMD(url+'&LX=1&tmp11='+Math.random(),window,450,650);
+        
+    }  
+     
+    
+</script>
+
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    var orderDetailstore = new Ext.data.JsonStore({
+         url:"work?proname=MJP196",
+        root:"root",
+        fields: ['sjbm','m01','z01','m02','z02','m03','z03','m04','z04','m05','z05','m06','z06','m07','z07','m08','z08','m09','z09','m10','z10','m11','z11','m12','z12','m13','z13','domain_man']
+    });
+	
+	
+	
+	var rowhead = new Ext.ux.grid.ColumnHeaderGroup({
+         rows: [
+						[{},{ header:"",
+						   align:"center",
+						   colspan:1},
+						{
+						   header:"1月份",
+						   align:"center",
+						   colspan:2
+						},
+						{
+						   header:"2月份",
+						   align:"center",
+						   colspan:2
+						},
+						{
+						   header:"3月份",
+						   align:"center",
+						   colspan:2
+						},
+						{
+						   header:"4月份",
+						   align:"center",
+						   colspan:2
+						},
+						{
+						   header:"5月份",
+						   align:"center",
+						   colspan:2
+						},
+						{
+						   header:"6月份",
+						   align:"center",
+						   colspan:2
+						},
+						{
+						   header:"7月份",
+						   align:"center",
+						   colspan:2
+						},
+						{
+						   header:"8月份",
+						   align:"center",
+						   colspan:2
+						},
+						{
+						   header:"9月份",
+						   align:"center",
+						   colspan:2
+						},
+						{
+						   header:"10月份",
+						   align:"center",
+						   colspan:2
+						},
+						{
+						   header:"11月份",
+						   align:"center",
+						   colspan:2
+						},
+						{
+						   header:"12月份",
+						   align:"center",
+						   colspan:2
+						},
+						{
+						   header:"累计",
+						   align:"center",
+						   colspan:2
+						}
+						
+						
+						]],
+						hierarchicalColMenu : false  
+    });
+
+   // var sm = new Ext.grid.CheckboxSelectionModel();
+    var cm = new Ext.grid.ColumnModel({ 
+	     defaults: {
+            sortable: true // columns are not sortable by default           
+        },
+        columns: [
+        new Ext.grid.RowNumberer(),//自动行号
+        //sm,
+        
+		
+		{header:'区域',dataIndex:'domain_man',width: 150},
+	
+        
+		
+		{header:'金额',dataIndex:'m01',width: 120,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'占比',dataIndex:'z01',width: 70,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'金额',dataIndex:'m02',width: 120,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'占比',dataIndex:'z02',width: 70,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'金额',dataIndex:'m03',width: 120,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'占比',dataIndex:'z03',width: 70,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'金额',dataIndex:'m04',width: 120,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'占比',dataIndex:'z04',width: 70,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'金额',dataIndex:'m05',width: 120,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'占比',dataIndex:'z05',width: 70,renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'金额',dataIndex:'m06',width: 120,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'占比',dataIndex:'z06',width: 70,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'金额',dataIndex:'m07',width: 120,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'占比',dataIndex:'z07',width: 70,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'金额',dataIndex:'m08',width: 120,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'占比',dataIndex:'z08',width: 70,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'金额',dataIndex:'m09',width: 120,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'占比',dataIndex:'z09',width: 70,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'金额',dataIndex:'m10',width: 120,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'占比',dataIndex:'z10',width: 70,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'金额',dataIndex:'m11',width: 120,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'占比',dataIndex:'z11',width: 70,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'金额',dataIndex:'m12',width: 120,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'占比',dataIndex:'z12',width: 70,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'金额',dataIndex:'m13',width: 150,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'占比',dataIndex:'z13',width: 70,renderer:Ext.util.Format.numberRenderer('00.00')}
+		
+		
+		
+	   
+       ]});
+    
+    cm.defaultSortable = true;
+  
+    var grid = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'backDetails',
+    	width:1825,//document.body.clientWidth-35, 
+    	height:document.body.clientHeight-75,
+    	title:'',
+    	ds: orderDetailstore,
+        cm: cm,
+		enableHdMenu:false,
+        plugins: [new Ext.ux.grid.GridSummary(),rowhead],
+        view: new Ext.ux.grid.BufferView({
+             scrollDelay: false,
+			 forceFit: true
+			
+        }),
+		
+        frame:false,
+        clicksToEdit:2,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid.render();
+	orderDetailstore.on('beforeload',function(){
+		Ext.apply(
+			this.baseParams, {
+				YEAR:Ext.get('YEAR').dom.value,
+				domain_man:encodeURI(Ext.get('domain_man').dom.value)
+				//Agent_Name:encodeURI(Ext.get('Agent_Name').dom.value),//,AGENT_CODE:Ext.get('SJBM').dom.value
+				//Agent_Level:encodeURI(Ext.get('Agent_Level').dom.value)
+			});
+	});
+    //orderDetailstore.load();
+
+     Ext.get("BtnCX").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       orderDetailstore.load();
+	   
+    });
+	
+
+	
+	
+	 Ext.get("exportE").on("click",function(){
+		
+      window.location.href='downLoad?proname=EXP196&inexcel=1&YEAR='+Ext.get('YEAR').dom.value+"&domain_man="+Ext.get('domain_man').dom.value;
+	   
+    });
+	 
+
+});
+
+</script>
+
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td> <table cellSpacing=0 cellPadding=0 border="0" width="100%">
+							<tr height="30">
+								<td style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid;font-size: 12pt;COLOR: #124164;FONT-WEIGHT: bold;"><img src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">销售汇总表（四）</td>
+							</tr>
+		</table></td>
+   </tr>
+	
+	<tr>
+    
+	<td height="25">
+	   
+	   
+	  <table width="100%" border="0" cellpadding="5" cellspacing="0" >
+          <tr> 
+            <td width="10%" align="right">年份：</td>
+            <td><select name="YEAR" id="YEAR">
+                <option>$$XLS014,</option>
+              </select>
+                  区域经理：<select name="domain_man" id="domain_man">
+                <option value="">全部</option>
+                <option>$$XL0053,</option>
+              </select>
+           <!--   客户名称：<input type="text" name="Agent_Name"  id="Agent_Name" value="" size="20">           等级：<select name="Agent_Level">
+                   <option value="">全 部</option>
+                  <option>$$XLS017,</option>--> 
+				
+                </select>   <input type="button" name="BtnCx" id="BtnCx" value="查询">
+            $$EXP095,</td>
+          </tr>
+          
+         
+        </table>
+	
+	</td>
+	</tr>
+	
+	<tr>
+      <td>
+		<div id="backDetails"></div>
+		 
+       
+      </td>
+    </tr>
+    
+  </table>
+ 
+
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" /><object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+</object>
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+
+<script language="javascript">
+   function printView(){
+   
+        LODOP.SET_PRINT_STYLEA(0,"FontSize",6);
+        			
+        LODOP.ADD_PRINT_BARCODE(5,768,257,36,"128A",'@@Agent_Code,');
+        LODOP.ADD_PRINT_URL(10,20,"80%","96%",'@@LS.URL,/display?proname=report/fhdzd_result_print.htm&Agent_Code=@@Agent_Code,&ORDER_DATE1=@@ORDER_DATE1,&ORDER_DATE2=@@ORDER_DATE2,');	
+        
+        LODOP.SET_PRINT_PAGESIZE(2, 0, 0, "A4");	
+		LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,""); //按适宽模式显示
+		LODOP.PREVIEW();
+		
+   }
+</script>
+<title>Untitled Document</title>
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+ 
+  <tr>
+    <td>
+	    <table width="100%" border="1" style="border-collapse:collapse" bordercolor="#000000" id="content">
+          <tr align="center" bgcolor="#BFBFBF" style="font-size: 9pt;">
+            <td  rowspan="2" nowrap><strong>客户名称</strong></td> 
+            <td  rowspan="2" nowrap>状态</td>
+            <td  rowspan="2" nowrap><strong>区域经理</strong></td>
+            <td colspan="2" nowrap><strong>电器</strong></td>
+           
+            <td colspan="3" nowrap><strong>扣板模块</strong></td>
+            <td  colspan="2" nowrap><strong>龙骨角线</strong></td>
+            <td nowrap><strong>配件</strong></td>
+          </tr>
+          <tr align="center" bgcolor="#BFBFBF" style="font-size: 9pt;">
+            <td nowrap>金额</td>
+            <td nowrap>占比(%)</td>
+            <td nowrap>金额</td>
+            <td nowrap>占比(%)</td>
+            <td nowrap>面积(m&sup2;)</td>
+            <td nowrap>金额</td>
+            <td nowrap>占比(%)</td>
+            <td nowrap>金额</td>
+          </tr>
+          
+          <tr style="font-size: 9pt;">
+            <td >$$MJP101,02</td> 
+            <td >$$MJP101,11</td>
+            <td >$$MJP101,10</td>
+            <td align="right">$$MJP101,03</td>
+            
+            
+            <td align="right">$$MJP101,04</td>
+            <td align="right">$$MJP101,05</td>
+            <td align="right">$$MJP101,06</td>
+            <td align="right">$$MJP101,12</td>
+            <td align="right">$$MJP101,07</td>
+            <td align="right">$$MJP101,08</td>
+            <td align="right">$$MJP101,09</td>
+          </tr>
+          <tr style="font-size: 9pt;">
+            <td >&nbsp;</td> 
+            <td >&nbsp;</td>
+            <td >&nbsp;</td>
+            <td align="right">$$MJH101,01</td>
+            
+            
+            <td align="right">&nbsp;</td>
+            <td align="right">$$MJH101,02</td>
+            <td align="right">&nbsp;</td>
+            <td align="right">$$MJH101,05</td>
+            <td align="right">$$MJH101,03</td>
+            <td align="right">&nbsp;</td>
+            <td align="right">$$MJH101,04</td>
+          </tr>
+        </table>
+	
+	</td>
+  </tr>
+   <tr>
+    <td>
+	   $$page,
+	</td>
+  </tr>
+  <tr>
+    <td>
+	    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+     
+	
+	  <tr>
+      
+    <td align="center" > 
+
+      <input type="hidden" name="BtnPrint" value="打 印" onClick="printView()">
+      $$EXP101,
+    </td>
+    </tr>
+  </table>
+	   
+	</td>
+  </tr>
+</table>
+
+
+		
+		
+</body>
+</html>

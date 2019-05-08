@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" CONTENT="0">
+<title>视频上传</title>
+<style>
+.bar {
+    height: 18px;
+    background: green;
+}
+</style>
+</head>
+<body>
+
+<input id="fileupload" type="file" name="file">
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.serializejson.min.js"></script>
+
+<script src="js/jfu/vendor/jquery.ui.widget.js"></script>
+<script src="js/jfu/jquery.iframe-transport.js"></script>
+<script src="js/jfu/jquery.fileupload.js"></script>
+<script>
+$(function () {
+    $('#fileupload').fileupload({
+        dataType: 'text',
+		Type:"post",
+        url:  'http://ad-kcc.dderp.cn:10080/vod/upload',
+		add:function(e,data){
+                var acceptFileTypes = /\/(mp4)$/i;
+                if(!acceptFileTypes.test(data.originalFiles[0]['type']))
+                {
+                  alert("只能选择视频文件MP4格式进行上传，请重试!");
+				  exit;
+                }
+               if(data.originalFiles[0]['size']>400*1024*1024)
+               {
+				   alert("文件不能大于400MB");
+				   exit;
+			   }
+			   data.submit();
+	     },
+		
+		
+        // 上传完成后的执行逻辑
+        done: function (e, data) {
+			//console.log(data);
+			//console.log(data.result);
+			var url="http://ad-kcc.dderp.cn:10080";
+			var video=$.parseJSON(data.result);
+			//alert("data="+video.id);
+			form1.FileCode.value=encodeURI(video.name)
+			form1.FileShortFullName.value=url+video.snapUrl
+			form1.FileFullName.value=url+video.videoUrl
+			var aspect=video.aspect;
+			var aspects=aspect.split("x")
+			form1.Pix_W.value=aspects[0];
+			form1.Pix_H.value=aspects[1];
+			form1.pic_name.value=encodeURI("短视频");
+			form1.ExeName.value="mp4";
+			form1.video_id.value=video.id
+			
+			//var form1Object=$('#form1').serializeJSON();
+			//console(form1Object);
+			//console.log(form1Object);
+			
+			//alert("dd="+form1Object);
+			$.ajax({
+                 type: 'post', // 提交方式 get/post
+                 url: 'work?proname=IN0H15&action=insert', // 需要提交的 url
+                 data: {
+					    "FileCode":form1.FileCode.value,
+						"FileShortFullName":form1.FileShortFullName.value,
+						"FileFullName":form1.FileFullName.value,
+						"Pix_W":form1.Pix_W.value,
+						"Pix_H":form1.Pix_H.value,
+						"pic_name":form1.pic_name.value,
+						"brand_code":form1.BM.value,
+						"ExeName":form1.ExeName.value,
+						"agent_code":"@@LS.DWDM,",
+						"lxfs":form1.lxfs.value,
+						"video_id":form1.video_id.value
+						
+					 
+					 },
+                 success: function(data) { // data 保存提交后返回的数据，一般为 json 数据
+                      // 此处可对 data 作相关处理
+					 if(data!="ok"){
+					    alert("上传失败");
+					 }
+					  else{
+                        alert('上传成功！');
+						 var ifrc = window.parent.frames[0];
+						ifrc.refreshVideo();
+						 var index = parent.layer.getFrameIndex(window.name);
+						 parent.layer.close(index);
+						
+					  }
+                 }
+           // 提交后重置表单
+           });
+			
+			/*for (var i=0;i<data.size();i++){
+			    alert(data[0]);
+			}
+            $.each(data.result.files, function (index, file) {
+                $('<p/>').text(file.name+" 上传成功！").appendTo(document.body);
+            });*/
+        },
+
+        // 上传过程中的回调函数
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $(".bar").text(progress + '%');
+            $('#progress .bar').css(
+                'width',
+                progress + '%'
+            );
+        }
+    });
+});
+</script>
+
+<!-- 进度条 -->
+<div id="progress">
+    <div class="bar" style="width: 0%;"></div>
+</div>
+<form action="" method="post" name="form1" >
+<input type="hidden" value="@@BM," name="BM" id="BM">
+<input type="hidden" value="@@Product_Id," name="Product_Id" id="Product_Id">
+<input type="hidden" value="@@Image_Type," name="Image_Type" id="Image_Type">
+<input type="hidden" value="@@LS.LXFS," name="lxfs" id="lxfs">
+<input type="hidden" value="" name="FileCode" id="FileCode">
+<input type="hidden" value="" name="FileShortFullName" id="FileShortFullName">
+<input type="hidden" value="" name="FileFullName" id="FileFullName">
+
+<input type="hidden" value="" name="Pix_W" id="Pix_W">
+<input type="hidden" value="" name="Pix_H" id="Pix_H">
+<input type="hidden" value="@@LS.DWDM," name="agent_code" id="agent_code">
+<input type="hidden" value="" name="pic_name" id="pic_name">
+<input type="hidden" value="@@BM," name="brand_code" id="brand_code">
+<input type="hidden" value="" name="ExeName" id="ExeName">
+<input type="hidden" value="" name="video_id" id="video_id">
+
+
+
+</form>
+</body>
+</html>

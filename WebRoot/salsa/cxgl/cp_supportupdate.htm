@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>配套产品设置</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+
+</head>
+
+<body>
+<script language="javascript">
+Ext.onReady(function(){
+    
+     if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+     var formMap = DWRUtil.getValues("form1");
+     var store = new Ext.data.JsonStore({
+        fields: ['value', 'name']
+    });
+	  
+	  if('@@ID,' != "")
+	  {
+		  DWRUtil.setValue("SERIES_CODE","!!MJ0S33,13");
+		 
+		
+		  DWRUtil.setValue("XL_CODE","!!MJ0S33,27");
+		  DWRUtil.setValue("PACK_TYPE","!!MJ0S33,24");
+		  DWRUtil.setValue("PRODUCT_CODE1","!!MJ0S33,01");
+		  
+		 
+		
+		 
+		  
+		  form1.SERIES_CODE.disabled = true;
+		  form1.XL_CODE.disabled = true;
+		
+		 
+		
+	  }
+
+	
+	  var orderDetailstore = new Ext.data.JsonStore({
+         url:"work?proname=MJ0S47",
+        root:"root",
+        fields: [ 'id','product_id','product_code','product_name','fit_len','fit_num','is_round','fit_memo','master_name','pcs_dj']
+    });
+	
+	 var cm = new Ext.grid.ColumnModel([
+        new Ext.grid.RowNumberer(),//自动行号
+        {header:'配件型号',dataIndex:'product_code',width: 110},
+        {header:'配件名称',dataIndex:'product_name',width: 210},
+        {header:'长度',dataIndex:'fit_len',width: 70,editor:new Ext.form.NumberField({   
+                    selectOnFocus:true,
+                    allowNegative: true, // 不允许为负数   
+                    decimalPrecision: 5, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000 // 最大值为10万            
+        })},
+        {header:'数量',dataIndex:'fit_num',width: 70,editor:new Ext.form.NumberField({   
+                    selectOnFocus:true,
+                    allowNegative: true, // 不允许为负数   
+                    decimalPrecision: 5, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000 // 最大值为10万            
+        })},
+		{header:'配送单位',dataIndex:'pcs_dj',width: 70, editor:
+            new Ext.form.ComboBox({   
+            width : 60,    
+            store : new Ext.data.SimpleStore({   fields : ['Label', 'Value'], data : [['单位','单位' ], ['PCS','PCS' ]]}),   
+            displayField : 'Label',   
+            valueField : 'Value',   
+            typeAhead : true,   
+            mode : 'local',   
+            value : 20,   
+            listWidth: 50, /** 行宽   **/    
+            triggerAction : 'all',   
+            selectOnFocus : true
+            })
+			},
+         {header:'备注',dataIndex:'fit_memo',width: 100,editor: new Ext.form.TextField({ 
+              allowBlank: true // 不能为空 
+          })}
+       ]);
+    
+    cm.defaultSortable = true;
+    
+    var grid = new Ext.grid.EditorGridPanel({
+    	el: 'productList',
+    	width:628, 
+    	height:150,
+    	title:'',
+    	ds: orderDetailstore,
+        cm: cm,
+        frame:false,
+        clicksToEdit:1,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid.render();
+    orderDetailstore.load({params:{ID:Ext.get('ID').dom.value}});
+    
+   grid.on("afteredit", afterEdit, grid); 
+   
+   function afterEdit(e) { 
+   var record = e.record;// 被编辑的记录  
+   
+   DWRUtil.setValue("d_Product_Id",e.record.get("id"));
+   
+   DWRUtil.setValue("d_Product_Len",e.record.get("fit_len"));
+   DWRUtil.setValue("d_Product_Num",e.record.get("fit_num"));
+    DWRUtil.setValue("d_pcs_dj",e.record.get("pcs_dj"));
+   
+   formMap = DWRUtil.getValues("form1");
+ 
+   DwrComm.parseIN('IN0041',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+           }
+       },async:false});
+   };
+    
+     Ext.get("AddSup").on("click",function(){
+       //NewWinMD('display?proname=baseinfo/suplist.htm&Product_Code='+Ext.get('ID').dom.value+'&tmp='+Math.random(),window);
+	    NewWinMD('display?proname=order/order_add.htm&tmp='+Math.random(),window);
+		//alert("");
+        orderDetailstore.load({params:{ID:Ext.get('ID').dom.value}});
+     
+    });
+	
+	 
+     Ext.get("DelSup").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       var record = grid.getSelectionModel().getSelected();
+       if(record == null)
+       {
+          alert("请选择要删除的记录!");
+          return false;
+       }
+      
+	    DWRUtil.setValue("d_Product_Id",record.get("id"));
+      formMap = DWRUtil.getValues("form1");
+      
+      DwrComm.parseIN('IN0041',formMap,'delete',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+		    alert("删除成功!");
+		    grid.store.remove(record); 
+           }
+       },async:false});
+  
+      
+     
+    });
+	
+	Ext.get("BtnAddProduct").on("click",function(){
+       
+	   
+       formMap = DWRUtil.getValues("form1");
+       if (DWRUtil.getValue("ID").length == 0){
+            alert("友情提醒:无效的单据");
+            return false;
+       }
+       
+       DwrComm.parseIN('IN0041',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{  
+           }
+       },async:false});
+      
+    });
+  
+	
+     
+     
+    
+
+});
+</script>
+<form name="form1" method="post" action="" id="form1">
+  <input name="ID"  id="ID"  type="hidden" value="@@ID,">
+  <input name="BtnAddProduct" id="BtnAddProduct" type="hidden" value="添加配件">
+  <input name="d_Product_Id" id="d_Product_Id" type="hidden" value="">
+  <input name="d_Product_Len" id="d_Product_Len" type="hidden" value="">
+  <input name="d_Product_Num" id="d_Product_Num" type="hidden" value="">
+   <input name="Product_Code" id="Product_Code" type="hidden" value="">
+  <input name="d_pcs_dj" id="d_pcs_dj" type="hidden" value="">
+  
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center" ><b>配套产品设置</b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;产品基本信息</td>
+          </tr>
+          
+	      
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+             所属类别：
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <select name="SERIES_CODE">
+                <option value="" selected>==选择==</option>
+                <option>$$XL0001,</option>
+              </select>
+            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+              所属系列：
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <select name="XL_CODE" id="XL_CODE">
+                <option value="" selected>==选择==</option>
+                <option>$$XL1008,</option>
+              </select>
+            </td>
+          </tr> 
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+              货号：
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_CODE1" type="text"  value="" size="20" readonly class="TEXTDISABLED"> 
+              
+             
+			     </td>
+          </tr>
+        
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+              名称：
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_NAME" type="text" readonly class="TEXTDISABLED" value="!!MJ0S33,03">
+            </td>
+          </tr>
+         
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">规格：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_SIZE" type="text" value="!!MJ0S33,04" readonly class="TEXTDISABLED"></td>
+          </tr>
+          
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">单位：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_Untl" type="text" value="!!MJ0S33,09" size="10" maxlength="10" readonly class="TEXTDISABLED">
+            </td>
+          </tr>
+		    <tr>
+            <td  bgcolor="#C4DFDC" class="tableleft">&gt;&gt;配套产品<input type="button" value="添加" name="AddSup"  id="AddSup"><input type="button" value="删除" name="DelSup" id="DelSup"></td>
+            <td  bgcolor="#C4DFDC" align="left"></td>
+          </tr>
+          <tr> 
+           
+            <td colspan="2" > 
+              <div id='productList'></div>
+            </td>
+          </tr>
+          
+          
+        </table>
+      </td>
+    </tr>
+  </table>
+  
+</form>
+</body>
+
+</html>

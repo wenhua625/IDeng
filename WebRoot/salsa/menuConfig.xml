@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="gbk"?>
+<deeptreeconfig>
+  <TopXMLSrc>work?proname=TREE01</TopXMLSrc>
+  <TreeLabel>DeepTree</TreeLabel>
+  <ShowTitle>Y</ShowTitle>
+  <ShowStatus>Y</ShowStatus>
+  <StartPage>/main.jsp</StartPage>
+  <ErrorPage>/error.jsp</ErrorPage>
+  <ContentTarget>top.mainFrame</ContentTarget>
+  <TreeId>DeepTree</TreeId>
+  <TreeRootPath></TreeRootPath>
+  <Locale>gb-ch</Locale>
+  <LocaleTextDirection>LTR</LocaleTextDirection>
+</deeptreeconfig>

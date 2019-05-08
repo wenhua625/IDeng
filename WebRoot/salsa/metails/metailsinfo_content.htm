@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>物料管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" src="inc/sort.js"></SCRIPT>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type="text/javascript">
+ function work(id){
+      if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+      form1.PRODUCT_CODE.value = id;
+      var formMap = DWRUtil.getValues("form1");
+      
+     DwrComm.parseIN('IN1002',formMap,'delete',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              alert("操作成功!");
+              window.location.reload();
+              
+           }
+       },async:false});
+ }
+</script>
+<script language="javascript">
+  function checkDel(id)
+  {
+      if(confirm('删除后将不在恢复! \n您确定删除吗?'))
+	  {
+	     
+		work(id);
+	  }
+	  else return;
+  }
+  function opr(url){
+     NewWinMD(url+'&tmp='+Math.random(),window);
+     if(form1.d_Flag.value=="1")
+     window.location.reload();
+     
+  }
+</script>
+</head>
+
+<body>
+<form name="form1" method="post" action="display?proname=metails/metailsinfo.htm" id="form1">
+  <input type="hidden" name="PRODUCT_CODE" value="">
+  <input type="hidden" name="d_Flag" value="0">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+		 
+	<tr>
+	
+      <td>
+        <table width="100%" border="1" cellpadding="2" cellspacing="0" id="PowerTable">
+          <tr align="center" bgcolor="#BFBFBF"> 
+            <td class="tableleft" height="17">编码</td>
+            <td class="tableleft" height="17">名称</td>
+            <td class="tableleft" height="17">类别</td>
+            <td class="tableleft" height="17">规格</td>
+            <td class="tableleft" height="17">单位</td>
+			<td class="tableleft" height="17">售价</td>
+           
+            <td class="tableleft" height="17">备注</td>
+  
+            <td class="tableleft" height="17">操作</td>
+          </tr>
+          <tr > 
+            <td>$$MJ1001,01</td>
+            <td>$$MJ1001,03</td>
+            <td>$$MJ1001,02</td>
+            <td>$$MJ1001,04</td>
+			<td >$$MJ1001,05</td>
+            <td align="right">$$MJ1001,06</td>
+        
+         
+            <td align="right">$$MJ1001,07</td>
+            <td> 
+			【<a href='#' onClick="opr('display?proname=metails/metails_add&PRODUCT_CODE=$$MJ1001,01')">修改</a>】  【<a href='#' onClick="return checkDel('$$MJ1001,01')">删除</a>】
+             
+            </td>
+          </tr>
+         
+        </table>
+      </td>
+    </tr>
+     <tr align="right">
+         <td><table>$$page,</table></td>
+      </tr>
+  </table>
+</form>
+</body>
+</html>

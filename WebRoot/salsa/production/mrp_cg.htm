@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/Calendar1.js" type=text/javascript language=javascript></script>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type="text/javascript">
+   //弹出窗口
+   function opr(url){
+        var s=NewWinCustMD(url+'&LX=1&tmp11='+Math.random(),window,550,850);
+        
+    }    
+     
+    
+</script>
+<style type="text/css">
+			.yellowBack {background: yellow;}
+</style>
+
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    var orderDetailstore = new Ext.data.JsonStore({
+         url:"work?proname=MJ8005",
+        root:"root",
+        fields: ['metail_code','product_code','product_name','product_size','product_untl','wl_sl','mrp_id','sup_code','sup_name','yqcgrq','code','rq']
+    });
+	
+	  var store_sup = new Ext.data.JsonStore({
+        url:"work?proname=XLS016",
+        fields: [ 'name','value']
+    });
+
+    var sm = new Ext.grid.CheckboxSelectionModel();
+    var cm = new Ext.grid.ColumnModel([
+        new Ext.grid.RowNumberer(),//自动行号
+        sm,
+        
+        {header:'编码及型号',dataIndex:'product_code',width: 135},
+		{header:'名称',dataIndex:'product_name',width: 250},
+        {header:'规格',dataIndex:'product_size',width: 150},
+		{header:'单位',dataIndex:'product_untl',width: 70},
+		{header:'提交日期',dataIndex:'rq',width: 85},
+		{header:'要求交货日期',dataIndex:'yqcgrq',width: 85},
+		{header:'供应商',dataIndex:'sup_name',width: 145,editor:
+            new Ext.form.ComboBox({   
+            width : 140,    
+            store : store_sup, 
+            displayField : 'name',   
+            valueField : 'value',   
+            typeAhead : true,   
+            mode : 'local',   
+            value : 20,   
+            listWidth: 300, /** 行宽   **/    
+            triggerAction : 'all',   
+            selectOnFocus : true,
+			 listeners : {   
+              select:{
+                  fn:function(combo,value){
+                  
+                     var record = grid.getSelectionModel().getSelected();
+                        DWRUtil.setValue("d_Product_Id",record.get("mrp_id"));
+                        DWRUtil.setValue("Sup_Code",combo.getValue());
+                        formMap = DWRUtil.getValues("form1");
+   						DwrComm.parseIN('IN0H01',formMap,'update',{callback:function(data){
+           						if (data != 'ok'){
+               						alert(data);
+           						}else{
+           						   orderDetailstore.load();
+           						}
+       						},async:false});
+                  }
+              }  
+                 
+            }  
+            
+            }),renderer:function(value,cellmeta,record, rowIndex, columnIndex, store){
+                  
+                       cellmeta.css="yellowBack";
+				 
+		        return value;
+		   }
+           
+        },
+		{header:'需求数',dataIndex:'wl_sl',width: 60},
+       
+       
+		
+		{header:'MRP号',dataIndex:'code',width: 95}
+		
+		
+       
+	   
+       ]);
+    
+    cm.defaultSortable = true;
+    var tbar=new Ext.PagingToolbar({
+		         id:'pagingToolbar',  
+                 store: orderDetailstore,  
+                 pageSize: 15,  
+                 displayInfo: true,  
+                 displayMsg: "本页显示第{0}条到第{1}条记录,一共{2}条",  
+                 emptyMsg: "没有记录"  
+  
+             });
+    var grid = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'backDetails',
+    	width:document.body.clientWidth-35, 
+    	height:document.body.clientHeight-65,
+    	title:'',
+    	ds: orderDetailstore,
+        cm: cm,
+        sm:sm,
+        
+		bbar:tbar, 
+        frame:false,
+        clicksToEdit:1,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid.render();
+	orderDetailstore.on('beforeload',function(){
+		Ext.apply(
+			this.baseParams, {
+				start:tbar.cursor, limit:15,
+				SPMC:encodeURI(Ext.get('SPMC').dom.value),WLMC:encodeURI(Ext.get('WLMC').dom.value),
+				SUP_NAME:encodeURI(Ext.get('SUP_NAME').dom.value),
+				ORDER_DATE1:form1.ORDER_DATE1.value,
+				ORDER_DATE2:form1.ORDER_DATE2.value
+			});
+	});
+    orderDetailstore.load();
+	
+   grid.on("beforeedit", beforeEdit, grid);
+    function beforeEdit(e){
+       store_sup.load({params:{Product_Code:e.record.get("metail_code")}});  
+    }
+
+     Ext.get("BtnCX").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+	  // alert(pagingToolbar.getPageData().activePage);
+       orderDetailstore.load();
+	   
+    });
+	
+	  Ext.get("BtnView").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       var s_sup;
+       
+       
+       var rows=grid.getSelectionModel().getSelections();
+      
+       var str = "";
+       for(i=0;i<rows.length;i++){
+           str+="'"+rows[i].get("mrp_id") +"',";
+       }
+       if (str.length == 0){
+           alert("请选择要采购的物料！！！");
+           return false;
+        }
+       form1.d_Qg_Id.value=str.substring(0,str.length-1);
+       formMap = DWRUtil.getValues("form1");
+       var s_sup;
+       DwrComm.parseMJ('MJ8008',formMap,{callback:function(list){
+             s_sup = list;  
+        },async:false});
+       if (s_sup.length >1){
+           alert("每一次采购，只能选择一家供货商！");
+           return false;
+        }
+        if (s_sup[0].sup_code == null){
+             alert("请设置正确的供货商！");
+             return false;
+        } 
+        
+       //form1.Agent_Code.value=rows[0].get("sup_code");
+       //form1.Arr_Date.value = rows[0].get("arr_date");
+       formMap = DWRUtil.getValues("form1");
+       
+       opr('display?proname=production/cgd.htm&Qg_Id='+form1.d_Qg_Id.value+'&Sup_Code='+rows[0].get("sup_code"));
+	    orderDetailstore.load();
+
+   });
+     
+
+});
+
+</script>
+<form name="form1" method="post" action="" id="form1">
+<input name="d_Flag" value="0" type="hidden">
+<input type="hidden" name="d_Product_Id"><input type="hidden" name="Sup_Code"><input type="hidden" name="d_Qg_Id" >
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr align="center" height="5"> 
+		<td>
+		
+		</td>
+	</tr>
+	<tr align="center">
+		<td>
+		<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;" valign="top"><img
+					src="images/loadtree/mdmde.gif" WIDTH="18" HEIGHT="18">采购需求</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+	<td>
+	   
+	   
+	  <table width="100%" border="0" cellpadding="5" cellspacing="0" >
+          <tr> 
+            <td width="9%" align="right">成品型号及名称：</td>
+            <td width="71%"><input type="text" name="SPMC" id="SPMC" size="15" value="" >
+              物料编码或名称：
+                <input type="text" name="WLMC"  id="WLMC" size="15" value="" >
+                供应商名称：
+                <input type="text" name="SUP_NAME"  id="SUP_NAME" size="15" value="" >
+                提交日期：<input type="text" name="ORDER_DATE1"  size="10" value="" onFocus="calendar()" readonly>
+              -            
+            <input type="text" name="ORDER_DATE2"   size="10"  value="" onFocus="calendar()" readonly>
+                <input type="button" name="BtnCx" id="BtnCx" value="查询">    </td>
+            <td width="20%"><input name="BtnView" type="button" value="生成采购单"></td>
+          </tr>
+        </table>
+	
+	</td>
+	</tr>
+	
+	<tr>
+      <td>
+		<div id="backDetails"></div>
+		 
+       
+      </td>
+    </tr>
+    
+  </table>
+  </form>  
+
+</body>
+
+</html>

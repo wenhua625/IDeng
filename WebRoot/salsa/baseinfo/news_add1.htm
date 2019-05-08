@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<script type="text/javascript" src="js/extjs/ext-base3.4.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all3.4.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<title>֪ͨ</title>
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function() {
+	 
+	var my_form = new Ext.FormPanel({
+				
+				renderTo : 'my_id',
+				frame : true,
+				title : '',
+				width : 940,
+			
+				items : [{
+							xtype : 'textfield',
+							fieldLabel : '����',
+							name : 'title',
+							allowBlank : false,
+							width:500,
+							emptyText:'������֪ͨ����...'
+						
+						}, 
+						{
+							xtype : 'htmleditor',
+							name : 'content',
+							width:600,
+							fieldLabel : '��������'
+						
+							
+						},{
+							xtype : 'checkbox',
+							fieldLabel : '�Ƿ��ö�',
+							name : 'is_good',
+							boxLabel : '�Ƿ��ö�'
+						},
+						{
+							xtype : 'checkbox',
+							fieldLabel : '�Ƿ�ض�',
+							name : 'is_read',
+							boxLabel : '�Ƿ�ض�'
+						}
+						
+							],
+
+		
+
+	buttons : [{
+				text : '���',
+				handler : function() {
+				   my_form.getForm().submit({
+					waitMsg:'正在提交中.......',
+					url:'work?proname=ENP031',   //异步提交
+					method:'post',
+ 								success : function(form, action) {
+									Ext.Msg.alert('Success', '添加成功');
+									
+									 var arg;
+	                              if (window.parent.opener) {
+                                       arg=window.parent.opener;
+                                   }
+                                   else {
+	                                  arg=window.dialogArguments;
+                                   }
+     
+                                  arg.document.getElementById('d_Flag').value="1";
+								  window.close();
+									//window.location.href='/index.jsp';
+								},
+								failure : function(form, action) {
+									Ext.Msg.alert('Warning', '添加失败');
+								}
+							}); 
+				
+				
+				
+					
+				}
+			}, {
+				text : '����',
+				handler : function() {
+					my_form.getForm().reset();
+				}
+			}
+			]
+				});
+				
+				
+				
+				
+
+});
+</script>
+<div id="my_id" style='width:200px;height:350px;'></div>
+</body>
+</html>

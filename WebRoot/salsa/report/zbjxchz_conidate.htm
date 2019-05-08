@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base target="_self"/>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script language="javascript">
+ function checkSearch()
+ {
+    if( (form1.ORDER_DATE2.value.length == 0)){
+        alert("友情提醒：统计起止日期必须输入!");
+        return false;
+    }
+    if( (form1.AGENT_CODE.value.length == 0)){
+        alert("友情提醒：请选择分公司!");
+        return false;
+    }
+    
+	form1.Submit2.value="正在处理中，请稍等...";
+	form1.Submit2.disabled=true;
+	return true;
+ }
+</script>
+</head>
+
+<body >
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    var s_sup;
+    if('@@LS.DWDM,' == '00'){
+       DwrComm.parseXL('XL0063',formMap,{callback:function(list){
+             s_sup = list;  
+        },async:false});
+    }else{
+       DwrComm.parseXL('XL0060',formMap,{callback:function(list){
+             s_sup = list;  
+        },async:false});
+    }
+    var sel = DWRUtil.getValue("AGENT_CODE");
+       DWRUtil.removeAllOptions("AGENT_CODE");
+       DWRUtil.addOptions("AGENT_CODE",s_sup,"value","name");
+       DWRUtil.setValue("AGENT_CODE",sel); 
+    
+});
+
+</script>
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0" >
+    <tr align="center" height="10"> 
+		<td>
+		
+		</td>
+	</tr>
+    <tr> 
+      <td> <table cellSpacing=0 cellPadding=0 border="0" width="100%">
+							<tr height="30">
+								<td style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid;font-size: 12pt;COLOR: #124164;FONT-WEIGHT: bold;"><img src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">物品进销存汇总表</td>
+							</tr>
+		</table></td>
+   </tr>
+	<tr>
+      <td>
+	  <form name="form1" method="post" action="display?proname=report/zbjxchz_result" onSubmit="return checkSearch()">
+        <table width="100%" border="0">
+          <tr> 
+            <td width="15%" align="right">仓库：</td>
+            <td width="85%"> 
+            
+            <select name="AGENT_CODE" id="AGENT_CODE">
+               
+            </select>   
+            </td>
+          </tr>
+		  <tr> 
+            <td width="15%" align="right">所属系列： </td>
+            <td width="85%">  
+              <select name="SERIES_CODE">
+                <option value="">全部</option>
+                <option>$$XL0001,</option>
+              </select>
+            </td>
+          </tr>
+          <tr> 
+            <td width="15%" align="right">统计日期： </td>
+            <td width="85%">  
+              <input type="text" name="ORDER_DATE1" size="10" readonly onclick="javascript:ShowCalendar(this)" value="@@LS.FIRSTDAYSOFCURMONTH,">
+              - 
+              <input type="text" name="ORDER_DATE2" size="10" readonly onclick="javascript:ShowCalendar(this)" value="@@LS.CURDATE,">
+            </td>
+          </tr>
+          <tr> 
+            <td width="15%" align="right">产品号： </td>
+            <td width="85%"> 
+              <input type="text" name="PRODUCT_CODE" size="10">
+              产品名称： 
+              <input type="text" name="PRODUCT_NAME"><input type="submit" name="Submit2" value="生成报表">
+            </td>
+          </tr>
+		  
+          <tr>
+            <td width="9%">&nbsp;</td>
+            <td width="91%"></td>
+          </tr>
+        </table>
+             </form>
+            </td>
+          </tr>
+		  <tr>
+		  
+      <td width="30" height="30">&nbsp; </td>
+		  </tr>
+    
+  </table>
+  
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+.tabletext {FONT-SIZE: 12px; COLOR: #635B5B; FONT-FAMILY: 宋体}
+.tabletoptitle{ background-color:#E1D8D2;height:15px;}
+.tableleft { background-color:#FFFCF7;FONT-SIZE: 12px; COLOR: #635B5B; FONT-FAMILY: 宋体}
+
+
+
+.nn {
+	BACKGROUND-REPEAT: no-repeat
+	font-size: 12px;
+}
+
+
+
+body
+{
+margin:0px 0px 0px 0px;
+font-size: 12px;
+font-family: Tahoma,Arial,Verdana,宋体,;
+COLOR: #635B5B;
+background-color:#FFFFFF;
+scrollbar-base-color:#808080;
+scrollbar-3dlight-color:#808080;
+scrollbar-highlight-color:#D4D0C8;
+scrollbar-face-color:#808080;
+scrollbar-arrow-color:#FFFFFF;
+scrollbar-shadow-color:#D4D0C8;
+scrollbar-darkshadow-color:#808080;
+scrollbar-track-color:#D4D0C8;
+overflow:auto;
+}
+
+.ImgButton {height: 20;width: 80;background: url(../image/button_bak%20.gif) repeat;border-color: #5A6CA2;border-top-color: #EEEEEE;border-top-width: 1;border-left-color: #EEEEEE;border-left-width: 1;border-bottom-color: #5A6CA2;border-bottom-width: 1;border-right-color: #5A6CA2;border-right-width: 1;font-family: Arial;padding-top:2px;cursor:hand;}
+.ImgButton120 {height: 20;width: 120;background: url(../image/button_bak%20.gif) repeat;border-color: #5A6CA2;border-top-color: #EEEEEE;border-top-width: 1;border-left-color: #EEEEEE;border-left-width: 1;border-bottom-color: #5A6CA2;border-bottom-width: 1;border-right-color: #5A6CA2;border-right-width: 1;font-family: Arial;padding-top:2px;cursor:hand;}
+
+A:link {
+	COLOR: #003333; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:hover {
+	FONT-SIZE: 9pt; COLOR: #FFEADF; TEXT-DECORATION: underline
+}
+A:active {
+	FONT-SIZE: 9pt; COLOR: #003333; TEXT-DECORATION: underline
+}
+.input {
+	FONT-SIZE: 9pt;
+	BACKGROUND: #F7F7F7;
+	COLOR: #003333;
+	border: 1px solid #FD7328;
+}
+
+
+.input3 {
+	WIDTH: 10px; HEIGHT: 10px
+}
+
+
+
+
+
+
+
+
+
+
+A:hover {
+	FONT-SIZE: 9pt; COLOR: #990000}
+LI {
+	LINE-HEIGHT: 200%
+}
+
+.form2 {
+	BORDER-RIGHT: #ffffff 0px solid; BORDER-TOP: #999999 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #ffffff 0px solid; COLOR: #4B4343; BORDER-BOTTOM: #999999 1px solid
+}
+.WH {
+	FONT: bold 14px 宋体; COLOR: #fff
+}
+.WHS {
+	FONT: 12px 宋体; COLOR: #666666
+}
+.WHS:link {
+	FONT: 12px 宋体; COLOR: #fff
+}
+.WHS:visited {
+	FONT: 12px 宋体; COLOR: #fff
+}
+.WHS:hover {
+	FONT: 12px 宋体; COLOR: #f60
+}
+.X {
+	FONT-WEIGHT: bold; FONT-SIZE: 24px
+}
+.L {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px
+}
+.M {
+	FONT: bold 14px "宋体"
+}
+.C {
+	FONT-SIZE: 14px
+}
+.S {
+	FONT-SIZE: 12px
+}
+.LM {
+	LINE-HEIGHT: 130%
+}
+.LL {
+	LINE-HEIGHT: 150%
+}
+.f11 {
+	FONT-SIZE: 14px
+}
+.f1 {
+	FONT-SIZE: 10px
+}
+
+
+.f3 {
+	FONT-SIZE: 16px
+}
+.f4 {
+	FONT-SIZE: 18px
+}
+.f5 {
+	FONT-SIZE: 24px
+}
+.f6 {
+	FONT-SIZE: 31px
+}
+.lh13 {
+	LINE-HEIGHT: 130%
+}
+.lh15 {
+	LINE-HEIGHT: 150%
+}
+.lh17 {
+	LINE-HEIGHT: 170%
+}
+SELECT {
+	FONT-SIZE: 12px
+}
+INPUT {
+	FONT-SIZE: 12px
+}
+.form {
+	BORDER-TOP-WIDTH: 1px; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 12px; BORDER-LEFT-COLOR: #cccccc; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #cccccc; BORDER-TOP-COLOR: #cccccc; FONT-FAMILY: "宋体"; BACKGROUND-COLOR: #ffffff; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #cccccc
+}
+.form2 {
+	BORDER-TOP-WIDTH: 1px; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 12px; BORDER-LEFT-COLOR: #cccccc; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #cccccc; BORDER-TOP-COLOR: #cccccc; FONT-FAMILY: "宋体"; BACKGROUND-COLOR: #ececec; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #cccccc
+}
+.form3 {
+	BORDER-RIGHT: #abaeb4 1px solid; BORDER-TOP: #666666 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #666666 1px solid; COLOR: #666666; BORDER-BOTTOM: #abaeb4 1px solid; FONT-FAMILY: "宋体"
+}
+.form4 {
+	BORDER-RIGHT: #abaeb4 0px solid; BORDER-TOP: #666666 0px solid; FONT-SIZE: 12px; BORDER-LEFT: #666666 0px solid; COLOR: #666666; BORDER-BOTTOM: #abaeb4 0px solid; FONT-FAMILY: "宋体"
+}
+.botton {
+	background-image: url(../image/bottom.gif);
+	background-repeat: repeat;
+}
+
+
+.topmenu {
+	background-image: url(../image/tr.gif);
+	background-repeat: repeat;
+}

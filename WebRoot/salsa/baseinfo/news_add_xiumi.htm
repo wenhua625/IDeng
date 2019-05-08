@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>通知管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+
+
+</head>
+<body >
+<script language="javascript">
+
+ function add(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    if(form1.httpUrl.value=="")
+	{
+		 alert("请输入通知URL");
+		 form1.httpUrl.focus();
+		 return false;
+	}
+	 if(form1.title.value=="")
+	{
+		 alert("请输入通知标题");
+		 form1.title.focus();
+		 return false;
+	}
+	formMap = DWRUtil.getValues("form1");
+    DwrComm.parseIN('INP031',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              alert("操作成功!");
+              dialogArguments.document.getElementById('d_Flag').value="1";   
+              window.close();
+           }
+       },async:false});
+}
+
+
+</script>
+<form name="form1" method="post" action="" id="form1">
+  <input type="hidden" name="content" value="">
+  
+  <div style="width:100%">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center" ><b> 通知新闻发布</b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">标题：</div>            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="title" id="title" type="text" class="input" size="50">
+                        </td>
+          </tr>
+            <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">新闻链接URL:</td>
+            <td bgcolor="#FFFFFF"> <input name="httpUrl" id="httpUrl" type="text" class="input" size="60"></td>
+          </tr>
+          
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">正文：</td>
+            <td bgcolor="#FFFFFF">
+            
+              <p style="font-size:16px">点击到<a href="http://xiumi.us" target="_blank">秀米H5编辑器</a>中编辑通知或新闻，完成后拷贝URL到上面的新闻链接URL中</p>
+              <p><a href="http://xiumi.us" target="_blank"><img src="images/xiumi3.png" width="467" height="293"><img src="images/xiumi4.png" alt="" width="488" height="293"></a></p></td>
+            
+            <input type="hidden" id="contentV" name="contentV"/>
+          </tr>
+          
+        
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">是否置顶：</td>
+            <td bgcolor="#FFFFFF"> 
+			   <select name="is_good"  id="is_good" >
+			       <option value="否">否</option>
+				   <option value="是">是</option>
+			   </select>
+                        </td>
+          </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">是否必读：</td>
+            <td bgcolor="#FFFFFF"><select name="is_read"  id="is_read" >
+			       <option value="是">是</option>
+			       <option value="否">否</option>
+				   
+			   </select></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="90%" height="40" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" valign="bottom"><div align="center"> 
+          <input id="submit" name="Submit" type="button" class="ImgButton" value="确  定" onClick="add()">
+          &nbsp;&nbsp;&nbsp;&nbsp; 
+          <input name="Submit2" type="reset" class="ImgButton" onClick="window.close()" value="关 闭">
+        </div></td>
+    </tr>
+  </table>
+  </div>
+</form>
+
+</body>
+</html>

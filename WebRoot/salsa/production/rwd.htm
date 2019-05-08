@@ -1,0 +1,383 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+         <base target="_self"/>
+       <title>任务单</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<link href="css/style1.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+		<object id="LODOP"
+			classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+		</object>
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<script src="inc/dateams.js" type=text/javascript></script>
+		<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+		
+		<script type='text/javascript' src='dwr/engine.js'></script>
+		<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+        <style>
+.redBack {background: red;}
+.greenBack {background: green;}
+       </style>
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    
+   
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    form1.BtnFinish.disabled = true;
+	//任务单列表
+    //var sm = new Ext.grid.CheckboxSelectionModel();
+    var cm = new Ext.grid.ColumnModel([
+        //new Ext.grid.RowNumberer(),//自动行号
+        //sm,
+        {header:'任务单号',dataIndex:'rwd_id',width: 130},
+         {header:'品牌',dataIndex:'sccj',width: 60},
+        {header:'型号',dataIndex:'psid',width: 70},
+        {header:'名称',dataIndex:'spmc',width: 110},
+        {header:'规格',dataIndex:'xhgg',width: 70},
+		{header:'单位',dataIndex:'jldw',width: 70},
+        {header:'数量',dataIndex:'sl',width: 50,align:"right"},
+        {header:'领料情况',dataIndex:'cks',width: 55,renderer:function(value,cellmeta,record, rowIndex, columnIndex, store){
+                  if(record.data.cks > 0){
+                  
+                       cellmeta.css="greenBack";
+                       return "已领";
+				  }else{
+				       cellmeta.css="redBack";
+				       return  "未领";
+				  }
+		        
+		   }},
+        {header:'要求完成日期',dataIndex:'yqwcrq',width: 95},
+        {header:'实际完成日期',dataIndex:'sjwcrq',width: 95},
+        {header:'备注',dataIndex:'bz',width: 100}
+        
+       ]);
+    cm.defaultSortable = false; 
+	
+	//任务单列表数据Store
+    var orderDetailstore = new Ext.data.JsonStore({
+        url:"work?proname=MJS021",
+        root:"root",
+        fields: ['rwd_id', 'spbm','spmc','xhgg','jldw','sl','yqwcrq','bz','sccj','psid','sjwcrq','cks']
+    });
+    //任务单表格
+    var grid = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'backList',
+    	width:775, 
+    	height:150,
+    	title:'任务单',
+    	ds: orderDetailstore,
+        cm: cm,
+        //sm:sm,
+        frame:false,
+        clicksToEdit:1,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:true}),
+        viewConfig:{
+              forceFit:true,
+              getRowClass:function(record,rowIndex,rowParams,store){   
+                    /*if(record.data.enterd_num == record.data.back_num){   
+                        return 'x-grid-record-blue';   
+                    }else{   
+                        return '';   
+                    }*/  
+                       
+                }   
+              
+        },
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid.render();
+    orderDetailstore.load({params:{RWD_ID:'@@RWD_ID,'}});
+    //单击任务单
+	grid.on("rowclick",function(grid,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             var record = grid.getSelectionModel().getSelected();
+             form1.ID.value = record.get("spbm");
+			 form1.RWD_ID.value = record.get("rwd_id");
+			 form1.SL.value=record.get("sl");
+			 
+			 if(record.get("sjwcrq") == "" || record.get("sjwcrq") == null){
+			     if(parseInt(record.get("cks"))<=0)
+			     {
+                     form1.BtnFinish.disabled = true;
+			     }else{
+			        form1.BtnFinish.disabled = false; 
+			     }
+			     
+			 }
+			 else{
+			    form1.BtnFinish.disabled = true;
+			 }
+             mxstore.load({params:{ID:form1.ID.value,SL:record.get("sl"),RWD_ID:form1.RWD_ID.value}});
+             enterstore.load({params:{ID:form1.ID.value,SL:record.get("sl")}});
+             jdstore.load({params:{SPBM:form1.RWD_ID.value}});
+           
+      });
+	
+	//物料列表存储
+	var mxstore = new Ext.data.GroupingStore({
+         proxy:new Ext.data.HttpProxy({    
+         	method: 'GET',    
+         	url: 'work?proname=MJP064'
+         }),    
+        reader: new Ext.data.JsonReader({root:"root"}, ['code','spbm','spmc','xhgg','jldw','sl','dh_sl','dj','je','lb','lb_mc','kcsl','ce','psid']),
+		groupField:'lb_mc', //定义默认分组列
+		groupOnSort:false,
+		sortInfo:{field:'spbm',direction:'ASC'} //定义排序列，此属性必须定义
+	});
+    //物料列表表格
+    var tab_grid0 = new Ext.grid.GridPanel({
+    	width:775, 
+    	height:330,
+    	title:'',
+    	ds: mxstore,
+        cm: new Ext.grid.ColumnModel([
+         
+        {header:'类型',dataIndex:'lb_mc',width: 35},
+        {header:'编码',dataIndex:'psid',width: 85},
+        {header:'名称',dataIndex:'spmc',width: 130},
+        {header:'规格',dataIndex:'xhgg',width: 75},
+        {header:'单位',dataIndex:'jldw',width: 50,summaryRenderer: function(v, params, data){return  '合计：';}},
+        {header:'单耗',dataIndex:'dh_sl',width: 60,summaryType:'sum',align:"right"},
+		{header:'总耗',dataIndex:'sl',width: 60,summaryType:'sum',align:"right"},
+        {header:'单价',dataIndex:'dj',width: 50,renderer:Ext.util.Format.usMoney,align:"right"},
+        {header:'金额',dataIndex:'je',width: 60,renderer:Ext.util.Format.usMoney,summaryType:'sum',align:"right"}
+        //{header:'库存',dataIndex:'kcsl',width: 50,align:"right"},
+        //{header:'库存差额',dataIndex:'ce',width: 50,align:"right"}
+       ]),
+       view:new Ext.grid.GroupingView({
+           hideGroupedColumn:true,
+           startCollapsed:false,
+           forceFit:true,
+           sortAscText:"正序"
+         }
+        ), //添加分组视图
+        frame:false,
+        plugins: new Ext.ux.grid.GridSummary(),
+        clicksToEdit:1,
+        stripeRows:true,
+        columnLines: true,
+		tbar: [
+    	    {  
+            iconCls: 'icon-print',  
+            text: '打印物料清单', 
+            xtype : "button", 
+            handler: function(){
+                     if(Ext.get('ID').dom.value == ""){
+                            alert("请选择任务单打印!");
+                            return false;
+                         }
+                    LODOP.ADD_PRINT_BARCODE(5,508,257,36,"Code39",Ext.get('ID').dom.value);
+                         LODOP.ADD_PRINT_URL(10,10,"100%","95%",'@@LS.URL,/display?proname=print/sc_bom_print.htm&ID='+form1.ID.value+'&RWD_ID='+form1.RWD_ID.value+'&SL='+form1.SL.value);
+        				 //LODOP.SET_PRINT_PAGESIZE(1,2100,2970,""); 
+		                 LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,""); //按适宽模式显示
+		                 var result = LODOP.PREVIEW();
+            }  
+          }],
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+        
+        
+    });
+    
+	
+	//工价工序清单
+	var enterstore = new Ext.data.GroupingStore({
+         proxy:new Ext.data.HttpProxy({    
+         	method: 'GET',    
+         	url: 'work?proname=MJP057'
+         }),    
+        reader: new Ext.data.JsonReader({root:"root"}, ['code','zbbm','zbmc','gxbm','gxmc','dj','bz']),
+		groupField:'zbmc', //定义默认分组列
+		groupOnSort:false,
+		sortInfo:{field:'gxbm',direction:'ASC'} //定义排序列，此属性必须定义
+	});
+
+    //工价工序表格
+    var tab_grid1 = new Ext.grid.EditorGridPanel({
+    	width:775, 
+    	height:330,
+    	title:'',
+    	ds: enterstore,
+        cm: new Ext.grid.ColumnModel([
+            {header:'生产组别',dataIndex:'zbmc',width: 35},
+        	{header:'工序名称',dataIndex:'gxmc',width: 105,summaryRenderer: function(v, params, data){return  '合计：';}},
+        
+        	{header:'工价',dataIndex:'dj',width: 50,renderer:Ext.util.Format.usMoney,align:"right",summaryType:'sum'},
+        	{header:'备注',dataIndex:'bz',width: 80}
+        
+       
+       	]),
+        view:new Ext.grid.GroupingView({
+           hideGroupedColumn:true,
+           startCollapsed:false,
+           forceFit:true,
+           sortAscText:"正序"
+         }
+        ), //添加分组视图
+        frame:false,
+        plugins: new Ext.ux.grid.GridSummary(),
+        stripeRows:true,
+        columnLines: true,
+		tbar: [
+    	    {  
+            iconCls: 'icon-print',  
+            text: '打印工序', 
+            xtype : "button", 
+            handler: function(){
+                    LODOP.ADD_PRINT_BARCODE(5,508,257,36,"Code39",Ext.get('ID').dom.value);
+                         LODOP.ADD_PRINT_URL(10,10,"100%","95%",'@@LS.URL,/display?proname=print/gjb_print.htm&ID='+form1.ID.value);
+        				 //LODOP.SET_PRINT_PAGESIZE(1,2100,2970,""); 
+		                 LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,""); //按适宽模式显示
+		                 var result = LODOP.PREVIEW();
+            }  
+          }],
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+        
+        
+    });
+    
+    //生产进度
+	var jdstore = new Ext.data.JsonStore({
+        url:"work?proname=MJP069",
+        root:"root",
+        fields: ['rq','gxmc','sl']
+    });
+
+    //生产进度表格
+    var tab_grid2 = new Ext.grid.EditorGridPanel({
+    	width:775, 
+    	height:330,
+    	title:'',
+    	ds: jdstore,
+        cm: new Ext.grid.ColumnModel([
+            {header:'发生日期',dataIndex:'rq',width: 85},
+        	{header:'工序名称',dataIndex:'gxmc',width: 155,summaryRenderer: function(v, params, data){return  '合计：';}},
+        
+        	{header:'数量',dataIndex:'sl',width: 50,renderer:Ext.util.Format.usMoney,align:"right",summaryType:'sum'}
+        	
+        
+       
+       	]),
+        frame:false,
+        plugins: new Ext.ux.grid.GridSummary(),
+        stripeRows:true,
+        columnLines: true,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+        
+        
+    });
+    
+   //物料工序Tab页
+   var tabs=new Ext.TabPanel({
+  		renderTo:"backDetails",
+  		width:775,
+  		autoHeight:true,
+  		deferredRender:false,
+  		region:'center',
+  		autoHeight:true
+  });
+  tabs.add({
+		id:"mx",
+		title:'所需物料',  
+		//layout:'fit',
+		items:tab_grid0,
+		//listeners: {activate: handleActivate},
+		autoHeight:true
+	});
+  tabs.add({
+		id:"enter",
+		title:'工序组成',  
+		//layout:'fit',
+		items:tab_grid1,
+		//listeners: {activate: handleActivate},
+		autoHeight:true
+	});
+	tabs.add({
+		id:"jd",
+		title:'生产进度',  
+		//layout:'fit',
+		items:tab_grid2,
+		//listeners: {activate: handleActivate},
+		autoHeight:true
+	});
+	tabs.activate(0);
+    
+	 //关闭
+   Ext.get("BtnClose").on("click",function(){
+      window.close()
+       
+   });
+    //生产完工
+   Ext.get("BtnFinish").on("click",function(){
+      if(form1.RWD_ID.value == ""){
+           alert("任务单无效，请选择任务单！");
+           return false;
+       }
+        formMap = DWRUtil.getValues("form1");
+       
+       if(!confirm("你确认该任务完工了吗？")) return false;
+       DwrComm.parseIN('INP022',formMap,'insert',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                         
+                     }else
+                     {
+                        alert("操作成功，该任务已完工!");
+                        window.close();
+                     }
+                    },async:false}); 
+   });
+    
+	
+
+});
+
+</script>
+<form name="form1" method="post" action="" >
+   <input type="hidden" name="d_Flag" value="0">
+  <input type="hidden" name="d_JsonData" value="">
+  <input type="hidden" name="d_SPBM">
+  <input type="hidden" name="SH_FLAG">
+  <input type="hidden" name="ID" value="">
+  <input type="hidden" name="RWD_ID" value="">
+  <input type="hidden" name="SL" value="">
+<table width="100%" height="0" border="0" align="center" cellpadding="0"
+	cellspacing="0">
+	<tr>
+		<td >
+		   <div id='backList'></div>
+		</td>
+	</tr>
+	<tr >
+		<td >
+		  <div id='backDetails'></div>
+		</td>
+	</tr>
+	<tr >
+		<td align="center" >
+		   <input type="button" name="BtnFinish"  value="验收通过且完工">
+		   <input type="button" name="BtnClose" id="BtnClose" value="关  闭">	  </td>
+	</tr>
+
+</table>
+</form>
+</body>
+</html>

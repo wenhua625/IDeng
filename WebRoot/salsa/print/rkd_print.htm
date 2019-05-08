@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<script language="javascript" src="js/print1/LodopFuncs.js"></script>
+    
+<script type="text/javascript" src="js/extjs/openWindow.js"></script>
+		<script src="inc/dateams.js" type=text/javascript></script>
+		<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+	<style type="text/css">
+<!--
+.style1 {
+	font-family: "宋体";
+	font-size: 18px;
+}
+.style5 {
+	font-family: "宋体";
+	font-size: 14px;
+}
+.style6 {
+	font-family: "宋体";
+	font-size: 18px;
+}
+.style9 {
+	font-family: "黑体";
+	font-weight: bold;
+	font-size: 16px
+}
+-->
+        </style>
+
+<script language="javascript" type="text/javascript"> 
+	 //声明为全局变量
+/* 	function PrintMytable(){
+		  
+		var LODOP=getLodop(document.getElementById('LODOP_OB'),document.getElementById('LODOP_EM'));
+		LODOP.ADD_PRINT_TABLE(10,10,"95%",265,document.getElementById("div1").innerHTML);
+		
+		var ix=LODOP.PREVIEW();
+		//window.dialogArguments.document.getElementById('print_Flag').value=ix; 
+		   
+		window.close();			
+	};		 */
+</script>
+<title></title>
+
+
+</head>
+<body>
+
+<div id="div1">
+
+<table border=1 width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse" bordercolor="#000000">
+
+<thead>
+<tr>
+   <td colspan="10">
+<table width="100%" border="0">
+  <tr>
+				
+				<td width="27%" style="font-size:14px"> <p align="center" >第<font color="#0000FF" tdata="pageNO" format="#">#</font>页/总<font color="#0000FF" tdata="pageCount" format="#">##</font>页</p></td>
+				<td width="45%"></td>
+				<td width="28%" style="font-size:14px">&nbsp;
+					</td>
+		  </tr>
+			<tr>
+				<td width="27%">&nbsp;</td>
+				<td width="45%" align="center" class="style1">
+				  <strong>@@LS.AGENT,<br>入库单
+			  </strong>				</td>
+				<td width="28%" class="style6">&nbsp;</td>
+			</tr>
+			<tr >
+			  <td colspan="3" align="center"><table width="90%" border="0" cellpadding="0" cellspacing="0">
+                <tr >
+                  <td align="left" style="font-size:14px">单号：!!MJP025,01</td>
+                  <td align="left" style="font-size:14px">日期：!!MJP025,02 送货单日期：!!MJP025,28</td>
+                </tr>
+                <tr>
+                  <td colspan="2" align="left" style="font-size:14px">备注：!!MJP025,21</td>
+                  </tr>
+              </table></td>
+			</tr>
+</table></td>
+</tr>
+
+
+<tr align="center">
+
+										<td  nowrap="nowrap" style="font-size:14px">
+											序号										</td>
+										
+										
+										<td  nowrap="nowrap" style="font-size:14px">
+											名称</td>
+										
+										<td  nowrap="nowrap" style="font-size:14px">型号</td>
+										<td  nowrap="nowrap" style="font-size:14px">规格</td>
+										<td  nowrap="nowrap" style="font-size:14px">客户名称</td>
+										<td  nowrap="nowrap" style="font-size:14px">单位</td>
+										<td  nowrap="nowrap" style="font-size:14px">
+											数量										</td>
+										
+										
+										<td  nowrap="nowrap" style="font-size:14px">备 注</td>
+	  </tr>
+</thead>
+<tr >
+
+										<td style="font-size:14px" align="center">
+											$$MJP021,25</td>
+										
+										
+										<td style="font-size:14px">
+											$$MJP021,03</td>
+										
+										<td style="font-size:14px">$$MJP021,17</td>
+										<td style="font-size:14px">$$MJP021,04</td>
+                                        <td style="font-size:14px">$$MJP021,24</td>
+										
+										<td style="font-size:14px" align="center">$$MJP021,05</td>
+										<td style="font-size:14px" align="right">
+											$$MJP021,06</td>
+										
+										
+										<td style="font-size:14px">
+											$$MJP021,13</td>
+	</tr>
+									<tr>
+										<td colspan="6" align="right" style="font-size:14px">											合计： </td>
+										<td align="right">!!MJP025,11 </td>
+									    <td align="right">&nbsp;</td>
+									</tr>
+
+									
+
+
+
+<tfoot>
+
+
+
+<tr>
+<td colspan="10">
+   <table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr class="style5" valign="bottom">
+				<td>
+					<table width="100%" border="0">
+						<tr>
+							<td width="20%" style="font-size:14px">
+								制单人：</td>
+							<td width="3%" style="font-size:14px">&nbsp;								</td>
+							<td width="22%" style="font-size:14px">
+								经办人：							</td>
+							<td width="22%" style="font-size:14px">&nbsp;								</td>
+							<td width="33%" style="font-size:14px">
+								打印日期：@@LS.DATE,							</td>
+						</tr>
+						<tr>
+						  <td colspan="5" style="font-size:14px">白联：存根 红联：供应商 黄联：仓库 蓝联：记账 </td>
+					  </tr>
+					</table>				</td>
+			</tr>
+</table></td>
+</tr>
+</tfoot>
+</table>
+</div>
+
+
+
+
+<div  id="typediv1"> <font color='#FF00FF' >Web打印服务CLodop未正常启动，点击这里<a href='#' onclick="javascript:PrintMytable()" target='_self'>执行打印</a></div>
+
+
+
+
+<script language="javascript" type="text/javascript"> 
+	//PrintMytable();	
+	function PrintMytable(){
+		document.getElementById("typediv1").style.display="none";//隐藏
+	    LODOP=getLodop();  
+		LODOP.PRINT_INIT("");
+		LODOP.ADD_PRINT_TABLE(10,10,"95%",760,document.getElementById("div1").innerHTML);
+		
+		//LODOP.PREVIEW();
+		var ix=  LODOP.PREVIEW();
+         // parent.frames["b-win"].document.getElementById("d_Flag").value= ix;
+		 if (LODOP.CVERSION) {
+			 CLODOP.On_Return=function(TaskID,Value){
+				closewin('o-win');
+			 }
+         }
+	};		
+	
+	if (needCLodop()) {
+		window.On_CLodop_Opened=function(){
+			PrintMytable(); //prn1_preview()是调用打印方法
+			window.On_CLodop_Opened=null;
+		};
+	}else{
+		window.onload = function(){
+			PrintMytable(); 
+		};
+	}
+	
+	
+	 /* else {
+		//: 判断网页是否加载完成     
+        document.onreadystatechange = function () {      
+	        if(document.readyState=="complete") {            
+	             PrintMytable();	    
+	        }     
+        }
+	} */
+	
+	
+</script>
+</body>
+
+</html>

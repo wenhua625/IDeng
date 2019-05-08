@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<data>
+  <row>
+    <KJM>RP0001</KJM>
+    <LJH>Provider=SQLOLEDB.1;Password=salsa;Persist Security Info=True;User ID=sa;Initial Catalog=salsa_erp;Data Source=127.0.0.1</LJH>
+    <CS></CS>
+    <SQL>select a.product_code,a.product_name+case a.demo when '' then '' else '('+a.demo+')' end product_name,a.product_size,a.product_color,a.product_untl,a.product_price,d.pack_num rel_num,d.pack_num*a.product_price rel_amount,b.Pricetype_name,right(d.box_code,3)+'#' package_demo,a.order_code,agent_name,dbo.getdatestr1(out_date) out_date   from order_product_list a,price_type b,order_list c,pack_list d  where a.price_type=b.pricetype_id and a.order_code=c.order_code  and a.order_code=d.order_code and a.id=d.appadId  and a.order_code='@@ORDER_CODE,' and a.fact_num-isnull(a.del_num,0) !=0  order by d.box_code,a.id</SQL>
+    <SQL1></SQL1>
+    <REPORTFILE>D:\report\salsa_fhd.frf</REPORTFILE>
+    <KJSM>发货单</KJSM>
+  </row>
+  <row>
+    <KJM>RP0002</KJM>
+    <LJH>Provider=SQLOLEDB.1;Password=salsa;Persist Security Info=True;User ID=sa;Initial Catalog=salsa_erp;Data Source=127.0.0.1</LJH>
+    <CS></CS>
+    <SQL>select a.product_code,a.product_name+case a.demo when '' then '' else '('+a.demo+')' end product_name,a.product_size,a.product_color,a.product_untl,a.product_price,d.pack_num rel_num,d.pack_num*a.product_price rel_amount,b.Pricetype_name,right(d.box_code,3)+'#' package_demo,a.order_code,agent_name,dbo.getdatestr1(out_date) out_date   from order_product_list a,price_type b,order_list c,pack_list d  where a.price_type=b.pricetype_id and a.order_code=c.order_code  and a.order_code=d.order_code and a.id=d.appadId  and a.order_code='@@ORDER_CODE,' and a.fact_num-isnull(a.del_num,0) !=0  order by d.box_code,a.id</SQL>
+    <SQL1></SQL1>
+    <REPORTFILE>D:\report\salsa_fhd4ckadmin.frf</REPORTFILE>
+    <KJSM>发货单</KJSM>
+  </row>
+  <row>
+    <KJM>RP0003</KJM>
+    <LJH>Provider=SQLOLEDB.1;Password=salsa;Persist Security Info=True;User ID=sa;Initial Catalog=salsa_erp;Data Source=127.0.0.1</LJH>
+    <CS></CS>
+    <SQL>select a.product_code,a.product_name,a.product_size,a.product_color,a.product_untl,a.product_price,a.fact_num-isnull(a.del_num,0) rel_num,a.fact_amount-isnull(a.del_amount,0) rel_amount,b.Pricetype_name, a.demo package_demo,a.order_code,agent_name,dbo.getdatestr1(out_date) out_date    from order_product_list a,price_type b,order_list c where a.price_type=b.pricetype_id and a.order_code=c.order_code  and a.order_code='@@ORDER_CODE,' and a.fact_num-isnull(a.del_num,0) !=0   order by a.id</SQL>
+    <SQL1></SQL1>
+    <REPORTFILE>D:\report\salsa_fhd.frf</REPORTFILE>
+    <KJSM>发货单</KJSM>
+  </row>
+</data>

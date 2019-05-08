@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>edition.htm</title>
+		<base target="_self"/> 
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		
+		<link href="css/style1.css" rel="stylesheet" type="text/css" />		<!-- css文件，统一字体、背景颜色、间距等 -->
+		
+		<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0></object> <!-- 打印 -->
+			
+		<link href="css/ext-all.css" rel="stylesheet" type="text/css" />	<!-- ext框架有关 -->
+		<script src="js/extjs/ext-base.js" type="text/javascript"></script>
+		<script src="js/extjs/ext-all.js" type="text/javascript"></script>
+		<script src="js/extjs/ext-lang-zh_CN.js" type="text/javascript"></script>
+		<script src="js/extjs/GroupSummary.js" type="text/javascript"></script>
+		<script type="text/javascript" src="js/extjs/BufferView.js"></script>	<!--当用到此句时要加。view: new Ext.ux.grid.BufferView({scrollDelay: false,forceFit: true}),-->
+		
+		<script src="dwr/engine.js" type="text/javascript"></script>		<!-- dwr框架有关 -->
+		<script src="dwr/util.js" type="text/javascript"></script>
+		<script src="dwr/interface/DwrComm.js" type="text/javascript"></script>
+		
+		<script src="inc/check.js" type="text/javascript" language="JavaScript"></script>	<!-- 判断数量与金额、打开窗口要用到 -->
+		<script src="inc/dateams.js" type="text/javascript"></script>				<!-- ShowCalendar()用到的js文件 -->
+		<script src="inc/Calendar1.js" type="text/javascript" language="JavaScript"></script>	<!--calendar()用到的js文件，与ShowCalendar()功能同，但形式不同-->
+		
+		
+		<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>		<!--jquery框架：如何判断有新增按钮的，且按钮前面有个加号的就是使用了jquery框架-->
+		<script type="text/javascript" src="js/easyui/easyui-webase.js"></script>
+		<script type="text/javascript" src="js/easyui/json2.js"></script>
+		<script type="text/javascript" src="js/easyui/easyui.plugin.hy.js"></script>
+		<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+		<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="js/easyui/jquery.edatagrid.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/easyui/default/easyui.css">		<!--jquery的整体布局-->
+		<link rel="stylesheet" type="text/css" href="css/easyui/icon.css"> 			<!--jquery中所使用的按钮图标：列表名、新增、待托运订单-->
+		
+		<script type="text/javascript">								/*什么时候用opr(url)？在用到opr函数的地方加上*/
+     			function opr(url){
+        			form1.action=url+'&tmp11='+Math.random();	//表单的动作：'display?proname=quickorder/xsd.htm&Note_Type=XS'+'&tmp11='+Math.random()
+        			form1.submit();					//表单的提交
+     			}
+		</script>	
+	</head>
+  
+  	<body>
+		<script type='text/javascript'>						/*什么时候用Ext框架？一张table表，要对表中的某一列数据进行查询时*/
+			Ext.onReady(function(){
+   				if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+   				var formMap = DWRUtil.getValues("form1");
+   				
+  //生产品牌列表(注意必须MJ1924接口中大写的字段，grid里都要变成小写，否则无法显示)
+    var processDetailstore = new Ext.data.JsonStore({
+        url:"work?proname=MJ1924",
+        root:"root",
+        fields: ['id','vername','vercode','ostype','verurl','vercontent','flag']
+
+    });
+    
+  
+   
+    //品牌列表
+    var cm = new Ext.grid.ColumnModel([
+        new Ext.grid.RowNumberer(),//自动行号
+        //{header:'编号',dataIndex:'id',width: 180,editor: new Ext.form.TextField({ allowBlank: true })},
+        {header:'版本名称',dataIndex:'vername',width: 180,editor: new Ext.form.TextField({ allowBlank: true })},
+        {header:'版本号',dataIndex:'vercode',width: 50,editor: new Ext.form.TextField({ allowBlank: true })},
+        {header:'应用名称',dataIndex:'ostype',width: 200,editor: new Ext.form.TextField({ allowBlank: true })},
+        {header:'安装包下载地址',dataIndex:'verurl',width: 250,editor: new Ext.form.TextField({ allowBlank: true })},
+        {header:'版本更新内容',dataIndex:'vercontent',width: 250,editor: new Ext.form.TextField({ allowBlank: true })},
+        {header:'标志',dataIndex:'flag',width: 50,editor: new Ext.form.TextField({ allowBlank: true })}
+       ]);
+    
+    cm.defaultSortable = true;
+    
+    var summary = new Ext.ux.grid.GridSummary();
+    var grid_process = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'EditionList',
+    	width:1050, 
+    	height:380,
+    	title:'版本列表',
+    	ds: processDetailstore,
+        cm: cm,
+        plugins: summary,
+        frame:false,
+        clicksToEdit:1,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid_process.render();
+    processDetailstore.load();
+    
+       //修改版本
+   grid_process.on("afteredit", afterEdit, grid_process); 
+   
+   function afterEdit(e) { 
+   var record = e.record;// 被编辑的记录
+   
+   
+   DWRUtil.setValue("d_Id",e.record.get("id"));    //获取被编辑记录的id字段，将其赋给d_Id字段
+   DWRUtil.setValue("d_VerName",e.record.get("vername"));
+   DWRUtil.setValue("d_VerCode",e.record.get("vercode"));
+   DWRUtil.setValue("d_OSType",e.record.get("ostype"));
+   DWRUtil.setValue("d_VerURL",e.record.get("verurl"));
+   DWRUtil.setValue("d_VerContent",e.record.get("vercontent"));
+   DWRUtil.setValue("d_flag",e.record.get("flag"));
+   
+   formMap = DWRUtil.getValues("form1");//以上这几个字段在form1中都是隐藏的，通过form1表单的提交，将这些字段（d_Id）传到后台。并通过'@@d_Id,'来获取到被编辑的记录。
+  
+   DwrComm.parseIN('IN1915',formMap,'update',{callback:function(data){  //update BM_VER set VerName='@@d_VerName,',VerCode='@@d_VerCode,',OSType='@@d_OSType,',VerURL='@@d_VerURL,',VerContent='@@d_VerContent,',flag='@@d_flag,' where id='@@d_Id,'
+           if (data != 'ok'){
+               alert(data);
+           }
+       },async:false});
+   };
+   
+   
+			});
+		</script>
+
+  		<form id="form1" name="form1" method="post" action="">
+  			<input type="hidden" name="d_Id">   
+  			<input type="hidden" name="d_VerName">
+  			<input type="hidden" name="d_VerCode">
+  			<input type="hidden" name="d_OSType">
+  			<input type="hidden" name="d_VerURL">
+  			<input type="hidden" name="d_VerContent">
+  			<input type="hidden" name="d_flag">
+ 
+  			<table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+  				<tr align="center" height="10">
+  					<td>
+  					</td>
+  				</tr>
+  				
+  				<tr align="center">
+  					<td>
+  						<table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+  							<tr height="30">
+  								<td style="BORDER-BOTTOM:@@LS.BGCOLOR, 1px solid; font-size:12pt;COLOR:#124164;FONT-WEIGHT:bold;">
+  									<img src="images/webtype/colon.gif" width="24" height="24">版本列表
+  								</td>
+							</tr>
+  						</table>
+  					</td>
+  				</tr>
+  				
+  				
+				<tr>
+	    				<td>
+	       					<table>
+	           					<tr>
+	              						<td>
+	                  						<div id="EditionList"></div>
+	              						</td>
+	           					</tr>
+	       					</table>
+	    				</td>
+				</tr>
+
+  			</table>
+  		</form>
+    
+  	</body>
+</html>

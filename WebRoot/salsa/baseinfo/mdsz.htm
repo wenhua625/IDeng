@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>店面管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+	
+
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+<script type="text/javascript">
+ function initPage()
+ {
+      if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+  
+	   DwrComm.parseMJ('MJ0S42',formMap,{callback:function(data){
+	  // alert("data:"+data[0].agent_code);
+            DWRUtil.setValue("BM",data[0].agent_code);
+		 DWRUtil.setValue("MC",data[0].agent_name);
+		 DWRUtil.setValue("LXR",data[0].contact_man);
+		 DWRUtil.setValue("DH", data[0].agent_tel); 
+		 DWRUtil.setValue("END_DATE", data[0].end_date);
+		 DWRUtil.setValue("DZ", data[0].agent_address);
+		 
+		  DWRUtil.setValue("printDz",data[0].printdz);
+       },async:false});
+	  
+	 /*     DWRUtil.setValue("BM","!!MJ0S42,01");
+		 DWRUtil.setValue("MC","!!MJ0S42,02");
+		 DWRUtil.setValue("LXR","!!MJ0S42,05");
+		 DWRUtil.setValue("DH","!!MJ0S42,04"); 
+		 DWRUtil.setValue("END_DATE","!!MJ0S42,06");
+		 DWRUtil.setValue("DZ","!!MJ0S42,03");
+		 
+		  DWRUtil.setValue("printDz","!!MJ0S42,07");
+		  */
+		
+	  
+ }
+ function work(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    if(form1.BM.value.length==0)
+	  {
+	      alert("店面编码是必输项!");
+		  form1.BM.focus();
+		  return false;
+	  }
+	var action='delete';
+	
+    DwrComm.parseIN('INP077',formMap,action,{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              alert("门店设置成功，重新登录后生效!");
+             // dialogArguments.document.getElementById('d_Flag').value="1";
+             // window.close();
+           }
+       },async:false});
+}
+
+</script>
+
+
+<script type="text/javascript">
+	$(function(){
+		$("#Agent_Code").change(function(){
+		
+				initPage();
+		   });
+	})
+</script>
+
+</head>
+
+<body onLoad="initPage()">
+<form name="form1" method="post" action="" id="form1">
+  <input name="BM" id="BM" value="@@LS.DWDM," type="hidden">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center" height="35"><b> <font size="5">
+      <select  name="Agent_Code" id="Agent_Code" >
+			<option>$$XL0008,</option>
+      </select>  门店信息</font></b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+         <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;门店信息</td>
+          </tr>
+          
+          <tr> 
+            <td width="200" align="right" bgcolor="#C4DFDC" class="tableleft"> 
+             门店名称：            </td>
+            <td bgcolor="#FFFFFF"><input type="text" name="MC" id="MC" size="30"></td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">联系人：</td>
+            <td bgcolor="#FFFFFF"><input type="text" name="LXR" id="LXR" size="15" ></td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">手机号码：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="DH" id="DH" size="20">              </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">店铺地址：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="DZ" id="DZ" size="40">
+              <FONT COLOR="#FF0000">（注：不要超过30个字）</FONT></td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"><font color="blue">客串串使用有效期：</font></td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="END_DATE" id="END_DATE" size="20" readonly class="TEXTDISABLED"></td>
+          </tr>
+           <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;特定信息</td>
+          </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">在哪打印发货单：</td>
+            <td bgcolor="#FFFFFF"><select name="printDz" id="printDz">
+             <option value="办公室">办公室</option>
+			 <option value="仓库">仓库</option>
+              
+            </select></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="90%" height="40" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" valign="bottom"><div align="center"> 
+          <input name="Submit" type="button" class="ImgButton" value="确  定" onClick="work()">
+          &nbsp;&nbsp;&nbsp;&nbsp; 
+          <input name="Submit2" type="hidden" class="ImgButton" onClick="window.close()" value="关 闭">
+        </div></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

@@ -1,0 +1,90 @@
+.inputme {
+	FONT: 10pt Courier New, 'MS Sans Serif','Times New Roman'; background-color12: rgb(255,255,255); background-color11: rgb(192,192,190); color11: rgb(128,64,0); size: 10pt
+}
+.buttons {
+	BACKGROUND-COLOR: #4f78d9; BORDER-BOTTOM-COLOR: #99ccff; BORDER-LEFT-COLOR: #99ccff; BORDER-RIGHT-COLOR: #99ccff; BORDER-TOP-COLOR: #99ccff; COLOR: white; FONT-FAMILY: trebuchet, Arial, trebuchet; FONT-SIZE: 8pt; FONT-WEIGHT: bold; WIDTH: 75px
+}
+.button2 {
+	BACKGROUND-COLOR: #4f78d9; BORDER-BOTTOM-COLOR: #99ccff; BORDER-LEFT-COLOR: #99ccff; BORDER-RIGHT-COLOR: #99ccff; BORDER-TOP-COLOR: #99ccff; COLOR: white; FONT-SIZE: 9pt; FONT-WEIGHT: normal
+}
+.button3 {
+	BACKGROUND-COLOR: #4f78d9; BORDER-BOTTOM-COLOR: #99ccff; BORDER-LEFT-COLOR: #99ccff; BORDER-RIGHT-COLOR: #99ccff; BORDER-TOP-COLOR: #99ccff; COLOR: white; FONT-SIZE: 9pt; FONT-WEIGHT: normal
+}
+BODY {
+	BACKGROUND-COLOR: aliceblue; FONT-FAMILY: ËÎÌו; FONT-SIZE: 9pt
+}
+.TrTitle {
+	BACKGROUND-COLOR: cornflowerblue; FONT-FAMILY: Fixedsys; FONT-SIZE: 9pt
+}
+.TrOdd {
+	BACKGROUND-COLOR: #d7ecfa; FONT-SIZE: 9pt
+}
+.TrEven {
+	BACKGROUND-COLOR: #c1e0ff; FONT-SIZE: 9pt
+}
+.TrHead {
+	BACKGROUND-COLOR: cornflowerblue; COLOR: white; FONT-SIZE: 9pt
+}
+TABLE {
+	FONT-SIZE: 9pt
+}
+A:active {
+	COLOR: red; FONT-SIZE: 9pt; FONT-WEIGHT: 200; TEXT-DECORATION: underline
+}
+A:link {
+	COLOR: blue; FONT-SIZE: 9pt; FONT-WEIGHT: 200; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: blue; FONT-SIZE: 9pt; FONT-WEIGHT: 200; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: red; FONT-SIZE: 9pt; FONT-WEIGHT: 200; TEXT-DECORATION: underline
+}
+.Ttitle {
+	BACKGROUND-COLOR: lightblue; BORDER-BOTTOM: slategray thin solid; BORDER-LEFT: thin; BORDER-RIGHT: slategray thin solid; BORDER-TOP: thin
+}
+SELECT {
+	BACKGROUND-COLOR: white; COLOR: black; FONT-FAMILY: ËÎÌו; FONT-SIZE: 10.5pt
+}
+SELECT.doc {
+	BACKGROUND-COLOR: white; COLOR: black; FONT-FAMILY: Fixedsys; FONT-SIZE: 12pt
+}
+TEXTAREA {
+	BACKGROUND-COLOR: white; BORDER-BOTTOM: #42428f 2px ridge; BORDER-LEFT: #42428f 2px ridge; BORDER-RIGHT: #42428f 2px ridge; BORDER-TOP: #42428f 2px ridge; COLOR: black; FONT-FAMILY: Fixedsys; FONT-SIZE: 11pt
+}
+HR {
+	COLOR: #2f2f4f
+}
+PRE {
+	COLOR: #ff0000; FONT-FAMILY: Fixedsys; FONT-SIZE: 12pt
+}
+BODY.guest {
+	BACKGROUND-COLOR: #000000; MARGIN: 3px
+}
+.guest TD {
+	COLOR: #a8a8a8; FONT-FAMILY: Fixedsys; FONT-SIZE: 12pt
+}
+.guest A {
+	COLOR: #e6e8fa; TEXT-DECORATION: none
+}
+.guest A:hover {
+	COLOR: #ff0000; TEXT-DECORATION: underline
+}
+.guest TABLE.line {
+	BORDER-BOTTOM: #42428f 10px double; BORDER-LEFT: #42428f 10px double; BORDER-RIGHT: #42428f 10px double; BORDER-TOP: #42428f 10px double
+}
+.guest TD.line {
+	BACKGROUND-COLOR: #2f2f4f; BORDER-BOTTOM: #2f2f4f 10px solid; BORDER-LEFT: #2f2f4f 10px solid; BORDER-RIGHT: #2f2f4f 10px solid; BORDER-TOP: #2f2f4f 10px solid
+}
+.guest TD.name {
+	BACKGROUND-COLOR: #000000; COLOR: #00ff00
+}
+.guest TD.time {
+	BACKGROUND-COLOR: #000000; COLOR: #00ff00
+}
+.guest .time {
+	COLOR: #00ffff
+}
+.guest HR {
+	COLOR: #42428f
+}

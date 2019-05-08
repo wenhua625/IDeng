@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>用户管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<script src="inc/dateams.js" type="text/javascript"></script>
+		<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/extjs/openWindow.js"></script>
+
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script lanuage="javascript">
+  function checkInput()
+  {
+      if(form1.lxfs.value==null || form1.lxfs.value.length !=11)
+	  {
+	      alert("请输入11位数的手机号码!");
+		  form1.lxfs.focus();
+		  return false;
+	  }
+	  if(form1.yhxm.value==null || form1.yhxm.value.length==0){
+	   	  alert("请输入员工姓名!");
+		  form1.yhxm.focus();
+		  return false;
+	  }
+	 if(form1.PASSWORD.value==null || form1.PASSWORD.value.length==0)
+	  {
+	      alert("请输入密码!");
+		  form1.PASSWORD.focus();
+		  return false;
+	  }
+	  if(form1.PASSWORD.value!= form1.REMM.value)
+	  {
+	      alert("两次输入的密码不一样，请重输!");
+		  form1.REMM.focus();
+		  return false;
+	  }
+	  
+	  return true;
+  }
+</script>
+
+<script type="text/javascript">
+ function work(){
+ 
+   if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    var s_bts = "";
+     DwrComm.parseMJ('MJP281',formMap,{callback:function(list){
+		         s_bts = list;				    
+     },async:false});
+    // alert("s_bts:"+s_bts);
+     if(s_bts.length >0  ){
+     	alert("该手机号是【"+s_bts[0].agent_name+"】店铺下的员工，无法加入到本店铺");
+     }else{
+    DwrComm.parseIN('IN0034',formMap,'insert',{callback:function(data){if (data != 'ok'){alert(data);}else{ 
+                      alert("添加成功，请为该员工开通手机端权限");
+                    	 
+                    	parent.frames["main"].document.getElementById("d_Flag").value="1";
+                    	 closewin("b-win");
+                    	
+                   }},async:false});
+        }
+     }
+</script>
+<script type="text/javascript">
+	function add(){
+		if(checkInput()){
+			work();		
+		}
+		
+	}
+	function CSH(){
+		 if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+   		 var formMap = DWRUtil.getValues("form1");
+   		  DwrComm.parseIN('IN0034',formMap,'delete',{callback:function(data){if (data != 'ok'){alert(data);}else{ 
+                      alert("密码初始化成功，初始密码为：zz");
+                    
+                   }},async:false});
+	}
+	function col(){
+	 closewin("b-win");
+	}
+	function change(){
+	  form1.YHH.value =form1.DEPT.value;  
+	}
+</script>
+</head>
+
+<body>
+<form name="form1" method="post" action="" id="form1">
+
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0" >
+    <tr> 
+      <td align="center"><b> 修改员工信息 </b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr align="center"> 
+            <td  height="17"> 
+              <table width="100%" border="0">
+                
+                <tr  height="30">  
+                  <td align="right" class="WHS">所属店铺</td>
+                  <td class="WHS">
+                  <select name="agent_code" id="agent_code" style="background-color:#EEEEEE;pointer-events:none"> 
+                 	 <option>$$XL0008,</option>
+                  
+                  </select>
+                  
+                    
+                  </td>
+                </tr>
+                <tr  height="30">  
+                  <td align="right" class="WHS">手机：</td>
+                  <td class="WHS"> 
+                    <input type="text" name="lxfs" id='lxfs' style="background-color:#EEEEEE;pointer-events: none" >
+                  </td>
+                </tr>
+                
+                <tr  height="30">  
+                  <td align="right" class="WHS">姓名：</td>
+                  <td class="WHS"> 
+                    <input type="text" name="yhxm" size="13">
+                  </td>
+                </tr>
+                 
+                
+                <tr  height="30">  
+                  <td align="right" >岗位职务：</td>
+                  <td class="WHS">
+                    <select name="yhjb" id="yhjb">
+                        <option value="导购">导购</option>
+                        <option value="文员">文员</option>
+                        <option value="业务员">业务员</option>
+                        <option value="店长">店长</option>
+                        <option value="设计师">设计师</option>
+                        <option value="仓管">仓管</option>
+                        <option value="安装工">安装工</option>
+                        <option value="售后主管">售后主管</option>
+                        <option value="财务">财务</option>
+                        <option value="人事">人事</option>
+                        <option value="送货员">送货员</option>
+                        <option value="工程主管">工程主管</option>
+                        <option value="总经理">总经理</option>
+                        <option value="销售总监">销售总监</option>
+                        <option value="销售主管">销售主管</option>
+                        <option value="副总经理">副总经理</option>
+                        <option value="其他">其他</option>
+                       
+                    </select> 
+                   
+                  </td>
+                </tr>
+              <!--   <tr> 
+                  <td align="right" class="WHS">密码：</td>
+                  <td class="WHS"> 
+                    <input type="password" name="PASSWORD" size="15">
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right" class="WHS">确认密码：</td>
+                  <td class="WHS"> 
+                    <input type="password" name="REMM" size="15">
+                  </td>
+                </tr> -->
+                
+               
+              
+                <tr   height="30"> 
+                  <td align="right" class="WHS">状态：</td>
+                  <td class="WHS"> 
+                    <select name="STS"  >
+                      <option value="0">在职</option>
+                      <option value="1">离职</option>
+                    </select>
+                    <input type="hidden" name='yhh' id='yhh'>
+                  </td>
+                </tr>
+                
+                
+               
+              </table>
+              <input type="button" name="Submit1" value="密码初始化" onClick="CSH()">
+               &nbsp;&nbsp;&nbsp;&nbsp;
+              <input type="button" name="Submit4" value="提交" onClick="add()">
+               &nbsp;&nbsp;&nbsp;&nbsp;
+              <input type="button" name="Submit2" value="关闭" onClick="col()">
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  
+</form>
+<script type="text/javascript">
+	function update(){
+		
+	if('!!MJP282,01'!=' ') form1.yhh.value='!!MJP282,01';
+	if('!!MJP282,06'!=' ') form1.agent_code.value='!!MJP282,06';
+	if('!!MJP282,04'!=' ') form1.lxfs.value='!!MJP282,04';
+	if('!!MJP282,02'!=' ') form1.yhxm.value='!!MJP282,02';
+	if('!!MJP282,03'!=' ') form1.yhjb.value='!!MJP282,03';
+	if('!!MJP282,05'!=' ') form1.STS.value='!!MJP282,05';
+	}
+update();
+
+</script>
+</body>
+</html>

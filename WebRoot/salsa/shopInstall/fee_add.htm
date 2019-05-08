@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>产品信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+
+
+		
+<script src="inc/dateams.js" type=text/javascript></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/openWindow.js"></script>
+
+		<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script lanuage="javascript">
+  function checkInput()
+  {
+     
+	  
+	  if(form1.Fee_Man.value.length==0)
+	  {
+	      alert("报销人名称不能为空，请选择!");
+		  form1.Fee_Man.focus();
+		  return false;
+	  }
+	  if(form1.Fee_Type.value.length==0)
+	  {
+	      alert("费用类别一定要选择，请选择!");
+		  form1.Fee_Type.focus();
+		  return false;
+	  }
+	  
+	  if(form1.Fee_Tel.value.length==0)
+	  {
+	      alert("报销人电话不能为空，请输入!");
+		  form1.Fee_Tel.focus();
+		  return false;
+	  }
+	  if(form1.Fee_Amount.value.length==0 || isNaN(form1.Fee_Amount.value))
+	  {
+	      alert("报销金额不能为空或报销金额输入不正确，请输入!");
+		  form1.Fee_Amount.focus();
+		  return false;
+	  }
+	  if(form1.Fee_Date.value.length==0)
+	  {
+	      alert("消费时间不能为空，请选择!");
+		  form1.Fee_Date.focus();
+		  return false;
+	  }
+	  if(form1.DEMO.value.length==0)
+	  {
+	      alert("消费用途不能为空，请选择!");
+		  form1.DEMO.focus();
+		  return false;
+	  }
+	 
+	  
+	  return true;
+  }
+</script>
+<script type="text/javascript">
+
+
+
+</script>
+
+</head>
+
+<body >
+<script language="javascript">
+Ext.onReady(function(){
+    
+     if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+     var formMap = DWRUtil.getValues("form1");
+        
+    
+     Ext.get("Fee_Man").on("change",function(){
+       formMap = DWRUtil.getValues("form1");
+       DwrComm.parseKey('MJP278',formMap,{callback:function(data){
+       	   form1.Fee_Tel.value = data ;
+       },async:false});
+   });
+    
+    Ext.get("BtnAdd").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       if(checkInput()){
+			DwrComm.parseIN('INP084',formMap,"insert",{callback:function(data){
+	           if (data != 'ok'){
+	               alert(data);
+	           }else{
+	              alert("操作成功!");
+	              parent.frames["main"].document.getElementById("d_Flag").value="1";
+	              closewin('b-win'); 
+	           }
+	       },async:false});  	
+	   }   
+   });
+       
+    //form1.submit();
+});
+</script>
+<form name="form1" method="post" action="" id="form1">
+  
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center" ><b>费用报销信息新增</b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          
+          <tr>
+		    <td bgcolor="#C4DFDC" class="tableleft" align="right">门店 </td>
+		    <td bgcolor="#FFFFFF">
+		    <select name="Agent_Code" id="Agent_Code" > 
+					                 	 <option>$$XL0008,</option>                  
+					               </select>
+		     </td>
+	      </tr>
+	       <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+              费用类别：            </td>
+            <td bgcolor="#FFFFFF"> 
+              <select name="Fee_Type" id="Fee_Type">
+                <option value="" selected>==选择==</option>
+                <option>$$XL0071,</option>
+              </select>            </td>
+          </tr>
+	      <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+              报销人：            </td>
+            <td bgcolor="#FFFFFF"> 
+              <select name="Fee_Man" id="Fee_Man">
+                <option value="" selected>==选择==</option>
+                <option>$$XL0072,</option>
+              </select>            </td>
+          </tr>
+	     
+	      
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+              报销人电话：            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="Fee_Tel" id="Fee_Tel" type="text" class="input" >
+			     </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+             消费时间：            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="Fee_Date" id="Fee_Date" type="text"  size="10"
+					readonly onClick="javascript:ShowCalendar(this)"  value="@@LS.CURDATE,">           </td>
+          </tr>
+          
+          
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">报销金额：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="Fee_Amount" id="Fee_Amount" size="20">
+             </td>
+          </tr>
+         
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">用途：</td>
+            <td bgcolor="#FFFFFF"><textarea name="DEMO" cols="30"></textarea></td>
+          </tr>
+          
+          
+        </table>   <input type="hidden" name="Opr_Tel" id="Opr_Tel" value="@@LS.LXFS,"/>
+        <input type="hidden" name="Opr_Man" id="Opr_Man" value="@@LS.XM,"/>
+        </td>
+    </tr>
+  </table>
+  <table width="90%" height="40" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" valign="bottom"><div align="center"> 
+          <input name="BtnAdd" id="BtnAdd" type="button" class="ImgButton" value="确  定" >
+          &nbsp;&nbsp;&nbsp;&nbsp; 
+          <input name="Submit2" type="reset" class="ImgButton" onClick="closewin('b-win')" value="关 闭">
+        </div></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

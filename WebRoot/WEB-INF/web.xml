@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+  
+  <display-name>Application Data Exchange</display-name>
+  <!--字符编码过滤器 -->
+  <filter>
+	<filter-name>Set Character Encoding</filter-name>
+	<filter-class>com.novarise.webase.filter.CharacterEncodingFilter</filter-class>
+	<init-param>
+	  <param-name>encoding</param-name>
+	  <param-value>GBK</param-value>
+	</init-param>
+  </filter>
+  <filter>
+	<filter-name>Permission Check</filter-name>
+	<filter-class>com.novarise.webase.filter.PermissionFilter</filter-class>
+	<init-param>
+		<param-name>LOGIN_PAGE</param-name>
+		<param-value>display?proname=error/errorloginpage.htm</param-value>
+	</init-param>
+  </filter> 
+  <!-- 过滤器映射 -->
+  <filter-mapping>
+    <filter-name>Set Character Encoding</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>  
+  <filter-mapping>
+    <filter-name>Permission Check</filter-name>
+    <url-pattern>/display</url-pattern>
+  </filter-mapping>
+  
+  <!-- <listener>   
+      <listener-class>     
+          com.novarise.webase.servlet.SessionListener    
+      </listener-class>    
+ </listener>  --> 
+  
+
+  <!--初始化数据源配置-->
+  <servlet>
+    <servlet-name>InitDataSource</servlet-name>
+    <servlet-class>com.novarise.webase.servlet.InitDataSource</servlet-class>
+    <init-param>
+      <param-name>config</param-name>
+      <param-value>dsconfig.xml</param-value>
+    </init-param>
+    <init-param>
+      <param-name>default</param-name>
+      <param-value>local</param-value>
+    </init-param>
+    <init-param>
+      <param-name>sms</param-name>
+      <param-value>1</param-value>
+    </init-param>
+    <init-param>
+      <param-name>sms_url</param-name>
+      <param-value>http://116.213.72.20/SMSHttpService/send.aspx</param-value>
+    </init-param>
+    <init-param>
+      <param-name>sms_user</param-name>
+      <param-value>ymkj1</param-value>
+    </init-param>
+    <init-param>
+      <param-name>sms_pwd</param-name>
+      <param-value>ymkj1</param-value>
+    </init-param>
+    <init-param>
+      <param-name>sms_type</param-name>
+      <param-value>34</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>           
+  
+  <servlet>
+    <servlet-name>Display</servlet-name>
+    <servlet-class>com.novarise.webase.servlet.Display</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Work</servlet-name>
+    <servlet-class>com.novarise.webase.servlet.Work</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>BarCodeServlet</servlet-name>
+    <servlet-class>com.novarise.webase.servlet.BarCodeServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>testXml</servlet-name>
+    <servlet-class>com.novarise.webase.servlet.testXml</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DownLoadServlet</servlet-name>
+    <servlet-class>com.novarise.webase.servlet.DownLoadServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>JQuery</servlet-name>
+    <servlet-class>com.novarise.webase.servlet.JQuery</servlet-class>
+  </servlet>
+  
+  <servlet>  
+        <servlet-name>dwr-invoker</servlet-name>  
+  
+        <servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>	
+        <init-param>  
+            <param-name>debug</param-name>  
+            <param-value>false</param-value>  
+        </init-param> 
+		
+   </servlet>
+  <servlet>
+    <servlet-name>MobQuery</servlet-name>
+    <servlet-class>com.novarise.webase.servlet.MobQuery</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ICBCPay</servlet-name>
+    <servlet-class>com.novarise.webase.servlet.ICBCPay</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AccountCashier</servlet-name>
+    <servlet-class>com.novarise.webase.servlet.AccountCashier</servlet-class>
+  </servlet>
+   <servlet>
+    <servlet-name>Excel</servlet-name>
+    <servlet-class>com.novarise.webase.servlet.Excel</servlet-class>
+  </servlet>
+  <servlet>
+    
+    <servlet-name>WeiXinPayMonitor</servlet-name>
+    <servlet-class>com.novarise.webase.servlet.WeiXinPayMonitor</servlet-class>
+  </servlet>
+  <servlet>
+    
+    <servlet-name>FileLoadUpServlet</servlet-name>
+    <servlet-class>com.novarise.webase.servlet.FileLoadUpServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>HtmlBuilder</servlet-name>
+    <servlet-class>com.novarise.webase.servlet.HtmlBuilder</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>VideoMonitor</servlet-name>
+    <servlet-class>com.novarise.webase.servlet.VideoMonitor</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+  <!--映射配置-->
+  <servlet-mapping>
+    <servlet-name>Display</servlet-name>
+    <url-pattern>/display</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>Work</servlet-name>
+    <url-pattern>/work</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>BarCodeServlet</servlet-name>
+    <url-pattern>/bar</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet-mapping>
+    <servlet-name>testXml</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DownLoadServlet</servlet-name>
+    <url-pattern>/downLoad</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>JQuery</servlet-name>
+    <url-pattern>/query</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>  
+        <servlet-name>dwr-invoker</servlet-name>  
+        <url-pattern>/dwr/*</url-pattern>  
+    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MobQuery</servlet-name>
+    <url-pattern>/servlet/MobQuery</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ICBCPay</servlet-name>
+    <url-pattern>/ICBCPay</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AccountCashier</servlet-name>
+    <url-pattern>/account_notice</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>Excel</servlet-name>
+    <url-pattern>/EXCEL</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>WeiXinPayMonitor</servlet-name>
+    <url-pattern>/weixinpay</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+    <servlet-name>FileLoadUpServlet</servlet-name>
+    <url-pattern>/FileLoadUpServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HtmlBuilder</servlet-name>
+    <url-pattern>/htmlbuilder</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>VideoMonitor</servlet-name>
+    <url-pattern>/videoMonitor</url-pattern>
+  </servlet-mapping>
+  
+  
+  <session-config>
+    <session-timeout>60</session-timeout>
+  </session-config>
+  
+  <welcome-file-list>
+    <welcome-file>index.htm</welcome-file>
+    
+  </welcome-file-list>
+</web-app>

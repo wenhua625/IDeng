@@ -1,0 +1,76 @@
+
+
+
+<html>
+<head>
+<title></title>
+<link type="text/css" rel="stylesheet" href="css/moia.css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+</head>
+
+<body background="images/firstbg/welcome.gif">
+<script type='text/javascript'>
+Ext.chart.Chart.CHART_URL = 'images/charts.swf';
+Ext.onReady(function(){
+     var store3 =new Ext.data.JsonStore({
+        		url:"work?proname=MJ0X37",
+        		root:"root",
+        		fields: ['mm_name', 'back_amount']
+    		});
+   
+  
+    new Ext.Panel({
+        width: 450,
+        height: 280,
+        title: '@@LS.YEAR,年月度打款分析',
+        renderTo: 'container_mm',
+        draggable:true,
+        items: {
+            store: store3,
+            xtype: 'columnchart',
+            xField: 'mm_name',
+            yField: 'back_amount',
+           
+            //extra styles get applied to the chart defaults
+            extraStyle:
+            {
+                legend:
+                {
+                    display: 'bottom',
+                    padding: 5,
+                    font:
+                    {
+                        //family: 'Tahoma',
+                        size: 13
+                    }
+                }
+            }
+        }
+    });
+    
+   
+   
+    store3.load({params:{ORDER_DATE1:'@@LS.YEAR,-01-01',ORDER_DATE2:'@@LS.YEAR,-12-31'}});
+});
+
+</script>
+<table width="100%" class="w01_13px_grey">
+<tr>
+	<td ></td>
+	<td ></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td width="2%">	</td>
+	<td width="45%"><div id="container_mm"></div></td>
+	<td width="5%">	</td>
+	
+</tr>
+</table>
+</body>
+</html>

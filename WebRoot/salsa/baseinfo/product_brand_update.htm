@@ -1,0 +1,391 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>产品信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type='text/javascript'>
+function opr(url){
+     NewWinCustMD(url+'&tmp='+Math.random(),window,650,600);
+     
+  	 
+  }
+</script>
+</head>
+
+<body>
+<script language="javascript">
+Ext.onReady(function(){
+    
+     if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+     var formMap = DWRUtil.getValues("form1");
+     var store = new Ext.data.JsonStore({
+        fields: ['value', 'name']
+    });
+	   Ext.get('BtnAudit').dom.style.visibility='hidden';
+	  if('@@ID,' != "")
+	  {
+		  DWRUtil.setValue("SERIES_CODE","!!MJ0S23,13");
+		  DWRUtil.setValue("PRICE_TYPE","!!MJ0S23,14");
+		   DWRUtil.setValue("WARE_CODE","!!MJ0S23,21"); 
+		  DWRUtil.setValue("Brand_Code","!!MJ0S23,26");
+		  DWRUtil.setValue("XL_CODE","!!MJ0S23,27");
+		  DWRUtil.setValue("PACK_TYPE","!!MJ0S23,24");
+		  DWRUtil.setValue("STS","!!MJ0S23,15");
+		
+		  DWRUtil.setValue("isPublic","!!MJ0S23,31"); 
+		  DWRUtil.setValue("store_no","!!MJ0S23,34"); 
+		
+		  
+		   
+		  
+		   var jgd="!!MJ0S23,33";
+  		 var elements1 = document.getElementsByName("productAttr");
+		 for(var i=0;i<elements1.length;i++){
+ 		   
+ 		    if (jgd.indexOf(elements1[i].value) !=-1 ){
+ 		       elements1[i].checked = true;
+ 		    }
+  		  }
+		    
+		 
+		  
+		
+	  }
+
+    var items;
+    
+    
+     Ext.get("SERIES_CODE").on("change",function(){
+       formMap = DWRUtil.getValues("form1");
+       DwrComm.parseAL('XL0068',formMap,{callback:function(list){
+           store.loadData(list);
+           items=list;
+       },async:false});
+        DWRUtil.removeAllOptions("XL_CODE");
+        DWRUtil.addOptions("XL_CODE",items,"value","name"); 
+   
+     if(form1.XL_CODE.value ==""){
+      alert("没有加载系列信息，重新加载...");
+      DWRUtil.addOptions("XL_CODE",items,"value","name");  
+     } 
+     });
+	 
+	 
+	
+    
+  
+	
+	
+	
+	 Ext.get("BtnSubmit").on("click",function(){
+       
+       formMap = DWRUtil.getValues("form1");
+      if(form1.PRODUCT_CODE1.value.length==0 || form1.PRODUCT_CODE1.value.length>20)
+	  {
+	      alert("产品货号不能为空或产品货号长度超过20位，请输入!");
+		  form1.PRODUCT_CODE1.focus();
+		  return false;
+	  }
+	  
+	  if(form1.PRODUCT_NAME.value.length==0)
+	  {
+	      alert("产品名称不能为空，请输入!");
+		  form1.PRODUCT_NAME.focus();
+		  return false;
+	  }
+	 
+	  
+	  if(form1.PRODUCT_Untl.value.length==0)
+	  {
+	      alert("单位不能为空，请输入!");
+		  form1.PRODUCT_Untl.focus();
+		  return false;
+	  }
+	  if(form1.PRODUCT_PRICE.value.length==0 || isNaN(form1.PRODUCT_PRICE.value))
+	  {
+	      alert("出厂价不能为空或出厂价输入不正确，请输入!");
+		  form1.PRODUCT_PRICE.focus();
+		  return false;
+	  }
+	  
+	  if(form1.TYPE_SALES.value.length==0 || isNaN(form1.TYPE_SALES.value))
+	  {
+	      alert("特价不能为空或特价输入不正确，请输入!");
+		  form1.TYPE_SALES.focus();
+		  return false;
+	  }
+	   
+	 
+	  
+	   
+	  
+	 
+	  if(form1.PACK_NUM.value.length==0 || isNaN(form1.PACK_NUM.value))
+	  {
+	      alert("打包方式数目不能为空或打包方式数目输入不正确，请输入!");
+		  form1.PACK_NUM.focus();
+		  return false;
+	  }
+	  getProductAttr();
+	  var company="@@LS.SYSTEMBHD,";
+	var kj="IN0048";
+	var msgtip="保存成功";
+	if(company.indexOf("格勒") != -1){
+	   kj='IN00G2';
+	   msgtip = "保存成功，审核通过后生效！";
+	}
+      formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN(kj,formMap,'update',{callback:function(data){if (data != 'ok'){alert(data);}else{ 
+                      alert(msgtip);
+					  dialogArguments.document.getElementById('d_Flag').value="1";   
+                      window.close();   
+                   }},async:false});
+      
+    });
+	
+	 
+     function  getProductAttr(){
+        // 得到checkbox数组
+ 		var elements = document.getElementsByName("productAttr");
+ 		var str = "";
+ 		// 取得所选择的功能
+ 		for(var i=0;i<elements.length;i++){
+  			if(elements[i].checked){
+   				str +=  ""+elements[i].value + ",";
+  			}
+ 		}
+ 		form1.Product_Attr.value= str.substring(0,str.length-1);
+ 		
+ 		
+     }
+	 
+	 //审核通过
+    Ext.get("BtnAudit").on("click",function(){
+		
+	    form1.d_Flag.value="0";
+       opr('display?proname=baseinfo/product_update_after.htm&ID='+form1.ID.value)
+        if(form1.d_Flag.value == "1")
+        {
+          dialogArguments.document.getElementById('d_Flag').value="1";   
+           window.close();  
+         }
+       
+   }); 
+    if(parseInt('!!MJ0S23,38')>0)
+	{
+	     Ext.get('BtnAudit').dom.style.visibility='visible';
+	}
+     
+    
+
+});
+</script>
+<form name="form1" method="post" action="" id="form1">
+  <input name="ID" type="hidden" value="@@ID,">
+  <input name="Product_Code" id="Product_Code" type="hidden" value="">
+  <input name="Product_Attr" id="Product_Attr" type="hidden" value="">
+  
+  <input name="d_Flag" id="d_Flag"  type="hidden" value="">
+  
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center" ><b> 产品信息添加</b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;产品基本信息</td>
+          </tr>
+           <tr>
+		    <td bgcolor="#C4DFDC" class="tableleft" align="right"></td>
+		    <td bgcolor="#FFFFFF"><input name="Brand_Code" value="@@Brand_Code," type="hidden">
+		     </td>
+	      </tr>
+	      
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+             所属类别：
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <select name="SERIES_CODE">
+                <option value="" selected>==选择==</option>
+                <option>$$XL0066,</option>
+              </select>
+            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+              所属系列：
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <select name="XL_CODE" id="XL_CODE">
+                <option value="" selected>==选择==</option>
+                <option>$$XL0067,</option>
+              </select>
+            </td>
+          </tr> 
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+              货号：
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_CODE1" type="text" class="input" value="!!MJ0S23,01" size="20" > 
+              
+              <input name="isPublic" type="hidden" value="否">
+			     </td>
+          </tr>
+         <!--   <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">条形码：</div>
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_TXM" id="PRODUCT_TXM" type="text" class="input" size="30" value="!!MJ0S23,25">
+            </td>
+          </tr>-->
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+              名称：
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_NAME" type="text" class="input" value="!!MJ0S23,03">
+            </td>
+          </tr>
+         
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">规格：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_SIZE" type="text" value="!!MJ0S23,04">
+            </td>
+          </tr>
+          
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">单位：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_Untl" type="text" value="!!MJ0S23,09" size="10" maxlength="10">
+            </td>
+          </tr>
+          
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;产品价格信息</td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">进货价：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_PRICE" type="text" style ="color:#FF0000" value="!!MJ0S23,10" size="15">
+              
+              <input name="TYPE_AGENT" type="hidden" style ="color:#FF0000" value="!!MJ0S23,18" size="15">
+            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">售价：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="TYPE_SALES" type="text" style ="color:#FF0000" value="!!MJ0S23,19" size="15">
+              
+            </td>
+          </tr>
+          
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">返利：</td>
+            <td bgcolor="#FFFFFF">
+              
+             
+			   <select name="PRICE_TYPE" id="PRICE_TYPE">
+		        <option value="返利">返利</option>
+				 <option value="不返利">不返利</option>
+			  </select>
+		      </td>
+          </tr>
+		   
+		   <tr>
+		    <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;产品存放信息</td>
+	      </tr>
+	      <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">预警下限：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="LOWER_NUM" size="10" value="!!MJ0S23,16">常备货库存量：<input type="text" name="CBKCL" id="CBKCL" size="10" value="!!MJ0S23,30">
+              <input  name="store_no" id="store_no" type="hidden" value="" size="15">
+            </td>
+          </tr>
+		    <tr>
+		    <td bgcolor="#C4DFDC" class="tableleft" align="right">打包方式：</td>
+		    <td bgcolor="#FFFFFF"><input name="PACK_NUM" type="text" value="!!MJ0S23,23" size="5">
+		      单位/
+	          <select name="PACK_TYPE" id="PACK_TYPE">
+                <option value="箱">箱</option>
+	            <option value="包">包</option>
+	            
+	            <option value="件">件</option>
+              </select>
+	          
+	          <input type="hidden" name="WARE_CODE" id="WARE_CODE">
+	          
+	         </td>
+	      </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">备注：</td>
+            <td bgcolor="#FFFFFF"> 
+              <textarea name="DEMO" cols="30">!!MJ0S23,11</textarea>
+            </td>
+          </tr>
+         
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">状态：</td>
+            <td bgcolor="#FFFFFF"><select name="STS">
+			    <option value="0">启用</option>
+				<option value="1">停用</option>
+            </select>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">产品特性：</td>
+            <td bgcolor="#FFFFFF">
+              <div style="color:blue">
+              <input type="checkbox" name="productAttr" value="1" id="productAttr">
+            是否特价
+                <input type="checkbox" name="productAttr"  value="2" id="productAttr">
+是否配件
+<input type="checkbox" name="productAttr"  value="3" id="productAttr">
+是否定制
+<input type="checkbox" name="productAttr"  value="4" id="productAttr">
+是否辅材
+<input type="checkbox" name="productAttr"  value="5" id="productAttr">
+是否工程 
+<input type="checkbox" name="productAttr"  value="6" id="productAttr">
+是否宣传品
+<input type="checkbox" name="productAttr"  value="7" id="productAttr">
+是否赠送礼品</div></td>
+          </tr>
+        
+          
+          
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="90%" height="40" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" valign="bottom"><div align="center"> 
+          <input name="BtnSubmit"  id="BtnSubmit" type="button" class="ImgButton" value="确  定">
+          &nbsp;&nbsp;
+          <input name="BtnAudit" id="BtnAudit" type="button" class="ImgButton" value="修改后信息">
+          &nbsp;&nbsp; 
+          <input name="Submit2" type="reset" class="ImgButton" onClick="window.close()" value="关 闭">
+        </div></td>
+    </tr>
+  </table>
+</form>
+</body>
+
+</html>

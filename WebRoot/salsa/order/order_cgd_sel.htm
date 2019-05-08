@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type="text/javascript" src="js/extjs/openWindow.js"></script>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script language="javascript">
+var selarrar= new Array();
+if(!Array.indexOf)
+{
+    Array.prototype.indexOf = function(obj)
+    {              
+        for(var i=0; i<this.length; i++)
+        {
+            if(this[i]==obj)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+  Array.prototype.remove = function(b) { 
+var a = this.indexOf(b); 
+if (a >= 0) { 
+this.splice(a, 1); 
+return true; 
+} 
+return false; 
+}; 
+function pageInit()
+{   
+    form1.submit();
+}
+function BindEnter(obj)
+{  if(obj.keyCode == 27)        
+     {                 
+		closewin('o-win');
+     } 
+}
+function selected()
+{
+	// alert("dd"+selarrar);
+	if(selarrar != ""){
+//	window.parent.parent.document.getElementById('d_Flag').value="1";
+	
+	  parent.frames["b-win"].document.getElementById("d_Flag").value="1";
+	  parent.frames["b-win"].document.getElementById("d_SPBM").value=selarrar;
+	 //  window.dialogArguments.document.getElementById('d_Flag').value="1";
+	//  window.dialogArguments.document.getElementById('d_SPBM').value=selarrar;
+	}
+	// window.close();  
+	closewin('o-win');
+}
+</script>
+</script>
+</head>
+
+<body onLoad="pageInit()" onkeydown="BindEnter(event)">
+<form name="form1" method="post" action="display?proname=order/cgdsel_content.htm" id="form1" target="cardframe">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+           
+      <td width="2%"  >&nbsp;</td>
+      <td width="98%"  >
+         客户名称：
+           <input type="text" name="SJ"  size="20" value="">
+           
+           <input name="Brand_Code" id="Brand_Code" value="" type="hidden">
+        <input name="DWBM" id="DWBM" value="@@DWBM," type="hidden">
+          
+
+订货单号(后三位)：
+<input type="text" name="CGD_CODE"  size="10" value=""><input type="submit" name="Submit2" value="查询">
+</td>
+    </tr>
+	
+	
+	<tr>
+      <td colspan="2">
+      <IFRAME id="cardframe" name="cardframe" src=""
+						frameBorder=0 width="100%" scrolling=auto height="430"></IFRAME>      </td>
+    </tr>
+  </table>
+   <table width="100%" border="1">
+  <tr>
+    <td align="right"><font color="red">【操作提示：】</font></td>
+    <td><font color="blue">按ESC键退出</font></td>
+    <td>&nbsp;</td>
+    <td><input type="button" name="BtnSel" value="确定" onClick="selected()" ></td>
+  </tr>
+</table>
+</form> 
+
+</body>
+<script>
+    
+</script>
+
+</html>

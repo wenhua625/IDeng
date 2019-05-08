@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/Calendar1.js" type=text/javascript language=javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type="text/javascript">
+     
+     function opr(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,550,800);
+        
+     }
+    
+</script>
+
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    Ext.get('BtnAdd').dom.style.visibility='visible';
+     /*var dj="@@LS.QXDJ,";
+     if(dj.indexOf("001") != -1)
+    {
+      Ext.get('BtnAdd').dom.style.visibility='visible';
+    }*/
+     //单据查找列表
+    var processDetailstore = new Ext.data.JsonStore({
+        url:"work?proname=MJQ062",
+        root:"root",
+        fields: [ 'sj','id','sh','ckmc','zsl','zje','jbrmc','zdr','shr','bz']
+    });
+    
+
+    var cm = new Ext.grid.ColumnModel([
+        new Ext.grid.RowNumberer(),//自动行号
+        {header:'单据时间',dataIndex:'sj',width:105},
+        {header:'单据编号',dataIndex:'id',width: 155},
+		{header:'单据状态',dataIndex:'sh',width: 65},
+        {header:'品牌',dataIndex:'ckmc',width: 105},
+		
+        {header:'总数量',dataIndex:'zsl',width: 55,summaryType:'sum',align:"right"},
+        {header:'总金额',dataIndex:'zje',width: 75,renderer:Ext.util.Format.usMoney,summaryType:'sum',storable:true,align:"right"},
+		
+        {header:'经办人',dataIndex:'jbrmc',width: 75},
+        {header:'制单人',dataIndex:'zdr',width: 75},
+        {header:'审核人',dataIndex:'shr',width: 75},
+       
+       
+        {header:'备注',dataIndex:'bz',width: 135}
+        
+
+       ]);
+    
+    //cm.defaultSortable = true;
+   
+  
+    
+    
+    var summary = new Ext.ux.grid.GridSummary();
+    var grid_process = new Ext.grid.GridPanel({
+    	stripeRows: true,
+    	el: 'productList',
+    	width:document.body.clientWidth-10, 
+    	height:document.body.clientHeight-59,
+    	title:'',
+    	ds: processDetailstore,
+        cm: cm,
+        plugins: summary,
+		enableHdMenu:false,
+        frame:false,
+        clicksToEdit:1,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+       
+        autoScroll:true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid_process.render();
+    
+    processDetailstore.load({params:{ORDER_DATE1:Ext.get('ORDER_DATE1').dom.value,ORDER_DATE2:Ext.get('ORDER_DATE2').dom.value,CK:Ext.get('CK').dom.value,Sts:Ext.get('Sts').dom.value}});
+    
+    //查询
+   Ext.get("BtnCx").on("click",function(){
+        
+        processDetailstore.load({params:{ORDER_DATE1:Ext.get('ORDER_DATE1').dom.value,ORDER_DATE2:Ext.get('ORDER_DATE2').dom.value,CK:Ext.get('CK').dom.value,Sts:Ext.get('Sts').dom.value}});
+        
+   });
+   
+   //新增
+   Ext.get("BtnAdd").on("click",function(){
+        
+         opr('display?proname=quickorder/pdd.htm');
+        
+   });
+   //双击表格
+     grid_process.on("rowdblclick",function(grid_process,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             var record = grid_process.getSelectionModel().getSelected();
+             form1.d_Flag.value = "0";
+             opr('display?proname=quickorder/pdd.htm&ID='+record.get("id"));
+             if(form1.d_Flag.value == "1")
+             {
+               processDetailstore.load({params:{ORDER_DATE1:Ext.get('ORDER_DATE1').dom.value,ORDER_DATE2:Ext.get('ORDER_DATE2').dom.value,CK:Ext.get('CK').dom.value,Sts:Ext.get('Sts').dom.value}}); 
+             }
+      }); 
+});
+
+</script>
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr align="center" height="5"> 
+		<td>
+		
+		</td>
+	</tr>
+	<tr align="center">
+		<td>
+		<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td width="21%"
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><img
+					src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">盘点单</td>
+				<td width="79%" style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><input type="button" name="BtnAdd" value="新  增" ></td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+	<td>
+	   <form name="form1" method="post" action="display?proname=report/ywdjcx_content.htm" id="form1" target="cardframe">
+	   <input name="d_Flag" value="0" type="hidden">
+	  <table width="100%" border="0" cellpadding="5" cellspacing="0" >
+          <tr> 
+            <td width="10%" align="right">开单日期：</td>
+            <td><input type="text" name="ORDER_DATE1" size="10" value="@@LS.FIRSTDAYSOFCURMONTH," readonly onFocus="calendar()">
+              -            
+            <input type="text" name="ORDER_DATE2" size="10" readonly value="@@LS.CURDATE," onFocus="calendar()">品牌：            
+            <select name="CK">
+                 
+               <option>$$XL1005,</option>
+            </select>状态：
+            <select name="Sts">
+                <option value="">全部</option>
+                <option value="T">已审核</option>
+                <option value="F">待审核</option>
+            </select>
+            <input type="button" name="BtnCx" value="查询"></td>
+          </tr>
+        </table>
+	  </form>
+	</td>
+	</tr>
+	
+	<tr>
+      <td>
+          <!--<IFRAME id="cardframe" name="cardframe"
+						src="display?proname=report/ywdjcz_content.htm&ORDER_DATE1=@@LS.FIRSTDAYSOFCURMONTH,&ORDER_DATE2=@@LS.CURDATE,&Note_Type=XS"
+						frameBorder=0 width="100%" scrolling=auto height="450"></IFRAME>-->
+		<div id="productList"></div>
+		 
+       
+      </td>
+    </tr>
+    <tr></tr>
+  </table>
+  
+
+</body>
+
+</html>

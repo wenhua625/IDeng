@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>艾订货客户店铺详情</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'>
+</script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+<script type="text/javascript">
+ function initPage(){
+	if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+      var formMap = DWRUtil.getValues("form1");
+      DWRUtil.setValue("CONTACT_MAN","!!MJP225,01");
+      DWRUtil.setValue("AGENT_CODE","!!MJP225,02");
+      DWRUtil.setValue("AGENT_NAME","!!MJP225,03");
+      DWRUtil.setValue("agent_tel","!!MJP225,04");
+      DWRUtil.setValue("Open_Flag","!!MJP225,05");
+      DWRUtil.setValue("brand_code","!!MJP225,06");
+      DWRUtil.setValue("Bzj_Amount","!!MJP225,07");
+      DWRUtil.setValue("join_date","!!MJP225,08");
+      DWRUtil.setValue("end_date","!!MJP225,09");
+      DWRUtil.setValue("Taf_Company","!!MJP225,10");
+      DWRUtil.setValue("isAddTaf","!!MJP225,11");
+      DWRUtil.setValue("device_token","!!MJP225,12");
+      DWRUtil.setValue("AGENT_TYPE","!!MJP225,13");
+      DWRUtil.setValue("Agent_Mobile1","!!MJP225,14");
+      DWRUtil.setValue("DOMAIN_MAN","!!MJP225,15");
+  }
+  
+   //修改方法
+   function work(){
+       if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+       var formMap = DWRUtil.getValues("form1");
+   //调用修改接口
+    DwrComm.parseIN('INP061',formMap,'update',{callback:function(data){if (data != 'ok'){alert(data);}else{ 
+                      dialogArguments.document.getElementById('d_Flag').value="1";   
+                      window.close();   
+                   }},async:false});
+   }
+   
+   //判断某些字段是否有值，如没值测提醒填入，在进行修改
+   function add(){
+       if(form1.end_date.value =="" || form1.end_date.value==null){
+           alert("请输入店铺到期日期！！");
+           return false ;
+       }
+       work();//信息填入完善，侧调用修改方法
+   }
+   
+   
+ 
+   
+</script>
+		<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+
+   
+   
+    var m_store = new Ext.data.JsonStore({
+        fields: ['value', 'name']
+    });
+    //供货商模糊查询
+   Ext.get("BtnGYS").on("click",function(){
+      
+	       formMap = DWRUtil.getValues("form1"); 
+		   var items;
+           DwrComm.parseAL('XLS021',formMap,{callback:function(list){
+              m_store.loadData(list);
+			  
+              items=list;
+          },async:false});
+	   
+        DWRUtil.removeAllOptions("brand_code");
+        DWRUtil.addOptions("brand_code",items,"value","name");   
+
+		 
+		 
+      
+        
+   });
+   
+  
+   
+   
+    
+   
+});
+</script>
+  </head>
+  <body onLoad="initPage()"> <!-- onload 事件会在页面或图像加载完成后立即发生。 -->
+   <form name="form1" method="post" action="" id="form1"><div align="right"> 
+</div><table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center" style="margin-top:10px;"><b> 修改客户信息</b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+               <div align="right">品牌：</div>            
+            </td>
+            <td bgcolor="#FFFFFF">
+               <select name="brand_code" id="brand_code">
+		  			<option>$$XL1005,</option>
+        	</select>
+           
+									<input type="text" name="M_DWBM" value="" size="6" id="M_DWBM"><input type="button" name="BtnGYS" id="BtnGYS"  value="搜">
+            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">客户编码：</div>            
+            </td>
+            <td bgcolor="#FFFFFF">
+               <input type="text" name="AGENT_CODE" id="AGENT_CODE" value="!!MJP225,02"/>           
+           </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">联系人：</div>            
+            </td>
+            <td bgcolor="#FFFFFF">
+               <input type="text" name="CONTACT_MAN" id="CONTACT_MAN" value="!!MJP225,01"/>
+           </td>
+          </tr>
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">职位：</div>            
+            </td>
+            <td bgcolor="#FFFFFF">
+                <input type="text" name="AGENT_TYPE" id="AGENT_TYPE" value="!!MJP225,13"/>                                         
+           </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">签约日期：</div>            
+            </td>
+            <td bgcolor="#FFFFFF">
+                <input type="text" name="join_date" size="12" readonly onClick="javascript:ShowCalendar(this)" value="!!MJP225,08">
+                                                 到期日期：
+                <input type="text" name="end_date" size="12" readonly onClick="javascript:ShowCalendar(this)" value="!!MJP225,09"> 
+           </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">手机号：</div>            
+            </td>
+            <td bgcolor="#FFFFFF">
+               <input type="text" name="agent_tel" id="agent_tel" value="!!MJP225,04" disabled=true/>  <!-- 隐藏输入 -->           
+           </td>
+          </tr>
+            <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">状态：</div>            
+            </td>
+            <td bgcolor="#FFFFFF">
+                <select name="Open_Flag">
+                 <option value="启用">启用</option>
+                 <option value="禁用">禁用</option>
+              </select>            
+           </td>
+          </tr>
+            <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">详细信息：</div>            
+            </td>
+            <td bgcolor="#FFFFFF">
+               <input type="text" name="AGENT_NAME" id="AGENT_NAME" value="!!MJP225,03"/>           
+           </td>
+          </tr> 
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">账户余额：</div>            
+            </td>
+            <td bgcolor="#FFFFFF">
+               <input type="text" name="Bzj_Amount" id="Bzj_Amount" value="!!MJP225,07"/>           
+           </td>
+          </tr> 
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">来源：</div>            
+            </td>
+            <td bgcolor="#FFFFFF">
+               <input type="text" name="Taf_Company" id="Taf_Company" value="!!MJP225,10"/> 
+           </td>
+          </tr> 
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right"> 是否：</div>            
+            </td>
+            <td bgcolor="#FFFFFF">
+               <select name="isAddTaf" id="isAddTaf">
+                <option value="否">否</option>
+                   <option value="是">是</option>
+               </select>                              
+           </td>
+          </tr> 
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">标志：</div>            
+            </td>
+            <td bgcolor="#FFFFFF">
+               <input type="text" name="device_token" id="device_token" value="!!MJP225,12" size="44"/>           
+           </td>
+          </tr> 
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">用户装置：</div>            
+            </td>
+            <td bgcolor="#FFFFFF">
+               <input type="text" name="Agent_Mobile1" id="Agent_Mobile1" value="!!MJP225,14"/>           
+           </td>
+          </tr> 
+     </table>
+      </td>
+    </tr>
+  </table>
+  <!-- 修改按钮 -->
+   <table width="100%" height="0" border="0" align="center" style="padding-top:40px">
+          <tr align="center"> 
+            <td>     
+        		<input type="button" name="Submit4" id="Submit4" value="修 改" onClick="add()">
+        	</td>
+          </tr>
+  </table>
+  
+</form>
+  </body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>客户信息管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script>
+  function checkFrom()
+  {
+     
+     if(form1.AGENT_CODE.value.length == 0)
+	 {
+	    alert("客户代号不能为空,请输入！");
+		form1.AGENT_CODE.focus();
+		return false;
+	 }
+	 if(form1.AGENT_NAME.value.length == 0)
+	 {
+	    alert("客户名称不能为空,请输入！");
+		form1.AGENT_NAME.focus();
+		return false;
+	 }
+	 return true;
+  }
+</script>
+
+<script type="text/javascript">
+ function work(){
+     if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    DwrComm.parseIN('IN0006',formMap,'insert',{callback:function(data){if (data != 'ok'){alert(data);}else{ 
+                      dialogArguments.document.getElementById('d_Flag').value="1";   
+                      window.close();   
+                   }},async:false});
+        }
+</script>
+<script type="text/javascript">
+	function add(){
+		if(checkFrom()){
+			work();		
+		}
+		
+	}
+</script>
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+     if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    var store = new Ext.data.JsonStore({
+        url:"work?proname=XL0018",
+        fields: ['value', 'name']
+    });
+    store.load();
+   
+    var combo = new Ext.form.ComboBox({
+        store: store,
+        displayField:'name',
+        typeAhead: true,
+        mode: 'local',
+        forceSelection: true,
+        triggerAction: 'all',
+        emptyText:'请输入所属分公司',
+        selectOnFocus:true,
+        valueField :'value',
+        applyTo: 'Sjbm_Name',
+        listeners:{select:function(){
+                form1.Sjbm.value = combo.getValue();
+                 formMap = DWRUtil.getValues("form1");
+                DwrComm.parseKey('MJP090',formMap,{callback:function(data){
+                  
+                   form1.AGENT_CODE.value = data;
+                  
+                   
+                  
+                },
+                async:false}); 
+             }
+           }
+    });
+    
+    Ext.get("addPQ").on("click",function(){
+     if(form1.AGENT_CODE.value.length == 0)
+	 {
+	    alert("客户代号不能为空,请输入！");
+		form1.AGENT_CODE.focus();
+		return false;
+	 } 
+       Ext.MessageBox.prompt("请输入分公司名称","",function(e,text){
+                                                if(e=="ok")
+                                                {
+                                                   Ext.Ajax.request({
+                                                      url: 'work?proname=IN0K11&Sjbm=-1'+"&Agent_Name="+text+"&AGENT_CODE="+form1.AGENT_CODE.value,
+                                                      success:function(request)
+                                                      {
+                                                          store.load();
+                                                      },
+                                                      failure:function(){
+                                                          alert("添加失败");
+                                                      }
+                                                   });
+                                                }
+                                               
+                                            })
+       
+   });
+   
+   Ext.get("updatePQ").on("click",function(){
+       if(form1.Sjbm.value.length == 0)
+	   {
+	      alert("请选择要修改的分公司信息!");
+		  return ;
+	   }
+       Ext.MessageBox.prompt("请输入新的分公司名称","原分公司名称："+form1.Sjbm_Name.value,function(e,text){
+                                                if(e=="ok")
+                                                {
+                                                   Ext.Ajax.request({
+                                                      url: 'work?proname=IN0K11&action=update&Agent_Code='+form1.Sjbm.value+"&Agent_Name="+text,
+                                                      success:function(request)
+                                                      {
+                                                          DwrComm.parseAL('XL0038',{callback:function(list){store.loadData(list)},async:false});
+                                                      },
+                                                      failure:function(){
+                                                          alert("修改失败");
+                                                      }
+                                                   });
+                                                }
+                                               
+                                            })
+       
+   });
+   
+  
+});
+</script>
+<form name="form1" method="post" action="" id="form1">
+
+<table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center" ><b> 请填写客户信息</b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">品牌：</div>            </td>
+            <td bgcolor="#FFFFFF">
+              <select name="Brand_Code" >
+		  			<option>$$XL1005,</option>
+        	</select>            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">所属省份：</div>            </td>
+            <td bgcolor="#FFFFFF">
+              <input name="Sjbm" type="hidden" class="input">
+              <input name="Sjbm_Name" type="text" class="input"><input type="hidden" name="addPQ" id="addPQ" value="添加"><input type="hidden" name="updatePQ" id="updatePQ" value="修改">            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">客户代号：</div>            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="AGENT_CODE" type="text" class="TEXTDISABLED" maxlength="5" size="10" readonly >            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">客户名称：</div>            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="AGENT_NAME" type="text" class="input" size="30">
+			  执价方式：
+			  <select name="AGENT_TYPE" id="AGENT_TYPE">
+			      <option>$$XL0031,</option>
+				  
+			      
+			  </select>
+			              </td>
+          </tr>
+         
+          <!--
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right"></div>
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="AGENT_TYPE" type="hidden" class="input" value="shop">
+            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">分公司：</div>
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <select name="AGENT_TYPE">
+                <option>$$XL0018,</option>
+                
+              </select>
+            </td>
+          </tr>-->
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">所属区域经理：</td>
+            <td bgcolor="#FFFFFF">
+              <select name="DOMAIN_MAN">
+                <option>$$XL0003,</option>
+              </select>            </td>
+          </tr>
+         
+          <tr>
+		     <td  bgcolor="#C4DFDC" class="tableleft">默认收货信息&gt;&gt;</td>
+		     <td  bgcolor="#C4DFDC" align="left"></td>
+	      </tr>
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">收货地址：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="AGENT_ADDRESS" type="text" class="input" value="!!MJ0S38,08" size="50"></td>
+          </tr>
+           <tr>
+             <td bgcolor="#C4DFDC" class="tableleft" align="right">地址简称：</td>
+             <td bgcolor="#FFFFFF"><input name="SHDZJC" type="text" class="input" value=""></td>
+           </tr>
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">联系人：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="CONTACT_MAN" type="text" size="15"class="input" value="!!MJ0S38,10">
+              联系电话：
+              <input name="AGENT_TEL" type="text" size="15" class="input" value="!!MJ0S38,09">
+             <font color="red"> 非常重要</font></td>
+          </tr>
+          
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">电话：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="AGENT_TEL1" type="text" class="input">            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">传真：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="AGENT_FAX" type="text" class="input">（注:只能填写一个传真）            </td>
+          </tr>
+          
+          
+          
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">QQ：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="AGENT_QQ" type="text" class="input">
+			  <input type="hidden" name="YF_XT" size="10" value="0">
+           
+              <input type="hidden" name="YF_JX" size="10" value="0">
+              
+            <input type="hidden" name="YF_LG" size="10" value="0">
+           <input type="hidden" name="YF_DQXT" size="10" value="0">
+              <input type="hidden" name="YF_XS" size="5" value="1">
+			              </td>
+          </tr>
+         
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">签约折扣：</td>
+            <td bgcolor="#FFFFFF"><input type="text" name="QYZK" size="10" value="100">（95:表示打95折） 
+              客户等级：
+                <select name="Agent_Level">
+                   <option>$$XLS017,</option>
+                </select></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="90%" height="40" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" valign="bottom"><div align="center"> 
+          <input name="Submit" type="button" class="ImgButton" value="确  定" onClick="add()">
+          &nbsp;&nbsp;&nbsp;&nbsp; 
+          <input name="Submit2" type="button" class="ImgButton" onClick="window.close()" value="关  闭">
+        </div></td>
+    </tr>
+  </table>
+  
+</form>
+</body>
+</html>

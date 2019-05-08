@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="Webase_KCC"
+  id="myeclipse.1468509270158"
+  context-root="/Webase_KCC"
+  j2ee-spec="5.0"
+  archive="Webase_KCC.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,139 @@
+<html>
+	<head>
+		<title>管理资源树</title>
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<link type="text/css" rel="stylesheet"
+			href="loadtree/TreeConfig/deepTree.css">
+		
+		<link type="text/css" rel="stylesheet" href="css/moia.css">
+		<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+		<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+        <script type="text/javascript" src="js/extjs/ext-all.js"></script>
+        
+        <script type='text/javascript' src='dwr/engine.js'></script>
+        <script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+	</head>
+	<!--
+<body oncontextmenu="return true;" topmargin="0" leftmargin="0" marginheight="0" marginwidth="0" bgcolor="#EFEFF7" text="#000000">
+-->
+	<body oncontextmenu="return false;" topmargin="0" leftmargin="0"
+		marginheight="0" marginwidth="0" bgcolor="#e8f0ec">
+<script type='text/javascript'>
+Ext.onReady(function(){
+    
+
+    
+   
+      
+    var data = {"totalCount":50,"root":[{"num":1,"note_type":"CG"},{"num":1,"note_type":"FL"},{"num":1,"note_type":"LL"},{"num":1,"note_type":"PD"},{"num":1,"note_type":"SK"},{"num":2,"note_type":"TC"},{"num":1,"note_type":"TH"},{"num":1,"note_type":"XS"},{"num":1,"note_type":"ZG"}]}
+  
+      var tpl = new Ext.XTemplate(
+                    '<p>欢迎你的使用</p>',
+                    '<p></p>',
+                    '<p>祝你用的开心</p>'
+                    
+                );
+     
+     
+     var tip_data = new Ext.data.JsonStore({
+         url:"work?proname=MJ0K82",
+         root:"root",
+        fields: ['agent_name', 'by_back_amount','sy_back_amount']
+    });
+     var cm = new Ext.grid.ColumnModel([
+        
+        {header:'客户',dataIndex:'agent_name',width: 70},
+        {header:'本月',dataIndex:'by_back_amount',width: 40},
+        {header:'上月',dataIndex:'sy_back_amount',width: 60}
+        
+       
+       ]);
+    
+    cm.defaultSortable = false;
+     var p = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'tipWin',
+    	width:180, 
+    	height:280,
+    	title:'低于上月销售名单',
+    	ds: tip_data,
+        cm: cm,
+        frame:false,
+        clicksToEdit:1,
+        columnLines: true,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    
+    p.render();
+    tip_data.load();
+    var task={run:function(){
+       
+       
+       tpl.overwrite(report.body, data);
+       report.body.highlight('#c3daf9', {block:true}); 
+     },interval:3000};   
+    var taskRunner=new Ext.util.TaskRunner();   
+    taskRunner.start(task);
+    
+     var report = new Ext.Panel({
+        title: '系统提醒',
+        width: 180,
+        height:150,
+        html: '',
+        renderTo: 'reportWin'
+    });
+      
+   
+});
+
+</script>		
+		<form name="select">
+			<TABLE id=table30 cellSpacing=0 cellPadding=0 width="100%"
+				bgColor=#ffffff border=0>
+				<TBODY>
+					<TR>
+						<TD vAlign=top width=187 rowSpan=2>
+							<TABLE id=table31 cellSpacing=0 cellPadding=0 width="100%"
+								border=0>
+								<TBODY>
+									<TR>
+										<TD>
+											<IMG height=75 src="images/hdl/newt01.gif"
+												width=187 border=0>
+										</TD>
+									</TR>
+								</TBODY>
+							</TABLE>
+							<TABLE id=table31 cellSpacing=0 cellPadding=0 width="100%"
+								border=0>
+								<TBODY>
+									<TR>
+										<TD>
+										    <div id="reportWin"></div>
+										</TD>
+									</TR>
+								</TBODY>
+							</TABLE>
+							<TABLE id=table31 cellSpacing=0 cellPadding=0 width="100%"
+								border=0>
+								<TBODY>
+									<TR>
+										<TD>
+											<div id="tipWin"></div>
+										</TD>
+									</TR>
+								</TBODY>
+							</TABLE>
+							
+						</TD>
+					</TR>
+				</TBODY>
+			</TABLE>
+		</form>
+	</body>
+</html>

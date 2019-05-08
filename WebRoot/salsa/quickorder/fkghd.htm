@@ -1,0 +1,350 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base target="_self"/>
+<title></title>
+<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+</object> 
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" src="js/zwtopy.js"></SCRIPT>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    
+  
+  
+  
+    Ext.get('BtnSubmit').dom.style.visibility='hidden';
+    Ext.get('BtnDelete').dom.style.visibility='hidden';  
+    //Ext.get('Save').dom.style.visibility='hidden'; 
+   //Ext.get('YWY').dom.disabled = true;
+    
+    if ('@@BACK_CODE,' != ''){
+       	DWRUtil.setValue("Agent_Name","!!MJ0T06,02");
+    	DWRUtil.setValue("Agent_Code","!!MJ0T06,06");
+    	DWRUtil.setValue("Back_Code","!!MJ0T06,01");
+    	DWRUtil.setValue("Arr_Date","!!MJ0T06,04");
+    	DWRUtil.setValue("Back_Date","!!MJ0T06,03");
+    	DWRUtil.setValue("Note_Type","!!MJ0T06,10");
+    	DWRUtil.setValue("Opr_Man","!!MJ0T06,08");
+    	DWRUtil.setValue("Audit_Man","!!MJ0T06,09");
+        DWRUtil.setValue("Order_Num","!!MJ0T06,07");
+        DWRUtil.setValue("Order_Amount","!!MJ0T06,11");
+        DWRUtil.setValue("Opr_Dw","!!MJ0T06,17");
+        DWRUtil.setValue("JSDH","!!MJ0T06,16");
+        DWRUtil.setValue("Demo","!!MJ0T06,05");
+		DWRUtil.setValue("BZ","!!MJ0T06,36");
+		
+		DWRUtil.setValue("Arr_Address","!!MJ0T06,20");
+		//DWRUtil.setValue("YWY","!!MJ0T06,15");
+        
+       if ('!!MJ0T06,13' == '0') {
+          Ext.get('BtnSubmit').dom.style.visibility='visible';
+          Ext.get('BtnDelete').dom.style.visibility='visible';  
+         
+          Ext.get('Save').dom.style.visibility='visible'; 
+        }
+        if ('!!MJ0T06,13' == '5') {
+          
+           Ext.get('BtnSubmit').dom.style.visibility='visible';
+          
+        }
+		
+		if ( '@@View,'== 'View') {
+          
+           Ext.get('M_DWBM').dom.disabled = true;
+           Ext.get('Agent_Code').dom.disabled = true;
+		   Ext.get('BtnGYS').dom.disabled = true;
+		  
+        }
+        formMap = DWRUtil.getValues("form1");
+          
+    }
+    
+    
+    
+   
+   
+   
+    
+   
+   Ext.get("Save").on("click",function(){
+       
+       
+       formMap = DWRUtil.getValues("form1");
+       if (DWRUtil.getValue("Back_Code").length == 0){
+            alert("友情提醒:单据无效，无法保存!");
+            return false;
+       }
+       if (parseFloat(DWRUtil.getValue("Order_Amount")) == 0){
+            alert("到账金额不能为0!");
+            return false;
+       }
+       //if (DWRUtil.getValue("JSDH").length == 0){
+       //     alert("友情提醒:请输入汇款编号!");
+       //     return false;
+      // }
+       
+       if (DWRUtil.getValue("Order_Amount") == "0" ||DWRUtil.getValue("Order_Num").length ==0 ){
+            alert("提示：到账金额为0,无法保存！");
+            return false;
+            
+       }
+       DwrComm.parseIN('IN0K18',formMap,'delete',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              alert("保存成功！");
+              Ext.get('BtnSubmit').dom.style.visibility='visible';
+           }
+       },async:false}); 
+   });
+     
+   Ext.get("BtnSubmit").on("click",function(){
+       
+       document.getElementById('Save').click();
+       //设为在途数量
+       
+       formMap = DWRUtil.getValues("form1");
+       
+        if (DWRUtil.getValue("Back_Code").length == 0){
+            alert("友情提醒:单据无效，无法提交!");
+            return false;
+       }
+       if (parseFloat(DWRUtil.getValue("Order_Amount")) == 0){
+            alert("付款金额不能为0!");
+            return false;
+       }
+       //if (DWRUtil.getValue("JSDH").length == 0){
+       //     alert("友情提醒:请输入汇款编号!");
+        //    return false;
+      // }
+
+       if(!confirm("你确认要付款给："+DWRUtil.getValue("Agent_Name") +' 的 '+form1.Demo.value+' 【'+DWRUtil.getValue("Order_Amount")+'】的款项吗'))
+	   {
+	      return false;
+	   }
+       //设置标志位"1"
+       DwrComm.parseIN('IN0K21',formMap,'call',{callback:function(data){
+                            if (data != 'ok'){
+                                  alert(data);
+                            }else{
+                           if( window.dialogArguments.parent.form1 == undefined){
+		      window.dialogArguments.form1.submit();
+		   }else{
+           window.dialogArguments.parent.form1.submit();
+		   }
+                            window.close();
+                             
+                            }
+       },async:false});
+              
+          
+       
+        
+   }); 
+   
+   
+   
+ 
+  
+   Ext.get("BtnDelete").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+        if (DWRUtil.getValue("Back_Code").length == 0){
+            alert("友情提醒:不能删除无效的单据!");
+            return false;
+       }
+        if (confirm('友情提示：单据删除后，数据不能恢复，确认要删除吗？')){
+        DwrComm.parseIN('IN0K09',formMap,'delete',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              
+             alert("友情提示：单据已成功删除!");
+            if( window.dialogArguments.parent.form1 == undefined){
+		      window.dialogArguments.form1.submit();
+		   }else{
+           window.dialogArguments.parent.form1.submit();
+		   }
+             window.close();
+             
+             
+                        
+              
+           }
+       },async:false});
+       }else return ; 
+       
+        
+   });
+   
+   
+   
+   
+    
+   
+    Ext.get("BtnPrint").on("click",function(){
+    
+        LODOP.ADD_PRINT_URL(10,10,781,531,'@@LS.URL,/display?proname=quickorder/skd_print.htm&Back_Code='+Ext.get('Back_Code').dom.value+'&BACK_CODE='+Ext.get('Back_Code').dom.value);	
+		LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,""); //按适宽模式显示
+		LODOP.PREVIEW();
+		//window.close();	
+	   //LODOP.PRINT();	
+       
+        
+   }); 
+   
+    Ext.get("Backd").on("click",function(){
+        
+           
+           if( window.dialogArguments.parent.form1 == undefined){
+		      window.dialogArguments.form1.submit();
+		   }else{
+           window.dialogArguments.parent.form1.submit();
+		   }
+           window.close();
+       
+        
+   });  
+   
+     var m_store = new Ext.data.JsonStore({
+        fields: ['value', 'name']
+    });
+     //供货商模糊查询
+   Ext.get("BtnGYS").on("click",function(){
+           //alert("fdsfsd"+form1.LX.value);
+	       formMap = DWRUtil.getValues("form1"); 
+		   var items;
+           DwrComm.parseAL('XLS011',formMap,{callback:function(list){
+              m_store.loadData(list);
+			  //alert(list);
+              items=list;
+          },async:false});
+	   
+        DWRUtil.removeAllOptions("Agent_Code");
+        DWRUtil.addOptions("Agent_Code",items,"value","name");   
+ 
+        
+   });
+   
+      //生成单号
+   Ext.get("BtnSC").on("click",function(){
+           formMap = DWRUtil.getValues("form1");
+				 var s_sup;
+               
+      			formMap = DWRUtil.getValues("form1");
+                DwrComm.parseKey('MJ0T01',formMap,{callback:function(data){
+                  if (!confirm("你选择的供货商名称："+DWRUtil.getValue("Agent_Name")+"\n\n  生成的收款单号为："+data+"\n\n你真的要继续吗?")){
+                       return false;
+                   }
+                   form1.Back_Code.value=data;
+                   DWRUtil.setValue("Order_Num","0");
+                   DWRUtil.setValue("Order_Amount","0");
+                   formMap = DWRUtil.getValues("form1"); 
+                },
+                async:false});
+        
+   });
+   
+});
+
+</script>
+<form name="form1" method="post" action="" id="form1">
+<input type="hidden" name="Note_Type" value='@@Note_Type,'>
+<table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" align="center" style="font-size: 16pt; COLOR: #124164; FONT-WEIGHT: bold;" ><b> 付款单</b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;【供货商信息】</td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">供货商名称：</td>
+            <td bgcolor="#FFFFFF">
+			<input type="text" name="M_DWBM" value="" size="6" id="M_DWBM"><input type="button" name="BtnGYS" id="BtnGYS"  value="搜">
+			  <select id="Agent_Code" name="Agent_Code">
+			      <option value="">全部</option>
+				  <option>$$XLS011,</option>
+			  </select>              </td>
+          </tr>
+		   <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">单据号：</td>
+            <td bgcolor="#FFFFFF"><input type="text" name="Back_Code" value="" readonly class="TEXTDISABLED">
+             <input type="button" name="BtnSC" id="BtnSC" value="生成"></td>
+          </tr>
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;【财务信息】</td>
+          </tr>
+		  <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">付款金额：</td>
+            <td bgcolor="#FFFFFF">
+              <input type="text" name="Order_Amount" value="" style="font-size:16px;font-family: Arial; color:#ff2900; font-weight:700;ime-mode:disabled;" size="15" ><input type="hidden" name="Order_Num" value="0" ></td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">&nbsp;</td>
+            <td bgcolor="#FFFFFF">
+		  <input type="hidden" value="付款" name="Demo" id="Demo">          </tr>
+          
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">汇款编号：</td>
+            <td bgcolor="#FFFFFF"><input type="text" name="JSDH"></td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">备注：</td>
+            <td bgcolor="#FFFFFF"><input type="text" name="BZ" size="30"></td>
+          </tr>
+          
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;【单据信息】</td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">&nbsp;</td>
+            <td bgcolor="#FFFFFF">&nbsp;</td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">制单日期：</td>
+            <td bgcolor="#FFFFFF">
+              <input type="text" name="Back_Date"  size="15" value="@@LS.CURDATE," readonly class="TEXTDISABLED">            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">制单人：</td>
+            <td bgcolor="#FFFFFF">
+              <input type="text" name="Opr_Man" value="@@LS.XM," readonly class="TEXTDISABLED" size="15">            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="90%" height="40" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" valign="bottom"><div align="center">
+	      <input type="button" name="Save" value="保 存" class="ImgButton">  
+		  <input type="button" name="BtnDelete" class="ImgButton" value="删除">
+		  <input type="button" name="BtnSubmit" value="付款确认" style="color:green" class="ImgButton">
+		
+		  <input type="button" name="BtnPrint" id="BtnPrint" value="打印" style="color:green" class="ImgButton"><input type="button" name="Backd" value="关闭" class="ImgButton">
+          
+        </div></td>
+    </tr>
+  </table>
+  
+</form>
+</body>
+</html>

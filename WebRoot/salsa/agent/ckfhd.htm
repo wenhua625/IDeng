@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/Calendar1.js" type=text/javascript language=javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type="text/javascript">
+     
+     function opr(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,600,850);
+        
+     }
+    
+</script>
+
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    Ext.get('BtnAdd').dom.style.visibility='hidden';
+     var dj="@@LS.QXDJ,";
+     if(dj.indexOf("001") != -1)
+    {
+      Ext.get('BtnAdd').dom.style.visibility='visible';
+    }
+    if('@@View,' == 'Opr')
+    {
+      Ext.get('BtnAdd').dom.style.visibility='visible'; 
+    }
+     //单据查找列表
+    var processDetailstore = new Ext.data.JsonStore({
+        url:"work?proname=MJP081",
+        root:"root",
+        fields: [ 'sj','id','sh','ckmc','dwmc','zsl','zje','jbrmc','zdr','shr','bz']
+    });
+    
+
+    var cm = new Ext.grid.ColumnModel([
+        new Ext.grid.RowNumberer(),//自动行号
+        {header:'单据时间',dataIndex:'sj',width:75},
+        {header:'单据编号',dataIndex:'id',width: 115},
+        {header:'客户名称',dataIndex:'dwmc',width: 175},
+		
+        {header:'仓库',dataIndex:'ckmc',width: 105,hidden:"true"},
+		
+        {header:'应发总数',dataIndex:'zsl',width: 55,summaryType:'sum',align:"right"},
+        {header:'金额',dataIndex:'zje',width: 75,renderer:Ext.util.Format.usMoney,summaryType:'sum',storable:true,align:"right"},
+		{header:'单据状态',dataIndex:'sh',width: 65},
+        {header:'经办人',dataIndex:'jbrmc',width: 75,hidden:"true"},
+        {header:'制单人',dataIndex:'zdr',width: 75,hidden:"true"},
+        {header:'审核人',dataIndex:'shr',width: 75,hidden:"true"},
+       
+       
+        {header:'备注',dataIndex:'bz',width: 155}
+        
+
+       ]);
+    
+    //cm.defaultSortable = true;
+   
+  
+    
+    
+    var summary = new Ext.ux.grid.GridSummary();
+    var grid_process = new Ext.grid.GridPanel({
+    	stripeRows: true,
+    	el: 'productList',
+    	width:document.body.clientWidth-10, 
+    	height:document.body.clientHeight-59,
+    	title:'',
+    	ds: processDetailstore,
+        cm: cm,
+        plugins: summary,
+        frame:false,
+        clicksToEdit:1,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        viewConfig:{forceFit:true},
+        autoScroll:true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid_process.render();
+    processDetailstore.on('beforeload',function(){
+		Ext.apply(
+			this.baseParams, {
+				Sts:Ext.get('Sts').dom.value
+			});
+	});
+    
+    processDetailstore.load();
+    
+   
+   
+   //新增
+   Ext.get("BtnAdd").on("click",function(){
+        
+         opr('display?proname=quickorder/xsfhd.htm');
+        
+   });
+   //双击表格
+     grid_process.on("rowdblclick",function(grid_process,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             var record = grid_process.getSelectionModel().getSelected();
+             form1.d_Flag.value = "0";
+             opr('display?proname=quickorder/xsfhd.htm&ID='+record.get("id"));
+             //if(form1.d_Flag.value == "1")
+             //{
+               processDetailstore.load(); 
+            // }
+      }); 
+});
+
+</script>
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr align="center" height="5"> 
+		<td>
+		
+		</td>
+	</tr>
+	<tr align="center">
+		<td>
+		<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td width="21%"
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><img
+					src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">待发货的订单列表</td>
+				<td width="79%" style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">&nbsp;<input type="hidden" name="BtnAdd" value="新  增" ></td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+	<td>
+	   <form name="form1" method="post" action="display?proname=report/ywdjcx_content.htm" id="form1" target="cardframe">
+	   <input name="d_Flag" value="0" type="hidden">
+	   <input name="Sts" value="6" type="hidden">
+	  
+	  </form>
+	</td>
+	</tr>
+	
+	<tr>
+      <td>
+         
+		<div id="productList"></div>
+		 
+       
+      </td>
+    </tr>
+    <tr></tr>
+  </table>
+  
+
+</body>
+
+</html>

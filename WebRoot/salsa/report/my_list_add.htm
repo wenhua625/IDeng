@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>我店订单--【客户报备【客户信息添加】】</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/extjs/openWindow.js"></script>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+<script type="text/javascript">
+	//定义一个方法用来在添加之前，对输入框进行判断是否为空
+	
+	function add(){
+		
+		   
+	        if(form1.Arr_Man.value==""){
+			   alert("业主姓名为必填项");
+			    return false;
+			}
+			if(form1.Arr_Tel.value==""){
+			   alert("业主电话为必填项");
+			    return false;
+			}
+			if(form1.order_src.value==""){
+			    alert("请选择订单来源！！");
+			    return false;
+			}
+			if(form1.ywy.value==""){
+			    alert("请选择跟单员！！");
+			    return false;
+			}
+			
+			
+			if(form1.Order_Amount.value==""){
+			    form1.Order_Amount.value=0;
+			}
+			
+			//满足条件，侧调用修改的方法
+			work();		
+	}
+
+   //【订单】添加的方法
+   function work(){
+	if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+	
+      var formMap = DWRUtil.getValues("form1");
+    DwrComm.parseIN('INP062',formMap,'insert',{callback:function(data){if (data != 'ok'){alert(data);}else{ 
+	                  alert("添加成功!");
+					  parent.frames["main"].document.getElementById("d_Flag").value="1";
+					 // parent.frames["main"].processDetailstore.load();
+					  closewin('b-win');
+                     // dialogArguments.document.getElementById('d_Flag').value="1";   
+                      //window.close();   
+                   }},async:false});
+          
+        }
+</script>
+</head>
+<body>
+	<form name="form1" method="post" action="" id="form1">
+		<div align="right"></div>
+		<table width="100%" height="0" border="0" align="center"
+			cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="center"><b>客户报备</b></td>
+			</tr>
+			<tr>
+				<td height="0">
+					<table width="100%" border="0" align="center" cellpadding="2"
+						cellspacing="1">
+                        <tr>
+							<td width="250" bgcolor="#C4DFDC" class="tableleft" align="right">门店名称：</td>
+							<td bgcolor="#FFFFFF"><select  name="agent_code" id="agent_code" >
+                    
+								   
+                                  <option>$$XL0008,</option>
+                              </select></td>
+						</tr>
+						<tr>
+							<td width="250" bgcolor="#C4DFDC" class="tableleft" align="right">业主姓名：</td>
+							<td bgcolor="#FFFFFF"><input name="Arr_Man" id="Arr_Man"
+								type="text" value="" size="20"></td>
+						</tr>
+						<tr>
+							<td width="250" bgcolor="#C4DFDC" class="tableleft" align="right">性别：</td>
+							<td bgcolor="#FFFFFF">
+							   <select name="sex" id="sex">
+							       <option value="先生">先生</option>
+							       <option value="女士">女士</option>
+							   </select>
+							</td>
+						</tr>
+						<tr>
+							<!-- 只能输入11位数字，并去空格 -->
+							<td width="250" bgcolor="#C4DFDC" class="tableleft" align="right">业主电话：</td>
+							<td bgcolor="#FFFFFF"><input name="Arr_Tel" id="Arr_Tel"
+								type="text" value="" size="20" maxlength=11
+								onkeyup="this.value=this.value.replace(/\D/g,'')">
+								<span style="color:red; font-size:15px;">（一个手机号只能报一次单，不允许重复）</span>
+								</td>
+						</tr>
+						<tr>
+							<td width="250" bgcolor="#C4DFDC" class="tableleft" align="right">所属小区：</td>
+							<td bgcolor="#FFFFFF"><select name="Arr_Address" id="Arr_Address">
+                                       <option value="">未知</option>
+                                      <option>$$XL0070,</option>
+                                      </select></td>
+						</tr>
+						<tr>
+							<td width="250" bgcolor="#C4DFDC" class="tableleft" align="right">门牌号：</td>
+							<td bgcolor="#FFFFFF"><input name="arr_address_detail"
+								id="arr_address_detail" type="text" size="20">
+								<span style="font-size:15px;">（例:5-202-1001）</span>
+								</td>
+						</tr>
+                        <tr>
+							<td width="250" bgcolor="#C4DFDC" class="tableleft" align="right">客户来源：</td>
+							<td bgcolor="#FFFFFF"><select name="order_src" id="order_src">
+							  <option value="">==选择==</option>
+							  <option value="到店">到店</option>
+							  <option value="电销">电销</option>
+							  <option value="异业带单">异业带单</option>
+							  <option value="家装公司带单">家装公司带单</option>
+							  <option value="老客户介绍">老客户介绍</option>
+							  <option value="扫楼">扫楼</option>
+						    </select></td>
+						</tr>
+                        <tr>
+						  <td bgcolor="#C4DFDC" class="tableleft" align="right">跟单员：  </td>
+						  <td bgcolor="#FFFFFF">
+						    <select  name="ywy" id="ywy" >
+						      <option value="">全部</option>
+						      <option>$$XLP013,</option>
+					      </select>
+					      <input name="Order_Amount"
+								id="Order_Amount" type="hidden" size="15" value="">
+						  <input name="djje" id="djje"
+								type="hidden" value="">
+						  </td>
+					  </tr>
+						<tr>
+							<td width="250" bgcolor="#C4DFDC" class="tableleft" align="right">户型：</td>
+							<td bgcolor="#FFFFFF">
+							    <select name="housetype" id="housetype">
+							       <option value="">==选择==</option>
+							        <option value="一居">一居</option>
+							        <option value="二居">二居</option>
+							        <option value="三居">三居</option>
+							        <option value="四居">四居</option>
+							        <option value="小户型">小户型</option>
+							        <option value="公寓">公寓</option>
+							        <option value="复式">复式</option>
+							    </select>
+								</td>
+						</tr>
+						<tr>
+							<td width="250" bgcolor="#C4DFDC" class="tableleft" align="right">面积：</td>
+							<td bgcolor="#FFFFFF"><input name="housearea"
+								id="housearea" type="text" size="10" 
+								onkeypress="return event.keyCode>=48&&event.keyCode<=57" 
+								ng-pattern="/[^a-zA-Z]/" >
+								<span style="color:red; font-size:15px;">（单位：㎡）</span></td>
+						</tr>
+						
+						
+						<tr>
+							<td width="250" bgcolor="#C4DFDC" class="tableleft" align="right">要求安装时间：</td>
+							<td bgcolor="#FFFFFF"><input type="text" name="yqazsj"
+								id="yqazsj" size="15" readonly
+								onClick="javascript:ShowCalendar(this)"></td>
+						</tr>
+					    <tr>
+		                  <td  bgcolor="#C4DFDC" class="tableleft">补充信息：&gt;&gt;</td>
+		                  <td  bgcolor="#C4DFDC" align="left"></td>
+	                    </tr>	
+	                    <tr>
+							<td width="250" bgcolor="#C4DFDC" class="tableleft" align="right">消费能力：</td>
+							<td bgcolor="#FFFFFF">
+							    <select name="Order_MEMO" id="Order_MEMO">
+							        <option value="">==选择==</option>
+							        <option value="低档消费">低档消费</option>
+							        <option value="中档消费">中档消费</option>
+							        <option value="高档消费">高档消费</option>
+							    </select>
+							</td>
+						</tr>
+						<tr>
+							<td width="250" bgcolor="#C4DFDC" class="tableleft" align="right">订单类型：</td>
+							<td bgcolor="#FFFFFF"><select name="FPH" id="FPH">
+						      <option value="">====选择====</option>
+							      <option value="全屋吊顶订单">全屋吊顶订单</option>
+							      <option value="品尚订单">品尚订单</option>
+							      <option value="德尚订单">德尚订单</option>
+							      <option value="318订单">318订单</option>
+						      </select>
+							</td>
+						</tr>
+						<tr>
+							<td width="250" bgcolor="#C4DFDC" class="tableleft" align="right">装修阶段：</td>
+							<td bgcolor="#FFFFFF">
+							    <select name="Order_MEMO_A" id="Order_MEMO_A">
+							        <option value="">==选择==</option>
+							        <option value="水电阶段">水电阶段</option>
+							        <option value="瓦工（泥水）">瓦工（泥水）</option>
+							        <option value="木工阶段">木工阶段</option>
+							        <option value="油漆阶段">油漆阶段</option>
+							        <option value="安装阶段">安装阶段</option>
+							        <option value="清洁阶段">清洁阶段</option>
+							        <option value="家电家私阶段">家电家私阶段</option>
+							    </select>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<table width="100%" height="0" border="0" align="center"
+			cellpadding="5" cellspacing="30">
+			<tr align="center">
+				<td><input type="button" name="Submit4" id="Submit4"
+					value="添加" onClick="add()">
+					<input type="button" name="ButnClose" id="ButnClose"
+					value="关闭" onClick="closewin('b-win')"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

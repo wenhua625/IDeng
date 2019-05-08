@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>我店订单--【订单信息修改】</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+<script type="text/javascript">
+	function initPage() {
+		if (typeof window['DWRUtil'] == 'undefined')
+			window.DWRUtil = dwr.util;
+		var formMap = DWRUtil.getValues("form1");
+		//根绝前一个页面的订单号进行查询，并在此界面赋值
+		DWRUtil.setValue("ORDER_CODE", "!!MJP227,01");
+		DWRUtil.setValue("Arr_Man", "!!MJP227,03");
+		DWRUtil.setValue("Arr_Tel", "!!MJP227,04");
+		DWRUtil.setValue("Arr_Address", "!!MJP227,05");
+		DWRUtil.setValue("FPH", "!!MJP227,06");
+		DWRUtil.setValue("dh_sts", "!!MJP227,07");
+		DWRUtil.setValue("groom_date", "!!MJP227,08");
+		DWRUtil.setValue("yqazsj", "!!MJP227,09");
+		DWRUtil.setValue("order_date", "!!MJP227,17");
+		DWRUtil.setValue("Order_Amount", "!!MJP227,10");
+		DWRUtil.setValue("djje", "!!MJP227,11");
+		DWRUtil.setValue("YWY", "!!MJP227,12");
+		DWRUtil.setValue("sex", "!!MJP227,13");
+		DWRUtil.setValue("arr_address_detail", "!!MJP227,14")
+		DWRUtil.setValue("housetype", "!!MJP227,15")
+		DWRUtil.setValue("housearea", "!!MJP227,16");
+		
+		if(form1.dh_sts.value == "已送货" ||form1.dh_sts.value == "已安装" )
+		    form1.Order_Amount.disabled = true;
+	}
+
+	//金额输入的约束
+	function onlyNumber(obj) {
+		//得到第一个字符是否为负号
+		var t = obj.value.charAt(0);
+		//先把非数字的都替换掉，除了数字和. 
+		obj.value = obj.value.replace(/[^\d\.]/g, '');
+		//必须保证第一个为数字而不是. 
+		obj.value = obj.value.replace(/^\./g, '');
+		//保证只有出现一个.而没有多个. 
+		obj.value = obj.value.replace(/\.{2,}/g, '.');
+		//保证.只出现一次，而不能出现两次以上 
+		obj.value = obj.value.replace('.', '$#$').replace(/\./g, '').replace(
+				'$#$', '.');
+		//如果第一位是负号，则允许添加
+		if (t == '-') {
+			obj.value = '-' + obj.value;
+		}
+	}
+	
+	//定义一个方法用来在修改之前，对输入框进行判断是否为空
+	function add(){
+	        if(form1.Arr_Man.value==""){
+			   alert("业主姓名为必填项");
+			    return false;
+			}
+			
+			if(form1.yqazsj.value==""){
+			    alert("请填写【预约安装时间】");
+			    return false;
+			}
+			if(form1.order_date.value==""){
+			    alert("请填写【成交日期】");
+			    return false;
+			}
+			if(form1.Order_Amount.value==""){
+			    form1.Order_Amount.value="";
+			}
+			
+			if(form1.housearea.value==""){
+			   alert("请输入房屋面积");
+			   return false;
+			}
+			//满足条件，侧调用修改的方法
+			work();		
+	}
+
+   //【订单】修改的方法
+   function work(){
+	if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+      var formMap = DWRUtil.getValues("form1");
+      //判断该订单的状态是否为已上报，【是】侧弹框提示并停止往下运行，【否】侧往下执行
+      /*if(form1.dh_sts.value=="已上报"){
+         alert("该订单已上报，侧不允许对该订单进行修改！！！");
+         return false;
+      }else{*/
+	  if(!confirm(("你确认要修改吗？"))) return false;
+    DwrComm.parseIN('INP062',formMap,'update',{callback:function(data){if (data != 'ok'){alert(data);}else{ 
+                      dialogArguments.document.getElementById('d_Flag').value="1";   
+                      window.close();   
+                   }},async:false});
+          }
+      /*  }*/
+</script>
+</head>
+<body onLoad="initPage()">
+	<form name="form1" method="post" action="" id="form1">
+		<div align="right"></div>
+		<table width="100%" height="0" border="0" align="center"
+			cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="center"><b>修改订单信息</b></td>
+			</tr>
+			<tr>
+				<td height="0">
+					<table width="100%" border="0" align="center" cellpadding="2"
+						cellspacing="1">
+			             <tr>
+							<td width="240" bgcolor="#C4DFDC" class="tableleft" align="right">业主姓名：</td>
+							<td bgcolor="#FFFFFF"><input name="Arr_Man" id="Arr_Man"
+								type="text" value="" size="20">
+								<input name="ORDER_CODE"
+								id="ORDER_CODE" type="hidden" value="" size="30" disabled=true></td>
+						</tr>
+						<tr>
+							<td width="240" bgcolor="#C4DFDC" class="tableleft" align="right">性别：</td>
+							<td bgcolor="#FFFFFF">
+							   <select name="sex" id="sex">
+							       <option value="">选择</option>
+							       <option value="先生">先生</option>
+							       <option value="女士">女士</option>
+							   </select>
+							</td>
+						</tr>
+						<tr>
+							<!-- 只能输入11位数字，并去空格 -->
+							<td width="240" bgcolor="#C4DFDC" class="tableleft" align="right">业主电话：</td>
+							<td bgcolor="#FFFFFF"><input name="Arr_Tel" id="Arr_Tel"
+								type="text" value="" size="20" maxlength=11
+								onkeyup="this.value=this.value.replace(/\D/g,'')" disabled=true>
+							</td>
+						</tr>
+						<tr>
+							<td width="240" bgcolor="#C4DFDC" class="tableleft" align="right">房屋地址：</td>
+							<td bgcolor="#FFFFFF"><input name="Arr_Address"
+								id="Arr_Address" type="text" size="30" disabled=true></td>
+						</tr>
+						<tr>
+							<td width="240" bgcolor="#C4DFDC" class="tableleft" align="right">门牌号：</td>
+							<td bgcolor="#FFFFFF"><input name="arr_address_detail"
+								id="arr_address_detail" type="text" size="15" disabled=true>
+								<span style="font-size:15px;">（例:5号楼202室）</span>
+								</td>
+						</tr>
+						<tr>
+							<td width="240" bgcolor="#C4DFDC" class="tableleft" align="right">户型：</td>
+							<td bgcolor="#FFFFFF">
+							    <select name="housetype" id="housetype">
+							        <option value="一居">一居</option>
+							        <option value="二居">二居</option>
+							        <option value="三居">三居</option>
+							        <option value="四居">四居</option>
+							        <option value="小户型">小户型</option>
+							        <option value="公寓">公寓</option>
+							        <option value="复式">复式</option>
+							    </select>
+								</td>
+						</tr>
+						<tr>
+							<td width="240" bgcolor="#C4DFDC" class="tableleft" align="right">面积：</td>
+							<td bgcolor="#FFFFFF"><input name="housearea"
+								id="housearea" type="text" size="12" 
+								onkeypress="return event.keyCode>=48&&event.keyCode<=57" 
+								ng-pattern="/[^a-zA-Z]/" >
+								<span style="color:red; font-size:15px;">（单位：㎡）</span></td>
+						</tr>
+						<tr>
+							<td width="240" bgcolor="#C4DFDC" class="tableleft" align="right">成交日期：</td>
+							<td bgcolor="#FFFFFF"><input type="text" name="order_date"
+								id="order_date" size="15" readonly
+								onClick="javascript:ShowCalendar(this)" disabled=true>
+							(无法修改，如要修改，请删除后重新报备)</td>
+						</tr>
+						<tr>
+							<td width="250" bgcolor="#C4DFDC" class="tableleft" align="right">要求安装时间：</td>
+							<td bgcolor="#FFFFFF"><input type="text" name="yqazsj"
+								id="yqazsj" size="15" readonly
+								onClick="javascript:ShowCalendar(this)"></td>
+						</tr>
+						<tr>
+							<td width="240" bgcolor="#C4DFDC" class="tableleft" align="right">合同金额：</td>
+							<td bgcolor="#FFFFFF"><input name="Order_Amount"
+								id="Order_Amount" type="text" size="15"
+								onkeyup="onlyNumber(this)" onblur="onlyNumber(this)">
+							（影响欠款报表）</td>
+						</tr>
+						<tr>
+							<td width="240" bgcolor="#C4DFDC" class="tableleft" align="right">定金金额：</td>
+							<td bgcolor="#FFFFFF"><input name="djje" id="djje"
+								type="text" size="15" onkeyup="onlyNumber(this)"
+								onblur="onlyNumber(this)" disabled=true></td>
+						</tr>
+						<tr>
+							<td width="240" bgcolor="#C4DFDC" class="tableleft" align="right">报单人：</td>
+							<td bgcolor="#FFFFFF"><input name="YWY" id="YWY" type="text"
+								size="12" disabled=true></td>
+						</tr>
+						<tr>
+							<td width="240" bgcolor="#C4DFDC" class="tableleft" align="right">状态：</td>
+							<td bgcolor="#FFFFFF"><input name="dh_sts" id="dh_sts"
+								type="text" size="12" disabled=true></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<table width="100%" height="0" border="0" align="center"
+			cellpadding="5" cellspacing="20">
+			<tr align="center">
+				<td><input type="button" name="Submit4" id="Submit4"
+					value="修 改" onClick="add()">
+					<input type="button" name="Submit4" id="Submit4"
+					value="关闭" onClick="window.close()"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

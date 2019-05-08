@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script src="inc/Calendar1.js" type=text/javascript language=javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base3.4.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all3.4.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+ <script type="text/javascript" src="js/extjs/BufferView.js"></script>
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type="text/javascript">
+    //弹出窗口
+   function opr(url){
+        var s=NewWinCustMD(url+'&LX=1&tmp11='+Math.random(),window,450,650);
+        
+    }  
+     
+    
+</script>
+
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    var orderDetailstore = new Ext.data.JsonStore({
+         url:"work?proname=MJ0X17",
+        root:"root",
+        fields: ['货号','名称','单位','数量','金额','客户名称','类型','系列']
+    });
+
+   // var sm = new Ext.grid.CheckboxSelectionModel();
+    var cm = new Ext.grid.ColumnModel({ 
+	     defaults: {
+            sortable: true // columns are not sortable by default           
+        },
+        columns: [
+        new Ext.grid.RowNumberer(),//自动行号
+        //sm,
+        
+		
+		{header:'客户名称',dataIndex:'客户名称',width: 100},
+		{header:'类型',dataIndex:'类型',width: 60},
+		{header:'系列',dataIndex:'系列',width: 80},
+        {header:'型号编码',dataIndex:'货号',width: 85},
+        {header:'名称规格',dataIndex:'名称',width: 170},
+       
+		{header:'单位',dataIndex:'单位',width: 50},
+        
+		
+		{header:'数量',dataIndex:'数量',width: 80,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		{header:'金额',dataIndex:'金额',width: 60,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')}
+		
+		
+	   
+       ]});
+    
+    cm.defaultSortable = true;
+  
+    var grid = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'backDetails',
+    	width:document.body.clientWidth-35, 
+    	height:document.body.clientHeight-85,
+    	title:'',
+    	ds: orderDetailstore,
+        cm: cm,
+		enableHdMenu:false,
+        plugins: new Ext.ux.grid.GridSummary(),
+        view: new Ext.ux.grid.BufferView({
+             scrollDelay: false,
+			 forceFit: true
+			
+        }),
+		
+        frame:false,
+        clicksToEdit:1,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid.render();
+	orderDetailstore.on('beforeload',function(){
+		Ext.apply(
+			this.baseParams, {
+				ORDER_DATE1:Ext.get('ORDER_DATE1').dom.value,ORDER_DATE2:Ext.get('ORDER_DATE2').dom.value,
+				PRODUCT_CODE:encodeURI(Ext.get('SPBM').dom.value),SERIES_CODE:encodeURI(Ext.get('SERIES_CODE').dom.value),XL_CODE:Ext.get('XL_CODE').dom.value,
+				Cust_Code:Ext.get('Cust_Code').dom.value,AGENT_CODE:Ext.get('SJBM').dom.value,isTechCode:Ext.get('isTechCode').dom.value
+			});
+	});
+   // orderDetailstore.load();
+
+     Ext.get("BtnCX").on("click",function(){
+      // formMap = DWRUtil.getValues("form1");
+       orderDetailstore.load();
+	   
+    });
+	
+	
+	
+     var store = new Ext.data.JsonStore({
+        fields: ['value', 'name']
+    });
+    var items;
+    
+    
+     Ext.get("SERIES_CODE").on("change",function(){
+	   
+       formMap = DWRUtil.getValues("form1");
+	   
+       DwrComm.parseAL('XLS006',formMap,{callback:function(list){
+           store.loadData(list);
+           items=list;
+       },async:false});
+	   
+        DWRUtil.removeAllOptions("XL_CODE");
+		//var arr={"","全部"};
+		var arr=[{"name":"全部","value":""}];
+		DWRUtil.addOptions("XL_CODE",arr,"value","name");
+        DWRUtil.addOptions("XL_CODE",items,"value","name");   
+   });
+   
+   
+   var store_com = new Ext.data.JsonStore({
+              url:"work?proname=AL0T48",
+              fields: ['value', 'name']
+         });
+     store_com.load();
+    var combo = new Ext.form.ComboBox({
+        store: store_com,
+        displayField:'name',
+        typeAhead: true,
+        mode: 'local',
+        forceSelection: true,
+        triggerAction: 'all',
+        emptyText:'请选择客户名称',
+        selectOnFocus:true,
+        valueField :'value',
+        applyTo: 'Agent_Name',
+		 listeners:{select:function(){
+                form1.Cust_Code.value = combo.getValue();
+		 }}
+       
+       });
+	  combo.on('beforequery',function(e){
+                      var combo = e.combo; 
+                      if(!e.forceAll){ 
+                          var value = e.query; 
+                          combo.store.filterBy(function(record,id){
+                            var text = record.get(combo.displayField); //用自己的过滤规则,如写正则式 
+                            return (text.indexOf(value)!=-1); 
+                          }); 
+                          combo.expand(); 
+                       return false; } });
+	
+	
+	 Ext.get("exportE").on("click",function(){
+		
+        window.location.href='downLoad?proname=EX0X17&inexcel=1&ORDER_DATE1='+Ext.get('ORDER_DATE1').dom.value+"&ORDER_DATE2="+Ext.get('ORDER_DATE2').dom.value+"&Cust_Code="+Ext.get('Cust_Code').dom.value+"&SERIES_CODE="+Ext.get('SERIES_CODE').dom.value+"&XL_CODE="+Ext.get('XL_CODE').dom.value+"&PRODUCT_CODE="+Ext.get('SPBM').dom.value
+		                      +"&AGENT_CODE="+Ext.get('SJBM').dom.value +"&isTechCode="+Ext.get('isTechCode').dom.value;
+		//alert( window.location.href);
+							
+			
+	   
+    });
+	 
+
+});
+
+</script>
+<form name="form1" method="post" action="" id="form1">
+<input name="d_Flag" value="0" type="hidden">
+<input name="d_Product_Id" value="0" type="hidden">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr align="center" height="5"> 
+		<td>
+		
+		</td>
+	</tr>
+	<tr align="center">
+		<td>
+		<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;" valign="top"><img
+					src="images/loadtree/mdmde.gif" WIDTH="18" HEIGHT="18">型号销售汇总表</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+	<td>
+	   
+	   
+	  <table width="100%" border="0" cellpadding="5" cellspacing="0" >
+          <tr> 
+            <td width="10%" align="right">统计周期：</td>
+            <td width="90%" colspan="2"><input type="text" name="ORDER_DATE1" size="10" value="@@LS.FIRSTDAYSOFCURMONTH," readonly onFocus="calendar()">
+              -            
+            <input type="text" name="ORDER_DATE2" size="10" readonly value="@@LS.CURDATE," onFocus="calendar()">
+            名称及型号
+            ：
+            <input name="SPBM" type="text" value="" size="20">
+              类型：
+            <select name="SERIES_CODE">
+                <option value="">全部</option>
+			    <option>$$XL0001,</option>
+            </select>
+			系列
+			 <select name="XL_CODE" id="XL_CODE">
+                   <option value="">全部</option>
+                   <option>$$XL1008,</option>
+            </select>
+			 是否高新产品：<select name="isTechCode" id="isTechCode">
+                   <option value="">全部</option>
+                   <option value="not null">是</option>
+                   <option value="null">否</option>
+            </select>
+            
+           </td>
+          </tr>
+          <tr> 
+            <td width="10%" align="right">客户名称：</td>
+            <td width="15%">
+              <input type="text" name="Agent_Name" value="" size="20">
+              <input type="hidden" name="Cust_Code">
+            </td>
+            <td width="75%">省份：<select name="SJBM"  id="SJBM">
+               <option value="">全部</option>
+               <option>$$XL0057,</option>
+            </select>
+              <input type="button" name="BtnCx" id="BtnCx" value="查询">   $$EX0X17,</td>
+          </tr>
+         
+        </table>
+	
+	</td>
+	</tr>
+	
+	<tr>
+      <td>
+		<div id="backDetails"></div>
+		 
+       
+      </td>
+    </tr>
+    
+  </table>
+  </form>  
+
+</body>
+
+</html>

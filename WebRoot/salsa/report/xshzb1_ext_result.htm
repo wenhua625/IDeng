@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base3.4.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all3.4.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+</head>
+
+<body>
+
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+	
+    //生产工艺列表
+    var orderDetailstore = new Ext.data.JsonStore({
+        url:"work?proname=MJP166",
+        root:"root",
+        fields: ['id','a_year','m1','m2','m3','m4','m5','m6','m7','m8','m9','m10','m11','m12','agent_code','agent_name','plan_type','memo','m_total']
+    });
+    
+    
+     
+    
+    var cm = new Ext.grid.ColumnModel([
+        new Ext.grid.RowNumberer(),//自动行号
+        {header:'单位名称',dataIndex:'agent_name',width:185,summaryRenderer: function(v, params, data){
+				return "合计：";
+		}},
+        {header:'一月',dataIndex:'m1',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'二月',dataIndex:'m2',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'三月',dataIndex:'m3',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'四月',dataIndex:'m4',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'五月',dataIndex:'m5',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'六月',dataIndex:'m6',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'七月',dataIndex:'m7',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'八月',dataIndex:'m8',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'九月',dataIndex:'m9',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'十月',dataIndex:'m10',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'十一月',dataIndex:'m11',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+		{header:'十二月',dataIndex:'m12',width: 70,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 100000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+        {header:'小计',dataIndex:'m_total',width: 70,summaryType:'sum'},
+        {header:'备注',dataIndex:'memo',width: 100,editor: new Ext.form.TextField({ 
+              allowBlank: true// 不能为空 
+          })}
+
+       ]);
+    
+   // cm.defaultSortable = true;
+    
+    //var summary = new Ext.ux.grid.GridSummary();
+   var grid = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'backDetails',
+    	width:document.body.clientWidth-35, 
+    	height:document.body.clientHeight-75,
+    	title:'',
+    	ds: orderDetailstore,
+        cm: cm,
+       // sm:sm,
+	   enableHdMenu:false,
+        forceFit:true,
+		viewConfig: {
+            forceFit: true
+        },
+        frame:false,
+		
+        clicksToEdit:1,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid.render();
+  
+     
+      var store_com = new Ext.data.JsonStore({
+              url:"work?proname=AL0T48",
+              fields: ['value', 'name']
+         });
+     store_com.load();
+    var combo = new Ext.form.ComboBox({
+        store: store_com,
+        displayField:'name',
+        typeAhead: true,
+        mode: 'local',
+        forceSelection: true,
+        triggerAction: 'all',
+        emptyText:'请选择客户名称',
+        selectOnFocus:true,
+        valueField :'value',
+        applyTo: 'Agent_Name',
+		 listeners:{select:function(){
+                form1.Cust_Code.value = combo.getValue();
+		 }}
+       
+       });
+	  combo.on('beforequery',function(e){
+                      var combo = e.combo; 
+                      if(!e.forceAll){ 
+                          var value = e.query; 
+                          combo.store.filterBy(function(record,id){
+                            var text = record.get(combo.displayField); //用自己的过滤规则,如写正则式 
+                            return (text.indexOf(value)!=-1); 
+                          }); 
+                          combo.expand(); 
+                       return false; } });
+
+   
+   
+ 
+   
+});
+
+</script>
+        
+   
+
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td> <table cellSpacing=0 cellPadding=0 border="0" width="100%">
+							<tr height="30">
+								<td style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid;font-size: 12pt;COLOR: #124164;FONT-WEIGHT: bold;"><img src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">销售汇总表（一）</td>
+							</tr>
+		</table></td>
+   </tr>
+	 <tr>
+				<td align="center">
+				<table width="100%" border="0" cellpadding="0">
+					<tr style="font-size: 16pt; font-weight: bolder" align="center">
+						<td >销售汇总表（一）</td>
+					</tr>
+				</table>				</td>
+	</tr>
+    <tr height="5" style="font-size: 9pt;"> 
+      <td style="padding-left:6px">年份： 
+        <select name="YEAR" id="YEAR">
+                <option>$$XLS014,</option>
+              </select>
+        <input type="submit" name="Submit2" value="查询"></td>
+    </tr>
+    
+    <tr valign="top"> 
+      <td height="0" colspan="2" align="center"> 
+           <div id="backDetails"></div>
+      </td>
+    </tr>
+  </table>
+ 
+
+
+
+</body>
+
+</html>

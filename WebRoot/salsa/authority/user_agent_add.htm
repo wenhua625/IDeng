@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>用户管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" src="inc/formvalidate.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" src="inc/standardoutput.js"></SCRIPT>
+<script lanuage="javascript">
+
+function checkSubmit(){
+	if (formValidate("form1")==false){
+		return false;
+	}else{
+		return true;
+	}		
+}
+</script>
+<script type="text/javascript" src="js/dojo/dojo.js"></script>
+<script type="text/javascript">
+    dojo.require("dojo.io.*");
+</script>
+<script type="text/javascript">
+ function work(){
+    var formObj = dojo.byId("form1");
+     dojo.io.bind({
+                formNode:formObj,
+                url:"work?proname=IN0005",
+                method:formObj.method,
+                load:function(type , data ,evt){
+                    if(data == "ok"){
+                    	alert("操作成功!");
+                    	
+                    	window.close();
+                    }else{
+                    	alert(data);
+                    }
+                },
+                error:function(type,error){
+                    alert(type);
+                }
+		
+            })
+        }
+</script>
+<script type="text/javascript">
+	function add(){
+		if(checkSubmit()){
+			work();		
+		}
+		
+	}
+</script>
+</head>
+
+<body>
+
+<form name="form1" method="post" action="" id="form1">
+
+<input type="hidden" name="YHZ" value="agent">
+<input type="hidden" name="YHID" value="!!MJ0S39,12">
+  <table width="95%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center"><b> 请填写代理商用户信息 </b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr align="center"> 
+            <td bgcolor="#C4DFDC" class="tableleft" height="17"> 
+              <table width="100%" border="0">
+                <tr class="tabletoptitle"> 
+                  <td align="right" class="WHS">系统登陆名：</td>
+                  <td class="WHS">
+				   <script>
+				  //if('!!MJ0S39,01' == '') 
+                    //document.write("<input type='text' name='YHH' must='true' value='!!MJ0S39,01'>*登陆名");
+				  //else
+				    //document.write("<input type='text' name='YHH' must='true' value='!!MJ0S39,01' readonly>*登陆名");
+				 </script> 
+				    <input type='text' name='YHH' must='true' value='!!MJ0S39,01' maxlength="15" size="15">
+                    *登陆名
+                     </td>
+                </tr>
+				<tr class="tabletoptitle"> 
+                  <td align="right" class="WHS">用户名称：</td>
+                  <td class="WHS"> 
+                    <input type="text" name="YHXM" must="true" value="!!MJ0S39,03">
+                    *中文名字</td>
+                </tr>
+                
+                <tr class="tabletoptitle"> 
+                  <td align="right" class="WHS">密码：</td>
+                  <td class="WHS">
+				  <script>
+				  if('!!MJ0S39,01' == '') 
+                    document.write("<input type='password' name='PASSWORD' size='15'>");
+				  else
+				    document.write("<input type='password' name='PASSWORD' size='15' value='********' readonly>");
+				 </script>
+                  </td>
+                </tr>
+                <tr class="tabletoptitle"> 
+                  <td align="right" class="WHS">确认密码：</td>
+                  <td class="WHS"> 
+                    <script>
+				  if('!!MJ0S39,01' == '') 
+                    document.write("<input type='password' name='REMM' size='15'>");
+				  else
+				    document.write("<input type='password' name='REMM' size='15' value='********' readonly>");
+				 </script>
+                  </td>
+                </tr>
+                <tr class="tabletoptitle"> 
+                  <td align="right" class="WHS">状态：</td>
+                  <td class="WHS"> 
+                    <select name="STS">
+                      <option value="0">活动</option>
+                      <option value="1">禁用</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="tabletoptitle"> 
+                  <td align="right" class="WHS">所属代理商：</td>
+                  <td class="WHS"> @@AGENT_NAME, 
+                    <input type="hidden" name="DEPT" value="@@AGENT_CODE,">
+                  </td>
+                </tr>
+                <tr class="tabletoptitle"> 
+                  <td align="right" class="WHS">联系方式：</td>
+                  <td class="WHS"> 
+                    <input type="text" name="LXFS" value="!!MJ0S39,09">
+                  </td>
+                </tr>
+              </table>
+              <input type="button" name="Submit4" value="提交" onClick="add()">
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  
+</form>
+
+</body>
+<script>
+    form1.STS.value='!!MJ0S39,08';
+	
+</script>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>客户信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type="text/javascript">
+
+ function initPage()
+ {
+	  if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+      var formMap = DWRUtil.getValues("form1");
+	  DWRUtil.setValue("is330KH","!!MJ0S38,29");
+	  DWRUtil.setValue("SHDZJC","!!MJ0S38,30");
+	  DWRUtil.setValue("DOMAIN_MAN","!!MJ0S38,04");
+	  DWRUtil.setValue("Brand_Code","!!MJ0S38,17");
+	  DWRUtil.setValue("Sjbm","!!MJ0S38,11");
+      DWRUtil.setValue("Agent_Level","!!MJ0S38,26");
+	   DWRUtil.setValue("Open_Flag","!!MJ0S38,12");
+	  DWRUtil.setValue("Agent_Area","!!MJ0S38,32");
+	  DWRUtil.setValue("Auth_Amount","!!MJ0S38,33");
+	  DWRUtil.setValue("ICBC_Account","!!MJ0S38,35");
+	  DWRUtil.setValue("Agent_StarLevel","!!MJ0S38,36");
+	   DWRUtil.setValue("kcc_price","!!MJ0S38,37");
+	   DWRUtil.setValue("adh_agentcode","!!MJ0S38,38");
+	   
+	  
+	  if('@@View,' =='View')
+	  {
+		   form1.Submit4.disabled = true;
+	  }
+	   
+	  
+ }
+ function work(){
+     
+    
+	if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+      var formMap = DWRUtil.getValues("form1");
+	
+	if(form1.adh_agentcode.value == "")
+	{
+		 alert("请输入艾订货编码！才能完成授权");
+		 form1.adh_agentcode.focus();
+		 return false;
+	}
+	if(!confirm("授权码："+form1.adh_agentcode.value+" , 你确认要授权吗?")) return false;
+	 formMap = DWRUtil.getValues("form1");
+    DwrComm.parseIN('IN0001',formMap,'update',{callback:function(data){if (data != 'ok'){alert(data);}else{ 
+                      dialogArguments.document.getElementById('d_Flag').value="1";   
+                      window.close();   
+                   }},async:false});
+        }
+</script>
+
+</head>
+
+<body onLoad="initPage()">
+<form name="form1" method="post" action="" id="form1"><div align="right"> 
+</div><table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center"><b> 门店授权</b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">品牌：</div>            </td>
+            <td bgcolor="#FFFFFF">
+              <select name="Brand_Code" disabled=true>
+		  			<option>$$XL1005,</option>
+        	</select>            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">所属区域：</div>            </td>
+            <td bgcolor="#FFFFFF">
+              <select name="Sjbm" disabled=true>
+		  			<option>$$XL0018,</option>
+        	</select>            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">客户代号：</div>            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="AGENT_CODE" type="text" class="TEXTDISABLED" maxlength="4" size="10" value="!!MJ0S38,01" readonly>签约日期：
+              <input type="text" name="Join_Date" size="12"  onClick="javascript:ShowCalendar(this)" value="!!MJ0S38,27" class="TEXTDISABLED" readonly>
+到期日期：
+<input type="text" name="End_Date" size="12" class="TEXTDISABLED" readonly onClick="javascript:ShowCalendar(this)" value="!!MJ0S38,28">            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">客户名称：</div>            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="AGENT_NAME" type="text"  value="!!MJ0S38,02" size="30" class="TEXTDISABLED" readonly>
+			           </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">售价：</div>            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input id="kcc_price" name="kcc_price" type="text" class="TEXTDISABLED" readonly value="!!MJ0S38,37" size="30">
+			  
+			           </td>
+          </tr>
+          
+          <!--
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">名称拼音：</div>
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="AGENT_PING" type="text" class="input" value="!!MJ0S38,07">
+            </td>
+          </tr>
+          
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">客户类型：</div>
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <select name="AGENT_TYPE">
+                <option>$$XL0018,</option>
+                
+              </select>
+            </td>
+          </tr>
+          -->
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">所属区域经理：</td>
+            <td bgcolor="#FFFFFF">
+              <select name="DOMAIN_MAN" disabled>
+                <option>$$XL0009,</option>
+              </select>            </td>
+          </tr>
+         
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">电话：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="AGENT_TEL1" type="text"  value="!!MJ0S38,18" class="TEXTDISABLED" readonly>            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">传真：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="AGENT_FAX" type="text"  value="!!MJ0S38,13" class="TEXTDISABLED" readonly>            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">手机一：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="Agent_Mobile1" type="text"  value="!!MJ0S38,15" class="TEXTDISABLED" readonly>            </td>
+          </tr>
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">手机二：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="Agent_Mobile2" type="text"  value="!!MJ0S38,16" class="TEXTDISABLED" readonly>            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">QQ：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="AGENT_QQ" type="text" value="!!MJ0S38,19" class="TEXTDISABLED" readonly>            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">状态：</td>
+            <td bgcolor="#FFFFFF">
+              <select name="Open_Flag" disabled>
+                 <option value="启用">启用</option>
+		         <option value="禁用">禁用</option>
+              </select> 
+			   <input type="hidden" name="YF_XT" size="10" value="!!MJ0S38,20">
+           
+            <input type="hidden" name="YF_JX" size="10" value="!!MJ0S38,21">
+           
+            <input type="hidden" name="YF_LG" size="10" value="!!MJ0S38,22">
+          
+        <input type="hidden" name="YF_DQXT" size="10" value="!!MJ0S38,24">
+             
+          <input type="hidden" name="YF_XS" size="5" value="!!MJ0S38,23">
+          
+			  
+			            </td>
+          </tr>
+		 
+		  <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">签约折扣：</td>
+            <td bgcolor="#FFFFFF"><input type="text" name="QYZK" size="10" value="!!MJ0S38,25" class="TEXTDISABLED" readonly>
+            （95:表示打95折） 
+              客户任务等级：
+                <select name="Agent_Level" disabled>
+                  <option>$$XLS017,</option>
+				  
+                </select>
+               </td>
+          </tr>
+         
+		   <tr>
+		     <td  bgcolor="#C4DFDC" class="tableleft">默认店铺信息&gt;&gt;</td>
+		     <td  bgcolor="#C4DFDC" align="left"></td>
+	      </tr>
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">店铺地址：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="AGENT_ADDRESS" type="text" class="TEXTDISABLED" readonly value="!!MJ0S38,08" size="50"></td>
+          </tr>
+           <tr>
+             <td bgcolor="#C4DFDC" class="tableleft" align="right">地址简称：</td>
+             <td bgcolor="#FFFFFF"><input name="SHDZJC" type="text"  value="" class="TEXTDISABLED" readonly></td>
+           </tr>
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">联系人：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="CONTACT_MAN" type="text" size="15" value="!!MJ0S38,10" class="TEXTDISABLED" readonly>
+              联系电话：
+              <input name="AGENT_TEL" type="text" size="15"  value="!!MJ0S38,09" class="TEXTDISABLED" readonly>
+             <font color="red"> 非常重要</font></td>
+          </tr>
+          
+            <tr>
+             <td bgcolor="#C4DFDC" class="tableleft" align="right">艾订货编码：</td>
+             <td bgcolor="#FFFFFF"><input name="adh_agentcode" type="text" style=" font-size:16px;color:red" value="" size="10"></td>
+           </tr>
+          
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    
+          <tr align="center"> 
+            <td>     
+        		<input type="button" name="Submit4" id="Submit4" value="授权" onClick="work()">
+        		
+        		<!--<input type="button" name="Submit5" value="开通片区系统" onClick="open_sys()">
+            --></td>
+          </tr>
+        
+  </table>
+  
+</form>
+</body>
+
+</html>

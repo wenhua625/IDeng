@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+	
+	 var store = new Ext.data.JsonStore({
+              url:"work?proname=AL0T48",
+              fields: ['value', 'name']
+         });
+         store.load();
+    var combo = new Ext.form.ComboBox({
+        store: store,
+        displayField:'name',
+        typeAhead: true,
+        mode: 'local',
+        forceSelection: true,
+        triggerAction: 'all',
+        emptyText:'请选择客户名称',
+        selectOnFocus:true,
+        valueField :'value',
+        applyTo: 'DWMC',
+		 listeners:{select:function(){
+			 alert(combo.getValue());
+                form1.Agent_Code.value = combo.getValue();
+		 }}
+       
+       });
+	  combo.on('beforequery',function(e){
+                      var combo = e.combo; 
+                      if(!e.forceAll){ 
+                          var value = e.query; 
+                          combo.store.filterBy(function(record,id){
+                            var text = record.get(combo.displayField); //用自己的过滤规则,如写正则式 
+                            return (text.indexOf(value)!=-1); 
+                          }); 
+                          combo.expand(); 
+                       return false; } });
+    form1.submit();
+  
+    
+});
+
+</script>
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr align="center" height="5"> 
+		<td>
+		
+		</td>
+	</tr>
+	<tr align="center">
+		<td>
+		<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><img
+					src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">售后服务</td>
+				<td style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"></td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+	<td>
+	   <form name="form1" method="post" action="display?proname=shop/shd_list_content.htm" id="form1" target="cardframe">
+	  <table width="100%" border="0" cellpadding="5" cellspacing="0" >
+          <tr> 
+            <td width="11%" align="right">制单时间：</td>
+            <td colspan="2"><input type="text" name="ORDER_DATE1" size="10" value="" readonly onClick="javascript:ShowCalendar(this)">
+              -            
+              <input type="text" name="ORDER_DATE2" size="10" readonly value="" onClick="javascript:ShowCalendar(this)">来源渠道：            
+              <select name="Order_Src">
+			  <option value="">全部</option>
+              <option value="门店">门店</option>
+              <option value="齐家网">齐家网</option>
+			  <option value="城团网">城团网</option>
+			  <option value="一起装修网">一起装修网</option>
+			  <option value="华夏家博会">华夏家博会</option>
+			  <option value="婚博会">婚博会</option>
+			  <option value="我爱我家">我爱我家</option>
+			  <option value="爱舍区">爱舍区</option>
+			  <option value="其他">其他</option>
+                        </select>地址或电话：
+              <input type="hidden" name="Cust_Code">
+              <input type="text" name="Cust_Name" value="" >
+              <input type="hidden" name="Note_Type" value="Z">
+            
+            是否开发票：
+            <select name="ISFP">
+			   <option value="">全部</option>
+              <option value="未开">未开</option>
+              <option value="待开">待开</option>
+              <option value="已开">已开</option>
+             
+            </select>
+            <input type="submit" name="Submit" value="查询"></td>
+          </tr>
+          <tr>
+            <td align="right">专卖店：</td>
+            <td width="35%"><input
+					type="text" name="DWMC" value="" size="20">
+                    <input type="hidden"  name="Agent_Code" id="Agent_Code">
+              </td>
+            <td width="54%">&nbsp;</td>
+          </tr>
+        </table>
+	  </form>
+	</td>
+	</tr>
+	
+	<tr>
+      <td>
+         <IFRAME id="cardframe" name="cardframe"
+						src=""
+						frameBorder=0 width="100%" scrolling=auto height="380"></IFRAME>
+       
+      </td>
+    </tr>
+    <tr></tr>
+  </table>
+  
+
+</body>
+
+</html>

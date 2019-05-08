@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>上传图片</title>
+<base target="_self"/>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" CONTENT="0">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<link href="js/uploadify/uploadify.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/uploadify/jquery.uploadify.min.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+
+<script type="text/javascript">
+       
+        $(document).ready(function() {
+			 if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+	
+    var formMap = DWRUtil.getValues("form1");
+			var s_sup;
+               DwrComm.parseMJ('MJP262',formMap,{callback:function(list){
+                   s_sup = list;  
+               },async:false});
+			   
+			   if(s_sup.length==0)
+			   {
+				   $('#BtnClear').attr('disabled',"true");
+			   }
+			   
+			   for(var x=0;x<s_sup.length;x++)
+			   {
+				 $("#divPreview").append($("<img src='" +s_sup[x].image_path + "'/>"));  
+			   }
+			  // alert("dd="+s_sup.length);
+			  
+			
+			  
+			  $("#BtnClear").click(function(){
+				  
+				  if(!confirm("清除掉后，图片将无法恢复，你确认要删除吗？")) return false;
+				  formMap = DWRUtil.getValues("form1");
+                 DwrComm.parseIN('IN0023',formMap,'delete',{callback:function(data){
+                    if (data != 'ok'){
+                      alert(data);
+                      }else{ 
+					   form1.submit();
+                     }
+                 },async:false});
+             });
+			   
+           
+            $("#uploadify").uploadify({
+                'swf'     : 'js/uploadify/uploadify.swf',
+                'uploader': '@@LS.URL,/work?proname=UE0024&id=@@BM,&Product_Id=@@Product_Id,',
+                
+                'buttonText':'上传卖点图片',
+				'uploadLimit': 5,   
+                'fileTypeDesc' : 'Image Files',         
+                'fileTypeExts' : '*.gif; *.jpg; *.png',
+                'progressData' : 'speed',
+                'width' : '200',
+				'height' : '20',
+				'fileSizeLimit':1024,
+                'onUploadSuccess' : function(file, data, response) { 
+                      
+							$("#divPreview").append($("<img src='" +data + "'/>"));
+	        
+                 }
+                
+               
+            });
+			
+			
+        });
+ 
+
+
+
+</script>
+</head>
+<body scroll="auto" style="BACKGROUND-COLOR: #cccccc;">
+<form action="display?proname=baseinfo/spgl_photo_md.htm" method="post" name="form1" >
+<input type="hidden" value="@@BM," name="BM" id="BM">
+<input type="hidden" value="@@Product_Id," name="Product_Id" id="Product_Id">
+<input type="hidden" value="@@Image_Type," name="Image_Type" id="Image_Type">
+<table width="100%" border="0" cellSpacing=0 cellPadding=0>
+   <tr>
+      <td align="left" valign="top">
+      
+      <div id="divPreview" style="width: 750px; padding-bottom:10px;border:solid 0px #000;">
+                            
+                        </div>
+	   <!-- <div style="border:1px solid #009900; width:550px; height:600px;min-height:200px;overflow: scroll; ">
+					       <img src="salsa/product_photo/@@Photo,"  width="750"  id="photo_img"/>
+					   </div>-->
+		
+      </td>
+    </tr>
+    <tr>
+       <td align="center">每个文件最大512kb,尺寸：750*XXX像素，按上传顺序显示，弹窗后可以按Shift键上传多张图片(最多5张)
+         <input type="file" name="uploadify" id="uploadify">  <input type="button" name="BtnClear" id="BtnClear" value="清空图片" > <input type="button" name="BtnClose" value="关闭" onClick="window.close()"></td>
+    </tr>
+ </table>
+</form>
+</body>
+</html>

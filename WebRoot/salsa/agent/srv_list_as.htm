@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>售后记录</title>
+		<base target="_self">
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<meta http-equiv="expires" content="30">
+		<link href="css/style011.css" rel="stylesheet" type="text/css">
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<SCRIPT LANGUAGE="JavaScript" src="inc/sort.js"></SCRIPT>
+		<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+</object> 
+		<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+		<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+     <script language="javascript">
+        function opr(url){
+		        if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+               var formMap = DWRUtil.getValues("form1");
+		       form1.Srv_Id.value=url;
+               formMap = DWRUtil.getValues("form1");
+               var s_sup;
+               DwrComm.parseMJ('MJP202',formMap,{callback:function(list){
+                   s_sup = list;  
+               },async:false});
+               DWRUtil.setValue("Qus_Content",s_sup[0].agent_name+':'+s_sup[0].qus_content);
+               DWRUtil.setValue("Qus_Answer",s_sup[0].ans_content);
+               DWRUtil.setValue("Ans_Man",s_sup[0].ans_man);
+               
+              
+          }
+      </script> 
+	</head>
+
+	<body style="margin-left: 0px;">
+	<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+   
+    Ext.get("BtnSave").on("click",function(){
+	    if(checkAndSave())
+		{
+		   alert("操作成功!");
+		   form1.Srv_Id.value ="";
+		   form1.submit();
+		}
+      
+    });
+	
+	function checkAndSave(){
+     
+	  if(form1.Qus_Answer.value.length==0)
+	  {
+	      alert("回复内容不能为空，请输入!");
+		  form1.Qus_Answer.focus();
+		  return false;
+	  }
+	 
+       formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('INP054',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              
+             
+           }
+       },async:false}); 
+       return true;
+   }
+	
+	 
+});
+
+</script>
+
+		<form name="form1" method="post" action="" id="form1" >
+		<input type="hidden" name="Srv_Id" value="" id="Srv_Id">
+		<input type="hidden" name="Ans_Man" value="@@LS.XM," id="Ans_Man">
+				<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><img
+					src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">建议或投诉</td>
+		    </tr>
+		</table>	
+			<table width="100%" border="0">
+				<tr>
+				    <td align="center"><table width="80%" border="0">
+  
+  <tr>
+    <td align="right">建议或投诉：
+      </td>
+    <td><textarea name="Qus_Content"  id="Qus_Content" cols="70" rows="2" disabled></textarea></td>
+  </tr>
+	<tr>
+    <td align="right">回复：</td>
+    <td><textarea name="Qus_Answer"  id="Qus_Answer" cols="70" rows="3"></textarea></td>
+	</tr>
+  <tr>
+    <td colspan="2" align="center"><input type="button" name="BtnSave" id="BtnSave" value="回复">      </td>
+    </tr>
+</table>
+</td>
+				</tr>	
+				<tr>
+					<td >
+						<table width="100%" border="1" style="border-collapse:collapse" bordercolor="#000000" id="PowerTable">
+        <tr align="center" bgcolor="#BFBFBF">
+          <td width="13%">客户</td> 
+         
+        
+          <td width="59%">内容</td>
+          <td width="8%">提问时间</td>
+          <td width="10%">回复时间</td>
+          <td width="10%">&nbsp;</td>
+        </tr>
+        <tr >
+          <td>$$MJP202,10</td>
+          
+         
+          <td>$$MJP202,05</td>
+          <td>$$MJP202,04</td>
+          <td >$$MJP202,07</td>
+          <td>【<a href="#" onClick="javascript:opr('$$MJP202,01')">回复</a>】</td>
+        </tr>
+      </table>
+					</td>
+				</tr>
+				
+			</table>
+
+		</form>
+		
+	</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/easyui/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/easyui/icon.css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-webase.js"></script>
+<script type="text/javascript" src="js/easyui/json2.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.edatagrid.js"></script>
+<script type="text/javascript" src="js/easyui/easyui.plugin.hy.js"></script>
+<script type="text/javascript">
+     
+     
+    
+</script>
+
+</head>
+
+<body>
+<script type='text/javascript'>
+
+$(function(){
+    //初始化表单数据
+    var $dg1=$('#productList');
+    //表格数据
+    $dg1.edatagrid({
+				width:"100%",
+				height:"auto",
+				nowrap: true,
+				autoRowHeight: false,
+				striped: true,
+				singleSelect:true,
+				collapsible:true,
+				url:'query?proname=MJE012',
+				queryParams:{
+				   ORDER_DATE1:form1.ORDER_DATE1.value,
+				   ORDER_DATE2:form1.ORDER_DATE2.value,
+				   Sts:form1.Sts.value
+				},
+				title:"售后开单列表",
+				iconCls:'icon-edit',
+				showFooter:true,
+				remoteSort: false,
+				idField:'id',
+				rownumbers:true,
+				fit:false,
+				fitColumns:true,
+				columns:[[
+					{title:'单据时间',field:'rq',width:80},
+					{title:'卖家名称',field:'ckmc',width: 135},
+        			{title:'单据编号',field:'id',width: 75},
+        			{title:'买家昵称',field:'dwmc',width: 95},
+					{title:'处理状态',field:'sh',width: 55},
+        			{title:'总数量',field:'zsl',width: 55,align:'right'},
+        			
+					{title:'总金额',field:'zje',width: 65,align:'right',hidden:true},
+        			{title:'开单人',field:'zdr',width: 75},
+					{title:'收货人',field:'jsr',width: 75},
+					{title:'联系电话',field:'dh',width: 90}, 
+					{title:'收货地址',field:'dz',width: 150}, 
+					{title:'摘要',field:'zy',width: 150}, 
+        			{title:'备注',field:'bz',width: 100} 
+        			
+    			]],
+    			toolbar:[{
+					id:'btnupdate',
+					text:'新增',
+					iconCls:'icon-add',
+					handler:function(){
+					
+					   
+					    form1.d_Flag.value == "0"
+					    opr('display?proname=taobao/tbd.htm');
+					    if(form1.d_Flag.value == "1"){
+					      $dg1.datagrid('reload');  
+					    }
+					}
+				}],
+				onDblClickRow:function(rowIndex, rowData){
+				    form1.d_Flag.value == "0"
+				    opr('display?proname=taobao/tbd.htm&ID='+rowData.id);
+				    if(form1.d_Flag.value == "1"){
+					      $dg1.datagrid('reload');  
+					 }
+				},
+    			onLoadSuccess:function(data){
+    			     
+    			},
+    			onAfterEdit:function(index,data){
+    			    
+    			    
+    			}
+	});
+   //弹出窗口
+   function opr(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,550,800);
+        
+    } 
+});
+//查询
+    function  search(){
+        var queryParams = $('#productList').datagrid('options').queryParams;
+      
+	    queryParams.ORDER_DATE1=form1.ORDER_DATE1.value;
+	    queryParams.ORDER_DATE2=form1.ORDER_DATE2.value;
+	    queryParams.Sts = form1.Sts.value;
+	    $('#productList').datagrid('reload');
+	    var p=$('#productList').datagrid('getPager');
+	    $(p).pagination('select',1);   
+   }
+</script>
+<form name="form1" method="post" action="" id="form1">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr align="center" height="5"> 
+		<td>
+		
+		</td>
+	</tr>
+	<tr align="center">
+		<td>
+		<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;" valign="top"><img
+					src="images/loadtree/mdmde.gif" WIDTH="18" HEIGHT="18">售后销售单</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+	<td>
+	   
+	   <input name="d_Flag" value="0" type="hidden">
+	  <table width="100%" border="0" cellpadding="5" cellspacing="0" >
+          <tr> 
+            <td width="10%" align="right">开单日期：</td>
+            <td><input type="text" name="ORDER_DATE1"  size="10" value="@@LS.FIRSTDAYSOFCURMONTH," readonly onClick="javascript:ShowCalendar(this)">
+              -            
+            <input type="text" name="ORDER_DATE2"   size="10"  value="@@LS.CURDATE," readonly onClick="javascript:ShowCalendar(this)">            状态：
+            <select name="Sts">
+                <option value="0">待审核</option>
+                <option value="1">配货中</option>
+				<option value="2">已发货</option>
+                <option value="">全部</option>
+               
+              
+            </select>
+            <input type="button" name="BtnCx" id="BtnCx" onClick="search()" value="查询"></td>
+          </tr>
+        </table>
+	
+	</td>
+	</tr>
+	
+	<tr>
+      <td>
+		<div id="productList"></div>
+		 
+       
+      </td>
+    </tr>
+    
+  </table>
+  </form>  
+
+</body>
+
+</html>

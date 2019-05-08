@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<data>
+  <row>
+    <KJM>AP0001</KJM>
+    <LJH>0002</LJH>
+    <CODEBASE>applets</CODEBASE>
+    <ARCHIVE>Pie</ARCHIVE>
+    <SQL>select case ywy when '' then '未知' else ywy end ywy,order_amount from (select ywy,sum(order_amount) order_amount  from orderlist where agent_code='@@LS.DWDM,' and order_date is not null group by ywy) x</SQL>
+    <XSFS>1</XSFS>
+    <BT>合同金额</BT>
+    <POINTNUM>12</POINTNUM>
+    <T0>上年同期</T0>
+    <T1>本年</T1>
+    <T2></T2>
+    <T3></T3>
+    <DWX>月</DWX>
+    <DWY>万kWh</DWY>
+    <CSID></CSID>
+    <KJSM>合同分析</KJSM>
+    <LINENUM>2</LINENUM>
+    <PWIDTH></PWIDTH>
+    <PHEIGHT></PHEIGHT>
+  </row>
+  <row>
+    <KJM>AP0002</KJM>
+    <LJH>0002</LJH>
+    <CODEBASE>applets</CODEBASE>
+    <ARCHIVE>Bar</ARCHIVE>
+    <SQL>select case ywy when '' then '未知' else ywy end ywy,sum(order_amount) order_amount,sum(col_amount) col_amount,sum(case sign(order_amount-col_amount) when -1 then 0 else order_amount-col_amount end) qk_amount from (
+select ywy, order_amount,(select sum(col_amount) from ordercol where ordercode=a.order_code)  col_amount
+from orderlist a 
+where agent_code='@@LS.DWDM,' 
+and order_date is not null
+) x
+group by ywy</SQL>
+    <XSFS>2</XSFS>
+    <BT>订单数据分析</BT>
+    <POINTNUM></POINTNUM>
+    <T0>合同金额</T0>
+    <T1>收款金额</T1>
+    <T2>欠款金额</T2>
+    <T3></T3>
+    <DWX></DWX>
+    <DWY>亿元</DWY>
+    <CSID></CSID>
+    <KJSM>电费帐务实收分析</KJSM>
+    <LINENUM>1</LINENUM>
+    <PWIDTH>1040</PWIDTH>
+    <PHEIGHT>480</PHEIGHT>
+  </row>
+ <row>
+    <KJM>AP0003</KJM>
+    <LJH>0002</LJH>
+    <CODEBASE>applets</CODEBASE>
+    <ARCHIVE>Pie</ARCHIVE>
+    <SQL>select ywy,col_amount from (
+select case ywy when '' then '未知' else ywy end ywy,sum(order_amount) order_amount,sum(col_amount) col_amount,sum(case sign(order_amount-col_amount) when -1 then 0 else order_amount-col_amount end) qk_amount from (
+select ywy, order_amount,(select sum(col_amount) from ordercol where ordercode=a.order_code)  col_amount
+from orderlist a 
+where agent_code='@@LS.DWDM,' 
+and order_date is not null
+) x
+group by ywy
+) mm</SQL>
+    <XSFS>1</XSFS>
+    <BT>回款金额</BT>
+    <POINTNUM>12</POINTNUM>
+    <T0>上年同期</T0>
+    <T1>本年</T1>
+    <T2></T2>
+    <T3></T3>
+    <DWX>月</DWX>
+    <DWY>万kWh</DWY>
+    <CSID></CSID>
+    <KJSM>合同分析</KJSM>
+    <LINENUM>2</LINENUM>
+    <PWIDTH></PWIDTH>
+    <PHEIGHT></PHEIGHT>
+  </row>
+  <row>
+    <KJM>AP0004</KJM>
+    <LJH>0002</LJH>
+    <CODEBASE>applets</CODEBASE>
+    <ARCHIVE>Pie</ARCHIVE>
+    <SQL>select ywy,qk_amount from (
+select case ywy when '' then '未知' else ywy end ywy,sum(order_amount) order_amount,sum(col_amount) col_amount,sum(case sign(order_amount-col_amount) when -1 then 0 else order_amount-col_amount end) qk_amount from (
+select ywy, order_amount,(select sum(col_amount) from ordercol where ordercode=a.order_code)  col_amount
+from orderlist a 
+where agent_code='@@LS.DWDM,' 
+and order_date is not null
+) x
+group by ywy
+) mm</SQL>
+    <XSFS>1</XSFS>
+    <BT>欠款金额</BT>
+    <POINTNUM>12</POINTNUM>
+    <T0>上年同期</T0>
+    <T1>本年</T1>
+    <T2></T2>
+    <T3></T3>
+    <DWX>月</DWX>
+    <DWY>万kWh</DWY>
+    <CSID></CSID>
+    <KJSM>合同分析</KJSM>
+    <LINENUM>2</LINENUM>
+    <PWIDTH></PWIDTH>
+    <PHEIGHT></PHEIGHT>
+  </row>
+  <row>
+    <KJM>AP0005</KJM>
+    <LJH>0002</LJH>
+    <CODEBASE>applets</CODEBASE>
+    <ARCHIVE>Bar</ARCHIVE>
+    <SQL>select order_src,zsl,cjs,convert(decimal(12,2),convert(float,cjs)/convert(float,zsl)*100) cjl from (
+select '总数据' Order_Src,COUNT(*) zsl,sum(case when Order_DATE is null then 0 else 1 end) cjs 
+from orderlist 
+where  agent_code='@@LS.DWDM,'  and ISNULL(Order_Src,'')!=''
+) nn
+union all
+select order_src,zsl,cjs,convert(decimal(12,2),convert(float,cjs)/convert(float,zsl)*100) cjl from (
+select case CHARINDEX('(',Order_Src) when 0 then Order_Src else SUBSTRING(Order_Src,0,CHARINDEX('(',Order_Src)) end Order_Src,COUNT(*) zsl,sum(case when Order_DATE is null then 0 else 1 end) cjs 
+from orderlist 
+where  agent_code='@@LS.DWDM,'  and ISNULL(Order_Src,'')!=''
+group by case CHARINDEX('(',Order_Src) when 0 then Order_Src else SUBSTRING(Order_Src,0,CHARINDEX('(',Order_Src)) end 
+) mm</SQL>
+    <XSFS>2</XSFS>
+    <BT>订单来源分析</BT>
+    <POINTNUM></POINTNUM>
+    <T0>订单数</T0>
+    <T1>成交数</T1>
+    <T2>成交率</T2>
+    <T3></T3>
+    <DWX></DWX>
+    <DWY>亿元</DWY>
+    <CSID></CSID>
+    <KJSM>电费帐务实收分析</KJSM>
+    <LINENUM>1</LINENUM>
+    <PWIDTH>1340</PWIDTH>
+    <PHEIGHT>480</PHEIGHT>
+  </row>
+  <row>
+    <KJM>AP0006</KJM>
+    <LJH>0002</LJH>
+    <CODEBASE>applets</CODEBASE>
+    <ARCHIVE>Bar</ARCHIVE>
+    <SQL>select order_src,zje,zsl,convert(decimal(12,2),convert(float,zje)/convert(float,zsl)) jdz from (
+select '总数据' Order_Src,COUNT(*) zsl,sum(order_amount) zje 
+from orderlist 
+where  agent_code='@@LS.DWDM,'  and ISNULL(Order_Src,'')!='' and Order_DATE is not null
+) nn
+union all
+select order_src,zje,zsl,convert(decimal(12,2),convert(float,zje)/convert(float,zsl)) jdz from (
+select case CHARINDEX('(',Order_Src) when 0 then Order_Src else SUBSTRING(Order_Src,0,CHARINDEX('(',Order_Src)) end Order_Src,COUNT(*) zsl,sum(order_amount) zje 
+from orderlist 
+where  agent_code='@@LS.DWDM,'  and ISNULL(Order_Src,'')!='' and Order_DATE is not null
+group by case CHARINDEX('(',Order_Src) when 0 then Order_Src else SUBSTRING(Order_Src,0,CHARINDEX('(',Order_Src)) end 
+) mm</SQL>
+    <XSFS>2</XSFS>
+    <BT>订单来源分析</BT>
+    <POINTNUM></POINTNUM>
+    <T0>订单金额</T0>
+    <T1>订单数</T1>
+    <T2>均单值</T2>
+    <T3></T3>
+    <DWX></DWX>
+    <DWY>亿元</DWY>
+    <CSID></CSID>
+    <KJSM>电费帐务实收分析</KJSM>
+    <LINENUM>1</LINENUM>
+    <PWIDTH>1340</PWIDTH>
+    <PHEIGHT>480</PHEIGHT>
+  </row>
+  <row>
+    <KJM>AP0025</KJM>
+    <LJH>0002</LJH>
+    <CODEBASE>applets</CODEBASE>
+    <ARCHIVE>chart.jar</ARCHIVE>
+    <SQL>select MC, get_round(byhsl,2) BYHSL, get_round(bnhsl,2) BNHSL FROM (select decode(a.dm,'50','合计',substr(mc,1,2)) mc, (select t.BYHSL from TJ_ZYZB t where t.dwm=a.dm and t.RQ=b.RQ) BYHSL, (select t.BNHSL from TJ_ZYZB t where t.dwm=a.dm and t.RQ=b.RQ) BNHSL from V_TJ_BMBM3 a,(select '@@YEAR,@@MONTH,' RQ from DUAL) b where a.YHDWDM='@@LS.DWDM,' ) Z</SQL>
+    <XSFS>4</XSFS>
+    <BT>@@YEAR,年各单位电费回收率情况</BT>
+    <POINTNUM></POINTNUM>
+    <T0>本月</T0>
+    <T1>本年</T1>
+    <T2></T2>
+    <T3></T3>
+    <DWX></DWX>
+    <DWY>%</DWY>
+    <CSID>1</CSID>
+    <KJSM>电费回收情况单位对比</KJSM>
+    <LINENUM>2</LINENUM>
+    <PWIDTH>410</PWIDTH>
+    <PHEIGHT>240</PHEIGHT>
+  </row>
+  <row>
+    <KJM>AP0026</KJM>
+    <LJH>0002</LJH>
+    <CODEBASE>applets</CODEBASE>
+    <ARCHIVE>chart.jar</ARCHIVE>
+    <SQL>SELECT decode(z.dm,'50','合计',substr(mc,1,2)) mc, (select to_char((NVL(BNQF,0)+NVL(LNQF1,0)+NVL(LNQF2,0))/10000,'999990.9999') ZQF from tj_ss_dldfrtj t WHERE t.DWM=z.DM AND RQ=(select max(rq) from tj_ss_dldfrtj where substr(rq,1,6)=z2.rq)) ZQF, (select to_char(BNQF/10000,'999990.9999') from tj_ss_dldfrtj t WHERE t.DWM=z.DM AND RQ=(select max(rq) from tj_ss_dldfrtj where substr(rq,1,6)=z2.rq)) BNQF, (select to_char(LNQF1/10000,'999990.9999') from tj_ss_dldfrtj t WHERE t.DWM=z.DM AND RQ=(select max(rq) from tj_ss_dldfrtj where substr(rq,1,6)=z2.rq)) LNQF1, (select to_char(LNQF2/10000,'999990.9999') from tj_ss_dldfrtj t WHERE t.DWM=z.DM AND RQ=(select max(rq) from tj_ss_dldfrtj where substr(rq,1,6)=z2.rq)) LNQF2 FROM V_TJ_BMBM3 z,(select '@@YEAR,@@MONTH,' RQ FROM DUAL) z2 WHERE z.yhdwdm='@@LS.DWDM,'</SQL>
+    <XSFS>4</XSFS>
+    <BT>@@YEAR,年各单位欠费情况</BT>
+    <POINTNUM></POINTNUM>
+    <T0>总欠费</T0>
+    <T1>本年欠费</T1>
+    <T2></T2>
+    <T3></T3>
+    <DWX></DWX>
+    <DWY>万元</DWY>
+    <CSID>1</CSID>
+    <KJSM>电费回收欠费情况</KJSM>
+    <LINENUM>2</LINENUM>
+    <PWIDTH>410</PWIDTH>
+    <PHEIGHT>240</PHEIGHT>
+  </row>
+  <row>
+    <KJM>AP0081</KJM>
+    <LJH>0002</LJH>
+    <CODEBASE>applets</CODEBASE>
+    <ARCHIVE>chart2.jar</ARCHIVE>
+    <SQL>select * from test_tu</SQL>
+    <XSFS>2</XSFS>
+    <BT>实时当月累计实收分析</BT>
+    <POINTNUM></POINTNUM>
+    <T0>实收</T0>
+    <T1></T1>
+    <T2></T2>
+    <T3></T3>
+    <DWX>月</DWX>
+    <DWY>亿元</DWY>
+    <CSID></CSID>
+    <KJSM>电费帐务实收分析</KJSM>
+    <LINENUM>1</LINENUM>
+    <PWIDTH></PWIDTH>
+    <PHEIGHT></PHEIGHT>
+  </row>
+  <row>
+    <KJM>AP0010</KJM>
+    <LJH>0002</LJH>
+    <CODEBASE>.</CODEBASE>
+    <ARCHIVE></ARCHIVE>
+    <SQL>select top 10 product_name,sum(a.fact_num) from order_product_list a,order_list b,series_list c where a.order_code=b.order_code and a.series_code=c.series_code and b.order_sts='5' and b.agent_code='@@LS.DWDM,' and product_code is not null and (b.order_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59' or '%'='@@ORDER_DATE2,') group by product_name order by sum(a.fact_num) desc</SQL>
+    <XSFS>1</XSFS>
+    <BT>进货产品前十名</BT>
+    <POINTNUM></POINTNUM>
+    <T0></T0>
+    <T1></T1>
+    <T2></T2>
+    <T3></T3>
+    <DWX></DWX>
+    <DWY></DWY>
+    <CSID></CSID>
+    <KJSM></KJSM>
+    <LINENUM>1</LINENUM>
+    <PWIDTH></PWIDTH>
+    <PHEIGHT></PHEIGHT>
+  </row>
+  <row>
+    <KJM>AP0011</KJM>
+    <LJH>0002</LJH>
+    <CODEBASE>.</CODEBASE>
+    <ARCHIVE></ARCHIVE>
+    <SQL>select c.series_name,sum(a.fact_num) from order_product_list a,order_list b,series_list c where a.order_code=b.order_code and a.series_code=c.series_code and b.order_sts='5' and b.agent_code='@@LS.DWDM,' and product_code is not null group by c.series_name order by sum(a.fact_num) desc</SQL>
+    <XSFS>5</XSFS>
+    <BT>物料使用频率最高前十名</BT>
+    <POINTNUM></POINTNUM>
+    <T0></T0>
+    <T1></T1>
+    <T2></T2>
+    <T3></T3>
+    <DWX>次</DWX>
+    <DWY>次</DWY>
+    <CSID></CSID>
+    <KJSM></KJSM>
+    <LINENUM>1</LINENUM>
+    <PWIDTH>350</PWIDTH>
+    <PHEIGHT>240</PHEIGHT>
+  </row>
+  <row>
+    <KJM>AP0012</KJM>
+    <LJH>0001</LJH>
+    <CODEBASE>.</CODEBASE>
+    <ARCHIVE></ARCHIVE>
+    <SQL>select c.series_name,sum(a.fact_num) from order_product_list a,order_list b,series_list c where a.order_code=b.order_code and a.series_code=c.series_code and b.order_sts='5' and b.agent_code='@@LS.DWDM,' and product_code is not null and (b.order_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59' or '%'='@@ORDER_DATE2,') group by c.series_name order by sum(a.fact_num) desc</SQL>
+    <XSFS>5</XSFS>
+    <BT>按产品系列分析进货</BT>
+    <POINTNUM></POINTNUM>
+    <T0></T0>
+    <T1></T1>
+    <T2></T2>
+    <T3></T3>
+    <DWX>个</DWX>
+    <DWY>个</DWY>
+    <CSID></CSID>
+    <KJSM></KJSM>
+    <LINENUM>1</LINENUM>
+    <PWIDTH>350</PWIDTH>
+    <PHEIGHT>240</PHEIGHT>
+  </row>
+  <row>
+    <KJM>AP0013</KJM>
+    <LJH></LJH>
+    <CODEBASE>.</CODEBASE>
+    <ARCHIVE></ARCHIVE>
+    <SQL>select MaterialName,MaterialNum from stock a,materialkind b where a.materialkind=b.kindid and (materialkind = '@@KIND,' or '%'='@@KIND,')</SQL>
+    <XSFS>5</XSFS>
+    <BT>按物料类型分析物料的数量</BT>
+    <POINTNUM></POINTNUM>
+    <T0></T0>
+    <T1></T1>
+    <T2></T2>
+    <T3></T3>
+    <DWX>个</DWX>
+    <DWY>个</DWY>
+    <CSID></CSID>
+    <KJSM></KJSM>
+    <LINENUM>1</LINENUM>
+    <PWIDTH>350</PWIDTH>
+    <PHEIGHT>240</PHEIGHT>
+  </row>
+  <row>
+    <KJM>AP0027</KJM>
+    <LJH>0002</LJH>
+    <CODEBASE>applets</CODEBASE>
+    <ARCHIVE>d3bintu.jar</ARCHIVE>
+    <SQL>select substr(mc,1,4),ljydhs from (select t.dm dm,t.mc mc,sum(a.ljydhs) ljydhs,sum(a.bnydhs) bnydhs,sum(a.byydhs) byydhs from V_TJ_YDLB t,(select dwm,rq,substr(ydlb,1,1) ydlb,sum(ljydhs) ljydhs,sum(bnydhs) bnydhs,sum(byydhs) byydhs from tj_ydhstj where dwm='@@LS.DWDM,' and rq=(select MAX(RQ) rq FROM TJ_YDHSTJ WHERE DWM='@@LS.DWDM,' and RQ&lt;='@@YEAR,@@MONTH,') group by dwm,rq,substr(ydlb,1,1)) a where a.ydlb like t.dm and t.dm&lt;&gt;'%' group by t.dm,t.mc order by dm ) z order by z.dm</SQL>
+    <XSFS>3</XSFS>
+    <BT>总用户数按用电类别分析</BT>
+    <POINTNUM></POINTNUM>
+    <T0></T0>
+    <T1></T1>
+    <T2></T2>
+    <T3></T3>
+    <DWX>户</DWX>
+    <DWY></DWY>
+    <CSID>2</CSID>
+    <KJSM>用户数按用电类别</KJSM>
+    <LINENUM>2</LINENUM>
+    <PWIDTH>350</PWIDTH>
+    <PHEIGHT>240</PHEIGHT>
+  </row>
+  <row>
+    <KJM>AP0028</KJM>
+    <LJH>0002</LJH>
+    <CODEBASE>applets</CODEBASE>
+    <ARCHIVE>d3bintu.jar</ARCHIVE>
+    <SQL>select mc,ljydhs from ( select t.dm dm,t.mc mc,sum(a.ljydhs) ljydhs,sum(a.bnydhs) bnydhs,sum(a.byydhs) byydhs from V_TJ_DYDJ t,(select dwm,rq,dydj,sum(ljydhs) ljydhs,sum(bnydhs) bnydhs,sum(byydhs) byydhs from tj_ydhstj where dwm='@@LS.DWDM,' and rq=(select MAX(RQ) rq FROM TJ_YDHSTJ WHERE DWM='@@LS.DWDM,' and RQ&lt;='@@YEAR,@@MONTH,') group by dwm,rq,dydj) a where a.dydj like t.dm and t.dm&lt;&gt;'%' group by t.dm,t.mc order by dm) z order by z.dm</SQL>
+    <XSFS>3</XSFS>
+    <BT>总用户数按电压等级分析</BT>
+    <POINTNUM></POINTNUM>
+    <T0></T0>
+    <T1></T1>
+    <T2></T2>
+    <T3></T3>
+    <DWX>户</DWX>
+    <DWY></DWY>
+    <CSID>2</CSID>
+    <KJSM>用户数按电压等级</KJSM>
+    <LINENUM>2</LINENUM>
+    <PWIDTH>350</PWIDTH>
+    <PHEIGHT>240</PHEIGHT>
+  </row>
+  <row>
+    <KJM>AP0029</KJM>
+    <LJH>0002</LJH>
+    <CODEBASE>applets</CODEBASE>
+    <ARCHIVE>d3bintu.jar</ARCHIVE>
+    <SQL>select substr(MC,1,3) mc, get_round(BYDL/10000,4) bydl FROM ( select a.MC MC, (select sum(t.zdl) from TJ_DJFLTJJB t where t.dwm=b.dwm and substr(t.ydlb,1,1)=a.DM and t.rq=b.rq) BYDL, a.dm from V_TJ_YDLB a,(select '@@LS.DWDM,' DWM,'@@YEAR,@@MONTH,' RQ from DUAL) b where a.dm&lt;&gt;'%' ) z order by dm</SQL>
+    <XSFS>3</XSFS>
+    <BT>@@YEAR,年@@MONTH,月按用电类别分类电量销售情况</BT>
+    <POINTNUM></POINTNUM>
+    <T0></T0>
+    <T1></T1>
+    <T2></T2>
+    <T3></T3>
+    <DWX>万kWh</DWX>
+    <DWY></DWY>
+    <CSID>2</CSID>
+    <KJSM>售电量按用电类别</KJSM>
+    <LINENUM>2</LINENUM>
+    <PWIDTH>350</PWIDTH>
+    <PHEIGHT>240</PHEIGHT>
+  </row>
+  <row>
+    <KJM>AP0030</KJM>
+    <LJH>0002</LJH>
+    <CODEBASE>applets</CODEBASE>
+    <ARCHIVE>chart2.jar</ARCHIVE>
+    <SQL>select substr(RQ,5,2)||'/'||substr(RQ,7,2) rq, (select decode(sign(sum(YS)/100000000),-1,0,get_round(sum(ys)/100000000,4)) YS from D_ZWRTJ t where substr(t.RQ,1,6)=substr(a.rq,1,6) and t.rq&lt;=a.rq) YS from tj_rq a where rq&gt;= to_char(add_months(to_date('@@YEAR,@@MONTH,','yyyymm'),-1),'yyyymm') and rq&lt;='@@YEAR,@@MONTH,32' and rq&lt;= to_char(sysdate-1,'yyyymmdd')</SQL>
+    <XSFS>2</XSFS>
+    <BT>实时当月累计应收分析</BT>
+    <POINTNUM></POINTNUM>
+    <T0>应收出帐</T0>
+    <T1></T1>
+    <T2></T2>
+    <T3></T3>
+    <DWX>日</DWX>
+    <DWY>亿元</DWY>
+    <CSID></CSID>
+    <KJSM>电费帐务应收分析</KJSM>
+    <LINENUM>1</LINENUM>
+    <PWIDTH></PWIDTH>
+    <PHEIGHT></PHEIGHT>
+  </row>
+</data>

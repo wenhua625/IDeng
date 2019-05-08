@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="GB2312"?>
+<datasource-configuration>
+	
+	<datasources>
+		<datasource name="local">
+			<connection>
+				<property name="conn_pool_size">10</property>
+				<property name="stmt_pool_size">10</property>
+				<property name="driver">com.microsoft.jdbc.sqlserver.SQLServerDriver</property>
+				<property name="url">jdbc:microsoft:sqlserver://127.0.0.1:1433;DatabaseName=web_fsilon</property>
+				<property name="stmt_max_size">200</property>
+				<property name="idle_timeout">1200</property>
+				<property name="shrink_interval">1000</property>
+				<property name="user">sa</property>
+				<property name="password">salsa</property>
+				<property name="encoding">GBK</property>
+			</connection>
+			<property name="encoding">GBK</property>
+			<property name="read_only">false</property>
+			<property name="show_result">false</property>
+			<property name="dialect">sqlserver</property>
+		</datasource>
+	</datasources>
+	
+	<systemConfig>
+		<root>salsa\</root>
+		<title>法狮龙吊顶ERP系统</title>
+		<errorpage>error/error1.htm</errorpage>
+		<errorloginpage>error/error.htm</errorloginpage>
+		<errorsessionpage>error/errorsessionpage.htm</errorsessionpage>
+		<authorization>1</authorization>
+		
+		<bgColor>#a29524</bgColor>
+		<bgImage>0573-86727878</bgImage>
+		<systemBHD>法狮龙吊顶</systemBHD>
+		<systemFHD>浙江海盐法狮龙建材有限公司</systemFHD>
+		<systemTYD>海盐武原工业园金星园区</systemTYD>
+		<!-- 授权金额 -->
+		<authAmount>3000</authAmount>
+	</systemConfig>	
+</datasource-configuration>

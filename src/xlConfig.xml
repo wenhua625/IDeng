@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<data>
+  <row>
+    <KJM>XL0001</KJM>
+    <XLKM>SERIES_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>SELECT SERIES_CODE value, SERIES_NAME name FROM Series_list_Z where STS='0' and agent_code='@@Agent_Code,'</SQL>
+    <KJSM>产品系列</KJSM>
+  </row>
+  <row>
+    <KJM>XL0002</KJM>
+    <XLKM>SERIES_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>SELECT SERIES_CODE, SERIES_NAME FROM Series_list where STS='0' and series_type='成品'</SQL>
+    <KJSM>产品系列</KJSM>
+  </row>
+  <row>
+    <KJM>XL0003</KJM>
+    <XLKM>DOMAIN_MAN</XLKM>
+    <LJH>0001</LJH>
+    <SQL>SELECT YHH,YHXM FROM TJ_SYS_YH WHERE YHZ='区域经理' and sts='0'</SQL>
+    <KJSM>业务员列表</KJSM>
+  </row>
+  <row>
+    <KJM>AL0004</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>SELECT AGENT_CODE value, AGENT_NAME name FROM Agent_list where agent_type='sup'</SQL>
+    <KJSM>供应商列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0006</KJM>
+    <XLKM>PRICE_TYPE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>SELECT PRICE,PRICE_NAME+'('+convert(varchar(10),PRICE)+')' FROM Price_list order by price_code</SQL>
+    <KJSM>价格管理</KJSM>
+  </row>
+  <row>
+    <KJM>XL0007</KJM>
+    <XLKM>DEPT</XLKM>
+    <LJH>0001</LJH>
+    <SQL>SELECT '20','全部' FROM WAREHOUSE_LIST UNION SELECT WAREHOUSE_CODE,WAREHOUSE_NAME FROM WAREHOUSE_LIST WHERE AGENT_CODE='20'</SQL>
+    <KJSM>仓库列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0008</KJM>
+    <XLKM>WARECODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select Agent_code value,Agent_name name from agent_list where agent_code in (@@LS.QXDP,)</SQL>
+    <KJSM>查询时仓库列表</KJSM>
+  </row>
+ <row>
+    <KJM>XL0009</KJM>
+    <XLKM>DOMAIN_MAN</XLKM>
+    <LJH>0001</LJH>
+    <SQL>SELECT YHH,YHXM FROM TJ_SYS_YH WHERE YHZ='区域经理'</SQL>
+    <KJSM>业务员列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0010</KJM>
+    <XLKM>AGENT</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code,agent_name from agent_list where agent_code !='20' order by agent_name</SQL>
+    <KJSM>总代理</KJSM>
+  </row>
+  <row>
+    <KJM>XL0012</KJM>
+    <XLKM>AGENT</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code,agent_name from agent_list where agent_code ='@@LS.DWDM,' union select agent_code,agent_name from agent_list where agent_code ='@@LS.WARE,' and agent_code!='20'</SQL>
+    <KJSM>总代理1</KJSM>
+  </row>
+  <row>
+    <KJM>XL0014</KJM>
+    <XLKM>AGENT</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code,agent_name from agent_list where SJBM='@@LS.DWDM,' union select agent_code,agent_name from agent_list where agent_code='@@LS.DWDM,' and agent_code!='20'</SQL>
+    <KJSM>总代理</KJSM>
+  </row>
+  <row>
+    <KJM>XL0015</KJM>
+    <XLKM>WARECODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select warehouse_code,warehouse_name from warehouse_list where agent_code='@@LS.DWDM,'</SQL>
+    <KJSM>仓库表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0016</KJM>
+    <XLKM>WARECODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select warehouse_code,warehouse_name from warehouse_list where warehouse_code='@@LS.WARE,' or warehouse_code='@@LS.WARE,'+1000</SQL>
+    <KJSM>仓库表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0017</KJM>
+    <XLKM>WARECODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code,agent_name from agent_list where agent_code!='20'</SQL>
+    <KJSM>总代理仓库表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0018</KJM>
+    <XLKM>AGENT_TYPE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name+'|'+agent_code name from agent_list where  sjbm='-1' and agent_code!='00'</SQL>
+    <KJSM>客户类型</KJSM>
+  </row>
+  <row>
+    <KJM>XL0019</KJM>
+    <XLKM>WARE_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select warehouse_code,warehouse_name from warehouse_list where agent_code is not null</SQL>
+    <KJSM>内部仓库</KJSM>
+  </row>
+  <row>
+    <KJM>XL0020</KJM>
+    <XLKM>CHECKAGENT</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select a.agent_code,agent_name from product_spec a,agent_list b where a.agent_code=b.agent_code and product_code='@@PRODUCT_CODE,'</SQL>
+    <KJSM>特价代理选定</KJSM>
+  </row>
+  <row>
+    <KJM>XL0021</KJM>
+    <XLKM>ALLAGENT</XLKM>
+    <LJH>0001</LJH>
+    <SQL>SELECT AGENT_CODE, AGENT_NAME FROM Agent_list where agent_code !='20' and agent_code not in(select agent_code from product_spec where product_code='@@PRODUCT_CODE,' )</SQL>
+    <KJSM>特价代理所有</KJSM>
+  </row>
+  <row>
+    <KJM>XL0022</KJM>
+    <XLKM>PRODUCT_SPEC</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select 'in','特价' union select 'not in','非特价'</SQL>
+    <KJSM>是否为特价</KJSM>
+  </row>
+  <row>
+    <KJM>XL0023</KJM>
+    <XLKM>DEPT</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name name from agent_list where sjbm=-1</SQL>
+    <KJSM>总部部门列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0024</KJM>
+    <XLKM>SHOP_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>SELECT agent_code,agent_name FROM Agent_list where agent_code not in('20') and agent_code not in (select shop_code from bill_list)</SQL>
+    <KJSM>账户管理</KJSM>
+  </row>
+  <row>
+    <KJM>XL0025</KJM>
+    <XLKM>WARE_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select distinct print_code,print_name from warehouse_list where print_code is not null</SQL>
+    <KJSM>打印备货</KJSM>
+  </row>
+  <row>
+    <KJM>XL0026</KJM>
+    <XLKM>WARE_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select warehouse_code,warehouse_name from warehouse_list where agent_code is null</SQL>
+    <KJSM>成品库</KJSM>
+  </row>
+  <row>
+    <KJM>XL0027</KJM>
+    <XLKM>ORDER_STS</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select ORDER_STS,STS_DEMO from order_sts</SQL>
+    <KJSM>状态</KJSM>
+  </row>
+  <row>
+    <KJM>XL0028</KJM>
+    <XLKM>PRODUCT_TYPE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select pricetype_id,pricetype_name from price_type</SQL>
+    <KJSM>价格类型</KJSM>
+  </row>
+  <row>
+    <KJM>XL0A01</KJM>
+    <XLKM>PRODUCT_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select product_code,product_code from product_list</SQL>
+    <KJSM>A:入库时选择产品</KJSM>
+  </row>
+  <row>
+    <KJM>AL0T01</KJM>
+    <XLKM>PRODUCT_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code Value,agent_name Name from agent_list where domain_man='@@LS.YHDM,' and len(sjbm)=2  and open_flag !='2'</SQL>
+    <KJSM>AJAX:自动完成式下拉框</KJSM>
+  </row>
+  <row>
+    <KJM>AL0T02</KJM>
+    <XLKM>PRODUCT_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code Value,agent_name Name from agent_list where len(agent_code)>2 and open_flag !='2'</SQL>
+    <KJSM>AJAX:自动完成式下拉框</KJSM>
+  </row>
+  <row>
+    <KJM>AL0029</KJM>
+    <XLKM>AGENT_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code Value,agent_name Name from agent_list where sjbm='@@LS.DWDM,' order by agent_code</SQL>
+    <KJSM>客户选择下拉框</KJSM>
+  </row>
+  <row>
+    <KJM>XL0030</KJM>
+    <XLKM>AppadId</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select ID,isNull(product_code,'')+PRODUCT_NAME from order_product_list where (product_code is null or product_code  in (select product_code from product_list where len(isNull(product_txm,''))=0 )) and order_code='@@ORDER_CODE,' </SQL>
+    <KJSM>客户选择下拉框</KJSM>
+  </row>
+  <row>
+    <KJM>XL0031</KJM>
+    <XLKM>AGENT_TYPE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select bm value,mc name from BM_JGLX</SQL>
+    <KJSM>执价方式</KJSM>
+  </row>
+  <row>
+    <KJM>XL0032</KJM>
+    <XLKM>Order_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code,agent_ping+'|'+agent_name from agent_list where agent_type in ('shop','sales') order by agent_ping</SQL>
+    <KJSM>专卖店列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0033</KJM>
+    <XLKM>Shop_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code,agent_name from agent_list where sjbm='@@LS.DWDM,'</SQL>
+    <KJSM>专卖店列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0034</KJM>
+    <XLKM>Pos_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select '' value,'全部' name union select agent_code value,agent_name name from agent_list where agent_type='shop' and open_flag='1'</SQL>
+    <KJSM>片区列表</KJSM>
+  </row>
+  <!-- 二期工程 -->
+  <row>
+    <KJM>XL0035</KJM>
+    <XLKM>Product_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select Product_Code,Product_Name,Product_Num-Abs_Num Product_Num,convert(varchar,pack_num)+product_untl+'/'+pack_type product_untl from product_list</SQL>
+    <KJSM>产品列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0036</KJM>
+    <XLKM>Product_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select Product_Code,Product_Name,Bad_Num Product_Num,convert(varchar,pack_num)+product_untl+'/'+pack_type product_untl from product_list</SQL>
+    <KJSM>产品列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0037</KJM>
+    <XLKM>Product_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select a.agent_code id ,a.agent_name text,(select count(*) from agent_list where sjbm=a.agent_code) leaf from agent_list a where a.sjbm='@@ParentId,'</SQL>
+    <KJSM>组织结构树</KJSM>
+  </row>
+  <row>
+    <KJM>XL0038</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code Value,agent_name Name from agent_list where len(agent_code) =2</SQL>
+    <KJSM>客户片区信息</KJSM>
+  </row>
+  <row>
+    <KJM>XL0039</KJM>
+    <XLKM>Product_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select Product_Code,Product_Name, Product_Num, product_untl from a_stock where agent_code='@@LS.DWDM,'</SQL>
+    <KJSM>片区产品列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0040</KJM>
+    <XLKM>YHH</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select yhh,yhxm from tj_sys_yh where yhz in ('zbjl')</SQL>
+    <KJSM>经理列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0041</KJM>
+    <XLKM>Pos_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select '' value,'全部' name union select agent_code value,agent_name name from agent_list where sjbm='@@Sjbm,'</SQL>
+    <KJSM>片区下专卖店列表</KJSM>
+  </row>
+  <row>
+    <KJM>AL0T42</KJM>
+    <XLKM>PRODUCT_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code Value,agent_name Name from agent_list where len(agent_code)>2 </SQL>
+    <KJSM>AJAX:自动完成式下拉框</KJSM>
+  </row>
+  <row>
+    <KJM>AL0T43</KJM>
+    <XLKM>PRODUCT_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code Value,agent_name Name from agent_list where domain_man='@@LS.YHDM,'</SQL>
+    <KJSM>AJAX:自动完成式下拉框</KJSM>
+  </row>
+  <row>
+    <KJM>XL0044</KJM>
+    <XLKM>CGD</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select Back_code,Back_Code from backlist where back_sts='1' and note_type='CG'</SQL>
+    <KJSM>总部采购单列表</KJSM>
+  </row>
+  <row>
+    <KJM>AL0T45</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name+'仓库' name from agent_list where agent_code='@@LS.DWDM,'</SQL>
+    <KJSM>自己仓库</KJSM>
+  </row>
+  <row>
+    <KJM>AL0T46</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name name from agent_list where agent_code!='@@LS.DWDM,' and sjbm=-1</SQL>
+    <KJSM>调入仓库</KJSM>
+  </row>
+  <row>
+    <KJM>XL0047</KJM>
+    <XLKM>CGD</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select back_code,back_code+agent_name from backlist a,agent_list b  where a.opr_dw=b.agent_code and note_type='ZTB' and a.agent_code='@@LS.DWDM,' and back_sts='1'</SQL>
+    <KJSM>总部调拨单列表</KJSM>
+  </row>
+ <row>
+    <KJM>AL0T48</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name+brand_code name from agent_list where  brand_code in(@@LS.QXQT,) and sjbm in (@@LS.QXCK,) and open_flag='启用'</SQL>
+    <KJSM>调入仓库</KJSM>
+  </row>
+  <row>
+    <KJM>XL0T48</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name+brand_code name from agent_list where  brand_code in(@@LS.QXQT,) and sjbm in (@@LS.QXCK,) and open_flag='启用'</SQL>
+    <KJSM>调入仓库</KJSM>
+  </row>
+  <row>
+    <KJM>AL0T49</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name+brand_code name from agent_list where agent_code='00'</SQL>
+    <KJSM>总部仓库</KJSM>
+  </row>
+   <row>
+    <KJM>XL0050</KJM>
+    <XLKM>CGD</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select back_code,back_code+agent_name from backlist a,agent_list b  where a.opr_dw=b.agent_code and note_type='0' and a.agent_code='@@LS.DWDM,' and back_sts='2'</SQL>
+    <KJSM>总部调拨单列表</KJSM>
+  </row>
+   <row>
+    <KJM>XL0051</KJM>
+    <XLKM>AGENT_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name+brand_code name from agent_list where  sjbm=-1</SQL>
+    <KJSM>调入仓库</KJSM>
+  </row>
+  <row>
+    <KJM>AL0T52</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select '' value,'全部' name union select agent_code value,agent_name+brand_code name from agent_list where agent_code!='@@LS.DWDM,' and sjbm=-1</SQL>
+    <KJSM>调入仓库</KJSM>
+  </row>
+  <row>
+    <KJM>XL0053</KJM>
+    <XLKM>YWY</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select yhxm value,yhxm name from tj_sys_yh where  yhz='区域经理'</SQL>
+    <KJSM>服务工程列表</KJSM>
+  </row>
+  <row>
+    <KJM>AL0054</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name+'分公司' name from agent_list where agent_code='@@LS.DWDM,' and agent_code!='00' and sjbm=-1</SQL>
+    <KJSM>业务员列表</KJSM>
+  </row>
+  <row>
+    <KJM>AL0055</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name name from agent_list where   sjbm=-1 and agent_code!='00'</SQL>
+    <KJSM>业务员列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0056</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name name from agent_list where  sjbm !='-1' and open_flag='启用'</SQL>
+    <KJSM>业务员列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0057</KJM>
+    <XLKM>AGENT_CODE8</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name name from agent_list where agent_code!='@@LS.DWDM,' and sjbm=-1</SQL>
+    <KJSM>分公司</KJSM>
+  </row>
+  <row>
+    <KJM>XL0058</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name+brand_code name from agent_list where   sjbm='@@Sjbm,' and open_flag='启用'</SQL>
+    <KJSM>分公司下的客户</KJSM>
+  </row>
+  <row>
+    <KJM>XL0059</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name+brand_code name from agent_list where  agent_name like '%@@DWBM,%' and open_flag='启用'</SQL>
+    <KJSM>总部仓库</KJSM>
+  </row>
+  <row>
+    <KJM>XL0060</KJM>
+    <XLKM>AGENT_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name+brand_code name from agent_list where agent_code='@@LS.DWDM,'</SQL>
+    <KJSM>自己仓库</KJSM>
+  </row>
+  <row>
+    <KJM>XL0061</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select '' value,'全部'  name union select agent_code value,agent_name+brand_code name from agent_list where   sjbm='@@AGENT_CODE,'</SQL>
+    <KJSM>所有分公司下的客户</KJSM>
+  </row>
+  <row>
+    <KJM>XL0062</KJM>
+    <XLKM>YWY</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select '' value,'全部'  name union select yhxm value,yhxm name from tj_sys_yh where  yhz='ywy'</SQL>
+    <KJSM>按分公司服务工程列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0063</KJM>
+    <XLKM>AGENT_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select '' value,'全部'  name union select agent_code value,agent_name name from agent_list where  sjbm=-1</SQL>
+    <KJSM>所有分公司</KJSM>
+  </row>
+  <row>
+    <KJM>XL0064</KJM>
+     <XLKM>AGENT_CODE8</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name name from agent_list where agent_code!='@@LS.DWDM,' and sjbm=-1  and agent_code in (@@LS.QXCK,)</SQL>
+    <KJSM>按权限划分分公司</KJSM>
+  </row>
+  <row>
+    <KJM>XL0065</KJM>
+    <XLKM>AGENT_CODE8</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name name from agent_list where agent_code!='@@LS.DWDM,' and sjbm=-1 </SQL>
+    <KJSM>按权限划分分公司</KJSM>
+  </row>
+  <row>
+    <KJM>XL1001</KJM>
+    <XLKM>Series_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select series_code id,series_name+'(&lt;font color=red&gt;'+convert(varchar,(select count(*) from product_list where series_code=a.series_code))+'&lt;/font&gt;)' text, 0 leaf,'s_main' hrefTarget,'display?proname=metails/metailsinfo.htm&amp;SERIES_CODE='+convert(varchar,series_code) href from Series_list a where series_code in (select series_code from series_list where series_type='物料') </SQL>
+    <KJSM>产品系列表(树形)</KJSM>
+  </row>
+  <row>
+    <KJM>XL1002</KJM>
+    <XLKM>Back_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select back_code id,dbo.getAgentName(agent_code)+right(back_code,7)+'(&lt;font color=red&gt;'+dbo.getSts(back_sts)+'&lt;/font&gt;)' text,dbo.getSupName(agent_code)+right(back_code,7)+'(&lt;font color=red&gt;'+dbo.getSts(back_sts)+'&lt;/font&gt;)' qtip, 0 leaf,'s_main' hrefTarget,'display?proname=ticket/@@Note_Type,d.htm&amp;BACK_CODE='+convert(varchar,back_code) href  from backlist where note_type='@@Note_Type,' and back_sts!='2' order by id</SQL>
+    <KJSM>未提交的销售单(树形)</KJSM>
+  </row>
+  <row>
+    <KJM>XL1003</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>SELECT AGENT_CODE value, AGENT_NAME name FROM Sup_list order by agent_name</SQL>
+    <KJSM>供应商列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL1004</KJM>
+    <XLKM>WARE_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select ware_code value,ware_code name from  WareList  order by ware_code</SQL>
+    <KJSM>仓位列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL1005</KJM>
+    <XLKM>DEPT</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select brand_name value ,brand_chnname+'【'+brand_name+'】' name from brand_list where 1=1</SQL>
+    <KJSM>品牌列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL1006</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name name from agent_list where agent_code='@@LS.DWDM,'</SQL>
+    <KJSM>公司生产部</KJSM>
+  </row>
+  <row>
+    <KJM>XL1007</KJM>
+    <XLKM>MM_Y</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select MM_Y value,MM_Y name from ( select datepart(year,dateadd(year,1,getdate())) MM_Y union select datepart(year,dateadd(year,0,getdate()))  union select datepart(year,dateadd(year,-1,getdate())) union select datepart(year,dateadd(year,-2,getdate())) union select datepart(year,dateadd(year,-3,getdate())) union select datepart(year,dateadd(year,-4,getdate())) )x</SQL>
+    <KJSM>最近几年的年份</KJSM>
+  </row>
+  <row>
+    <KJM>XLP003</KJM>
+    <XLKM>JBRBM</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select  yhh,yhxm from tj_sys_yh where yhz='ckadmin'</SQL>
+    <KJSM>营业员列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL1008</KJM>
+    <XLKM>XL_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>SELECT bm XL_CODE, mc XL_NAME FROM xl_list_z where agent_code='@@Agent_Code,'</SQL>
+    <KJSM>系列</KJSM>
+  </row>
+  <!-- 20130418升级部分 -->
+ <row>
+    <KJM>XLS001</KJM>
+    <XLKM>lb</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select bm,mc from sc_bm_splb</SQL>
+    <KJSM>物料类别</KJSM>
+  </row>
+  <row>
+    <KJM>XLS002</KJM>
+    <XLKM>DWBM</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select bm,mc from sc_bm_wldw where 1=1</SQL>
+    <KJSM>供货商列表</KJSM>
+  </row>
+   <row>
+    <KJM>XLS003</KJM>
+    <XLKM>zb</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select bm,mc from sc_bm_wldw where 1=1</SQL>
+    <KJSM>供货商列表</KJSM>
+  </row>
+  <row>
+    <KJM>XLS004</KJM>
+    <XLKM>PPBM</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select brand_name value ,brand_name name from brand_list</SQL>
+    <KJSM>品牌列表</KJSM>
+  </row>
+  <row>
+    <KJM>XLS005</KJM>
+    <XLKM>JBRBM</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select yhh,yhxm from tj_sys_yh where dept='@@LS.DWDM,'</SQL>
+    <KJSM>领用人列表</KJSM>
+  </row>
+  <row>
+    <KJM>XLS006</KJM>
+    <XLKM>SERIES_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select bm value,mc name from xl_list_z where sjbm='@@SERIES_CODE,' and agent_code='@@Agent_Code,'</SQL>
+    <KJSM>系列列表</KJSM>
+  </row>
+  <row>
+    <KJM>XLS007</KJM>
+    <XLKM>Demo</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select bm value,mc name from bm_skfs where bm!='货款' order by pxh</SQL>
+    <KJSM>收款方式列表</KJSM>
+  </row>
+  <row>
+    <KJM>XLS008</KJM>
+    <XLKM>Arr_Address</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select bank_name value,bank_name name from bm_bank</SQL>
+    <KJSM>收款行列表</KJSM>
+  </row>
+  <row>
+    <KJM>XLS009</KJM>
+    <XLKM>Exp_Name</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select exp_name value,exp_name name from exp_list</SQL>
+    <KJSM>快递公司列表</KJSM>
+  </row>
+  <row>
+    <KJM>XLS010</KJM>
+    <XLKM>zb</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select bm value,mc name from sc_bm_wldw where  mc like '%@@M_DWBM,%'</SQL>
+    <KJSM>供货商列表</KJSM>
+  </row>
+  <row>
+    <KJM>XLS011</KJM>
+    <XLKM>zb</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select bm value,mc name from sc_bm_wldw where  mc like '%@@M_DWBM,%'</SQL>
+    <KJSM>供货商列表</KJSM>
+  </row>
+  <row>
+    <KJM>XLS014</KJM>
+    <XLKM>MM_Y</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select MM_Y value,MM_Y name from (  select datepart(year,dateadd(year,0,getdate())) MM_Y  union select datepart(year,dateadd(year,-1,getdate())) union select datepart(year,dateadd(year,-2,getdate())) union select datepart(year,dateadd(year,-3,getdate())) union select datepart(year,dateadd(year,-4,getdate())) )x order by MM_Y desc</SQL>
+    <KJSM>最近几年的年份</KJSM>
+  </row>
+  <row>
+    <KJM>XLS016</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select dwbm value,mc+'['+convert(varchar,dj)+' '+lxr+' '+dh+']' name from product_wldw a,sc_bm_wldw b where a.dwbm=b.bm and product_id='@@Product_Code,'</SQL>
+    <KJSM>供应商选择</KJSM>
+  </row>
+  <row>
+    <KJM>XLS017</KJM>
+    <XLKM>Agent_Level</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select level_name value,level_name name from Agent_Level</SQL>
+    <KJSM>客户级别</KJSM>
+  </row>
+   <row>
+    <KJM>XLP001</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code value,agent_name+brand_code name from agent_list where sjbm in (@@LS.QXCK,) and open_flag='启用'</SQL>
+    <KJSM>自己管辖的客户按身份管辖</KJSM>
+  </row>
+   <row>
+    <KJM>XLP002</KJM>
+    <XLKM>store_no</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select bm,mc from bm_cw</SQL>
+    <KJSM>仓位</KJSM>
+  </row>
+   <row>
+    <KJM>ALP003</KJM>
+    <XLKM>ID_RWD</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select JH_ID value,PSID+'&lt;'+XHGG+'&gt;'+'('+SPMC+')  生产数量：'+convert(varchar,SL)+jldw name from jhd_mx where isJA='F'</SQL>
+    <KJSM>生产指令单</KJSM>
+  </row>
+   <row>
+    <KJM>XLP007</KJM>
+    <XLKM>ID_RWD</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select JH_ID value,PSID+'&lt;'+XHGG+'&gt;'+'('+SPMC+')  生产数量：'+convert(varchar,SL)+jldw name from jhd_mx where isJA='F'</SQL>
+    <KJSM>生产指令单</KJSM>
+  </row>
+  <row>
+    <KJM>XLP008</KJM>
+    <XLKM>zb</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select bm value,mc name from sc_bm_wldw where 1=1</SQL>
+    <KJSM>供货商列表</KJSM>
+  </row>
+  <row>
+    <KJM>XLP009</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>SELECT SERIES_CODE value, SERIES_NAME name FROM Series_list_z where agent_code='@@Agent_Code,'</SQL>
+    <KJSM>产品系列</KJSM>
+  </row>
+  <row>
+    <KJM>XLP010</KJM>
+    <XLKM>Srv_Man</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select lxfs,yhxm from tj_sys_yh where dept='@@LS.DWDM,'</SQL>
+    <KJSM>领用人列表</KJSM>
+  </row>
+  <row>
+    <KJM>XLP011</KJM>
+    <XLKM>Agent_Code</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select agent_code,agent_name from agent_list where brand_code in (@@LS.QXQT,) and sjbm!='-1'</SQL>
+    <KJSM>领用人列表</KJSM>
+  </row>
+  <row>
+    <KJM>XLP012</KJM>
+    <XLKM>DEPT</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select brand_name value ,brand_chnname+'【'+brand_name+'】' name from brand_list where brand_name in (@@LS.QXQT,)</SQL>
+    <KJSM>品牌列表</KJSM>
+  </row>
+    <row>
+    <KJM>XLP013</KJM>
+    <XLKM>DEPT</XLKM>
+    <LJH>0001</LJH>
+    <SQL> select lxfs value,yhxm name from tj_sys_yh a,agent_list b where a.DEPT=b.AGENT_CODE  and sts='0' and yhz='终端店面' and a.dept in (@@LS.QXDP,)</SQL>
+    <KJSM>店铺人员列表</KJSM>
+  </row>
+  <row>
+    <KJM>XLS021</KJM>
+    <XLKM>zb</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select brand_name value,brand_chnname name from brand_list where  brand_name like '%@@M_DWBM,%'</SQL>
+    <KJSM>供货商列表</KJSM>
+  </row>
+  <row>
+    <KJM>XL0066</KJM>
+    <XLKM>SERIES_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>SELECT SERIES_CODE value, SERIES_NAME name FROM Series_list where STS='0' and brand_code='@@Brand_Code,' order by series_pxh</SQL>
+    <KJSM>产品系列</KJSM>
+  </row>
+   <row>
+    <KJM>XL0067</KJM>
+    <XLKM>XL_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>SELECT bm XL_CODE, mc XL_NAME FROM xl_list where brand_code ='@@Brand_Code,' order by xl</SQL>
+    <KJSM>系列</KJSM>
+  </row>
+   <row>
+    <KJM>XL0068</KJM>
+    <XLKM>SERIES_CODE</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select bm value,mc name from xl_list where sjbm='@@SERIES_CODE,' and brand_code='@@Brand_Code,'</SQL>
+    <KJSM>系列列表</KJSM>
+  </row>
+   <row>
+    <KJM>XL0069</KJM>
+    <XLKM>SCCJ</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select mc value,mc name FROM sc_bm_wldw  where agent_code='@@LS.DWDM,'</SQL>
+    <KJSM>生产厂家</KJSM>
+  </row>
+   <row>
+    <KJM>XL0070</KJM>
+    <XLKM>Arr_Address</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select housing_name value,housing_name name from housing_address where agent_code='@@LS.DWDM,' order by housing_name</SQL>
+    <KJSM>小区列表</KJSM>
+  </row>
+   <row>
+    <KJM>XL0071</KJM>
+    <XLKM>BM</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select mc value,mc name from bm_fylb where agent_code='@@agent_code,' </SQL>
+    <KJSM>费用列表</KJSM>
+  </row>
+   <row>
+    <KJM>XL0072</KJM>
+    <XLKM>yhxm</XLKM>
+    <LJH>0001</LJH>
+    <SQL>select yhh value,yhxm name from  tj_sys_yh where dept='@@agent_code,' </SQL>
+    <KJSM>费用列表</KJSM>
+  </row>
+  
+  
+  
+</data>

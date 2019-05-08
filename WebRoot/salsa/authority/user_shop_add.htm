@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" src="inc/formvalidate.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" src="inc/standardoutput.js"></SCRIPT>
+<script lanuage="javascript">
+function checkSubmit(){
+	if (formValidate("form1")==false){
+		return false;
+	}else{
+		return true;
+	}		
+}
+  function checkInput()
+  {
+      if(form1.YHH.value==null || form1.YHH.value.length==0)
+	  {
+	      alert("请输入用户号!");
+		  form1.YHH.focus();
+		  return false;
+	  }
+	 if(form1.MM.value==null || form1.MM.value.length==0)
+	  {
+	      alert("请输入密码!");
+		  form1.MM.focus();
+		  return false;
+	  }
+	  if(form1.MM.value!= form1.REMM.value)
+	  {
+	      alert("两次输入的密码不一样，请重输!");
+		  form1.MM.focus();
+		  return false;
+	  }
+	  
+	  return true;
+  }
+</script>
+</head>
+
+<body onUnload="window.opener.location.reload();">
+<form name="form1" method="post" action="display?proname=authority/user_result" onSubmit="return checkSubmit()">
+<input type="hidden" name="YHZ" value="shop">
+<input type="hidden" name="WARECODE" value="@@LS.DWDM,">
+  <table width="95%" height="0" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#000000">
+    <tr>
+      <td height="0">
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr bgcolor="#336699" class="tabletoptitle"> 
+            <td height="15" class="WHS"> 
+              <div align="center">请填写专卖店用户信息</div>
+            </td>
+          </tr>
+          <tr align="center"> 
+            <td bgcolor="#C4DFDC" class="tableleft" height="17"> 
+              <table width="100%" border="0">
+                <tr class="tabletoptitle"> 
+                  <td align="right" class="WHS">用户号</td>
+                  <td class="WHS"> 
+                    <input type="text" name="YHH" must="true">
+                  </td>
+                </tr>
+                <tr class="tabletoptitle"> 
+                  <td align="right" class="WHS">用户名称</td>
+                  <td class="WHS"> 
+                    <input type="text" name="YHXM" must="true">
+                  </td>
+                </tr>
+                <tr class="tabletoptitle"> 
+                  <td align="right" class="WHS">密码</td>
+                  <td class="WHS">
+                    <input type="password" name="MM">
+                  </td>
+                </tr>
+                <tr class="tabletoptitle"> 
+                  <td align="right" class="WHS">确认密码</td>
+                  <td class="WHS">
+                    <input type="password" name="REMM">
+                  </td>
+                </tr>
+                <tr class="tabletoptitle"> 
+                  <td align="right" class="WHS">状态</td>
+                  <td class="WHS"> 
+                    <select name="STS">
+                      <option value="0">活动</option>
+                      <option value="1">禁用</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="tabletoptitle"> 
+                  <td align="right" class="WHS">所属专卖店</td>
+                  <td class="WHS"> 
+                    <select name="DEPT">
+                      <option>$$XL0005,</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr class="tabletoptitle"> 
+                  <td align="right" class="WHS">联系方式</td>
+                  <td class="WHS"> 
+                    <input type="text" name="LXFS">
+                  </td>
+                </tr>
+              </table>
+              <input type="submit" name="Submit4" value="提交">
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  
+</form>
+</body>
+</html>

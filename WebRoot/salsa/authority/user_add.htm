@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>用户管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script lanuage="javascript">
+  function checkInput()
+  {
+      if(form1.LXFS.value==null || form1.LXFS.value.length==0)
+	  {
+	      alert("请输入手机号码!");
+		  form1.LXFS.focus();
+		  return false;
+	  }
+	 if(form1.PASSWORD.value==null || form1.PASSWORD.value.length==0)
+	  {
+	      alert("请输入密码!");
+		  form1.PASSWORD.focus();
+		  return false;
+	  }
+	  if(form1.PASSWORD.value!= form1.REMM.value)
+	  {
+	      alert("两次输入的密码不一样，请重输!");
+		  form1.REMM.focus();
+		  return false;
+	  }
+	  if(form1.YHZ.value == 'ckadmin')
+	  {
+	      if(form1.DEPT.value == '20'){
+		  alert("请选择仓库管理员所管辖的仓库!");
+		  form1.DEPT.focus();
+		  return false;
+		  }
+	  }
+	  
+	  return true;
+  }
+</script>
+
+<script type="text/javascript">
+ function work(){
+ 
+   if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    DwrComm.parseIN('IN0S06',formMap,'insert',{callback:function(data){if (data != 'ok'){alert(data);}else{ 
+                      alert("操作成功!");
+                    	dialogArguments.document.location.reload();
+                    	window.close();  
+                   }},async:false});
+        }
+</script>
+<script type="text/javascript">
+	function add(){
+		if(checkInput()){
+			work();		
+		}
+		
+	}
+	function change(){
+	  form1.YHH.value =form1.DEPT.value;  
+	}
+</script>
+</head>
+
+<body>
+<form name="form1" method="post" action="" id="form1">
+
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0" >
+    <tr> 
+      <td align="center"><b> 请填写用户信息 </b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr align="center"> 
+            <td  height="17"> 
+              <table width="100%" border="0">
+                <tr> 
+                  <td align="right" class="WHS"></td>
+                  <td class="WHS">
+                  <input type="hidden" name="DEPT" value="00">
+                    
+                  <input type="hidden" name="YHH" size="10"></td>
+                </tr>
+                 <tr> 
+                  <td align="right" class="WHS">手机：</td>
+                  <td class="WHS"> 
+                    <input type="text" name="LXFS">
+                  </td>
+                </tr>
+                 <tr> 
+                  <td align="right" class="WHS">部门：</td>
+                  <td class="WHS"> 
+                    <input type="text" name="BM">
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right" class="WHS">姓名：</td>
+                  <td class="WHS"> 
+                    <input type="text" name="YHXM" size="13">
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right" >岗位职务：</td>
+                  <td class="WHS">
+                    <select name="YHZ" id="YHZ">
+                        <option value="">普通员工</option>
+                        <option value="系统管理员">系统管理员</option>
+                       
+                    </select> 
+                   
+                  </td>
+                </tr>
+                 <tr class='tabletoptitle'> 
+                  <td align='right' class='WHS'>负责品牌：</td>
+                  <td class='WHS'><input type="hidden" name="DEPT" value="00">
+                    <select name='Ware_Code'>
+                      <option>$$XL1005,</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right" class="WHS">密码：</td>
+                  <td class="WHS"> 
+                    <input type="password" name="PASSWORD" size="15">
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right" class="WHS">确认密码：</td>
+                  <td class="WHS"> 
+                    <input type="password" name="REMM" size="15">
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right" class="WHS">身份证：</td>
+                  <td class="WHS"> 
+                    <input type="text" name="SFZ" size="20">
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right" class="WHS">住址：</td>
+                  <td class="WHS"> 
+                    <input type="text" name="DZ" size="30">
+                  </td>
+                </tr>
+                 <tr> 
+                  <td align="right" class="WHS">入职日期：</td>
+                  <td class="WHS"> 
+                    <input type="text" name="RZRQ" size="10" readonly onClick="javascript:ShowCalendar(this)">
+                  </td>
+                </tr>
+                <tr> 
+                  <td align="right" class="WHS">电话：</td>
+                  <td class="WHS"> 
+                    <input type="text" name="DH">
+                  </td>
+                </tr>
+                
+                <tr> 
+                  <td align="right" class="WHS">状态：</td>
+                  <td class="WHS"> 
+                    <select name="STS">
+                      <option value="0">在职</option>
+                      <option value="1">离职</option>
+                    </select>
+                  </td>
+                </tr>
+                
+                
+               
+              </table>
+              <input type="button" name="Submit4" value="提交" onClick="add()">
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  
+</form>
+</body>
+</html>

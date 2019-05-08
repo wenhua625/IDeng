@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+<script type='text/javascript'>
+  function check()
+  {
+      if (form1.Agent_Code.value == "")
+      {
+         alert("请选择客户！");
+         return false;
+      }
+  }
+</script>
+</head>
+
+<body>
+<script language="javascript">
+Ext.onReady(function(){
+    
+     if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+     var formMap = DWRUtil.getValues("form1");
+     var store = new Ext.data.JsonStore({
+        fields: ['value', 'name']
+    });
+    var items;
+    
+   var store = new Ext.data.JsonStore({
+              url:"work?proname=AL0T48",
+              fields: ['value', 'name']
+         });
+         store.load();
+    var combo = new Ext.form.ComboBox({
+        store: store,
+        displayField:'name',
+        typeAhead: true,
+        mode: 'local',
+        forceSelection: true,
+        triggerAction: 'all',
+        emptyText:'请选择客户名称',
+        selectOnFocus:true,
+        valueField :'value',
+        applyTo: 'Agent_Name',
+		 listeners:{select:function(){
+                form1.Agent_Code.value = combo.getValue();
+				form1.submit();
+		 }}
+       
+       });
+	  combo.on('beforequery',function(e){
+                      var combo = e.combo; 
+                      if(!e.forceAll){ 
+                          var value = e.query; 
+						  if (value == null) value="";
+                          combo.store.filterBy(function(record,id){
+                            var text = record.get(combo.displayField); //用自己的过滤规则,如写正则式 
+							if (text == null) text="";
+                            return (text.indexOf(value)!=-1); 
+                          }); 
+                          combo.expand(); 
+                       return false; } }); 
+       
+    //form1.submit();
+});
+</script>
+
+        
+   
+<form name="form1" method="post" action="display?proname=report/fhdzd_result.htm" target="cardframe" onSubmit="return check()" >
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td colspan="3"> <table cellSpacing=0 cellPadding=0 border="0" width="100%">
+							<tr height="30">
+								<td style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid;font-size: 12pt;COLOR: #124164;FONT-WEIGHT: bold;"><img src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">发货对账单</td>
+							</tr>
+		</table></td>
+   </tr>
+	 <tr>
+				<td align="center" colspan="3">
+				<table width="100%" border="0" cellpadding="0">
+					<tr style="font-size: 16pt; font-weight: bolder" align="center">
+						<td >客户进销往来对账单</td>
+					</tr>
+				</table>
+				</td>
+	</tr>
+    <tr height="5" style="font-size: 9pt;"> 
+      <td width="14%" style="padding-left:6px" align="right">        客户名称：</td>
+      <td width="39%" style="padding-left:6px"><input type="hidden" name="Agent_Code" id="Agent_Code"/><input type="text" name="Agent_Name" value="" size="25"></td>
+      <td width="47%">账单周期：<input type="text" name="ORDER_DATE1" size="10" readonly onClick="javascript:ShowCalendar(this)" value="@@LS.FIRSTDAYSOFCURMONTH,">至<input type="text" name="ORDER_DATE2" size="10" readonly onClick="javascript:ShowCalendar(this)" value="@@LS.CURDATE,"><input type="submit" name="Submit2" value="查询"></td>
+    </tr>
+    
+    <tr valign="top"> 
+      <td height="0" colspan="4" align="center"> 
+            <IFRAME id="cardframe" name="cardframe"
+						src="display?proname=firstpage.htm"
+						frameBorder=0 width="100%" scrolling=auto height="450"></IFRAME>
+	   </td>
+    </tr>
+	
+  </table>
+ 
+</form>
+
+
+</body>
+
+</html>

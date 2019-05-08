@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>Untitled Document</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<link href="css/style011.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+		<script language="javascript">
+function trip(){
+	form1.Submit.value="正在处理中，请稍等...";
+	form1.Submit.disabled=true;
+}
+</script>
+	</head>
+
+	<body>
+
+
+		<table width="100%" height="0" border="0" align="center"
+			cellpadding="0" cellspacing="0">
+			<tr align="center">
+
+				<td>
+					<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+						<tr height="30">
+							<td
+								style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid;font-size: 12pt;COLOR: #124164;FONT-WEIGHT: bold;">
+								<img src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">
+								请输入查询条件
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+
+				<td>
+					<form name="form1" method="post" action="">
+						<table width="100%" border="0">
+							<tr>
+								<td width="20%" >
+									单据时间：
+								</td>
+								<td width="80%">
+									<input type="text" name="ORDER_DATE1" size="10" readonly
+										onclick="javascript:ShowCalendar(this)"
+										value="@@LS.FIRSTDAYSOFCURMONTH,">
+									-
+									<input type="text" name="ORDER_DATE2" size="10" readonly
+										onclick="javascript:ShowCalendar(this)" value="@@LS.CURDATE,">
+								</td>
+							</tr>
+							<tr >
+								<td>
+									订单号：
+								</td>
+								<td>
+									<input type="text" name="ORDER_CODE">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									状态：
+								</td>
+								<td>
+									<select name="ORDER_STS">
+										<option value="">
+											全部
+										</option>
+										<option>
+											$$XL0027,
+										</option>
+									</select>
+								</td>
+							</tr>
+							<tr >
+								<td>
+									产品号：
+								</td>
+								<td>
+									<input type="text" name="PRODUCT_CODE" size="10">
+								</td>
+							</tr>
+							<tr >
+								<td>
+									产品名称：
+								</td>
+								<td>
+									<input type="text" name="PRODUCT_NAME">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									客户名称：
+								</td>
+								<td>
+									<input type="text" name="AGENT_NAME">
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>
+									<input type="submit" name="Submit" value="查询">
+								</td>
+							</tr>
+
+						</table>
+					</form>
+				</td>
+			</tr>
+		</table>
+
+
+	</body>
+</html>

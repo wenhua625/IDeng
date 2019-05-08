@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base target="_self"/>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<script src="inc/dateams.js" type=text/javascript></script>
+		<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+		
+		<script type='text/javascript' src='dwr/engine.js'></script>
+		<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+<script type="text/javascript">
+     function opr(url){
+        //form1.action=url+'&tmp11='+Math.random();
+        //form1.submit();
+		//form1.d_Flag.value ="0";
+        //var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,550,800);
+		//if(form1.d_Flag.value=="1"){
+		  form1.action=url+'&tmp11='+Math.random();
+		  form1.submit();
+		//}
+     }
+</script>
+</head>
+
+<body>
+
+<form name="form1" method="post" action="" id="form1">
+  <input type="hidden" name="d_Flag" value="0">
+  <input type="hidden" name="d_SPBM" value="">
+  <input type="hidden" name="d_action" value="">
+  <input type="hidden" name="Back_Sts" value="0">
+
+<table width="100%" height="0" border="0" align="center" cellpadding="0"
+	cellspacing="0">
+	<tr align="center" height="10"> 
+		<td>
+		
+		</td>
+	</tr>
+	<tr align="center">
+		<td>
+		<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td width="13%"
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><img
+					src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">终端销售单列表</td>
+				<td width="50%" align="right" style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">地址或电话：
+			    <input type="text" name="SJ" value=""><input name="BtnCX" type="submit" value="查询"></td>
+				<td width="33%" align="right" style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">&nbsp;</td>
+			    <td width="2%" align="right" style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">&nbsp;</td>
+			    <td width="2%" align="right" style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">&nbsp;</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+        
+		<table width="100%" border="1" cellpadding="2" cellspacing="0" id="PowerTable">
+        <tr align="center" bgcolor="#BFBFBF">
+          <td>直营店</td>
+          
+          <td>单据号</td>
+          <td>下单日期</td>
+          <td>客户名称</td>
+          <td>联系电话</td>
+          <td>合同金额</td>
+          <td>客户来源</td>
+          <td>业务员</td>
+          <td>状态</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr >
+          <td>$$MJZ001,13</td>
+          
+          <td>$$MJZ001,02</td>
+          <td>$$MJZ001,03</td>
+          <td>$$MJZ001,04</td>
+          <td>$$MJZ001,05</td>
+          <td>$$MJZ001,06</td>
+          <td>$$MJZ001,07</td>
+          <td>$$MJZ001,08</td>
+          <td>$$MJZ001,12</td>
+          <td>【<a href="#" onClick="javascript:opr('display?proname=shop/xsd.htm&Back_Code=$$MJZ001,02&BACK_CODE=$$MJZ001,02')">详细信息</a>】</td>
+        </tr>
+      </table>
+      $$page,
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

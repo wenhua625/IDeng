@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+
+<link rel="stylesheet" type="text/css" href="css/easyui/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/easyui/icon.css">
+
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+ <script type="text/javascript">
+     
+     function opr(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,600,850);
+        
+     }
+     function opr1(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,413,510);
+        
+     }
+	 function opr2(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,413,910);
+        
+     }
+      function toUpload(spbm,photo)
+     {
+      
+       opr1('display?proname=baseinfo/spgl_photo.htm&BM='+photo+'&BM1='+spbm);
+       uploadreload();
+      // alert(document.contentWindow);
+     }
+	 
+	 function toUploadMD(photo)
+     {
+      
+       opr2('display?proname=note/spgl_photo_zm.htm&XH='+photo);
+       //uploadreload();
+      // alert(document.contentWindow);
+     }
+     
+    
+</script>
+<script>
+		$(function(){
+		    
+			$('#form1').form({  
+                url:"work?proname=IN0062",  
+    			onSubmit:function(){
+                    return $(this).form('validate');
+    			},  
+    		    success:function(data){  
+        		    if (data=="ok")
+        		    {
+        		      alert("保存成功,重新登陆系统后生效!");
+        		      
+        		    }else 
+        		    {  alert(data);}
+        		     
+    		    }  
+			});
+			
+			
+
+		});
+		
+		function save(){
+			     $('#form1').submit(); 
+		 }
+		
+		
+		
+		
+		
+</script>
+
+
+</head>
+
+<body>
+
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+   
+	<tr align="center">
+		<td>
+		<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><img
+					src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">经销售信息</td>
+		    </tr>
+		</table>		</td>
+	</tr>
+	
+  </table>
+
+    
+     <form id="form1" method="post">
+	        
+<input type="hidden" name="d_Flag" value="0">
+           <table width="60%" border="0" align="center" cellpadding="1" cellspacing="1">
+         
+          <tr> 
+            <td width="200" align="right" bgcolor="#C4DFDC" class="tableleft">经销商名称：            </td>
+            <td bgcolor="#FFFFFF"> 
+               <input type="hidden" name="action" value="insert">
+               <input type="hidden" name="Agent_Code" value="!!MJP105,01">   
+              <input name="Agent_Name" class="easyui-validatebox" type="text" data-options="required:true" size="35" value="!!MJP105,10" readonly="true">            </td>
+          </tr>
+          <tr> 
+            <td width="200" align="right" bgcolor="#C4DFDC" class="tableleft">手机：            </td>
+            <td bgcolor="#FFFFFF"> 
+               <input name="Agent_Tel" class="easyui-validatebox" type="text" data-options="required:true" size="30" value="!!MJP105,04">(可以留两个手机号)
+            </td>
+          </tr>
+          
+          <tr>
+            <td align="right" bgcolor="#C4DFDC" class="tableleft">联系人：</td>
+            <td bgcolor="#FFFFFF"> <input type="text" name="Contact_Man"  size="10" class="easyui-validatebox" value="!!MJP105,05" readonly="true"> </td>
+          </tr>
+          <tr> 
+            <td width="200" align="right" bgcolor="#C4DFDC" class="tableleft">联系电话：            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="Agent_Tel1" class="easyui-validatebox" type="text" size="15" value="!!MJP105,17">           </td>
+          </tr>
+          <tr> 
+            <td width="200" align="right" bgcolor="#C4DFDC" class="tableleft">QQ：            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="Agent_QQ"  size="15" value="!!MJP105,18">            </td>
+          </tr>
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">默认收货地址：</td>
+            <td bgcolor="#FFFFFF"><input name="Agent_Address" class="easyui-validatebox" type="text" data-options="required:true" size="40" value="!!MJP105,03" readonly="true"></td>
+          </tr>
+        </table>
+            <div style="padding:5px;text-align:center;">  
+            <a  href="#" class="easyui-linkbutton" icon="icon-ok" onClick="save()">保存</a>
+            
+            
+        </div>
+		<table width="80%"  border="1" align="center">
+  <tr>
+    <td colspan="4">专卖店图片：
+  
+        <br>
+  <font color="#FF0000"> 注：<br> 
+      1、上传图片后缀只能是jpg，每张图片大小不能超过512K；<br>
+      2、请勿直接修改图片的后缀为jpg格式，这样可能导致浏览器识别不出；若需修改请用photoshop之类工具另存为jpg格式 </font></td>
+  </tr>
+  <tr>
+    <td colspan="4" align="center">顶部（门口拍）<input type="button" name="uploadify1" id="uploadify1" value="上传" onclick="toUploadMD('01')"></td>
+    </tr>
+  <tr>
+    <td colspan="4" align="center">顶部（底部拍）<input type="button" name="uploadify2" id="uploadify2" value="上传" onclick="toUploadMD('02')"></td>
+    </tr>
+  <tr>
+    <td colspan="4">门面（正面）<input type="button" name="uploadify3" id="uploadify3" value="上传" onclick="toUploadMD('03')"></td>
+    </tr>
+  <tr>
+    <td> 周边（门面外左侧）<input type="button" name="uploadify4" id="uploadify4" value="上传" onclick="toUploadMD('04')"></td>
+    <td>左墙（门口拍）<input type="button" name="uploadify5" id="uploadify5" value="上传" onclick="toUploadMD('05')"></td>
+    <td>右墙（门口拍）<input type="button" name="uploadify6" id="uploadify6" value="上传" onclick="toUploadMD('06')"></td>
+    <td>周边（门面外右侧）<input type="button" name="uploadify7" id="uploadify7" value="上传" onclick="toUploadMD('07')"></td>
+  </tr>
+  <tr>
+    <td colspan="2">左墙（底部拍） <input type="button" name="uploadify8" id="uploadify8" value="上传" onclick="toUploadMD('08')"></td>
+    <td colspan="2">右墙（底部拍）<input type="button" name="uploadify9" id="uploadify9" value="上传" onclick="toUploadMD('09')"></td>
+  </tr>
+  <tr>
+    <td colspan="4">底部（正面） <input type="button" name="uploadify10" id="uploadify10" value="上传" onclick="toUploadMD('10')"></td>
+  </tr>
+  <tr>
+    <td colspan="4"> 门面（对面） <input type="button" name="uploadify11" id="uploadify11" value="上传" onclick="toUploadMD('11')"></td>
+  </tr>
+ 
+</table>
+
+   </form> 
+    
+
+
+</body>
+
+</html>

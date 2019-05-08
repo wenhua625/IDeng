@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<link rel="stylesheet" type="text/css" href="css/style1.css" />
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'>
+</script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript></script>
+<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+</object> 
+<title>品牌管理</title>
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+	
+    ///////////////////////////经营类目////////////////////////////////////////////
+    var processDetailstore = new Ext.data.JsonStore({
+        url:"work?proname=MJP222",
+        root:"root",
+        fields: ['bm','mc']
+    });
+    
+    //经营类目列表
+    var cm = new Ext.grid.ColumnModel([
+        new Ext.grid.RowNumberer(),//自动行号
+         {header:'类型编码',dataIndex:'bm',width: 150,hidden:true},
+        {header:'类型名称',dataIndex:'mc',width: 180,editor: new Ext.form.TextField({ allowBlank: true })}
+       ]);
+    
+    var grid_process = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'processList',
+    	width:250, 
+    	height:485,
+    	title:'经营类目',
+    	ds: processDetailstore,
+        cm: cm,
+        enableHdMenu:false,  //屏蔽排序的菜单；false
+        frame:false,
+        clicksToEdit:2,//点击几次开启编辑，clicksToEdit：1表示单击触发编辑
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid_process.render();
+    processDetailstore.load();
+  
+  //////////////////////////品牌表/////////////////////////////////////////
+   var processDetailstorea = new Ext.data.JsonStore({
+        url:"work?proname=MJP223",
+        root:"root",
+        fields: ['brand_id','brand_name','brand_chnname','brand_tel','brand_fax','brand_type','brand_sts','brand_level','brand_url','brand_imageurl']
+    });
+    
+    //品牌表列表
+    var cma = new Ext.grid.ColumnModel([
+        new Ext.grid.RowNumberer(),//自动行号
+        {header:'品牌英文名称',dataIndex:'brand_name',width: 100,editor: new Ext.form.TextField({ allowBlank: true })},
+        {header:'品牌中文名称',dataIndex:'brand_chnname',width: 100,editor: new Ext.form.TextField({ allowBlank: true })},
+        {header:'客服电话',dataIndex:'brand_tel',width: 150,editor: new Ext.form.TextField({ allowBlank: true })},
+        {header:'传真',dataIndex:'brand_fax',width: 100,editor: new Ext.form.TextField({ allowBlank: true })},
+		{header:'艾订货URL',dataIndex:'brand_url',width: 200,editor: new Ext.form.TextField({ allowBlank: true })},
+		{header:'艾订货图片URL',dataIndex:'brand_imageurl',width: 200,editor: new Ext.form.TextField({ allowBlank: true })}
+       ]);
+    
+    var grid_processa = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'processLista',
+    	width:860, 
+    	height:485,
+    	title:'品牌列表',
+    	ds: processDetailstorea,
+        cm: cma,
+        enableHdMenu:false,  //屏蔽排序的菜单；false
+        frame:false,
+        clicksToEdit:2,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid_processa.render();
+   // processDetailstorea.load();
+    
+    
+   /////////////////////添加、查询等功能操作/////////////////////////////
+   //点击经营类目【根据经营类目去查询品牌列表】
+   grid_process.on("rowclick",function(grid_process,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             //获取点击的行数据
+             var record = grid_process.getSelectionModel().getSelected();
+             //取获取数据的某一个数据
+              DWRUtil.setValue("JYLM_BM",record.get("mc"));
+             //点击类目时，刷新品牌列表 
+             processDetailstorea.load({params:{SJBM:encodeURIComponent(Ext.get('JYLM_BM').dom.value)}});
+   });
+   
+   //-------------------------经营类目的添加和修改------------------------------
+   //点击添加经营类目
+    Ext.get("addjylm").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+        DwrComm.parseIN('INP059',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+               processDetailstore.load({params:{SJBM:encodeURIComponent(Ext.get('d_JYLM_BM').dom.value)}});
+           }
+       },async:false});   
+   });
+   
+   //修改经营类目
+   grid_process.on("afteredit", afterEdit, grid_process); 
+   
+   function afterEdit(e) { 
+   var record = e.record;// 被编辑的记录  
+   DWRUtil.setValue("j_JYLM_BM",e.record.get("bm"));
+   DWRUtil.setValue("j_JYLM_MC",e.record.get("mc"));
+   formMap = DWRUtil.getValues("form1");
+   DwrComm.parseIN('INP059',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+             processDetailstore.load({params:{SJBM:encodeURIComponent(Ext.get('d_JYLM_BM').dom.value)}});
+           }
+       },async:false});
+   };
+   
+   //删除经营类目
+   grid_process.on("rowcontextmenu",function(grid_process,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             if('@@View,'=='View') {return;}
+             var treeMenu = new Ext.menu.Menu
+            ([       
+                {xtype:"button",text:"删除",icon:"images/webtype/del.gif",pressed:true, handler:function(){
+                    DWRUtil.setValue("JYLM_BM",processDetailstore.getAt(rowIndex).get('bm'));
+                    formMap = DWRUtil.getValues("form1");
+                    DwrComm.parseIN('INP059',formMap,'delete',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                     }else{
+                         var record = grid_process.getSelectionModel().getSelected();
+                         processDetailstore.remove(record); 
+                     }
+                    },async:false});
+                }}               
+            ]);
+            treeMenu.showAt(e.getPoint());
+      }); 
+   
+    //-------------------------品牌的添加和修改------------------------------
+    //点击按钮进行品牌添加
+    Ext.get("addpp").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+        DwrComm.parseIN('INP060',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+               processDetailstorea.load({params:{SJBM:encodeURIComponent(Ext.get('JYLM_BM').dom.value)}});
+           }
+       },async:false});   
+   });
+   
+   Ext.get("Search").on("click",function(){
+        processDetailstorea.load({params:{SJBM:encodeURIComponent(Ext.get('JYLM_BM').dom.value),Brand_Name:encodeURIComponent(Ext.get('Brand_Name').dom.value)}});  
+   });
+   
+   
+   
+   //修改品牌
+   //调用方法并制定在某个grid中进行执行
+   grid_processa.on("afteredit", afterEdit1, grid_processa); 
+   
+   //方法
+   function afterEdit1(e) { 
+   var record = e.record;  //被编辑的记录  
+   DWRUtil.setValue("p_Id",e.record.get("brand_id")); //必须要小写【我刚开始用大写，一直取不到值】
+   DWRUtil.setValue("p_Name",e.record.get("brand_name"));
+   DWRUtil.setValue("p_ChnName",e.record.get("brand_chnname"));
+   DWRUtil.setValue("p_Tel",e.record.get("brand_tel"));
+   DWRUtil.setValue("p_Fax",e.record.get("brand_fax"));
+   DWRUtil.setValue("p_url",e.record.get("brand_url"));
+   DWRUtil.setValue("p_imageurl",e.record.get("brand_imageurl"));
+	 
+   formMap = DWRUtil.getValues("form1");
+   DwrComm.parseIN('INP060',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+             processDetailstorea.load({params:{SJBM:encodeURIComponent(Ext.get('JYLM_BM').dom.value)}});
+           }
+       },async:false});
+   };
+   
+   //删除品牌
+   grid_processa.on("rowcontextmenu",function(grid_processa,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             if('@@View,'=='View') {return;}
+             var treeMenu = new Ext.menu.Menu
+            ([       
+                {xtype:"button",text:"删除",icon:"images/webtype/del.gif",pressed:true, handler:function(){
+                    DWRUtil.setValue("p_Id",processDetailstorea.getAt(rowIndex).get('brand_id'));
+                    formMap = DWRUtil.getValues("form1");
+                    DwrComm.parseIN('INP060',formMap,'delete',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                     }else{
+                         var record = grid_processa.getSelectionModel().getSelected();
+                         processDetailstorea.remove(record); 
+                     }
+                    },async:false});
+                }}               
+            ]);
+            treeMenu.showAt(e.getPoint());
+      }); 
+   
+   
+});
+</script>
+<form action="" method="post" name="form1" id="form1">
+<input type="hidden" name="JYLM_BM" id="JYLM_BM"/>
+<input type="hidden" name="d_JYLM_BM" id="d_JYLM_BM"/>
+<!-- 存放经营类目编辑的值 -->
+<input type="hidden" name="j_JYLM_BM" id="j_JYLM_BM"/>
+<input type="hidden" name="j_JYLM_MC" id="j_JYLM_MC"/>
+<!-- 存放品牌编辑后的值 -->
+<input type="hidden" name="p_Id" id="p_Id"/>
+<input type="hidden" name="p_Name" id="p_Name"/>
+<input type="hidden" name="p_ChnName" id="p_ChnName"/>
+<input type="hidden" name="p_Tel" id="p_Tel"/>
+<input type="hidden" name="p_Fax" id="p_Fax"/>
+<input type="hidden" name="p_url" id="p_url"/>
+<input type="hidden" name="p_imageurl" id="p_imageurl"/>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr height="30">
+				<td style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">
+				<img src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24"/>品牌列表</td>
+			</tr>
+	<tr>
+	    <td>
+	        <table width="100%" border="0" cellspacing="0" cellpadding="0" bordercolor="#000000">
+	             <tr style="height:5px;"></tr>
+	             <tr >
+	                <td><input type="button" name="addjylm" id="addjylm" value="添加经营类目"/></td>
+	                <td><input name="Brand_Name" id="Brand_Name" value="" type="text" size="15">  <input type="button" name="Search" id="Search" value="搜索"/>    
+                   <input type="button" name="addpp" id="addpp" value="添加品牌"/></td>
+	            </tr>		
+                <tr >
+                   <td><div id="processList"></div></td>
+                   <td><div id="processLista"></div></td>
+                </tr>
+	        </table>
+	    </td>
+	</tr>	
+   </table>
+</form>
+</body>
+</html>

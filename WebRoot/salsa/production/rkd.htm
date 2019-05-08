@@ -1,0 +1,676 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>入库明细</title>
+		<base target="_self"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<link href="css/style1.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+        
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<script src="inc/dateams.js" type=text/javascript></script>
+		<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type="text/javascript" src="js/extjs/openWindow.js"></script>
+		
+		<script type='text/javascript' src='dwr/engine.js'></script>
+		<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+
+	</head>
+
+	<body>
+		<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    var isOprSave=false;
+   
+     form1.BtnNoAudit.disabled = true;
+	  //form1.BtnAudit.disabled = true;
+     //form1.BtnPrint.disabled = true;
+    if("@@ID," != "")
+    {
+        DWRUtil.setValue("ID","!!MJP025,01");
+        DWRUtil.setValue("RQ","!!MJP025,02");
+        DWRUtil.setValue("CK","!!MJP025,03");
+        DWRUtil.setValue("DWBM","!!MJP025,04");
+        DWRUtil.setValue("JBRBM","!!MJP025,06");
+        DWRUtil.setValue("JSFSBM","!!MJP025,07");
+        DWRUtil.setValue("ZDR","!!MJP025,08");
+        DWRUtil.setValue("SHR","!!MJP025,09");
+        DWRUtil.setValue("ZDZK","!!MJP025,10");
+        DWRUtil.setValue("ZSL","!!MJP025,11");
+        DWRUtil.setValue("ZJE","!!MJP025,12");
+        DWRUtil.setValue("ZHJ","!!MJP025,13");
+        DWRUtil.setValue("TJE","!!MJP025,14");
+        DWRUtil.setValue("YJS","!!MJP025,15");
+        DWRUtil.setValue("BCXF","!!MJP025,16");
+        DWRUtil.setValue("EJS","!!MJP025,17");
+        DWRUtil.setValue("WJS","!!MJP025,18");
+        DWRUtil.setValue("ZZK","!!MJP025,19");
+        DWRUtil.setValue("ZY","!!MJP025,20");
+		 DWRUtil.setValue("Agent_Code","!!MJP025,03");
+       
+		DWRUtil.setValue("PZH","!!MJP025,24");
+		DWRUtil.setValue("SHRQ","!!MJP025,28");
+         if('!!MJP025,22' == "T")//对于审核通过的单子
+		 {
+		     form1.CK.disabled = true;
+		     form1.BtnSPBM.disabled = true;
+			 form1.BtnSelCgd.disabled = true;
+		     form1.ZTJ.disabled = true;
+		     form1.BCXF.disabled = true;
+		     form1.JBRBM.disabled = true;
+		      form1.DWBM.disabled = true;
+		     form1.BZ.disabled = true;
+			 form1.PZH.disabled = true;
+		     form1.BtnImport.disabled = true;
+		     form1.BtnDelRecord.disabled = true;
+		     form1.BtnSave.disabled = true;
+		     form1.BtnNoAudit.disabled = false;
+		     form1.BtnAudit.disabled = true;
+		     form1.BtnDel.disabled = true;
+		     //form1.BtnPrint.disabled = false;
+		 }else//对于取消审核的单子
+		 {
+		     form1.CK.disabled = false;
+		     form1.BtnSPBM.disabled = false;
+			 form1.BtnSelCgd.disabled = false;
+		     form1.ZTJ.disabled = false;
+		     form1.BCXF.disabled = false;
+		     form1.JBRBM.disabled = false;
+		     form1.BZ.disabled = false;
+		     form1.BtnImport.disabled = false;
+		     form1.BtnDelRecord.disabled = false;
+		     form1.BtnSave.disabled = false;
+		     form1.BtnNoAudit.disabled = true;
+		    
+		     form1.BtnDel.disabled = false;
+		     //form1.BtnPrint.disabled = true; 
+			  if("@@SH," == "SH"){
+			     form1.BtnAudit.disabled = false;
+			 }
+		 }
+            
+    }
+   //产品列表存储
+    var orderDetailstore = new Ext.data.JsonStore({
+         url:"work?proname=MJP021",
+        root:"root",
+        fields: ['code','spbm','spmc','xhgg','jldw','sl','jssl','yj','dj','je','zk','pfj','lsj','bz','zkje','ref_id','sccj','psid','sxmc','ysmc','cd','wlcg_id','tplj','ysbm']
+    });
+
+    
+    //产品列表表格
+     var cm = new Ext.grid.ColumnModel([
+         new Ext.grid.RowNumberer(),//自动行号
+        {header:'品牌',dataIndex:'sccj',width: 55,hidden:true}, 
+        {header:'型号',dataIndex:'psid',width: 85},
+		{header:'型号',dataIndex:'ysmc',width: 80,hidden:true},
+        {header:'名称',dataIndex:'spmc',width: 165},
+        {header:'规格',dataIndex:'xhgg',width: 90},
+		{header:'长度',dataIndex:'cd',width: 40,editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 0, // 默认的小数点位数   
+                    allowDecimals: true, // 允许为小数   
+                    maxValue: 100000, // 最大值为10万 ,
+                    selectOnFocus:true,
+					allowBlank: false
+                            
+        }),hidden:true},
+        {header:'单位',dataIndex:'jldw',width: 50,summaryRenderer: function(v, params, data){return  '合计：';}},
+        {header:'数量',dataIndex:'sl',width: 50,summaryType:'sum',align:"right",editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 2, // 默认的小数点位数   
+                    allowDecimals: true, // 允许为小数   
+                    maxValue: 1000000, // 最大值为100万 ,
+                    selectOnFocus:true
+                            
+        })},
+		{header:'结算数量',dataIndex:'jssl',width: 80,summaryType:'sum',align:"right",editor:new Ext.form.NumberField({   
+                    allowNegative: true, // 不允许为负数   
+                    decimalPrecision: 4, // 默认的小数点位数   
+                    allowDecimals: true, // 允许为小数   
+                    maxValue: 100000, // 最大值为10万 ,
+                    selectOnFocus:true,
+					allowBlank: false
+                            
+        }),hidden:true},
+        {header:'单价',dataIndex:'dj',width: 60,align:"right",editor:new Ext.form.NumberField({   
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision:5, // 默认的小数点位数   
+                    allowDecimals: true, // 允许为小数   
+                    maxValue: 100000, // 最大值为10万 ,
+                    selectOnFocus:true
+                            
+        }),hidden:true},
+        {header:'金额',dataIndex:'je',width: 65,renderer:Ext.util.Format.usMoney,summaryType:'sum',align:"right",hidden:true},
+       
+		  {header:'订单号',dataIndex:'ysbm',width: 90},
+		  {header:'客户名称',dataIndex:'ysmc',width: 280},
+		  
+		   {header:'备注',dataIndex:'bz',width: 110,editor: new Ext.form.TextField({ 
+              allowBlank: true// 不能为空 
+          })}
+       
+       ]);
+    //商品列表表格
+    var summary = new Ext.ux.grid.GridSummary(); 
+    var grid = new Ext.grid.EditorGridPanel({
+    	el: 'productList',
+    	width:document.body.clientWidth-15, 
+    	height:350,
+    	title:'入库清单',
+    	ds: orderDetailstore,
+        cm: cm,
+        frame:false,
+		enableHdMenu:false,
+        plugins: summary,
+        clicksToEdit:1,
+        stripeRows:true,
+        columnLines: true,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+        
+        
+    });
+    grid.render();
+   orderDetailstore.load({params:{ID:form1.ID.value}});
+
+   //表格编辑前 
+   grid.on("beforeedit", beforeEdit, grid); 
+   function beforeEdit(e) { 
+      var record = e.record;// 被编辑的记录 
+      if('!!MJP025,22' == 'T') return false;
+       formMap = DWRUtil.getValues("form1");
+      
+    }
+    
+  
+  //表格编辑后
+   grid.on("afteredit", afterEdit, grid); 
+   
+   function afterEdit(e) { 
+   var record = e.record;// 被编辑的记录  
+       if (e.record.get("sl") =="")
+	      e.record.set("sl","0");
+	
+	    //if(record.get("jssl") == "" || record.get("jssl") == null)
+	     // e.record.set("je",parseFloat(e.record.get("sl"))*parseFloat(e.record.get("dj")));
+		//else
+		
+	     if(parseInt(e.record.get("cd")) >= 0 ){
+			
+		      e.record.set("je",parseFloat(e.record.get("cd"))*parseFloat(e.record.get("sl"))*parseFloat(e.record.get("dj")));
+		 } 
+		  else
+		    e.record.set("je",parseFloat(e.record.get("sl"))*parseFloat(e.record.get("dj")));
+      
+       updateData();
+   
+   };
+   
+   //保存
+  Ext.get("BtnSave").on("click",function(){
+       if(checkAndSave()) {alert("保存成功!");}
+   }); 
+    //删除单据
+  Ext.get("BtnDel").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       if(!confirm("你确认要将整张单据删除吗？")) return false;
+       DwrComm.parseIN('INP005',formMap,'delete',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                         
+                     }else
+                     {
+                        dialogArguments.document.getElementById('d_Flag').value="1";
+                        window.close();
+                     }
+                    },async:false});
+   });
+    //删除记录
+  Ext.get("BtnDelRecord").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       var record = grid.getSelectionModel().getSelected();
+       if(record == null)
+       {
+          alert("请选择要删除的记录!");
+          return false;
+       }
+       grid.store.remove(record);
+       updateData();
+   }); 
+   
+    //审核通过
+  Ext.get("BtnAudit").on("click",function(){
+       form1.SH_FLAG.value='T';
+       if(!checkAndSave()) return false;
+       form1.BtnAudit.disabled = true;
+       DwrComm.parseIN('INP005',formMap,'call',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                         
+                     }else
+                     {
+                         /* NewWinMD('@@LS.URL,/display?proname=print/rkd_print.htm&ID='+form1.ID.value+'&time='+Math.random(),window);
+                         dialogArguments.document.getElementById('d_Flag').value="1";
+                         window.close(); */
+                         var url ='@@LS.URL,/display?proname=print/rkd_print.htm&ID='+form1.ID.value+'&time='+Math.random();
+      					 openWindow("o-win","入库单打印",url,950, 550,function(){});
+      					 parent.frames["b-win"].document.getElementById("d_Flag").value= 1;
+      					 closewin("b-win");
+                     }
+                    },async:false});
+       
+   }); 
+      //取消审核
+  Ext.get("BtnNoAudit").on("click",function(){
+       var dj="@@LS.QXDJ,";
+        //if (dj.indexOf("002")== -1)
+        //{
+            //alert("你没有反审核的权限！");
+            //return false;
+        //}
+       form1.SH_FLAG.value='F';
+       //if(!checkAndSave()) return false;
+       form1.BtnNoAudit.disabled = true;
+       formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('INP005',formMap,'call',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                         
+                     }else
+                     {
+                        form1.action="display?proname=production/rkd.htm&ID="+form1.ID.value;
+                        form1.submit();
+                     }
+                    },async:false});
+       
+   });
+       //补打
+  Ext.get("BtnPrint").on("click",function(){
+      var url ='@@LS.URL,/display?proname=print/rkd_print.htm&ID='+form1.ID.value+'&time='+Math.random();
+       openWindow("o-win","入库单打印",url,950, 550,function(){});
+       
+   });
+   //保存数据，公用
+  function checkAndSave()
+  {
+       updateData();
+       var vRecords = grid.store.data.items;
+       var vCount = vRecords.length; //得到记录长度
+       //订单没有数据
+       if(vCount == 0)
+       {
+         
+          return false;
+       } 
+       if(form1.ZJE.value == "") form1.ZJE.value=0; 
+       if(form1.ZTJ.value == "") form1.ZTJ.value=0;
+       if(form1.BCXF.value == "") form1.BCXF.value=0 ;
+	   if (vCount > 0) {
+        //begin 将记录对象转换为字符串（json格式的字符串）
+        form1.ZY.value = '入库['+vRecords[0].get("spmc")+']';
+        var d_check="0";
+        var vDatas = '[';
+        for (var i = 0; i < vCount; i++) {
+            if(vRecords[i].get("sl") == "0"){
+                alert("第 "+(i+1)+" 行的【数量】输入无效，请重输！");
+                d_check="1";
+                break;
+            }
+            vDatas += Ext.util.JSON.encode(vRecords[i].data) + ',';
+
+        }
+        if(d_check =="1") return false;
+        vDatas = vDatas.substr(0, vDatas.length - 1) + ']';
+
+        //end 将记录对象转换为字符串（json格式的字符串）
+      }
+       form1.d_JsonData.value=vDatas;
+	   //alert(vDatas);
+	   var ret=false;
+	   form1.CK.value= form1.Agent_Code.value;
+	   formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('INS023',formMap,'insert',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                         ret= false;
+                     }else
+                     {
+                        ret= true;
+                     }
+                    },async:false});
+     isOprSave = true;
+     return ret;
+  } 
+   //关闭
+  Ext.get("BtnClose").on("click",function(){
+      /* if(isOprSave == true){
+           
+            dialogArguments.document.getElementById('d_Flag').value="1";
+       }
+       window.close(); */
+       if(isOprSave == true){
+            parent.frames["main"].document.getElementById("d_Flag").value="1";
+       }
+    	closewin("b-win");
+   }); 
+   
+   //导入
+  Ext.get("BtnImport").on("click",function(){
+       form1.d_Flag.value ="0";
+       var win=NewWinCustMD('display?proname=order/zbdd_add.htm&Agent_Code=@@LS.ERPBM,&tmp='+Math.random(),window,450,650);
+	   if(form1.d_Flag.value=="1")
+		{
+		       //var len=grid.store.data.items.length;
+		       var s_sup;
+			   formMap = DWRUtil.getValues("form1");
+               DwrComm.parseMJ('MJP055',formMap,{callback:function(list){
+                    s_sup = list;  
+               },async:false});
+			  if(s_sup.length>0)
+			  {
+			    
+			    var keys = grid.store.fields.keys;
+			    
+			    for(var row=0;row<s_sup.length;row++)
+			    {
+			       record = new grid.store.recordType();
+			       record.data = {};
+			       for(var i=0;i<keys.length;i++)
+			       {
+			        var key=keys[i];
+			        record.data[key] = s_sup[row][key]; 
+			       }
+			       grid.store.add(record); 
+			    }
+                
+				
+
+
+			  }
+			  
+			  updateData();
+
+			 
+
+			                                         
+		   }	  
+    
+   }); 
+   
+    //导入Excel
+  Ext.get("BtnSelCgd").on("click",function(){
+      
+       form1.d_Flag.value ="0";
+	   if(form1.DWBM.value == "")
+	   {
+	       alert("请选择供货商！");
+		   return false;
+	   }
+		    if(form1.Agent_Code.value == "")
+	       {
+	          alert("请选择门店!");
+	          form1.Agent_Code.focus();
+	          return false;
+	       }
+      
+      	  	var url ='display?proname=order/order_cgd_sel.htm&Note_Type=CG&Tile='+ encodeURI('采购')+'&Sts=F&tmp='+Math.random()+'&DWBM='+form1.DWBM.value;
+	   
+				     openWindow("o-win","根据订单入库",url,950, 550,function(){
+							if(form1.d_Flag.value == "1"){
+							       var s_sup;
+								   formMap = DWRUtil.getValues("form1");
+								   var kjm="MJ0059";
+								   
+					               DwrComm.parseMJ(kjm,formMap,{callback:function(list){
+					                    s_sup = list;  
+					               },async:false});  
+								  if(s_sup.length>0)
+								  {
+								    var keys = grid.store.fields.keys;
+									for(var row=0;row<s_sup.length;row++)
+								    {
+								       record = new grid.store.recordType();
+								       record.data = {};
+								       for(var i=0;i<keys.length;i++)
+								       {
+								        var key=keys[i];
+								        record.data[key] = s_sup[row][key]; 
+								       }
+								       grid.store.add(record); 
+								    }
+								  }
+								  
+								  updateData();   
+							}		   
+						});
+    
+   });
+  
+   //过滤查询
+   Ext.get("BtnSPBM").on("click",function(){
+      
+	      
+		    if(form1.Agent_Code.value == "")
+	       {
+	          alert("请选择门店!");
+	          form1.Agent_Code.focus();
+	          return false;
+	       }
+		   form1.d_Flag.value ="0";
+          // var win=NewWinCustMD('display?proname=order/order_cgdsel.htm&SPBM='+Ext.get('SPBM').dom.value+'&tmp='+Math.random(),window,450,650);
+        //  var win=NewWinCustMD('display?proname=order/order_sel.htm&Agent_Code='+Ext.get('Agent_Code').dom.value+'&tmp='+Math.random(),window,500,750);
+		  	var url='display?proname=order/order_sel.htm&Agent_Code='+Ext.get('Agent_Code').dom.value+'&tmp='+Math.random();
+		      openWindow("o-win","根据订单入库",url,950, 550,function(){
+			   if(form1.d_Flag.value=="1")
+			   {
+			       var s_sup;
+				   formMap = DWRUtil.getValues("form1");
+				   var kjm="MJP164";
+	               DwrComm.parseMJ(kjm,formMap,{callback:function(list){
+	                    s_sup = list;  
+	               },async:false});
+				  if(s_sup.length>0)
+				  {
+				    var keys = grid.store.fields.keys;
+					for(var row=0;row<s_sup.length;row++)
+				    {
+				       record = new grid.store.recordType();
+				       record.data = {};
+				       for(var i=0;i<keys.length;i++)
+				       {
+				        var key=keys[i];
+				        record.data[key] = s_sup[row][key]; 
+				       }
+				       grid.store.add(record); 
+				    }
+				  }
+				  
+				  updateData();                       
+			   }
+		   });
+      
+        
+   });
+   //更新基本数据
+   function updateData()
+   {
+      form1.ZJE.value=grid.store.sum("je");
+	  form1.ZSL.value=grid.store.sum("sl");
+	  form1.ZZK.value=grid.store.sum("zkje");
+	  form1.YJS.value=form1.ZJE.value-form1.ZTJ.value;
+	  form1.WJS.value=form1.YJS.value-form1.BCXF.value;
+   }
+   
+   /* var m_store = new Ext.data.JsonStore({
+        fields: ['value', 'name']
+    });
+     //供货商模糊查询
+   Ext.get("BtnGYS").on("click",function(){
+           //alert("fdsfsd"+form1.LX.value);
+	       formMap = DWRUtil.getValues("form1"); 
+		   var items;
+           DwrComm.parseAL('XLS010',formMap,{callback:function(list){
+              m_store.loadData(list);
+			  //alert(list);
+              items=list;
+          },async:false});
+	   
+        DWRUtil.removeAllOptions("DWBM");
+        DWRUtil.addOptions("DWBM",items,"value","name");   
+
+		 
+		 
+      
+        
+   }); */
+   
+});
+</script>
+		<form name="form1" method="post" action="" id="form1">
+            <input type="hidden" name="d_Flag" id="d_Flag" value="0">
+			<input type="hidden" name="d_JsonData" value="">
+			<input type="hidden" name="d_SPBM" id="d_SPBM">
+			<input type="hidden" name="SH_FLAG" id="SH_FLAG">
+			<input type="hidden" name="ref_id" id="ref_id">
+			<input type="hidden" name="LX" value='@@LX,'>
+			<input type="hidden" name="SC_FLAG" value="F">
+            <input type="hidden" name="Note_Type" value="RK">
+            <input type="hidden" name="ZSE" value="0">
+            
+            <input type="hidden" name="PJLX" value="外购进仓" id="PJLX">
+			<table width="100%" border="0">
+				<tr>
+					<td colspan="2">
+						<table width="100%" border="0" align="center" cellpadding="1"
+							cellspacing="0">
+
+							<tr>
+								<td colspan="12" align="center">
+									<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+										<tr height="30">
+											<td align="center"
+												style="font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">入库单											</td>
+										</tr>
+									</table>								</td>
+							</tr>
+							<tr class="tabletoptitle">
+								<td align="right" width="10%">单号：</td>
+							  <td width="19%"><input type="text" name="ID" value="!!MJP022,01" readonly
+										class="TEXTDISABLED">
+								<input type="hidden" name="CK" value="">
+								<input type="hidden" name="JBRBM" value=""></td>
+								<td align="right">日期：</td>
+								<td><input type="text" name="RQ" value="@@LS.CURDATE,"  size="15"></td>
+								<td align="right">制单人：</td>
+								<td><input type="text" name="ZDR" value="@@LS.XM,"
+										readonly size="15" class="TEXTDISABLED"></td>
+							</tr>
+							<tr>
+								<td align="right">摘要：</td>
+								<td align="left"><input type="text" name="ZY" value="" readonly
+										size="20" class="TEXTDISABLED"></td>
+								<td width="10%" align="right">入库凭证号：</td>
+								<td width="22%">							    <input type="text" name="PZH" value=""   size="15" ></td>
+								<td width="10%" align="right">
+									审核人：								</td>
+								<td width="29%" align="left">
+									<input type="text" name="SHR" value="" readonly  size="15" class="TEXTDISABLED"
+										>								</td>
+							</tr>
+							<tr class="tabletoptitle">
+								<td align="right" width="10%">
+									备注：								</td>
+							  <td colspan="5">
+									<textarea name="BZ" cols="25">!!MJP025,21</textarea>
+									
+									<input type="hidden" name="DWBM" id="DWBM" value="@@LS.DWDM,">
+                                     
+                                    送货单日期：<input type="text" name="SHRQ" value="" size="15" readonly onClick="javascript:ShowCalendar(this)">门店：<select  name="Agent_Code" id="Agent_Code" >
+								    <option value="">选择</option>
+                                  <option>$$XL0008,</option>
+                              </select>
+                                    </td>
+							</tr>
+						</table>					</td>
+				</tr>
+
+				<tr>
+					<td colspan="2">
+						<table width="100%" border="0">
+							<tr class="tabletoptitle">
+								<td width="41%" align="center">
+                                <input type="button" name="BtnSelCgd" id="BtnSelCgd" value="根据订单入库">
+						                  <input type="button" name="BtnSPBM" id="BtnSPBM" value="选择产品">
+										  
+										  <input type="hidden" name="BtnImport" id="BtnImport" value="选择维修单"></td>
+								<td width="59%"><input type="button" name="BtnDelRecord" id="BtnDelRecord" value="删除记录">
+										
+									<input type="button" name="BtnSave" id="BtnSave" value="保  存">
+									<input type="button" name="BtnClose" id="BtnClose" value="关  闭">
+									<input type="button" name="BtnDel" id="BtnDel" value="删除单据">	
+							  <input type="button" name="BtnPrint" id="BtnPrint" value="打  印">						</td>
+							</tr>
+						</table>					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div id='productList'></div>					</td>
+				</tr>
+				
+
+				<tr height="10">
+					<td colspan="2">
+						<table width="100%" border="0" cellpadding="1" cellspacing="0">
+							<tr>
+								<td width="73%">
+									<table width="100%" border="0">
+										<tr>
+											<td width="17%" align="right">&nbsp;</td>
+											<td width="15%">
+												<input type="hidden" name="ZJE" size="13" value="" readonly class="TEXTDISABLED">											<input type="hidden" name="JSFSBM" value="1">
+												<input type="hidden" name="JSFSMC" value="现  金"></td>
+											<td width="8%" align="right">&nbsp;</td>
+											<td width="16%">
+												<input type="hidden" name="ZTJ" size="13"  value="" onKeyDown="valNum(event);" onpaste="clip(event);">											</td>
+											<td width="9%" align="right">&nbsp;</td>
+											<td width="35%">
+												<input type="hidden" name="YJS" size="13"  value="" readonly class="TEXTDISABLED">											</td>
+										</tr>
+										<tr>
+											<td align="right">&nbsp;</td>
+											<td>
+												<input type="hidden" name="BCXF" size="13"  value="" onKeyDown="valNum(event);" onpaste="clip(event);">											</td>
+											<td>&nbsp;										  </td>
+											<td>&nbsp;										  </td>
+											<td>&nbsp;										  </td>
+											<td><input type="hidden" name="WJS" value="0">
+										    <input type="hidden" name="ZZK" value="0">
+										    <input type="hidden" name="ZDZK" value="100"><input type="hidden" name="ZSL" value="0"></td>
+										</tr>
+									</table>							  </td>
+								<td width="27%" valign="top">
+									<table width="100%" border="0">
+										
+										<tr>
+											<td>
+												<input type="button" name="BtnAudit" id="BtnAudit"  value="审核通过">
+												<input type="hidden" name="BtnNoAudit" id="BtnNoAudit" value="取消审核"></td>
+										</tr>
+									</table>							  </td>
+							</tr>
+						</table>					</td>
+				</tr>
+			</table>
+
+		</form>
+
+	</body>
+</html>

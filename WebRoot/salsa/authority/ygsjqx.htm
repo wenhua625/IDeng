@@ -1,0 +1,380 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>员工权限</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+		<link href="css/style1.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css"
+			href="css/easyui/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="css/easyui/icon.css">
+		<link type="text/css" rel="stylesheet"
+			href="css/ztree/zTreeStyle/zTreeStyle.css">
+
+		<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+		<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+
+		<script type="text/javascript" src="js/ztree/jquery.ztree.all-3.5.min.js"></script>
+		<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="js/easyui/json2.js"></script>
+		<script type="text/javascript" src="js/easyui/easyui-webase.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+		<script type="text/javascript" src="js/extjs/openWindow.js"></script>
+		<script>
+   $(function(){
+       
+       var lastIndex;
+		    
+		    //权限组信息表格
+		    var $dg1=$('#productList');
+		    var $win1=$('#qxwin');
+		     
+			function cx(){
+				$dg1.datagrid({
+				title:'',
+				width:document.body.clientWidth-15,
+				height:document.body.clientHeight-80,
+				nowrap: true,
+				autoRowHeight: false,
+				striped: true,
+				singleSelect:true,
+				collapsible:true,
+				url:'query?proname=MJP238&Agent_Code='+form1.Agent_Code.value,
+				showFooter:true,
+				remoteSort: false,
+				idField:'yhh',
+				columns:[[
+					{title:'员工编号',field:'yhh',width:85},
+					{title:'店铺名称',field:'agent_name',width: 185},
+        			{title:'员工姓名',field:'yhxm',width: 85},
+					{title:'手机号码',field:'lxfs',width: 105},
+        			{title:'级别',field:'yhjb',width: 85},
+        			{title:'手机权限',field:'qx_mob_cd',width: 355}
+        			
+    			]],
+				pagination:true,
+				rownumbers:true,
+				toolbar:[{
+					id:'btnupdate',
+					text:'新增',
+					iconCls:'icon-add',
+					handler:function(){
+					    form1.d_Flag.value="0";
+					    var url ="display?proname=authority/user_add1.htm";
+				        openWindow('b-win','添加员工',url,600,350,function(){
+							if(form1.d_Flag.value == "1"){
+								 $dg1.datagrid('reload');  
+						    }
+						});
+					    
+					}},'-',{
+					id:'btnupdate',
+					text:'修改',
+					iconCls:'icon-tip',
+					handler:function(){
+						 var row = $dg1.datagrid('getSelected'); 
+			             if(!row) 
+				          {
+					          $.messager.alert('提示信息','请选择记录。','info'); 
+					          return false;
+				          }
+					    form1.d_Flag.value = "0";
+					     openWindow('b-win','员工信息修改','display?proname=authority/user_update1.htm&yhh='+row.yhh,600,350,function(){
+							if(form1.d_Flag.value == "1"){
+								 $dg1.datagrid('reload');  
+						    }
+						});
+						}},'-',{
+					id:'btnupdate',
+					text:'能看的手机上的菜单',
+					iconCls:'icon-tip',
+					handler:function(){
+					    openInfo();
+					}
+				},'-',{
+					id:'btnupdate',
+					text:'能看的电脑上的菜单',
+					iconCls:'icon-tip',
+					handler:function(){
+					    openInfo_dn();
+					}
+				}],
+				onDblClickRow:function(rowIndex, rowData){
+				    openInfo();
+				}
+			});
+			}
+			//快速搜索成品
+			$('#SJ').keydown(function(e){ 
+					if(e.keyCode==13){ 
+				       searchCpData();
+					} 
+			});
+			function searchCpData(){
+				var queryParams = $dg1.datagrid('options').queryParams;  
+				queryParams.SJ=encodeURI(document.getElementById("SJ").value);
+				$dg1.datagrid('reload');
+				var p=$dg1.datagrid('getPager');
+				$(p).pagination('select',1); 	         
+			}
+			//设置手机权限
+			function  openInfo(){
+			   var row = $dg1.datagrid('getSelected'); 
+			   if(!row) 
+				{
+					$.messager.alert('提示信息','请选择员工。','info'); 
+					return false;
+				}else
+				{
+                  
+				  $win1.window({title:row.yhxm+" 手机上的权限"});
+				  form1.YHZ.value=row.yhh;
+				  form1.win_Flag.value="0";
+				   $.post("work?proname=JREE16",{YHH:encodeURI(row.yhh)}, function(rsp) {
+				        var setting = {
+				              showLine: true,
+				              dblClickExpand: false,
+				              check : {
+								enable : true
+							  },
+				              data: {simpleData: {enable: true}},
+				              callback: {
+									onClick: onClick
+								}
+				              };
+	                    var zNodes=eval("("+rsp+")"); 
+						//alert(zNodes);
+                        $(document).ready(function(){
+			               $.fn.zTree.init($("#deeptree"), setting, zNodes);	
+	                     });
+         			});
+				  $win1.window('open');
+				}
+			
+			}
+			
+		//设置电脑权限
+			function  openInfo_dn(){
+			   var row = $dg1.datagrid('getSelected'); 
+			   if(!row) 
+				{
+					$.messager.alert('提示信息','请选择记录。','info'); 
+					return false;
+				}else
+				{
+                  
+				  $win1.window({title:row.yhxm+" 的电脑端权限"});
+				  form1.YHZ.value=row.yhh;
+				  form1.win_Flag.value="2";
+				   $.post("work?proname=JREE03",{YHH:encodeURI(row.yhh)}, function(rsp) {
+				        var setting = {
+				              showLine: true,
+				              dblClickExpand: false,
+				              check : {
+								enable : true
+							  },
+				              data: {simpleData: {enable: true}},
+				              callback: {
+									onClick: onClick
+								}
+				              };
+	                    var zNodes=eval("("+rsp+")"); 
+                        $(document).ready(function(){
+			               $.fn.zTree.init($("#deeptree"), setting, zNodes);	
+	                     });
+         			});
+				  $win1.window('open');
+				}
+			
+			}
+		   $("#Agent_Code").change(function(){
+				cx();
+		   });
+   
+     cx();
+	});
+	
+	
+	
+			
+		
+   
+   
+     
+
+	
+	
+	function onClick(e,treeId, treeNode) {
+			var zTree = $.fn.zTree.getZTreeObj("deeptree");
+			zTree.expandNode(treeNode);
+		}
+	 function saveQx()
+		 {
+		      var zTree = $.fn.zTree.getZTreeObj("deeptree");
+		      nodes = zTree.getCheckedNodes(true);
+		      var str = "";
+		      for(var i=0;i<nodes.length;i++)
+		      {
+		        // str +=  ""+nodes[i].id + ",";
+				 str +=  "''"+nodes[i].id + "'',";
+		      } 
+		      str=str.substring(0,str.length-1);
+		      //alert(str); 
+		      //form1.CD.value=str;
+		      var kjm="";
+		      if(form1.win_Flag.value == "0") 
+		         kjm="IN0025"  
+		      else if(form1.win_Flag.value == "2"){
+		         kjm="IN0K24"
+		      } else if(form1.win_Flag.value == "3"){
+		         kjm="INS013"
+		      }else if(form1.win_Flag.value == "4"){
+		         kjm="INS016"
+		      }else if(form1.win_Flag.value == "5"){
+		         kjm="IN0A02"
+		      }
+		      else kjm="IN0K25";
+		     // alert(kjm);
+		     //alert(form1.YHZ.value);
+		      $.post("work?proname="+kjm+"&action=insert",{CK:str,CD:str,QT:str,DJ:str,TS:str,SH:str,YHH:encodeURI(form1.YHZ.value)}, function(rsp) {
+				     //alert(rsp);
+				     if(rsp!='ok'){
+				        alert(rsp);
+				     }else{
+				        alert("保存成功!");
+						$('#productList').datagrid('reload');
+				     }
+				     
+         	  });
+			  
+			  
+		       
+		 }
+	
+		 
+    function closeQX()
+    {
+        $('#qxwin').window('close'); 
+    }
+     
+	
+			
+	 
+</script>
+
+
+	</head>
+
+	<body>
+		<form name="form1" id="form1" method="post">
+			<input type="hidden" name="YHZ">
+			<input type="hidden" name="CD">
+			<input type="hidden" name="win_Flag" value="">
+			<input type="hidden" name="d_Flag" id="d_Flag" value="0">
+			<table width="100%" height="0" border="0" align="center"
+				cellpadding="0" cellspacing="0">
+				<tr align="center" height="5">
+					<td>
+
+					</td>
+				</tr>
+				<tr align="center">
+					<td>
+						<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+							<tr height="30">
+								<td
+									style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">
+									<img src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">
+									员工手机权限
+								</td>
+								<td style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">
+								
+								门店 <select name="Agent_Code" id="Agent_Code" > 
+					                 	 <option>$$XL0008,</option>                  
+					               </select>
+				                  </td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+
+						<table width="100%" border="0" cellpadding="5" cellspacing="0">
+							<tr>
+								<td width="18%" align="right">
+									查询条件：
+								</td>
+								<td width="82%">
+									<input name="SJ" type="text" value="用户号/姓名" size="20" id="SJ" onFocus="javascript:if(this.value=='用户号/姓名')this.value='';" >
+									<font color="#006600">（输入后，按回车查询）</font> <font color="red">（注：权限设置好后，请让员工重新用手机登录）</font>
+							    </td>
+							</tr>
+						</table>
+
+					</td>
+				</tr>
+
+				<tr>
+					<td style="background-color:#FFFFFF;">
+						<div id="productList"></div>
+					</td>
+				</tr>
+				<tr></tr>
+			</table>
+			<div id="win" class="easyui-window"
+				data-options="title:'工价信息',iconCls:'icon-save',closed:'true',maximizable:false,minimizable:false,modal:true"
+				style="width:770px;height:455px;">
+				<div id="bomList"></div>
+			</div>
+			<div id="ygwin" class="easyui-window"
+				data-options="title:'员工列表',iconCls:'icon-save',closed:'true',maximizable:false,minimizable:false,modal:true"
+				style="width:450px;height:400px;">
+				<table id ="yglist" class="easyui-datagrid" title=""
+					
+					data-options="singleSelect:true,collapsible:true,rownumbers:true">
+					<thead>
+						<tr>
+							<th data-options="field:'yhh',width:80">
+								登陆号
+							</th>
+							<th data-options="field:'yhxm',width:100">
+								姓名
+							</th>
+							<th data-options="field:'lxfs',width:80">
+							   联系方式
+							</th>
+							
+						</tr>
+					</thead>
+				</table>
+
+			</div>
+			<div id="qxwin" class="easyui-window"
+				data-options="title:'功能菜单',iconCls:'icon-save',closed:'true',maximizable:false,minimizable:false,modal:true"
+				style="width:470px;height:455px;">
+				<div style="padding:5px;text-align:center;">
+					<a href="#" class="easyui-linkbutton" icon="icon-ok"
+						onClick="saveQx()">保存</a>
+					<a href="#" class="easyui-linkbutton" icon="icon-cancel"
+						onClick="closeQX()">关闭</a>
+				</div>
+				<ul id="deeptree" class="ztree"></ul>
+			</div>
+			
+
+
+
+
+
+
+
+
+		</form>
+
+
+	</body>
+
+</html>

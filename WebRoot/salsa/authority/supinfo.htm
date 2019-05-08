@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>供应商管理</title>
+<base target="_self"/>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" src="inc/sort.js"></SCRIPT>
+
+
+<script language="javascript">
+  function checkDel(id)
+  {
+      if(confirm('如删除，则所在的专卖店也将删除! \n您确定删除吗?'))
+	  {
+	     window.location="display?proname=authority/agent_result&action=delete&AGENT_CODE="+id;
+	  }
+	  else return;
+  }
+   function opr(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,650,850);
+        //window.document.location.reload();
+       
+     }
+  
+</script>
+</head>
+
+<body>
+<form name="form1" method="post" action="display?proname=authority/supinfo.htm" id="form1">
+<input name="AGENT_CODE" type="hidden">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><img
+					src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">供应商列表</td>
+				<td ></td>
+			</tr>
+    <tr> 
+      <td height="30"> 
+       
+        <!-- 所属采购员：
+        <select name="DOMAIN_MAN" onChange="javascript:form1.submit()">
+          <option value=" ">全部</option>
+		  <option>$$XL0003,</option>
+        </select>
+         -->
+        供应商名称:
+        <input type="text" name="AGENT_NAME"><!--
+        所属区域:
+        <select name="Sjbm" onChange="javascript:form1.submit()">
+          <option value=" ">全部</option>
+		  <option>$$XL0038,</option>
+        </select>
+        
+        --><input type="submit" name="Submit2" value="查询">
+        
+      </td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%"  border="1" style="border-collapse:collapse" bordercolor="#000000" id="PowerTable">
+          <tr align="center" bgcolor="#BFBFBF"> 
+            <td>代号</td>
+            <td>供应商名称</td>
+           
+            <td>联系人</td>
+            <td>联系电话</td>
+            <td>手机</td>
+            <td>修改</td>
+            <td>状态</td>
+          </tr>
+          <tr > 
+            <td>$$MJ1005,01</td>
+            <td>$$MJ1005,02</td>
+            
+             
+             <td>$$MJ1005,10</td>
+            <td>$$MJ1005,08</td>
+            <td>$$MJ1005,11 $$MJ1005,12</td>
+            <td>【<a href='#' onClick="opr('display?proname=authority/sup_add.htm&AGENT_CODE=$$MJ1005,01')">详细信息</a>】
+            </td>
+            <td>$$MJ1005,13</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr align="right">
+         <td><table>$$page,</table></td>
+      </tr>
+  </table>
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center"> 
+       
+        <input type="button" name="Submit" value="增加供应商" onClick="NewWinMD('display?proname=authority/sup_add.htm&AGENT_CODE=999999&tmp='+Math.random(),window)">
+        $$EX1005,
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

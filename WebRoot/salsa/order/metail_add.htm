@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base target="_self">
+<title>物料选择</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+
+
+<script>
+  function selected(productCode)
+  {
+     
+      dialogArguments.document.getElementById('Product_Code').value=productCode;
+      
+      dialogArguments.document.getElementById('BtnAddProduct').click();
+  }
+  function conf(){
+       window.close();
+  }
+</script>
+
+</head>
+
+<body >
+<form name="form1" method="post" action="" id="form1">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    
+	<tr> 
+            
+      <td height="30"  colspan="9">请输入货号：
+        <input type="text" name="PRODUCT_CODE">
+        品名：
+        <input type="text" name="PRODUCT_NAME"><input type="submit" name="Submit2" value="查询">
+            </td>
+            
+    </tr>
+	<tr>
+	   <td> 系列号： 
+        <select name="SERIES_CODE" onChange="javascript:form1.submit()">
+          <option value=" ">全部</option>
+		  <option>$$XL1001,</option>
+        </select>
+          <input type="button" name="Submit4" value="确定" onclick="conf()"></td>
+	</tr>
+	<tr>
+      <td height="0">
+          
+        <table width="100%" border="1" cellpadding="2" cellspacing="0" >
+          <tr align="center" bgcolor="#BFBFBF"> 
+            <td>选择</td>
+            <td>货号</td>
+            
+            <td>品名</td>
+           
+            <td>规格</td>
+            <td>库存</td>
+            
+            <td>单位</td>
+            
+            
+          </tr>
+          <tr >
+            <td> 
+			 <input type="checkbox" name="d_Product_Code"   onclick="return selected('$$MJ1001,08')" >
+            </td> 
+            <td>$$MJ1001,01</td>
+            
+            <td>$$MJ1001,03</td>
+            <td>$$MJ1001,04</td>
+           
+            <td>$$MJ1001,16</td>
+            
+            <td>$$MJ1001,05</td>
+           
+            
+          </tr>
+        </table>
+        $$page,
+      </td>
+    </tr>
+  
+      
+  </table>
+  
+</form>
+</body>
+</html>

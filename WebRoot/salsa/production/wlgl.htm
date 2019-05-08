@@ -1,0 +1,280 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/easyui/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/easyui/icon.css">
+
+
+
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script>
+		$(function(){
+		    $('#win').window('close'); 
+			$('#productList').datagrid({
+				title:'',
+				width:"auto",
+				height:document.body.clientHeight-75,
+				nowrap: true,
+				autoRowHeight: false,
+				striped: true,
+				singleSelect:true,
+				collapsible:true,
+				url:'query?proname=MJS001',
+				showFooter:false,
+				title:"物料基本信息",
+				iconCls:'icon-edit',
+				remoteSort: false,
+				fitColumns:true,
+				idField:'bm',
+				columns:[[
+					{title:'编码',field:'bm',width:65},
+        			{title:'名称',field:'mc',width: 205},
+					{title:'规格',field:'xhgg',width: 125},
+        			{title:'单位',field:'jldw',width: 55},
+					{title:'单价',field:'jj',width: 55,align:"right",formatter:function(value,row,index){return round2(value,2)}},
+        			
+        			{title:'类别',field:'lbmc',width: 205},  
+        			{title:'是否启用',field:'qy_mc',width: 65} 
+    			]],
+				pagination:true,
+				rownumbers:true,
+				toolbar:[{
+					id:'btnadd',
+					text:'新增',
+					iconCls:'icon-add',
+					handler:function(){
+					    $('#bm').attr({ readonly:false });
+					    $('#form1').form('load',{bm:"",mc:"",xhgg:"",jldw:"",jj:"",min_kc:"",max_kc:"",lb:""});
+					    $('#win').window('open');
+						//$('#btnsave').linkbutton('enable');
+						//alert('add')
+					}
+				},'-',{
+					id:'btnupdate',
+					text:'修改',
+					iconCls:'icon-edit',
+					handler:function(){
+					    var row = $('#productList').datagrid('getSelected'); 
+					    if(!row) 
+					    {
+					       $.messager.alert('提示信息','请先选择要更新的记录。','info'); 
+					       return false;
+					    }else
+					    {
+					        $('#bm').attr({ readonly:true });
+					        $('#form1').form('load',row); 
+					        $('#win').window('open');
+					    }
+					    
+						//$('#btnsave').linkbutton('enable');
+						//alert('add')
+					}
+				}]
+			});
+			$('#form1').form({  
+                url:"work?proname=INS001",  
+    			onSubmit:function(){
+                    return $(this).form('validate');
+    			},  
+    		    success:function(data){  
+        		    if (data=="ok")
+        		    {
+        		      alert("操作成功!");
+        		      $('#win').window('close');
+        		      $("#productList").datagrid('reload');   
+        		    }else 
+        		    {  alert(data);}
+        		     
+    		    }  
+			});
+			$('#SJ').keydown(function(e){ 
+					if(e.keyCode==13){ 
+				       searchData()
+						} 
+			}); 
+
+
+			
+
+			
+		});
+		function closewin(){
+			    $('#win').window('close'); 
+		}
+		function save(){
+			     $('#form1').submit(); 
+		 }
+		function searchData(){
+		          var queryParams = $('#productList').datagrid('options').queryParams;  
+		          queryParams.LB=document.getElementById("LB").value;
+		          queryParams.SJ=encodeURI(document.getElementById("SJ").value);
+			      $("#productList").datagrid('reload');  
+		 }
+		 function round2(Num1,Num2){     
+		      if(isNaN(Num1)||isNaN(Num2)){           
+		             return(0);     
+		       }else{     
+		          return(Num1.toFixed(Num2));           
+		       }
+		 }
+		
+		
+</script>
+<script type="text/javascript">
+     function opr(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,550,850);
+        
+     }
+     
+    
+</script>
+
+</head>
+
+<body>
+
+<input type="hidden" name="d_Flag" value="0">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr align="center" height="5"> 
+		<td>
+		
+		</td>
+	</tr>
+	<tr align="center">
+		<td>
+		<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><img
+					src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">物料管理</td>
+		    </tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+	<td>
+	  
+	  <table width="100%" border="0" cellpadding="5" cellspacing="0" >
+          <tr> 
+            <td width="13%" align="right">过滤条件：</td>
+            <td width="39%"><input name="SJ" type="text" value="" size="20" id="SJ">
+            <font color="#006600">（输入后，按回车）</font></td>
+            <td width="10%" align="right">类别：</td>
+            <td width="19%"><select name="LB" id="LB">
+               <option value="">全部</option>
+			  <option>$$XLS001,</option>
+            </select></td>
+            <td width="19%"><a  href="#" class="easyui-linkbutton" icon="icon-search" onClick="searchData()">查询</a></td>
+          </tr>
+        </table>
+	   
+	</td>
+	</tr>
+	
+	<tr>
+      <td style="background-color:#FFFFFF;">
+          <!--<IFRAME id="cardframe" name="cardframe"
+						src="display?proname=report/ywdjcz_content.htm&ORDER_DATE1=@@LS.FIRSTDAYSOFCURMONTH,&ORDER_DATE2=@@LS.CURDATE,&Note_Type=XS"
+						frameBorder=0 width="100%" scrolling=auto height="450"></IFRAME>-->
+		<div id="productList" ></div>
+		 
+       
+      </td>
+    </tr>
+    <tr></tr>
+  </table>
+ <div  id="win" class="easyui-window" data-options="title:'物料信息',iconCls:'icon-save'"  style="width:600px;height:450px;">  
+    
+     <form id="form1" method="post">
+           <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;产品基本信息</td>
+          </tr>
+          <tr> 
+            <td width="200" align="right" bgcolor="#C4DFDC" class="tableleft"> 
+              编码：            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="bm" id="bm" class="easyui-validatebox" type="text"  maxlength="20" size="10" data-options="required:true"></td>
+          </tr>
+         
+          <tr> 
+            <td width="200" align="right" bgcolor="#C4DFDC" class="tableleft"> 
+              名称：            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="mc" class="easyui-validatebox" type="text" data-options="required:true" size="25">            </td>
+          </tr>
+          
+          <tr> 
+            <td width="200" align="right" bgcolor="#C4DFDC" class="tableleft"> 
+              类别：            </td>
+            <td bgcolor="#FFFFFF"> 
+              <select name="lb" >
+                <option value="" selected>==选择==</option>
+                <option>$$XLS001,</option>
+              </select>            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">规格：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="xhgg">            </td>
+          </tr>
+         
+          
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">单位：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="jldw"   maxlength="10" size="10">            </td>
+          </tr>
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;产品价格信息</td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">单价：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="jj"   size="15" style ="color:#FF0000" class="easyui-numberbox" data-options="precision:2,required:true">            </td>
+          </tr>
+		  <tr>
+		    <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;补充信息</td>
+	      </tr>
+		  <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">最低库存：</td>
+            <td bgcolor="#FFFFFF"><input type="text" name="min_kc"  size="10" class="easyui-numberbox" data-options="precision:0"></td>
+          </tr>
+		  <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">最高库存：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="max_kc"  size="10" class="easyui-numberbox" data-options="precision:0">            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">备注：</td>
+            <td bgcolor="#FFFFFF"> 
+              <textarea name="bz" cols="30"></textarea>            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">是否启用：</td>
+            <td bgcolor="#FFFFFF"> 
+                 <select name="qy_flag" >
+                <option value="T">启用</option>
+                <option value="F">停用</option>
+              </select>         </td>
+          </tr>
+        </table>
+            <div style="padding:5px;text-align:center;">  
+            <a  href="#" class="easyui-linkbutton" icon="icon-ok" onClick="save()">保存</a>  
+            <a  href="#" class="easyui-linkbutton" icon="icon-cancel" onClick="closewin()">取消</a>  
+        </div>
+   </form> 
+    
+</div>
+
+</body>
+
+</html>

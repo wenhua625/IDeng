@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base target="_self">
+<title>@@Title,单选择</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" src="inc/sort.js"></SCRIPT>
+<script>
+  function selected()
+  {
+       var New=document.getElementsByName("SPBM");   
+	   var strNew="";  
+	  
+	   for(var i=0;i<New.length;i++)   
+	   {     
+	   
+		   if(New[i].checked){         
+		      strNew=New[i].value
+			  break;
+			}else  continue;  
+	   }
+	   
+      
+      if(strNew ==""){
+	      alert("请选择!");
+		  return false;
+	  }
+	  window.dialogArguments.document.getElementById('d_Flag').value="1";
+	  var s_value=strNew.split("|");
+	 
+	  window.dialogArguments.document.getElementById('ref_id').value=s_value[0];
+	  window.dialogArguments.document.getElementById('DWBM').value=s_value[1];
+	  window.close();
+      
+	  
+  }
+  function BindEnter(obj)
+  {    
+     if(obj.keyCode == 13)        
+     {                 
+          selected();
+     } 
+	 if(obj.keyCode == 27)        
+     {                 
+          window.close();
+     } 
+
+   }
+
+ 
+</script>
+
+</head>
+
+<body onkeydown="BindEnter(event)">
+<form name="form1" method="post" action="" id="form1" >
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    
+	
+	
+	<tr>
+      <td height="0">
+        <table width="100%" border="1" style="border-collapse:collapse" bordercolor="#000000" id="PowerTable">
+          <tr align="center" bgcolor="#BFBFBF"> 
+            <td>选择</td>
+            <td>采购单号</td>
+            <td>供应商名称</td>
+			<td>日期</td>
+            <td>摘要</td>
+          </tr>
+          <tr > 
+		     <td>  <input type="radio" name="SPBM"  value="$$MJP032,02|$$MJP032,13" id="SPBM">            </td>
+            <td>$$MJP032,02</td>
+            <td>$$MJP032,05</td>
+            <td>$$MJP032,01</td>
+            <td>$$MJP032,12</td>
+           </tr>
+        </table>
+      </td>
+    </tr>
+    $$page,
+      
+  </table>
+  <table width="100%" border="1">
+  <tr>
+    <td align="right"><font color="red">【操作提示：】</font></td>
+    <td><font color="blue">按上，下键选择，按回车键选中；按ESC键退出</font></td>
+    <td>&nbsp;</td>
+    <td><input type="button" name="Submit" value="选中" onClick="selected()" ></td>
+  </tr>
+</table>
+
+</form>
+</body>
+</html>

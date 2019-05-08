@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type="text/javascript">
+function opr(url){
+     NewWinMD(url+'&tmp='+Math.random(),window);
+     if(form1.d_Flag.value=="1")
+       form1.submit();
+  }
+</script>
+</head>
+
+<body>
+<script language="javascript">
+Ext.onReady(function(){
+    
+     if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+     var formMap = DWRUtil.getValues("form1");
+     var store = new Ext.data.JsonStore({
+        fields: ['value', 'name']
+    });
+    var items;
+    
+    
+     Ext.get("SERIES_CODE").on("change",function(){
+	   
+       formMap = DWRUtil.getValues("form1");
+	   
+       DwrComm.parseAL('XLS006',formMap,{callback:function(list){
+           store.loadData(list);
+           items=list;
+       },async:false});
+	   
+        DWRUtil.removeAllOptions("XL_CODE");
+		//var arr={"","全部"};
+		var arr=[{"name":"全部","value":""}];
+		DWRUtil.addOptions("XL_CODE",arr,"value","name");
+        DWRUtil.addOptions("XL_CODE",items,"value","name");   
+   });
+    form1.submit();
+    
+       
+   
+});
+</script>
+<form name="form1" method="post" action="display?proname=cxgl/supportproductinfo_content.htm" id="form1" target="cardframe">
+ <input type="hidden" name="d_Flag" value="0">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+            <td colspan="2"> 
+              <table border="0" width="100%">
+							<tr height="30">
+								<td style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid;font-size: 12pt;COLOR: #124164;FONT-WEIGHT: bold;"><img src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">配套产品设置</td>
+							</tr>
+				</table>            </td>
+          </tr>
+		  <tr> 
+            <td width="5%" height="30">                 </td>
+            <td width="95%"><select name="ZXYH"  id="ZXYH">
+              <option value="">全部</option>
+						<option value="是">是</option>
+              </select>
+              
+              类型
+              :
+              <select name="SERIES_CODE" onChange="javascript:form1.submit()">
+                        <option value=" ">全部</option>
+						<option>$$XL0001,</option>
+              </select>
+          系列:
+              <select name="XL_CODE"  id="XL_CODE">
+                        <option value="">全部</option>
+						<option>$$XL1008,</option>
+              </select>
+        
+        型号或名称：
+        <input type="text" name="PRODUCT_NAME">
+        <input type="submit" name="Query" value="查询">  </td>
+		  </tr>
+	
+	<tr>
+      <td colspan="2" >
+         <IFRAME id="cardframe" name="cardframe" src=""
+						frameBorder=0 width="100%" scrolling=auto height="500"></IFRAME>      </td>
+    </tr>
+  </table>
+</form> 
+
+</body>
+</html>

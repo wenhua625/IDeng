@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>Untitled Document</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<meta http-equiv="expires" content="30">
+		<link href="css/style011.css" rel="stylesheet" type="text/css">
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<SCRIPT LANGUAGE="JavaScript" src="inc/sort.js"></SCRIPT>
+		<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+		<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+        <script type='text/javascript' src='dwr/engine.js'></script>
+        <script type='text/javascript' src='dwr/util.js'></script>
+        <script language="javascript">
+        function opr(url,h,w){
+             var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,h,w);
+          }
+        function kk(agent_code,back_code,agent_amount,kk_flag,tis_amount){
+              var name1="999999"; 
+              if(name1 == null || name1.length == 0){
+                alert("托运单号不正确，无法发货确认!");
+                return false;
+              }
+            if(kk_flag == '-1'){
+               if(!confrim("余额不足,你确认发货吗？")) return false;
+               
+            }
+           
+            if(!confirm('应扣款：【'+agent_amount+"】,你确认吗？")) return false;       
+            if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+            var formMap = DWRUtil.getValues("form1");
+            form1.Agent_Code.value=agent_code;
+            form1.Agent_Amount.value=agent_amount;
+            form1.Tis_Amount.value=tis_amount;
+            form1.SFSF.value=name1;
+            form1.Back_Code.value=back_code;
+            formMap = DWRUtil.getValues("form1");
+            DwrComm.parseIN('IN0K22',formMap,'update',{callback:function(data){
+                if (data != 'ok'){
+                  alert(data);
+                }else{
+                  alert('扣款成功!');
+                 window.parent.form1.submit();
+                  
+                }
+          },async:false});
+        }
+      </script>
+	</head>
+
+	<body style="margin-left: 0px;">
+	<form name="form1" method="post" action="" id="form1">
+      <input type="hidden" name="Agent_Code"><input type="hidden" name="Back_Code"><input type="hidden" name="Agent_Amount"><input type="hidden" name="Tis_Amount"><input type="hidden" name="SFSF" value="">
+    </form>
+		<div >
+			<table width="100%" border="0">
+				
+				<tr>
+					<td >
+						<table width="100%" border="1" cellpadding="2" cellspacing="0" id="PowerTable">
+        <tr align="center" bgcolor="#BFBFBF"> 
+          <td>发生日期</td>
+          <td>单据编号</td>
+          <td>客户名称</td>
+          <!--<td>结算单号</td>
+          --><td>业务员</td>
+          <td>批复单号</td>
+          <td>数量</td>
+         
+          <td>金额</td>
+          <td>装修返回</td>
+          <td>运费</td>
+          <td>账上余额</td>
+          <td>应收</td>
+           <td></td>
+        </tr>
+        <tr style="color:$$MJ0X13,14"> 
+          <td>$$MJ0X13,01</td>
+          <td><a href="#" onclick="javascript:opr('display?proname=quickorder/$$MJ0X13,11.htm&BACK_CODE=$$MJ0X13,02&Note_Type=$$MJ0X13,12&View=View',650,850)">$$MJ0X13,02</a></td>
+          <td>$$MJ0X13,03</td>
+          <!--<td>$$MJ0X13,04</td>
+          --><td>$$MJ0X13,05</td>
+          <td>$$MJ0X13,06</td>
+          <td align="right">$$MJ0X13,07</td>
+          <td align="right">$$MJ0X13,08</td>
+          <td align="right">$$MJ0X13,19</td>
+           <td align="right">$$MJ0X13,09</td>
+          <td align="right">$$MJ0X13,13</td>
+          <td align="right">$$MJ0X13,22</td>
+          <td><input name="BtnKK" value="发货" type="hidden"  onclick="javascript:kk('$$MJ0X13,10','$$MJ0X13,02','$$MJ0X13,08','$$MJ0X13,16','$$MJ0X13,19')"></td>
+        </tr>
+        <tr style="font:bold;"> 
+          <td colspan="5" align="right">合计：</td>
+          <td align="right">$$MJ0X14,01</td>
+          <td align="right">$$MJ0X14,02</td>
+         <td align="right">$$MJ0X14,05</td>
+          
+          <td align="right">$$MJ0X14,06</td>
+          
+         
+          <td align="right">$$MJ0X14,03</td>
+          <td align="right">$$MJ0X14,04</td>
+           <td></td>
+        </tr>
+      </table>
+					</td>
+				</tr>
+				$$page,		
+			</table>
+
+		</div>
+		<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+      
+    <td align="center"> 
+	
+	$$EX0X13,
+	
+    </td>
+    </tr>
+  </table>
+	</body>
+</html>

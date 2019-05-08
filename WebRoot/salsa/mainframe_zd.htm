@@ -1,0 +1,274 @@
+<html>
+<head>
+<title>@@LS.SYSTEMBHD,系统</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+<link type="text/css" rel="stylesheet" href="css/style1.css">
+<link rel="stylesheet" type="text/css" href="css/easyui/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/easyui/icon.css">
+<link href="js_geler/reset.css" rel="stylesheet" type="text/css">
+<link href="js_geler/css.css" rel="stylesheet" type="text/css">
+<link type="text/css" rel="stylesheet" href="css/ztree/zTreeStyle/zTreeStyle.css">
+
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<style type="text/css">
+
+.nav ul li{ float:left; padding-left:23px; }
+.nav ul li a{ font:12px/18px "宋体"; color:#000000;}
+.nav ul li a:hover{ color:#6bb52c;}
+
+
+
+
+</style>
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/ztree/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+<script type='text/javascript' src='js/easyui/layer.js'></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type="text/javascript" src="js/extjs/ext-base3.4.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all3.4.js"></script>
+<script> 
+       var setting = {
+            view: {
+                dblClickExpand: false,
+				showLine: false
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				onClick: onClick
+			}
+		};
+        
+       $.post("work?proname=JREE05", function(rsp) {
+              $(document).ready(function(){
+			        $.fn.zTree.init($("#deeptree"), setting,eval("("+rsp+")"));
+		      });
+              
+         });
+         
+         function onClick(e,treeId, treeNode) {
+			var zTree = $.fn.zTree.getZTreeObj("deeptree");
+			zTree.expandNode(treeNode);
+		}
+		var s_msg="";
+		var s_msg1=""
+		var is_show="0";
+		function showMsg(){
+		
+		
+		DwrComm.parseTip("000",{callback:function(list){if(list.length>0){s_msg = list;}},async:false});
+	   
+	   if(s_msg.length >0 ){
+		$.messager.show({
+				title:'系统提醒',
+				msg:s_msg,
+				timeout:10000,
+				showType:'fade'
+			});
+			s_msg1 =s_msg;
+		}
+	   }
+	   
+	  
+        
+      
+
+</script>
+
+
+
+</head>
+
+<body bgcolor="#e8f0ec" class="easyui-layout">
+
+<div data-options="region:'north',split:false" title="" style="height:100px;padding:0px;">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr bgcolor="#5D82A8">
+    <td align=left>&nbsp;</td>
+    <td width="240">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="w01_11px_grey">
+        <tr>
+          <!--<td align="center" width="10"><img src="images/frame/arr_red.gif" border="0"></td>	
+          <td>&nbsp;<span class="w01_11px_white" onMouseOver="this.style.cursor='hand'" onClick="javascript:void window.open('display?proname=authority/bulletin.htm','main');">公告管理</span></td>        
+          --><td align="center" width="10"><img src="images/frame/arr_red.gif" border="0"></td>	
+          <td><input type="hidden" id="AA" value="">&nbsp;<span class="w01_11px_white" onMouseOver="this.style.cursor='hand'" onClick="javascript:void window.open('display?proname=authority/password_update.htm','main');">修改密码</span></td>        
+          <td align="center" width="10"><img src="images/frame/arr_red.gif" border="0"></td>
+          <td>&nbsp;<span class="w01_11px_white" onMouseOver="this.style.cursor='hand'" onClick="javascript: if( confirm('确实要退出平台吗?') ){ location='work?proname=QUIT'}">退出平台</span></td>
+          <td width="1">&nbsp;</td>
+        </tr>
+      </table>
+    </td>    
+  </tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" id="title">
+  <tr>
+    <td width="234"><img src="images/logon/main_02_salsa.gif" width="234" height="57"></td>
+    <td background="images/frame/main_03.gif">&nbsp;</td>
+  </tr>
+</table>
+
+<table width="100%" height="23" border="0" cellpadding="0" cellspacing="0" class="w01_13px_black" background="images/frame/menu_bg.gif">
+  <tr>
+    <td width="15%" align="center" background="images/frame/menu_bg.gif">@@LS.DATE,  @@LS.DAYCN,
+    	
+    </td>
+	<td width="84%" align="center">
+    		
+    </td>
+    
+    <td width="1%" nowrap align="right">&nbsp;</td>
+  </tr>
+</table>
+</div>
+
+
+<div data-options="region:'west',iconCls:'icon-reload',split:false" title="功能菜单" style="width:180px;background-color: #EEF2EB;">
+      <!--<iframe name="resource" marginheight="0" marginwidth="0" frameborder="0" width="100%" height="100%" scrolling="auto" src="display?proname=menuTree.htm"></iframe>-->
+	  <div >
+		<ul id="deeptree" class="ztree"></ul>
+	</div>
+</div>
+<div data-options="region:'center'" title="" style="overflow:hidden;padding: 5px 5px 5px 5px;background-color: #EEF2EB;">
+      <iframe name="main" marginheight="0" marginwidth="0" frameborder="0" width="100%" height="100%" scrolling="auto" src="display?proname=firstpage_zd.htm"></iframe>
+	  </div>
+
+<div data-options="region:'south',split:false" title="" style="height:24px;padding:0px;background=url(images/frame/footer_bg.gif)">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#5D82A8" background="images/frame/footer_bg.gif" class="w01_11px_grey" height="22">
+<tr valign="middle">
+  <td>
+  	<table  border="0" style="font-size:12px ">
+  		<tr>
+  				<td><img src="images/frame/person.gif" alt="登录名称"></td>
+					<td>名称:</td>
+					<td valign="bottom">@@LS.XM,</td>
+					<td><img src="images/frame/role.gif" alt="所属角色"></td>
+					<td>角色:</td>
+					<td valign="bottom">@@LS.YHZ,</td>
+					
+					<td><img src="images/frame/org.gif" alt="所在机构"></td>
+					<td>机构:</td>
+					<td>@@LS.AGENT,</td>
+					
+					<td>&nbsp;</td>
+  		</tr>
+    </table>
+  </td>
+  <td valign="middle" align="right" style="font-size:12px "><font color="#3c3c3c" >艾登软件(上海)有限公司&nbsp;&copy;&nbsp;@@LS.YEAR, 版权所有&nbsp;&nbsp;&nbsp;</font></td>
+</tr>
+</table>
+</div>
+</body>
+<script>
+ Ext.onReady(function() {
+ 
+      //检查消息是否必读
+		 if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+         var formMap = DWRUtil.getValues("form1");
+
+         function checkWin()
+        {
+          
+          formMap = DWRUtil.getValues("form1");
+		  var s_isNew;
+		  DwrComm.parseMJ('MJP114',formMap,{callback:function(data){
+		           
+		           if(data.length >0){
+		                 s_isNew=data;
+		                
+                         showWin(s_isNew);
+		                
+		              
+		              
+		           }
+                },
+                async:false});
+       }         
+       
+	   function showWin(newsId){			
+        var win1;
+        var newsNum=0;
+        
+       
+        win1 = new Ext.Window({
+                    applyTo: 'win',
+                    layout: 'fit', 
+                    title:"<span style='font-size:16px;'>通知(老板必读)</span>",
+                    width: 750,
+                    height: 550,
+					bodyStyle:"background-color:#FFFFFF;",
+					autoScroll:true,
+				    autoLoad:{
+			            url :'display?proname=note/newsInfo.htm&ID='+newsId[newsNum].newid
+					},
+					modal: true,
+					closable:false,
+					bbar:['->',{text:"<span style='font-size:16px;color:red'>已经阅读</span>",handler:function(){
+					        
+					            readInfo(newsId[newsNum].newid);
+					            newsNum=newsNum+1;
+					            
+					            if(newsNum==newsId.length)
+					              win1.close();
+					            else
+					              win1.load({url:'display?proname=note/newsInfo.htm&ID='+newsId[newsNum].newid,scripts:true});
+					           
+					         
+							   
+						   }},
+					      {text:"<span style='font-size:16px;'>退出系统</span>",handler:function(){
+						       if(!confirm('您确认要退出系统吗？')) return false;
+							   window.location='work?proname=QUIT';
+						  
+						  }}]
+                    
+                  
+                });
+                
+                win1.show();
+            
+           
+		   }
+		   
+		   function readInfo(newsId)
+		   {
+		       if(!confirm('您确认已经阅读了该通知吗？')) return false;
+				if('@@LS.BM,' == '8889'){
+					alert("只有老板阅读才生效，请老板登陆系统后，点击已经阅读！");
+					return false;
+				}else{
+					form1.NewsId.value=newsId;
+					formMap = DWRUtil.getValues("form1");
+					DwrComm.parseIN('INP027',formMap,'update',{callback:function(data){
+                    if (data != 'ok'){
+                             alert(data);
+                     }else{
+						alert("你已经成功的阅读了该通知，请按通知要求执行，谢谢你的配合!");
+                     }
+                      },async:false}); 
+							      
+				} 
+		   }
+           //checkWin();
+        });
+        
+	// window.setInterval("showMsg()",30000);//半分钟刷新1次 
+</script>
+<div id="win">
+   <form name="form1" method="post" action="" id="form1"><input type="hidden" name="NewsId" id="NewsId"></form>
+</div>
+ 
+    
+</html>

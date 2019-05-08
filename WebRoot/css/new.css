@@ -1,0 +1,75 @@
+@charset "utf-8";
+/* CSS Document */
+body { MARGIN: 0px;
+PADDING: 0px; 
+FONT-FAMILY: 'Lucida Grande','Lucida Sans Unicode','宋体',arial,verdana,sans-serif;
+COLOR: #666;
+FONT-SIZE:12px;
+LINE-HEIGHT:150%; } 
+
+
+.input  {
+         FONT-SIZE: 12px; FONT-FAMILY: 'Verdana', 'Arial', '����'; HEIGHT: 15px;
+}
+
+.button {height: 22px;width: 67px;
+background-image: url(../image/button_bak.gif);
+background-position: center center;border: 1px solid #8E3F48;
+color: #333333;font-family: "宋体";font-size: 12px;}
+
+a:link {font-family: "宋体";font-size: 12px;color: #333333;text-decoration: none;}
+a:visited {font-family: "宋体";font-size: 12px;color: #333333;text-decoration: none;}
+a:hover {font-family: "宋体";font-size: 12px;color: #993300;text-decoration: none;}
+a:active {font-family: "宋体";font-size: 12px;color: #333333;text-decoration: none;}
+
+#main{ POSITION: absolute;
+LEFT:107px;
+TOP:39px;
+WIDTH:780px;
+HEIGHT:515px;
+MARGIN: 0px;
+PADDING: 0px;
+BACKGROUND: url(../image/index.jpg);
+}
+
+
+#input1{
+	POSITION: absolute;
+	LEFT:439px;
+	TOP:309px;
+	WIDTH:120px;
+	height: 21px;
+}
+
+#input2{
+	POSITION: absolute;
+	LEFT:440px;
+	TOP:357px;
+	WIDTH:121px;
+	height: 21px;
+}
+
+#bt{POSITION: absolute;
+	LEFT:428px;
+	TOP:415px;
+	WIDTH:149px;
+	height: 21px;
+}
+#bt1{ FLOAT: left;
+ MARGIN: 0px ; 
+ PADDING: 0px;
+ WIDTH: 67px; }
+#bt2{ FLOAT: right;
+ MARGIN:  0px; 
+ PADDING: 0px;
+ WIDTH: 67px; }
+
+#bottom{POSITION: absolute;
+	LEFT:348px;
+	TOP:570px;
+	WIDTH:304px;}
+.bouuontext {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #333333;
+}

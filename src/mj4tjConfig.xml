@@ -1,0 +1,9026 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<data>
+	<row>
+		<KJM>MJ0038</KJM>
+		<CSMC>ID</CSMC>
+		<CSSQL>a.ID='@@ID,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0038</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code='@@SERIES_CODE,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0038</KJM>
+		<CSMC>XG_FLAG</CSMC>
+		<CSSQL>a.id in (select product_id from product_list_xgjl)</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0038</KJM>
+		<CSMC>STS</CSMC>
+		<CSSQL>a.STS = '@@STS,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0038</KJM>
+		<CSMC>Series_Type</CSMC>
+		<CSSQL>a.series_code in (select series_code from series_list where series_type='@@Series_Type,')</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0038</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(PRODUCT_NAME like '%@@PRODUCT_NAME,%' or product_code like '@@PRODUCT_NAME,%' or id like '@@PRODUCT_NAME,%')</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0010</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>PRODUCT_CODE like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0035</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>PRODUCT_CODE like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0051</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>PRODUCT_CODE like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C06</KJM>
+		<CSMC>WARE_CODE</CSMC>
+		<CSSQL>a.ware_code='@@WARE_CODE,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C06</KJM>
+		<CSMC>Cond</CSMC>
+		<CSSQL>a.product_num @@Cond, '@@PRODUCT_NUM,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C06</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code='@@SERIES_CODE,'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S52</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>back_code='@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	
+	
+	<row>
+		<KJM>MJ0C21</KJM>
+		<CSMC>ENTER_TYPE</CSMC>
+		<CSSQL>d.enter_type='@@ENTER_TYPE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C21</KJM>
+		<CSMC>ENTER_DATE2</CSMC>
+		<CSSQL>
+			a.enter_date between '@@ENTER_DATE1, 00:00:00' and
+			'@@ENTER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C21</KJM>
+		<CSMC>ENTER_CODE</CSMC>
+		<CSSQL>a.enter_code='@@ENTER_CODE,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C21</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C21</KJM>
+		<CSMC>WARE_CODE</CSMC>
+		<CSSQL>
+			a.ware_code in (select warehouse_code from warehouse_list
+			where agent_code='@@WARE_CODE,')
+		</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C21</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.SERIES_CODE = '@@SERIES_CODE,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S52</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>
+			dbo.getAgentName(agent_code) like '@@AGENT_NAME,%'
+		</CSSQL>
+		<XH>7.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0002</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.PRODUCT_CODE like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0007</KJM>
+		<CSMC>Open_Flag</CSMC>
+		<CSSQL>open_flag='@@Open_Flag,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0007</KJM>
+		<CSMC>Taf_Company</CSMC>
+		<CSSQL>Taf_Company='@@Taf_Company,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0007</KJM>
+		<CSMC>AGENT</CSMC>
+		<CSSQL>AGENT_CODE='@@AGENT,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0007</KJM>
+		<CSMC>DOMAIN_MAN</CSMC>
+		<CSSQL>a.DOMAIN_MAN='@@DOMAIN_MAN,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0007</KJM>
+		<CSMC>AGENT_TYPE</CSMC>
+		<CSSQL>sjbm='@@AGENT_TYPE,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0007</KJM>
+		<CSMC>Sjbm</CSMC>
+		<CSSQL>a.sjbm='@@Sjbm,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0007</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>add_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0038</KJM>
+		<CSMC>store_no</CSMC>
+		<CSSQL>
+			store_no='@@store_no,'
+		</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S70</KJM>
+		<CSMC>WARE_CODE</CSMC>
+		<CSSQL>
+			ware_code in (select warehouse_code from warehouse_list
+			where print_code='@@WARE_CODE,')
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S59</KJM>
+		<CSMC>WARE_CODE</CSMC>
+		<CSSQL>
+			b.ware_code in (select warehouse_code from warehouse_list
+			where print_code='@@WARE_CODE,')
+		</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S73</KJM>
+		<CSMC>DWMC</CSMC>
+		<CSSQL>dwmc like '%@@DWMC,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0014</KJM>
+		<CSMC>AGENT_TYPE</CSMC>
+		<CSSQL>b.agent_type='@@AGENT_TYPE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C02</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S43</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>agent_code='@@AGENT_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C06</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>agent_code='@@AGENT_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S43</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S43</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code='@@SERIES_CODE,'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C07</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.end_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8036</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.end_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8037</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.end_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C08</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.end_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C08</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C07</KJM>
+		<CSMC>AGENT</CSMC>
+		<CSSQL>b.agent_name like '@@AGENT,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8036</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>b.agent_code = '@@Agent_Code,'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8037</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>b.agent_code = '@@Agent_Code,'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C08</KJM>
+		<CSMC>AGENT</CSMC>
+		<CSSQL>b.agent_name like '@@AGENT,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S65</KJM>
+		<CSMC>ORDER_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,order_date,getdate())&lt;='@@ORDER_DAYS,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S65</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.order_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0010</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code='@@SERIES_CODE,'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0035</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code='@@SERIES_CODE,'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0051</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code='@@SERIES_CODE,'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0C01</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>
+			order_code in (select order_code from order_product_list
+			where product_name like '@@PRODUCT_NAME,%')
+		</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0002</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code='@@SERIES_CODE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0018</KJM>
+		<CSMC>WARE_CODE</CSMC>
+		<CSSQL>c.ware_code='@@WARE_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0014</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>b.AGENT_NAME like '@@AGENT_NAME,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C01</KJM>
+		<CSMC>ORDER_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,order_date,getdate())&lt;='@@ORDER_DAYS,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C01</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.order_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S43</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S43</KJM>
+		<CSMC>WARE_CODE</CSMC>
+		<CSSQL>a.ware_code='@@WARE_CODE,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S43</KJM>
+		<CSMC>Cond</CSMC>
+		<CSSQL>a.product_num @@Cond, '@@PRODUCT_NUM,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C07</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8036</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8037</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C07</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8036</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8037</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C07</KJM>
+		<CSMC>AGENT_TYPE</CSMC>
+		<CSSQL>
+			b.agent_code in (select agent_code from agent_list where
+			agent_type='@@AGENT_TYPE,')
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C08</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C08</KJM>
+		<CSMC>AGENT_TYPE</CSMC>
+		<CSSQL>
+			b.agent_code in (select agent_code from agent_list where
+			agent_type='@@AGENT_TYPE,')
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S65</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>a.order_code='@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S65</KJM>
+		<CSMC>ORDER_STS</CSMC>
+		<CSSQL>a.order_sts='@@ORDER_STS,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	
+	
+	
+	
+	
+	<row>
+		<KJM>MJ0010</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>PRODUCT_NAME like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0035</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(product_code like '%@@PRODUCT_NAME,%' or PRODUCT_NAME like '%@@PRODUCT_NAME,%' or product_size like '%@@PRODUCT_NAME,%')</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0051</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>PRODUCT_NAME like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0038</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.PRODUCT_CODE like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0038</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>a.Agent_Code='@@Agent_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0038</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>a.xl_Code='@@XL_CODE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0038</KJM>
+		<CSMC>ZXYH</CSMC>
+		<CSSQL>a.zxyh &gt;0</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0010</KJM>
+		<CSMC>ID</CSMC>
+		<CSSQL>ID='@@ID,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0035</KJM>
+		<CSMC>ID</CSMC>
+		<CSSQL>ID='@@ID,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0035</KJM>
+		<CSMC>DWBM</CSMC>
+		<CSSQL>ID in (select product_id from product_wldw where dwbm='@@DWBM,')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0035</KJM>
+		<CSMC>XL_Type</CSMC>
+		<CSSQL>series_code in (select series_code from series_list where series_type='@@XL_Type,')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0051</KJM>
+		<CSMC>ID</CSMC>
+		<CSSQL>ID='@@ID,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0014</KJM>
+		<CSMC>AGENT</CSMC>
+		<CSSQL>a.SHOP_CODE='@@AGENT,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0006</KJM>
+		<CSMC>YHXM</CSMC>
+		<CSSQL>(a.YHXM like '%@@YHXM,%' or a.yhh like '@@YHXM,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0006</KJM>
+		<CSMC>AGENT_TYPE</CSMC>
+		<CSSQL>DEPT ='@@AGENT_TYPE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0007</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>a.agent_name like '%@@AGENT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0007</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>a.brand_code='@@Agent_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0C01</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>
+			order_code in (select order_code from order_product_list
+			where product_code like '@@PRODUCT_CODE,%')
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C02</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.order_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C03</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>
+			ckbm='@@Cust_Code,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C03</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C02</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C03</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C06</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C06</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S52</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S52</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>
+			back_code in (select back_code from backdetails
+			where product_code like '@@PRODUCT_CODE,%')
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S52</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>
+			back_code in (select back_code from backdetails
+			where product_name like '@@PRODUCT_NAME,%')
+		</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S52</KJM>
+		<CSMC>ORDER_STS</CSMC>
+		<CSSQL>back_sts='@@ORDER_STS,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S65</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>
+			order_code in (select order_code from order_product_list
+			where product_code like '@@PRODUCT_CODE,%')
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S65</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>
+			order_code in (select order_code from order_product_list
+			where product_name like '@@PRODUCT_NAME,%')
+		</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	
+	
+	<row>
+		<KJM>MJ0C10</KJM>
+		<CSMC>DWBM</CSMC>
+		<CSSQL>agent_code='@@DWBM,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0034</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(spmc like '%@@PRODUCT_NAME,%' or ysmc like '%@@PRODUCT_NAME,%' or psid like '%@@PRODUCT_NAME,%' )</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0034</KJM>
+		<CSMC>JHD_CODE</CSMC>
+		<CSSQL>a.id like '%@@JHD_CODE,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0034</KJM>
+		<CSMC>DWBM</CSMC>
+		<CSSQL>dwbm = '@@DWBM,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0046</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(product_name like '%@@PRODUCT_NAME,%' or product_code like '%@@PRODUCT_NAME,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0046</KJM>
+		<CSMC>CGD_CODE</CSMC>
+		<CSSQL>a.id like '%@@CGD_CODE,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	
+	
+	<row>
+		<KJM>MJ0C01</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>a.order_code='@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C01</KJM>
+		<CSMC>ORDER_STS</CSMC>
+		<CSSQL>a.order_sts='@@ORDER_STS,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S65</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>
+			a.agent_code = '@@AGENT_CODE,'
+		</CSSQL>
+		<XH>7.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C07</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8036</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8037</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8036</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>a.order_code= '@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8037</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>a.order_code= '@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C08</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0S73</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			out_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0C21</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>7.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C21</KJM>
+		<CSMC>ENTER_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,a.enter_date,getdate())&lt;='@@ENTER_DAYS,'
+		</CSSQL>
+		<XH>8.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C12</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>a.agent_name like '@@AGENT_NAME,%'</CSSQL>
+		<XH>7.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C12</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>
+			order_code in (select order_code from order_product_list
+			where product_name like '@@PRODUCT_NAME,%')
+		</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C12</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>a.order_code='@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C12</KJM>
+		<CSMC>ORDER_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,order_date,getdate())&lt;='@@ORDER_DAYS,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C12</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.order_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C12</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>
+			order_code in (select order_code from order_product_list
+			where product_code like '@@PRODUCT_CODE,%')
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C12</KJM>
+		<CSMC>ORDER_STS</CSMC>
+		<CSSQL>a.order_sts='@@ORDER_STS,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0B01</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>
+			order_code in (select order_code from order_product_list
+			where product_name like '@@PRODUCT_NAME,%')
+		</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0B01</KJM>
+		<CSMC>ORDER_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,order_date,getdate())&lt;='@@ORDER_DAYS,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0B01</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.order_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0B01</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>
+			order_code in (select order_code from order_product_list
+			where product_code like '@@PRODUCT_CODE,%')
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0B01</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>a.order_code='@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S77</KJM>
+		<CSMC>ENTER_DATE2</CSMC>
+		<CSSQL>
+			a.enter_date between '@@ENTER_DATE1, 00:00:00' and
+			'@@ENTER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S77</KJM>
+		<CSMC>ENTER_CODE</CSMC>
+		<CSSQL>a.id='@@ENTER_CODE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S77</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>
+			a.id in(select enter_code from enter_product where
+			product_code='@@PRODUCT_CODE,')
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S77</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>
+			a.id in(select enter_code from enter_product where
+			product_name like '@@PRODUCT_NAME,%')
+		</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S77</KJM>
+		<CSMC>WARE_CODE</CSMC>
+		<CSSQL>
+			a.id in(select enter_code from enter_product where
+			ware_code='@@WARE_CODE,')
+		</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0H65</KJM>
+		<CSMC>ORDER_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,del_date,getdate())&lt;='@@ORDER_DAYS,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0H65</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.del_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0H65</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>a.order_code='@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S73</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>ORDER_CODE='@@ORDER_CODE,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0H65</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>
+			order_code in (select order_code from order_product_list
+			where product_code like '@@PRODUCT_CODE,%' and del_num is
+			not null)
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0H65</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>
+			order_code in (select order_code from order_product_list
+			where product_name like '@@PRODUCT_NAME,%' and del_num is
+			not null)
+		</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0H65</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>a.agent_name like '@@AGENT_NAME,%'</CSSQL>
+		<XH>7.0</XH>
+	</row>
+	<row>
+		<KJM>MJC10</KJM>
+		<CSMC>RED</CSMC>
+		<CSSQL>a.del_num@@RED,0</CSSQL>
+		<XH>8.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0H63</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.del_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0H63</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>
+			order_code in (select order_code from order_product_list
+			where product_code like '@@PRODUCT_CODE,%' and del_num is
+			not null)
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0H63</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>
+			order_code in (select order_code from order_product_list
+			where product_name like '@@PRODUCT_NAME,%' and del_num is
+			not null)
+		</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0H63</KJM>
+		<CSMC>ORDER_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,del_date,getdate())&lt;='@@ORDER_DAYS,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0H63</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>a.order_code='@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0H63</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>AGENT_NAME like '@@AGENT_NAME,%'</CSSQL>
+		<XH>7.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0C12</KJM>
+		<CSMC>RED</CSMC>
+		<CSSQL>a.del_num@@RED,0</CSSQL>
+		<XH>8.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0F24</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0F24</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			oper_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0F24</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>b.series_code='@@SERIES_CODE,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0F24</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>b.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0C50</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.end_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C50</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>b.agent_code = '@@Agent_Code,'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C50</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C50</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C50</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C51</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.end_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C51</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>b.agent_code = '@@Agent_Code,'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C51</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C51</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C51</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T03</KJM>
+		<CSMC>BACK_CODE</CSMC>
+		<CSSQL>a.Back_code= '@@BACK_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T10</KJM>
+		<CSMC>BACK_CODE</CSMC>
+		<CSSQL>a.Back_code= '@@BACK_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T10</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.Agent_code= '@@AGENT_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T10</KJM>
+		<CSMC>ARR_DATE2</CSMC>
+		<CSSQL>
+			a.Arr_Date between '@@ARR_DATE1, 00:00:00' and '@@ARR_DATE2,
+			23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T10</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>b.Product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T10</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>b.Product_Name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T10</KJM>
+		<CSMC>BACK_STS</CSMC>
+		<CSSQL>a.Back_Sts = '@@BACK_STS,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T10</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>b.Series_Code = '@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T10</KJM>
+		<CSMC>BACK_TYPE</CSMC>
+		<CSSQL>back_type = '@@BACK_TYPE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T11</KJM>
+		<CSMC>BACK_CODE</CSMC>
+		<CSSQL>a.Back_code= '@@BACK_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T11</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.Agent_code= '@@AGENT_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T11</KJM>
+		<CSMC>ARR_DATE2</CSMC>
+		<CSSQL>
+			a.Arr_Date between '@@ARR_DATE1, 00:00:00' and '@@ARR_DATE2,
+			23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T11</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>b.Product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T11</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>b.Product_Name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T11</KJM>
+		<CSMC>BACK_STS</CSMC>
+		<CSSQL>a.Back_Sts = '@@BACK_STS,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T11</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>b.Series_Code = '@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T11</KJM>
+		<CSMC>BACK_TYPE</CSMC>
+		<CSSQL>back_type = '@@BACK_TYPE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T12</KJM>
+		<CSMC>BACK_CODE</CSMC>
+		<CSSQL>a.Back_code= '@@BACK_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T12</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.Agent_code= '@@AGENT_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T12</KJM>
+		<CSMC>ARR_DATE2</CSMC>
+		<CSSQL>
+			a.Arr_Date between '@@ARR_DATE1, 00:00:00' and '@@ARR_DATE2,
+			23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T12</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>b.Product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T12</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>b.Product_Name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T12</KJM>
+		<CSMC>BACK_STS</CSMC>
+		<CSSQL>a.Back_Sts = '@@BACK_STS,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T12</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>b.Series_Code = '@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T12</KJM>
+		<CSMC>BACK_TYPE</CSMC>
+		<CSSQL>back_type = '@@BACK_TYPE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T13</KJM>
+		<CSMC>BACK_CODE</CSMC>
+		<CSSQL>a.Back_code= '@@BACK_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T13</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.Agent_code= '@@AGENT_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T13</KJM>
+		<CSMC>ARR_DATE2</CSMC>
+		<CSSQL>
+			a.Arr_Date between '@@ARR_DATE1, 00:00:00' and '@@ARR_DATE2,
+			23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T13</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>b.Product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T13</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>b.Product_Name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T13</KJM>
+		<CSMC>BACK_STS</CSMC>
+		<CSSQL>a.Back_Sts = '@@BACK_STS,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T13</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>b.Series_Code = '@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0T13</KJM>
+		<CSMC>BACK_TYPE</CSMC>
+		<CSSQL>back_type = '@@BACK_TYPE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0001</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>SERIES_CODE='@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0017</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>ORDER_CODE='@@ORDER_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0021</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>ORDER_CODE='@@ORDER_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S24</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>ORDER_CODE='@@ORDER_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8013</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.end_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8013</KJM>
+		<CSMC>AGENT</CSMC>
+		<CSSQL>b.agent_name like '@@AGENT,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8013</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8013</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8013</KJM>
+		<CSMC>AGENT_TYPE</CSMC>
+		<CSSQL>
+			b.agent_code in (select agent_code from agent_list where
+			agent_type='@@AGENT_TYPE,')
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8013</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8014</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.end_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8014</KJM>
+		<CSMC>AGENT</CSMC>
+		<CSSQL>b.agent_name like '@@AGENT,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8014</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8014</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8014</KJM>
+		<CSMC>AGENT_TYPE</CSMC>
+		<CSSQL>
+			b.agent_code in (select agent_code from agent_list where
+			agent_type='@@AGENT_TYPE,')
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8014</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8027</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>order_code= '@@ORDER_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8027</KJM>
+		<CSMC>BOX_CODE</CSMC>
+		<CSSQL>box_code= '@@BOX_CODE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8027</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8027</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ8029</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_man like '%@@SJ,%' or  arr_tel like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8029</KJM>
+		<CSMC>Ywy</CSMC>
+		<CSSQL>ywy_tel='@@Ywy,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8029</KJM>
+		<CSMC>dh_sts</CSMC>
+		<CSSQL>dh_sts='@@dh_sts,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ8030</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8030</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8030</KJM>
+		<CSMC>SALE_DATE2</CSMC>
+		<CSSQL>
+			b.sale_date between '@@SALE_DATE1, 00:00:00' and
+			'@@SALE_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8030</KJM>
+		<CSMC>Pos_Code</CSMC>
+		<CSSQL>b.agent_code='@@Pos_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8030</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>b.agent_code in (select agent_code from agent_list where sjbm='@@Agent_Code,')</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8031</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8031</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8032</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8032</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8033</KJM>
+		<CSMC>SALE_DATE2</CSMC>
+		<CSSQL>
+			sale_date between '@@SALE_DATE1, 00:00:00' and
+			'@@SALE_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8033</KJM>
+		<CSMC>Pos_Code</CSMC>
+		<CSSQL>pos_code = '@@Pos_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8033</KJM>
+		<CSMC>Series_Code</CSMC>
+		<CSSQL>
+			product_code in (select product_code from product_list where
+			series_code='@@Series_Code,')
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<!-- 总代理部分 -->
+	<row>
+		<KJM>MJD005</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.PRODUCT_CODE like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD005</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.PRODUCT_NAME like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJD005</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code='@@SERIES_CODE,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD005</KJM>
+		<CSMC>Stock_Id</CSMC>
+		<CSSQL>a.Stock_Id='@@Stock_Id,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD011</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.PRODUCT_CODE like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD011</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.PRODUCT_NAME like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJD011</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code='@@SERIES_CODE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJD017</KJM>
+		<CSMC>Order_Code</CSMC>
+		<CSSQL>a.Order_Code='@@Order_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJD029</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD029</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJD029</KJM>
+		<CSMC>SALE_DATE2</CSMC>
+		<CSSQL>
+			order_date between '@@SALE_DATE1, 00:00:00' and
+			'@@SALE_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD029</KJM>
+		<CSMC>Pos_Code</CSMC>
+		<CSSQL>a.shop_code='@@Pos_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD029</KJM>
+		<CSMC>SALE_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,order_date,getdate())&lt;='@@SALE_DAYS,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD029</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>a.Order_Code='@@ORDER_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD030</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD030</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJD030</KJM>
+		<CSMC>SALE_DATE2</CSMC>
+		<CSSQL>
+			order_date between '@@SALE_DATE1, 00:00:00' and
+			'@@SALE_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD030</KJM>
+		<CSMC>Pos_Code</CSMC>
+		<CSSQL>a.shop_code='@@Pos_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD030</KJM>
+		<CSMC>SALE_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,order_date,getdate())&lt;='@@SALE_DAYS,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD030</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>a.Order_Code='@@ORDER_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD027</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD027</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJD027</KJM>
+		<CSMC>SALE_DATE2</CSMC>
+		<CSSQL>
+			order_date between '@@SALE_DATE1, 00:00:00' and
+			'@@SALE_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD027</KJM>
+		<CSMC>Pos_Code</CSMC>
+		<CSSQL>a.shop_code='@@Pos_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD027</KJM>
+		<CSMC>SALE_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,order_date,getdate())&lt;='@@SALE_DAYS,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD027</KJM>
+		<CSMC>RETURN_CODE</CSMC>
+		<CSSQL>a.Return_Code='@@RETURN_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD028</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD028</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJD028</KJM>
+		<CSMC>SALE_DATE2</CSMC>
+		<CSSQL>
+			order_date between '@@SALE_DATE1, 00:00:00' and
+			'@@SALE_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD028</KJM>
+		<CSMC>Pos_Code</CSMC>
+		<CSSQL>a.shop_code='@@Pos_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD028</KJM>
+		<CSMC>SALE_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,order_date,getdate())&lt;='@@SALE_DAYS,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD028</KJM>
+		<CSMC>RETURN_CODE</CSMC>
+		<CSSQL>a.Return_Code='@@RETURN_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD031</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD031</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJD031</KJM>
+		<CSMC>SALE_DATE2</CSMC>
+		<CSSQL>
+			store_date between '@@SALE_DATE1, 00:00:00' and
+			'@@SALE_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD031</KJM>
+		<CSMC>SALE_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,store_date,getdate())&lt;='@@SALE_DAYS,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD031</KJM>
+		<CSMC>STORE_CODE</CSMC>
+		<CSSQL>a.Store_Code='@@STORE_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD032</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD032</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJD032</KJM>
+		<CSMC>SALE_DATE2</CSMC>
+		<CSSQL>
+			store_date between '@@SALE_DATE1, 00:00:00' and
+			'@@SALE_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD032</KJM>
+		<CSMC>SALE_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,store_date,getdate())&lt;='@@SALE_DAYS,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD032</KJM>
+		<CSMC>STORE_CODE</CSMC>
+		<CSSQL>a.Store_Code='@@STORE_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD033</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD033</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJD034</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD034</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJD035</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD035</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJD036</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD036</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJD036</KJM>
+		<CSMC>SALE_DATE2</CSMC>
+		<CSSQL>
+			order_date between '@@SALE_DATE1, 00:00:00' and
+			'@@SALE_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD036</KJM>
+		<CSMC>Pos_Code</CSMC>
+		<CSSQL>shop_code='@@Pos_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD036</KJM>
+		<CSMC>SALE_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,order_date,getdate())&lt;='@@SALE_DAYS,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD037</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD037</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJD037</KJM>
+		<CSMC>SALE_DATE2</CSMC>
+		<CSSQL>
+			order_date between '@@SALE_DATE1, 00:00:00' and
+			'@@SALE_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD037</KJM>
+		<CSMC>Pos_Code</CSMC>
+		<CSSQL>shop_code='@@Pos_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD037</KJM>
+		<CSMC>SALE_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,order_date,getdate())&lt;='@@SALE_DAYS,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJD038</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD038</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJD038</KJM>
+		<CSMC>SALE_DATE2</CSMC>
+		<CSSQL>
+			sale_date between '@@SALE_DATE1, 00:00:00' and
+			'@@SALE_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD038</KJM>
+		<CSMC>Pos_Code</CSMC>
+		<CSSQL>pos_code='@@Pos_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD038</KJM>
+		<CSMC>SALE_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,sale_date,getdate())&lt;='@@SALE_DAYS,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJD039</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJD039</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJD039</KJM>
+		<CSMC>SALE_DATE2</CSMC>
+		<CSSQL>
+			sale_date between '@@SALE_DATE1, 00:00:00' and
+			'@@SALE_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD039</KJM>
+		<CSMC>Pos_Code</CSMC>
+		<CSSQL>pos_code='@@Pos_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJD039</KJM>
+		<CSMC>SALE_DAYS</CSMC>
+		<CSSQL>
+			datediff(dd,sale_date,getdate())&lt;='@@SALE_DAYS,'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<!-- 二期工程 -->
+	<row>
+		<KJM>MJ0K19</KJM>
+		<CSMC>Product_Name</CSMC>
+		<CSSQL>Product_Name like '@@Product_Name,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K19</KJM>
+		<CSMC>Product_Code</CSMC>
+		<CSSQL>Product_Code like '@@Product_Code,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K19</KJM>
+		<CSMC>Back_Date2</CSMC>
+		<CSSQL>
+			back_date between '@@Back_Date1, 00:00:00' and
+			'@@Back_Date2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K19</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>b.agent_code='@@Agent_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K19</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>a.Back_Code='@@Back_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K20</KJM>
+		<CSMC>Product_Name</CSMC>
+		<CSSQL>Product_Name like '@@Product_Name,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K20</KJM>
+		<CSMC>Product_Code</CSMC>
+		<CSSQL>Product_Code like '@@Product_Code,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K20</KJM>
+		<CSMC>Back_Date2</CSMC>
+		<CSSQL>
+			back_date between '@@Back_Date1, 00:00:00' and
+			'@@Back_Date2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K20</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>b.agent_code='@@Agent_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K20</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>a.Back_Code='@@Back_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K21</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>
+			back_sts='@@Back_Sts,' 
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K21</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K21</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>agent_code='@@Agent_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K21</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>back_code='@@ORDER_CODE,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K24</KJM>
+		<CSMC>Product_Name</CSMC>
+		<CSSQL>Product_Name like '@@Product_Name,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K24</KJM>
+		<CSMC>Product_Code</CSMC>
+		<CSSQL>Product_Code like '@@Product_Code,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K24</KJM>
+		<CSMC>Back_Date2</CSMC>
+		<CSSQL>
+			back_date between '@@Back_Date1, 00:00:00' and
+			'@@Back_Date2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K24</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>b.agent_code='@@Agent_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K24</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>a.Back_Code='@@Back_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K25</KJM>
+		<CSMC>Product_Name</CSMC>
+		<CSSQL>Product_Name like '@@Product_Name,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K25</KJM>
+		<CSMC>Product_Code</CSMC>
+		<CSSQL>Product_Code like '@@Product_Code,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K25</KJM>
+		<CSMC>Back_Date2</CSMC>
+		<CSSQL>
+			back_date between '@@Back_Date1, 00:00:00' and
+			'@@Back_Date2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K25</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>b.agent_code='@@Agent_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K25</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>a.Back_Code='@@Back_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K26</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			oper_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K26</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K26</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>b.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K26</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>b.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K27</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			oper_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K27</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K27</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>b.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K27</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>b.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K28</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>o.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K28</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>o.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K28</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>o.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K29</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>o.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K29</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>o.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K29</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>o.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K32</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>Opr_Dw = '@@Agent_Code,'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K32</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K32</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K32</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K32</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>back_code= '@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K32</KJM>
+		<CSMC>SFFS</CSMC>
+		<CSSQL>SFSF= '@@SFFS,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+
+
+	<row>
+		<KJM>MJ0K33</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>Opr_Dw = '@@Agent_Code,'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K33</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K33</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K33</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K33</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>back_code= '@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K33</KJM>
+		<CSMC>SFFS</CSMC>
+		<CSSQL>SFSF= '@@SFFS,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K38</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K38</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>agent_code='@@Agent_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K39</KJM>
+		<CSMC>Product_Name</CSMC>
+		<CSSQL>Product_Name like '@@Product_Name,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K39</KJM>
+		<CSMC>Product_Code</CSMC>
+		<CSSQL>Product_Code like '@@Product_Code,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K39</KJM>
+		<CSMC>Back_Date2</CSMC>
+		<CSSQL>
+			back_date between '@@Back_Date1, 00:00:00' and
+			'@@Back_Date2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K39</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>b.agent_code='@@Agent_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K39</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>a.Back_Code='@@Back_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K40</KJM>
+		<CSMC>Product_Name</CSMC>
+		<CSSQL>Product_Name like '@@Product_Name,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K40</KJM>
+		<CSMC>Product_Code</CSMC>
+		<CSSQL>Product_Code like '@@Product_Code,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K40</KJM>
+		<CSMC>Back_Date2</CSMC>
+		<CSSQL>
+			back_date between '@@Back_Date1, 00:00:00' and
+			'@@Back_Date2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K40</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>b.agent_code='@@Agent_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K40</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>a.Back_Code='@@Back_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K49</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.order_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K49</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>
+			order_code in (select order_code from a_order_detail where
+			product_code like '@@PRODUCT_CODE,%')
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K49</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>
+			order_code in (select order_code from a_order_detail where
+			product_name like '@@PRODUCT_NAME,%')
+		</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K49</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>a.order_code='@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K49</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>
+			dbo.getAgentName(a.shop_code) like '@@AGENT_NAME,%'
+		</CSSQL>
+		<XH>7.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K50</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K50</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>
+			back_code in (select back_code from a_backdetails where
+			product_code like '@@PRODUCT_CODE,%')
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K50</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>
+			back_code in (select back_code from a_backdetails where
+			product_name like '@@PRODUCT_NAME,%')
+		</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K50</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>a.back_code='@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K50</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>
+			dbo.getAgentName(a.agent_code) like '@@AGENT_NAME,%'
+		</CSSQL>
+		<XH>7.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K50</KJM>
+		<CSMC>OrderSts</CSMC>
+		<CSSQL>
+			note_type='@@OrderSts,'
+		</CSSQL>
+		<XH>7.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K53</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K53</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>
+			back_code in (select back_code from a_backdetails where
+			product_code like '@@PRODUCT_CODE,%')
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K53</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>
+			back_code in (select back_code from a_backdetails where
+			product_name like '@@PRODUCT_NAME,%')
+		</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K53</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>a.back_code='@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K54</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.store_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K54</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>
+			store_code in (select store_code from a_store_detail where
+			product_code like '@@PRODUCT_CODE,%')
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K54</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>
+			store_code in (select store_code from a_store_detail where
+			product_code like '@@PRODUCT_NAME,%')
+		</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K54</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>a.store_code='@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K60</KJM>
+		<CSMC>Back_Date2</CSMC>
+		<CSSQL>
+			a.oper_date between '@@Back_Date1, 00:00:00' and
+			'@@Back_Date2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K60</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>a.receipt_code='@@Back_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K60</KJM>
+		<CSMC>Product_Code</CSMC>
+		<CSSQL>a.product_code like '@@Product_Code,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K60</KJM>
+		<CSMC>Series_Code</CSMC>
+		<CSSQL>b.SERIES_CODE = '@@Series_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K60</KJM>
+		<CSMC>Product_Name</CSMC>
+		<CSSQL>b.product_name like '@@Product_Name,%'</CSSQL>
+		<XH>7.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K61</KJM>
+		<CSMC>Back_Date2</CSMC>
+		<CSSQL>
+			a.oper_date between '@@Back_Date1, 00:00:00' and
+			'@@Back_Date2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K61</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>a.receipt_code='@@Back_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K61</KJM>
+		<CSMC>Product_Code</CSMC>
+		<CSSQL>a.product_code like '@@Product_Code,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K61</KJM>
+		<CSMC>Series_Code</CSMC>
+		<CSSQL>b.SERIES_CODE = '@@Series_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K61</KJM>
+		<CSMC>Product_Name</CSMC>
+		<CSSQL>b.product_name like '@@Product_Name,%'</CSSQL>
+		<XH>7.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K62</KJM>
+		<CSMC>Product_Name</CSMC>
+		<CSSQL>Product_Name like '@@Product_Name,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K62</KJM>
+		<CSMC>Product_Code</CSMC>
+		<CSSQL>Product_Code like '@@Product_Code,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K62</KJM>
+		<CSMC>Back_Date2</CSMC>
+		<CSSQL>
+			back_date between '@@Back_Date1, 00:00:00' and
+			'@@Back_Date2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K62</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>b.agent_code='@@Agent_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K62</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>a.Back_Code='@@Back_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K63</KJM>
+		<CSMC>Product_Name</CSMC>
+		<CSSQL>Product_Name like '@@Product_Name,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K63</KJM>
+		<CSMC>Product_Code</CSMC>
+		<CSSQL>Product_Code like '@@Product_Code,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K63</KJM>
+		<CSMC>Back_Date2</CSMC>
+		<CSSQL>
+			back_date between '@@Back_Date1, 00:00:00' and
+			'@@Back_Date2, 23:59:59'
+		</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K63</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>b.agent_code='@@Agent_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K63</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>a.Back_Code='@@Back_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K64</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.order_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K64</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>b.shop_code = '@@Agent_Code,'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K64</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K64</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K64</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K64</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>a.order_code= '@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0K65</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.order_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K65</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>b.shop_code = '@@Agent_Code,'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K65</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K65</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K65</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K65</KJM>
+		<CSMC>ORDER_CODE</CSMC>
+		<CSSQL>a.order_code= '@@ORDER_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K68</KJM>
+		<CSMC>Pos_Code</CSMC>
+		<CSSQL>f.agent_code='@@Pos_Code,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K68</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>f.agent_code in (select agent_code from agent_list where sjbm='@@Agent_Code,')</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K69</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>o.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K69</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>o.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K69</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>o.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K70</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>o.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K70</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>o.product_name like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K70</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>o.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K76</KJM>
+		<CSMC>BackSts</CSMC>
+		<CSSQL>back_sts in (@@BackSts,)</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K76</KJM>
+		<CSMC>Order_Sts</CSMC>
+		<CSSQL>back_sts='@@Order_Sts,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K76</KJM>
+		<CSMC>Back_Type</CSMC>
+		<CSSQL>Back_Type='@@Back_Type,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K76</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K76</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>Agent_Code in (select agent_code from agent_list where agent_name like '%@@Agent_Name,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K77</KJM>
+		<CSMC>BackSts</CSMC>
+		<CSSQL>back_sts='@@BackSts,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K78</KJM>
+		<CSMC>BackSts</CSMC>
+		<CSSQL>back_sts='@@BackSts,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K79</KJM>
+		<CSMC>BackSts</CSMC>
+		<CSSQL>back_sts='@@BackSts,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K80</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K80</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>sjbm = '@@AGENT_CODE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K80</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>x.agent_code= '@@Cust_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K81</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K81</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>sjbm = '@@AGENT_CODE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K81</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>x.agent_code= '@@Cust_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X01</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.oper_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X01</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>b.agent_code = '@@AGENT_CODE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X01</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X01</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X01</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X01</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>c.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X02</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.oper_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X02</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>b.agent_code = '@@AGENT_CODE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X02</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X02</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X02</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X02</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>c.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X03</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.sh_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X03</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>b.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X03</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>b.agent_code='@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X03</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X03</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X03</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X03</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>b.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X03</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>b.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X03</KJM>
+		<CSMC>PRODUCT_SIZE</CSMC>
+		<CSSQL>PRODUCT_SIZE like '@@PRODUCT_SIZE,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X03</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X03</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>jsdh like '@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X04</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.sh_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X04</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X04</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>b.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X04</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>b.agent_code='@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X04</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X04</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X04</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X04</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>b.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X04</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>b.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X04</KJM>
+		<CSMC>PRODUCT_SIZE</CSMC>
+		<CSSQL>PRODUCT_SIZE like  '@@PRODUCT_SIZE,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X04</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>jsdh like '@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X05</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.sh_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X05</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>b.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X05</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>b.agent_code='@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X05</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X05</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X05</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X05</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>b.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X05</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>b.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X05</KJM>
+		<CSMC>PRODUCT_SIZE</CSMC>
+		<CSSQL>PRODUCT_SIZE like '@@PRODUCT_SIZE,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X05</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X05</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>jsdh like '@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X06</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.sh_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X06</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X06</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>b.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X06</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>b.agent_code='@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X06</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X06</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X06</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X06</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>b.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X06</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>b.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X06</KJM>
+		<CSMC>PRODUCT_SIZE</CSMC>
+		<CSSQL>PRODUCT_SIZE like  '@@PRODUCT_SIZE,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X06</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>jsdh like '@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X07</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>(product_code like '%@@PRODUCT_CODE,%' or product_name like '%@@PRODUCT_CODE,%')</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X07</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X07</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>a.xl_code= '@@XL_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X07</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>a.agent_code= '@@Agent_Code,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X07</KJM>
+		<CSMC>Warn</CSMC>
+		<CSSQL>product_num&lt;lower_num</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X07</KJM>
+		<CSMC>store_no</CSMC>
+		<CSSQL>ckmc='@@store_no,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X07</KJM>
+		<CSMC>Cond</CSMC>
+		<CSSQL>product_num @@Cond, @@PRODUCT_NUM,</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X08</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>(product_code like '%@@PRODUCT_CODE,%' or product_name like '%@@PRODUCT_CODE,%')</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X08</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X08</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>a.xl_code= '@@XL_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X08</KJM>
+		<CSMC>Warn</CSMC>
+		<CSSQL>product_num&lt;lower_num</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X08</KJM>
+		<CSMC>Cond</CSMC>
+		<CSSQL>product_num @@Cond, @@PRODUCT_NUM,</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K74</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>k.product_code='@@PRODUCT_CODE,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K75</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>k.product_code='@@PRODUCT_CODE,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K74</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>o.series_code='@@SERIES_CODE,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0K75</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>o.series_code='@@SERIES_CODE,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X11</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			x.oper_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X11</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>x.agent_code = '@@AGENT_CODE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X11</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>x.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X11</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>x.product_name like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X11</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>x.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X12</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			x.oper_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X12</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>x.agent_code = '@@AGENT_CODE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X12</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>x.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X12</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>x.product_name like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X12</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>x.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0X13</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X13</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X13</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>a.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X13</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>a.jsdh= '@@JSDH,'</CSSQL>
+		<XH>7.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X13</KJM>
+		<CSMC>SFSF</CSMC>
+		<CSSQL>a.sfsf= '@@SFSF,'</CSSQL>
+		<XH>8.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X13</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>a.ywy= '@@YWY,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X13</KJM>
+		<CSMC>DOMAIN_MAN</CSMC>
+		<CSSQL>Domain_Man= '@@DOMAIN_MAN,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X13</KJM>
+		<CSMC>Demo</CSMC>
+		<CSSQL>a.back_demo= '@@Demo,'</CSSQL>
+		<XH>10.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X13</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>a.agent_code= '@@Cust_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X13</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>b.agent_name like '%@@Cust_Name,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X13</KJM>
+		<CSMC>Back_Type</CSMC>
+		<CSSQL>a.Back_Type= '@@Back_Type,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X13</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X13</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>Back_sts in ( @@Back_Sts,)</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X13</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>agent_name like '%@@Agent_Name,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X13</KJM>
+		<CSMC>BT_TYPE</CSMC>
+		<CSSQL>sfsf='@@BT_TYPE,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0X14</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X14</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X14</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X14</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>a.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X14</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>a.jsdh= '@@JSDH,'</CSSQL>
+		<XH>7.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X14</KJM>
+		<CSMC>SFSF</CSMC>
+		<CSSQL>a.sfsf= '@@SFSF,'</CSSQL>
+		<XH>8.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X14</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>a.ywy= '@@YWY,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X14</KJM>
+		<CSMC>DOMAIN_MAN</CSMC>
+		<CSSQL>Domain_Man= '@@DOMAIN_MAN,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X14</KJM>
+		<CSMC>Demo</CSMC>
+		<CSSQL>a.back_demo= '@@Demo,'</CSSQL>
+		<XH>10.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X14</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>a.agent_code= '@@Cust_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X14</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>b.agent_name like '%@@Cust_Name,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X14</KJM>
+		<CSMC>Back_Type</CSMC>
+		<CSSQL>a.Back_Type= '@@Back_Type,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X14</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>Back_sts in( @@Back_Sts,)</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X14</KJM>
+		<CSMC>BT_TYPE</CSMC>
+		<CSSQL>sfsf='@@BT_TYPE,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X15</KJM>
+		<CSMC>DOMAIN_MAN</CSMC>
+		<CSSQL>DOMAIN_MAN= '@@DOMAIN_MAN,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X15</KJM>
+		<CSMC>Sjbm</CSMC>
+		<CSSQL>Sjbm= '@@Sjbm,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X15</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>AGENT_NAME like '%@@AGENT_NAME,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X15</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>Brand_Code= '@@Brand_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X16</KJM>
+		<CSMC>DOMAIN_MAN</CSMC>
+		<CSSQL>DOMAIN_MAN= '@@DOMAIN_MAN,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X16</KJM>
+		<CSMC>Sjbm</CSMC>
+		<CSSQL>Sjbm= '@@Sjbm,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X16</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>AGENT_NAME= '%@@AGENT_NAME,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X16</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>Brand_Code= '@@Brand_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X21</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X21</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>a.back_sts = '@@Back_Sts,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X21</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X21</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where agent_name like '%@@Cust_Name,%') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X21</KJM>
+		<CSMC>Back_Demo</CSMC>
+		<CSSQL>a.Back_Demo like '%@@Back_Demo,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X21</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>a.agent_code = '@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X21</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>a.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X21</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>a.jsdh= '@@JSDH,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X21</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>a.Brand_Code= '@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X21</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>right(back_code,3) like '%@@Back_Code,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X17</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.sh_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X17</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>b.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X17</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>b.agent_code='@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X17</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X17</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X17</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X17</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>b.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X17</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>b.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X17</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code= '@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X17</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>product_code in (select product_code from product_list where xl_code='@@XL_CODE,')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X17</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>jsdh like  '@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X17</KJM>
+		<CSMC>isTechCode</CSMC>
+		<CSSQL>product_id in (select id from product_list where techcode is @@isTechCode,)</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	
+	
+	<row>
+		<KJM>MJ0X04</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>product_code in (select product_code from product_list where xl_code='@@XL_CODE,')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0X37</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>agent_code in (select agent_code from agent_list where brand_code='@@Brand_Code,')</CSSQL>
+		<XH>6.0</XH>
+	</row> 
+	
+	<!-- 生产系统 -->
+	<row>
+		<KJM>MJ1001</KJM>
+		<CSMC>ID</CSMC>
+		<CSSQL>a.ID='@@ID,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1001</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code='@@SERIES_CODE,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1001</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>PRODUCT_NAME like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1001</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.PRODUCT_CODE like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1005</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>AGENT_CODE='@@AGENT_CODE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1005</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>AGENT_NAME like '%@@AGENT_NAME,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1008</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>PRODUCT_NAME like '@@PRODUCT_NAME,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1008</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>x.series_code='@@SERIES_CODE,'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1009</KJM>
+		<CSMC>Order_Sts</CSMC>
+		<CSSQL>back_sts='@@Order_Sts,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1014</KJM>
+		<CSMC>Product_Code</CSMC>
+		<CSSQL>a.product_code='@@Product_Code,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1016</KJM>
+		<CSMC>Product_Code</CSMC>
+		<CSSQL>a.product_code='@@Product_Code,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1026</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1026</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>a.back_sts = '@@Back_Sts,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1026</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1026</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where agent_name like '%@@Cust_Name,%') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1026</KJM>
+		<CSMC>Back_Demo</CSMC>
+		<CSSQL>a.Back_Demo like '%@@Back_Demo,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1026</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>a.agent_code = '@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1026</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>a.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1026</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>a.jsdh= '@@JSDH,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1026</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>a.Brand_Code= '@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1026</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>right(a.back_code,3) like '%@@Back_Code,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1027</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>Brand_Code= '@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1027</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>a.Back_Code= '@@Back_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1028</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>Brand_Code= '@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1028</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>a.Back_Code= '@@Back_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<!-- 130418升级部分 -->
+	<row>
+		<KJM>MJP023</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(product_code like '%@@SPBM,%' or product_name like '%@@SPBM,%')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJS001</KJM>
+		<CSMC>BM</CSMC>
+		<CSSQL>bm= '@@BM,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS001</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(bm like '@@SJ,%' or mc like '%@@SJ,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS001</KJM>
+		<CSMC>LB</CSMC>
+		<CSSQL>lb='@@LB,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS001</KJM>
+		<CSMC>FH</CSMC>
+		<CSSQL>kcsl @@FH, @@FH_NUM,</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJS004</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(product_code like '@@SJ,%' or product_name like '%@@SJ,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS004</KJM>
+		<CSMC>LB</CSMC>
+		<CSSQL>series_code='@@LB,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS004</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(product_code like '@@SPBM,%' or product_name like '%@@SPBM,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS004</KJM>
+		<CSMC>PPBM</CSMC>
+		<CSSQL>agent_code='@@PPBM,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS004</KJM>
+		<CSMC>CK</CSMC>
+		<CSSQL>agent_code='@@CK,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS007</KJM>
+		<CSMC>ID</CSMC>
+		<CSSQL>id='@@ID,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS007</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>sh='@@Sts,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS007</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJS012</KJM>
+		<CSMC>ID</CSMC>
+		<CSSQL>id='@@ID,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS012</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>sh='@@Sts,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS012</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+    <row>
+		<KJM>MJS016</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(bm like '@@SPBM,%' or mc like '%@@SPBM,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS017</KJM>
+		<CSMC>ID</CSMC>
+		<CSSQL>id='@@ID,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS017</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>sh='@@Sts,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS017</KJM>
+		<CSMC>pzh</CSMC>
+		<CSSQL>pzh='@@pzh,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS017</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS021</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(spbm like '@@SPBM,%' or spmc like '%@@SPBM,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS024</KJM>
+		<CSMC>ID</CSMC>
+		<CSSQL>id='@@ID,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS024</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>sh='@@Sts,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS024</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS030</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(mc like '%@@SJ,%' or dh like '%@@SJ,%' or dz like '%@@SJ,%' or sj like '%@@SJ,%' or lxr like '%@@SJ,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS030</KJM>
+		<CSMC>BM</CSMC>
+		<CSSQL>bm='@@BM,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJS033</KJM>
+		<CSMC>ID</CSMC>
+		<CSSQL>id='@@ID,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS036</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(psid like '@@SPBM,%' or spmc like '%@@SPBM,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJH036</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(psid like '@@SPBM,%' or spmc like '%@@SPBM,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS036</KJM>
+		<CSMC>GHSBM</CSMC>
+		<CSSQL>dwbm='@@GHSBM,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJH036</KJM>
+		<CSMC>GHSBM</CSMC>
+		<CSSQL>dwbm='@@GHSBM,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS037</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(psid like '@@SPBM,%' or spmc like '%@@SPBM,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJH037</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(psid like '@@SPBM,%' or spmc like '%@@SPBM,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS028</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(mc like '%@@SJ,%' or dz like '%@@SJ,%' or dh like '%@@SJ,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS028</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>qy_flag='@@Sts,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS044</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(spbm like '@@SPBM,%' or spmc like '%@@SPBM,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS048</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(spbm like '@@SPBM,%' or spmc like '%@@SPBM,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJP026</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>sh='@@Sts,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP026</KJM>
+		<CSMC>PZH</CSMC>
+		<CSSQL>PZH like '%@@PZH,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP026</KJM>
+		<CSMC>SC_FLAG</CSMC>
+		<CSSQL>SC_FLAG='@@SC_FLAG,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP026</KJM>
+		<CSMC>DWMC</CSMC>
+		<CSSQL>DWMC like '%@@DWMC,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP026</KJM>
+		<CSMC>ZDR</CSMC>
+		<CSSQL>ZDR = '@@ZDR,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP032</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>sh='@@Sts,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP032</KJM>
+		<CSMC>ISKP</CSMC>
+		<CSSQL>pjhm is @@ISKP,</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP032</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP032</KJM>
+		<CSMC>DWMC</CSMC>
+		<CSSQL>dwmc like '%@@DWMC,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP038</KJM>
+		<CSMC>ID_RWD</CSMC>
+		<CSSQL>ID_RWD='@@ID_RWD,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP038</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>sh='@@Sts,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP038</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP038</KJM>
+		<CSMC>DWBM</CSMC>
+		<CSSQL>DWMC like '%@@DWBM,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP010</KJM>
+		<CSMC>LB</CSMC>
+		<CSSQL>lb='@@LB,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJH010</KJM>
+		<CSMC>LB</CSMC>
+		<CSSQL>lb='@@LB,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP062</KJM>
+		<CSMC>CZR</CSMC>
+		<CSSQL>czr like '%@@CZR,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP062</KJM>
+		<CSMC>DWBM</CSMC>
+		<CSSQL>dwbm ='@@DWBM,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP062</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJH062</KJM>
+		<CSMC>CZR</CSMC>
+		<CSSQL>czr like '%@@CZR,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJH062</KJM>
+		<CSMC>DWBM</CSMC>
+		<CSSQL>dwbm ='@@DWBM,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJH062</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJP063</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(spmc like '%@@SJ,%' or spbm like '%@@SJ,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS021</KJM>
+		<CSMC>SC_FLAG</CSMC>
+		<CSSQL>sc_flag='@@SC_FLAG,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS021</KJM>
+		<CSMC>WG_FLAG</CSMC>
+		<CSSQL>sjwcrq @@WG_FLAG, null</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJS021</KJM>
+		<CSMC>RWD_ID</CSMC>
+		<CSSQL>rwd_id='@@RWD_ID,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJP068</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(mc like '%@@SJ,%' or spbm like '%@@SJ,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJP068</KJM>
+		<CSMC>LB</CSMC>
+		<CSSQL>lb='@@LB,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP070</KJM>
+		<CSMC>CZR</CSMC>
+		<CSSQL>czr like '%@@CZR,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP070</KJM>
+		<CSMC>DWBM</CSMC>
+		<CSSQL>dwbm ='@@DWBM,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP070</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<!-- 盘点 -->
+	<row>
+		<KJM>MJQ023</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(product_code like '@@SPBM,%' or product_name like '%@@SPBM,%')</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJQ062</KJM>
+		<CSMC>CK</CSMC>
+		<CSSQL>ckbm='@@CK,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJQ062</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>sh='@@Sts,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<!-- 盘点结束 -->
+	<row>
+		<KJM>MJP046</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>sh='@@Sts,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP046</KJM>
+		<CSMC>ZDR</CSMC>
+		<CSSQL>zdr  like '%@@ZDR,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP072</KJM>
+		<CSMC>XH</CSMC>
+		<CSSQL>(psid like '%@@XH,%' or spmc like '%@@XH,%')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP072</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>sccj='@@Brand_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJH072</KJM>
+		<CSMC>XH</CSMC>
+		<CSSQL>(psid like '%@@XH,%' or spmc like '%@@XH,%')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJH072</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>sccj='@@Brand_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP073</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.sh_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP073</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>b.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP073</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>b.agent_code='@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP073</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJP073</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJP073</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJP073</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>b.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP073</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>b.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP073</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code= '@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP073</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>a.product_code in (select product_code from product_list where xl_code='@@XL_CODE,')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP073</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>jsdh like  '@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH073</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.sh_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH073</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>b.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJH073</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>b.agent_code='@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJH073</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJH073</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJH073</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJH073</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>b.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH073</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>b.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH073</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code= '@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH073</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>a.product_code in (select product_code from product_list where xl_code='@@XL_CODE,')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH073</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>jsdh like  '@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP075</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>agent_code='@@Agent_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH075</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>agent_code='@@Agent_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP076</KJM>
+		<CSMC>Sjbm</CSMC>
+		<CSSQL>x.agent_code in (select agent_code from agent_list where sjbm='@@Sjbm,')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP076</KJM>
+		<CSMC>AGENT</CSMC>
+		<CSSQL>dbo.getAgentName(x.agent_code) like '@@AGENT,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH076</KJM>
+		<CSMC>Sjbm</CSMC>
+		<CSSQL>x.agent_code in (select agent_code from agent_list where sjbm='@@Sjbm,')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH076</KJM>
+		<CSMC>AGENT</CSMC>
+		<CSSQL>dbo.getAgentName(x.agent_code) like '@@AGENT,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP078</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(psid like '%@@SPBM,%' or  spmc like '%@@SPBM,%' or  xhgg like '%@@SPBM,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP078</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>sccj='@@Brand_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP078</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>SERIES_CODE='@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP078</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>XL_CODE='@@XL_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP078</KJM>
+		<CSMC>DWBM</CSMC>
+		<CSSQL>DWBM='@@DWBM,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP078</KJM>
+		<CSMC>PZH</CSMC>
+		<CSSQL>PZH like '%@@PZH,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH078</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(psid like '%@@SPBM,%' or  spmc like '%@@SPBM,%' or  xhgg like '%@@SPBM,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH078</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>sccj='@@Brand_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH078</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>SERIES_CODE='@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH078</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>XL_CODE='@@XL_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH078</KJM>
+		<CSMC>DWBM</CSMC>
+		<CSSQL>DWBM='@@DWBM,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP079</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(psid like '%@@SPBM,%' or  spmc like '%@@SPBM,%' or  xhgg like '%@@SPBM,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP079</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>sccj='@@Brand_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP079</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>SERIES_CODE='@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP079</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>XL_CODE='@@XL_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP079</KJM>
+		<CSMC>PZH</CSMC>
+		<CSSQL>id_rwd like '%@@PZH,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP079</KJM>
+		<CSMC>JBRBM</CSMC>
+		<CSSQL>JBRBM='@@JBRBM,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH079</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(psid like '%@@SPBM,%' or  spmc like '%@@SPBM,%' or  xhgg like '%@@SPBM,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH079</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>sccj='@@Brand_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH079</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>SERIES_CODE='@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH079</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>XL_CODE='@@XL_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH079</KJM>
+		<CSMC>JBRBM</CSMC>
+		<CSSQL>JBRBM='@@JBRBM,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH079</KJM>
+		<CSMC>PZH</CSMC>
+		<CSSQL>id_rwd like '%@@PZH,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP080</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(psid like '%@@SPBM,%' or  spmc like '%@@SPBM,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP080</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>sccj='@@Brand_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH080</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(psid like '%@@SPBM,%' or  spmc like '%@@SPBM,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH080</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>sccj='@@Brand_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP081</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(product_code like '%@@SPBM,%' or  product_name like '%@@SPBM,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP081</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>SERIES_CODE='@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP081</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>XL_CODE='@@XL_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH081</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(product_code like '%@@SPBM,%' or  product_name like '%@@SPBM,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH081</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>SERIES_CODE='@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH081</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>XL_CODE='@@XL_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X64</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(yhh like '%@@SJ,%' or yhxm like '%@@SJ,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP084</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP084</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where agent_name like '%@@Agent_Name,%') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP084</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>a.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP084</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>a.jsdh= '@@JSDH,'</CSSQL>
+		<XH>7.0</XH>
+	</row>
+	<row>
+		<KJM>MJP084</KJM>
+		<CSMC>SFSF</CSMC>
+		<CSSQL>a.sfsf= '@@SFSF,'</CSSQL>
+		<XH>8.0</XH>
+	</row>
+	<row>
+		<KJM>MJP084</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>a.ywy= '@@YWY,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJP084</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>Back_Code like '%@@Back_Code,%'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJP084</KJM>
+		<CSMC>Demo</CSMC>
+		<CSSQL>a.back_demo= '@@Demo,'</CSSQL>
+		<XH>10.0</XH>
+	</row>
+	<row>
+		<KJM>MJP084</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>a.agent_code= '@@Cust_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP084</KJM>
+		<CSMC>Back_Type</CSMC>
+		<CSSQL>a.Back_Type= '@@Back_Type,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP084</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP084</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>Back_sts in ( @@Back_Sts,)</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP086</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.end_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP086</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>b.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP086</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>b.agent_code='@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP086</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(a.product_name like '%@@PRODUCT_NAME,%' or a.product_code like '@@PRODUCT_NAME,%') </CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJP086</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJP086</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>b.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP086</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>b.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP086</KJM>
+		<CSMC>PRODUCT_SIZE</CSMC>
+		<CSSQL>PRODUCT_SIZE like '@@PRODUCT_SIZE,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP086</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP086</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>jsdh like '@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJH086</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.end_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH086</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>b.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJH086</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>b.agent_code='@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJH086</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(a.product_name like '%@@PRODUCT_NAME,%' or a.product_code like '@@PRODUCT_NAME,%') </CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJH086</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJH086</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>b.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH086</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>b.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH086</KJM>
+		<CSMC>PRODUCT_SIZE</CSMC>
+		<CSSQL>PRODUCT_SIZE like '@@PRODUCT_SIZE,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH086</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH086</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>jsdh like '@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP087</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			 b.sh_date between dateadd(dd,-1,'@@ORDER_DATE2, 10:00:00') and
+			'@@ORDER_DATE2, 09:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP087</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(a.product_name like '%@@PRODUCT_NAME,%' or a.product_code like '@@PRODUCT_CODE,%') </CSSQL>
+		<XH>4.0</XH>
+	</row>
+    <row>
+		<KJM>MJP087</KJM>
+		<CSMC>PRODUCT_SIZE</CSMC>
+		<CSSQL>PRODUCT_SIZE like '@@PRODUCT_SIZE,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+    <row>
+		<KJM>MJP087</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH087</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			 b.sh_date between dateadd(dd,-1,'@@ORDER_DATE2, 10:00:00')  and
+			'@@ORDER_DATE2, 09:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH087</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(a.product_name like '%@@PRODUCT_NAME,%' or a.product_code like '@@PRODUCT_CODE,%') </CSSQL>
+		<XH>4.0</XH>
+	</row>
+    <row>
+		<KJM>MJH087</KJM>
+		<CSMC>PRODUCT_SIZE</CSMC>
+		<CSSQL>PRODUCT_SIZE like '@@PRODUCT_SIZE,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+    <row>
+		<KJM>MJH087</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP093</KJM>
+		<CSMC>BackSts</CSMC>
+		<CSSQL>back_sts in (@@BackSts,)</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJP093</KJM>
+		<CSMC>Order_Sts</CSMC>
+		<CSSQL>back_sts='@@Order_Sts,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJP093</KJM>
+		<CSMC>Back_Type</CSMC>
+		<CSSQL>Back_Type='@@Back_Type,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJP093</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJP093</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>Back_Code like '%@@Back_Code,%'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJP093</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>dbo.getAgentName(a.Agent_Code) like '%@@Agent_Name,%'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJP093</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>sh_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0X22</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X22</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>a.back_sts = '@@Back_Sts,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X22</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X22</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where agent_name like '%@@Cust_Name,%') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X22</KJM>
+		<CSMC>Back_Demo</CSMC>
+		<CSSQL>a.Back_Demo like '%@@Back_Demo,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X22</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>a.agent_code='@@Cust_Code,' </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X22</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>a.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X22</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>a.jsdh like '%@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X22</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>a.Brand_Code= '@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X22</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>back_code like '%@@Back_Code,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X22</KJM>
+		<CSMC>ISWC</CSMC>
+		<CSSQL>a.back_sts!= '2'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP096</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP096</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>a.back_sts = '@@Back_Sts,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP096</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP096</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where agent_name like '%@@Cust_Name,%') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP096</KJM>
+		<CSMC>Back_Demo</CSMC>
+		<CSSQL>a.Back_Demo like '%@@Back_Demo,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP096</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>a.agent_code = '@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP096</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>a.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP096</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>a.jsdh like  '%@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP096</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>a.Brand_Code= '@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP096</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>back_code like '%@@Back_Code,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP096</KJM>
+		<CSMC>ISWC</CSMC>
+		<CSSQL>a.back_sts!= '2'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP097</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>dwmc like  '%@@Agent_Name,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP097</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(a.psid like '%@@PRODUCT_NAME,%' or a.spmc like '@@PRODUCT_NAME,%') </CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJH097</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>dwmc like  '%@@Agent_Name,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH097</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(a.psid like '%@@PRODUCT_NAME,%' or a.spmc like '@@PRODUCT_NAME,%') </CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJP098</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>dwmc like  '%@@Agent_Name,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP098</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(a.psid like '%@@PRODUCT_NAME,%' or a.spmc like '@@PRODUCT_NAME,%') </CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ1025</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>agent_code in (select agent_code from agent_list where agent_name like  '%@@Agent_Name,%' ) </CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP099</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.end_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP099</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>b.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP099</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>b.agent_code='@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP099</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(a.product_name like '%@@PRODUCT_NAME,%' or a.product_code like '@@PRODUCT_NAME,%') </CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJP099</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJP099</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>b.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP099</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>b.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP099</KJM>
+		<CSMC>PRODUCT_SIZE</CSMC>
+		<CSSQL>PRODUCT_SIZE like '@@PRODUCT_SIZE,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP099</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP099</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>jsdh like '@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH099</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.end_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH099</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>b.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJH099</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>b.agent_code='@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJH099</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(a.product_name like '%@@PRODUCT_NAME,%' or a.product_code like '@@PRODUCT_NAME,%') </CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJH099</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJH099</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>b.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH099</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>b.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH099</KJM>
+		<CSMC>PRODUCT_SIZE</CSMC>
+		<CSSQL>PRODUCT_SIZE like '@@PRODUCT_SIZE,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH099</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH099</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>jsdh like '@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP101</KJM>
+		<CSMC>Sjbm</CSMC>
+		<CSSQL>x.agent_code in (select agent_code from agent_list where sjbm='@@Sjbm,')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP101</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>agent_name like '@@AGENT_NAME,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH101</KJM>
+		<CSMC>Sjbm</CSMC>
+		<CSSQL>x.agent_code in (select agent_code from agent_list where sjbm='@@Sjbm,')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH101</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>agent_name like '@@AGENT_NAME,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<!-- 财务部分 -->
+	<row>
+		<KJM>MJC001</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.end_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC001</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>b.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJC001</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>b.agent_code='@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJC001</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJC001</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJC001</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJC001</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>b.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC001</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>b.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC001</KJM>
+		<CSMC>PRODUCT_SIZE</CSMC>
+		<CSSQL>PRODUCT_SIZE like '@@PRODUCT_SIZE,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC001</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC001</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>jsdh like '@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC002</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.end_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC002</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>b.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJC002</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>b.agent_code='@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJC002</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJC002</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJC002</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJC002</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>b.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC002</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>b.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC002</KJM>
+		<CSMC>PRODUCT_SIZE</CSMC>
+		<CSSQL>PRODUCT_SIZE like '@@PRODUCT_SIZE,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC002</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC002</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>jsdh like '@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC003</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.end_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC003</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>b.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJC003</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>b.agent_code='@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJC003</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJC003</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJC003</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJC003</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>b.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC003</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>b.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC003</KJM>
+		<CSMC>PRODUCT_SIZE</CSMC>
+		<CSSQL>PRODUCT_SIZE like '@@PRODUCT_SIZE,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC003</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC003</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>jsdh like '@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJC007</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(o.product_code like '%@@SPBM,%' or  o.product_name like '%@@SPBM,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC007</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>o.SERIES_CODE='@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC007</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>o.XL_CODE='@@XL_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJC008</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(o.product_code like '%@@SPBM,%' or  o.product_name like '%@@SPBM,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC008</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>o.SERIES_CODE='@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC008</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>o.XL_CODE='@@XL_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC009</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC009</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJC009</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>a.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC009</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>a.jsdh= '@@JSDH,'</CSSQL>
+		<XH>7.0</XH>
+	</row>
+	<row>
+		<KJM>MJC009</KJM>
+		<CSMC>SFSF</CSMC>
+		<CSSQL>a.sfsf= '@@SFSF,'</CSSQL>
+		<XH>8.0</XH>
+	</row>
+	<row>
+		<KJM>MJC009</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>a.ywy= '@@YWY,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJC009</KJM>
+		<CSMC>DOMAIN_MAN</CSMC>
+		<CSSQL>Domain_Man= '@@DOMAIN_MAN,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJC009</KJM>
+		<CSMC>Demo</CSMC>
+		<CSSQL>a.back_demo= '@@Demo,'</CSSQL>
+		<XH>10.0</XH>
+	</row>
+	<row>
+		<KJM>MJC009</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>a.agent_code= '@@Cust_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJC009</KJM>
+		<CSMC>Back_Type</CSMC>
+		<CSSQL>a.Back_Type= '@@Back_Type,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJC009</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJC009</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>Back_sts in ( @@Back_Sts,)</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJC009</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>agent_name like '%@@Agent_Name,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJC010</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC010</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJC010</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>a.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC010</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>a.jsdh= '@@JSDH,'</CSSQL>
+		<XH>7.0</XH>
+	</row>
+	<row>
+		<KJM>MJC010</KJM>
+		<CSMC>SFSF</CSMC>
+		<CSSQL>a.sfsf= '@@SFSF,'</CSSQL>
+		<XH>8.0</XH>
+	</row>
+	<row>
+		<KJM>MJC010</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>a.ywy= '@@YWY,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJC010</KJM>
+		<CSMC>DOMAIN_MAN</CSMC>
+		<CSSQL>Domain_Man= '@@DOMAIN_MAN,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJC010</KJM>
+		<CSMC>Demo</CSMC>
+		<CSSQL>a.back_demo= '@@Demo,'</CSSQL>
+		<XH>10.0</XH>
+	</row>
+	<row>
+		<KJM>MJC010</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>a.agent_code= '@@Cust_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJC010</KJM>
+		<CSMC>Back_Type</CSMC>
+		<CSSQL>a.Back_Type= '@@Back_Type,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJC010</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJC010</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>Back_sts in ( @@Back_Sts,)</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJC010</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>agent_name like '%@@Agent_Name,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJC011</KJM>
+		<CSMC>DOMAIN_MAN</CSMC>
+		<CSSQL>DOMAIN_MAN= '@@DOMAIN_MAN,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJC011</KJM>
+		<CSMC>Sjbm</CSMC>
+		<CSSQL>Sjbm= '@@Sjbm,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJC011</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>AGENT_NAME like '%@@AGENT_NAME,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJC011</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>Brand_Code= '@@Brand_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJC012</KJM>
+		<CSMC>DOMAIN_MAN</CSMC>
+		<CSSQL>DOMAIN_MAN= '@@DOMAIN_MAN,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJC012</KJM>
+		<CSMC>Sjbm</CSMC>
+		<CSSQL>Sjbm= '@@Sjbm,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJC012</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>AGENT_NAME like '%@@AGENT_NAME,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJC012</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>Brand_Code= '@@Brand_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJC013</KJM>
+		<CSMC>Sjbm</CSMC>
+		<CSSQL>x.agent_code in (select agent_code from agent_list where sjbm='@@Sjbm,')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC013</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>agent_name like '@@AGENT_NAME,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC014</KJM>
+		<CSMC>Sjbm</CSMC>
+		<CSSQL>x.agent_code in (select agent_code from agent_list where sjbm='@@Sjbm,')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJC014</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>agent_name like '@@AGENT_NAME,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJC015</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(psid like '%@@SPBM,%' or  spmc like '%@@SPBM,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC015</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>sccj='@@Brand_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC015</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>SERIES_CODE='@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC015</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>XL_CODE='@@XL_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC015</KJM>
+		<CSMC>JBRBM</CSMC>
+		<CSSQL>JBRBM='@@JBRBM,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC016</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(psid like '%@@SPBM,%' or  spmc like '%@@SPBM,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC016</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>sccj='@@Brand_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC016</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>SERIES_CODE='@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC016</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>XL_CODE='@@XL_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC016</KJM>
+		<CSMC>JBRBM</CSMC>
+		<CSSQL>JBRBM='@@JBRBM,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC017</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(psid like '%@@SPBM,%' or  spmc like '%@@SPBM,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC017</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>sccj='@@Brand_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC017</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>SERIES_CODE='@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC017</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>XL_CODE='@@XL_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC017</KJM>
+		<CSMC>DWBM</CSMC>
+		<CSSQL>DWBM='@@DWBM,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC018</KJM>
+		<CSMC>SPBM</CSMC>
+		<CSSQL>(psid like '%@@SPBM,%' or  spmc like '%@@SPBM,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC018</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>sccj='@@Brand_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC018</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>SERIES_CODE='@@SERIES_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC018</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>XL_CODE='@@XL_CODE,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJC018</KJM>
+		<CSMC>DWBM</CSMC>
+		<CSSQL>DWBM='@@DWBM,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8007</KJM>
+		<CSMC>SPMC</CSMC>
+		<CSSQL>(psid like '%@@SPMC,%' or spmc like '%@@SPMC,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8007</KJM>
+		<CSMC>DWMC</CSMC>
+		<CSSQL>dwmc like '%@@DWMC,%' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ8007</KJM>
+		<CSMC>isJA</CSMC>
+		<CSSQL>isJA ='@@isJA,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8005</KJM>
+		<CSMC>SPMC</CSMC>
+		<CSSQL>
+			(ysmc like '%@@SPMC,%' or spmc like '%@@SPMC,%')
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8005</KJM>
+		<CSMC>WLMC</CSMC>
+		<CSSQL>
+			(product_code like '%@@WLMC,%' or product_name like '%@@WLMC,%')
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8005</KJM>
+		<CSMC>SUP_NAME</CSMC>
+		<CSSQL>
+			sup_code in (select bm from sc_bm_wldw where mc like '%@@SUP_NAME,%')
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8005</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ8038</KJM>
+		<CSMC>SPMC</CSMC>
+		<CSSQL>
+			(ysmc like '%@@SPMC,%' or spmc like '%@@SPMC,%')
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8038</KJM>
+		<CSMC>WLMC</CSMC>
+		<CSSQL>
+			(product_code like '%@@WLMC,%' or product_name like '%@@WLMC,%')
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8038</KJM>
+		<CSMC>SUP_NAME</CSMC>
+		<CSSQL>
+			sup_code in (select bm from sc_bm_wldw where mc like '%@@SUP_NAME,%')
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8038</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	
+	
+	<row>
+		<KJM>MJP104</KJM>
+		<CSMC>Series_Type</CSMC>
+		<CSSQL>series_code in (select series_code from series_list where series_type='@@Series_Type,')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP104</KJM>
+		<CSMC>Series_Code</CSMC>
+		<CSSQL>series_code='@@Series_Code,' </CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP104</KJM>
+		<CSMC>XL_Code</CSMC>
+		<CSSQL>XL_Code='@@XL_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP104</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>(agent_code in (@@Brand_Code,) or ispublic='是')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP104</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(product_size like '%@@SJ,%' or product_name like '%@@SJ,%' or product_code like '%@@SJ,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP104</KJM>
+		<CSMC>BM</CSMC>
+		<CSSQL>id='@@BM,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP104</KJM>
+		<CSMC>ISNEW</CSMC>
+		<CSSQL>isnew='是'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+
+        <row>
+		<KJM>MJP152</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP152</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>a.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP152</KJM>
+		<CSMC>Demo</CSMC>
+		<CSSQL>a.back_demo= '@@Demo,'</CSSQL>
+		<XH>10.0</XH>
+	</row>
+	<row>
+		<KJM>MJP152</KJM>
+		<CSMC>Back_Type</CSMC>
+		<CSSQL>a.Back_Type= '@@Back_Type,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP152</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP152</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>Back_sts in ( @@Back_Sts,)</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP152</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>mc like '%@@Cust_Name,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJH152</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH152</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>a.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH152</KJM>
+		<CSMC>Demo</CSMC>
+		<CSSQL>a.back_demo= '@@Demo,'</CSSQL>
+		<XH>10.0</XH>
+	</row>
+	<row>
+		<KJM>MJH152</KJM>
+		<CSMC>Back_Type</CSMC>
+		<CSSQL>a.Back_Type= '@@Back_Type,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJH152</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJH152</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>Back_sts in ( @@Back_Sts,)</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJH152</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>mc like '%@@Cust_Name,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0036</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.sh_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0036</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>a.back_sts = '@@Back_Sts,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0036</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0036</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where agent_name like '%@@Cust_Name,%') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0036</KJM>
+		<CSMC>Back_Demo</CSMC>
+		<CSSQL>a.Back_Demo like '%@@Back_Demo,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0036</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>a.agent_code = '@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0036</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>a.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0036</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>a.jsdh= '@@JSDH,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0036</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>a.Brand_Code= '@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0036</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>back_code like '%@@Back_Code,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0036</KJM>
+		<CSMC>PACK_DATE2</CSMC>
+		<CSSQL>
+			a.pack_date between '@@PACK_DATE1, 00:00:00' and '@@PACK_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0036</KJM>
+		<CSMC>Pack_Man</CSMC>
+		<CSSQL>a.Pack_Man like '%@@Pack_Man,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0036</KJM>
+		<CSMC>PH_Man</CSMC>
+		<CSSQL>a.PH_Man like '%@@PH_Man,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP145</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>sxbm like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP145</KJM>
+		<CSMC>DWMC</CSMC>
+		<CSSQL>dwmc like '%@@DWMC,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP145</KJM>
+		<CSMC>DWBM</CSMC>
+		<CSSQL>dwbm = '@@DWBM,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP148</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>dwmc like '%@@Agent_Name,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0019</KJM>
+		<CSMC>SPMC</CSMC>
+		<CSSQL>(psid like '%@@SPMC,%' or spmc like '%@@SPMC,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0019</KJM>
+		<CSMC>DWMC</CSMC>
+		<CSSQL>dwmc like '%@@DWMC,%' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0019</KJM>
+		<CSMC>isJA</CSMC>
+		<CSSQL>isJA ='@@isJA,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0037</KJM>
+		<CSMC>isJA</CSMC>
+		<CSSQL>isJA ='@@isJA,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0037</KJM>
+		<CSMC>SPMC</CSMC>
+		<CSSQL>(spmc like '%@@SPMC,%' or psid like '%@@SPMC,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0037</KJM>
+		<CSMC>DWMC</CSMC>
+		<CSSQL>dwmc like '%@@DWMC,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	
+	<row>
+		<KJM>MJP158</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP158</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP158</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>a.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP158</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>a.jsdh= '@@JSDH,'</CSSQL>
+		<XH>7.0</XH>
+	</row>
+	<row>
+		<KJM>MJP158</KJM>
+		<CSMC>SFSF</CSMC>
+		<CSSQL>a.sfsf= '@@SFSF,'</CSSQL>
+		<XH>8.0</XH>
+	</row>
+	<row>
+		<KJM>MJP158</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>a.ywy= '@@YWY,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJP158</KJM>
+		<CSMC>DOMAIN_MAN</CSMC>
+		<CSSQL>Domain_Man= '@@DOMAIN_MAN,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJP158</KJM>
+		<CSMC>Demo</CSMC>
+		<CSSQL>a.back_demo= '@@Demo,'</CSSQL>
+		<XH>10.0</XH>
+	</row>
+	<row>
+		<KJM>MJP158</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>a.agent_code= '@@Cust_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP158</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>b.agent_name like '%@@Cust_Name,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP158</KJM>
+		<CSMC>Back_Type</CSMC>
+		<CSSQL>a.Back_Type= '@@Back_Type,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP158</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP158</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>Back_sts in ( @@Back_Sts,)</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP158</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>agent_name like '%@@Agent_Name,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP158</KJM>
+		<CSMC>BT_TYPE</CSMC>
+		<CSSQL>sfsf='@@BT_TYPE,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJH158</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJH158</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJH158</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>a.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH158</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>a.jsdh= '@@JSDH,'</CSSQL>
+		<XH>7.0</XH>
+	</row>
+	<row>
+		<KJM>MJH158</KJM>
+		<CSMC>SFSF</CSMC>
+		<CSSQL>a.sfsf= '@@SFSF,'</CSSQL>
+		<XH>8.0</XH>
+	</row>
+	<row>
+		<KJM>MJH158</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>a.ywy= '@@YWY,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJH158</KJM>
+		<CSMC>DOMAIN_MAN</CSMC>
+		<CSSQL>Domain_Man= '@@DOMAIN_MAN,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJH158</KJM>
+		<CSMC>Demo</CSMC>
+		<CSSQL>a.back_demo= '@@Demo,'</CSSQL>
+		<XH>10.0</XH>
+	</row>
+	<row>
+		<KJM>MJH158</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>a.agent_code= '@@Cust_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJH158</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>b.agent_name like '%@@Cust_Name,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJH158</KJM>
+		<CSMC>Back_Type</CSMC>
+		<CSSQL>a.Back_Type= '@@Back_Type,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJH158</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJH158</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>Back_sts in ( @@Back_Sts,)</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJH158</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>agent_name like '%@@Agent_Name,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJH158</KJM>
+		<CSMC>BT_TYPE</CSMC>
+		<CSSQL>sfsf='@@BT_TYPE,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP159</KJM>
+		<CSMC>DWBM</CSMC>
+		<CSSQL>DWBM = '@@DWBM,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP159</KJM>
+		<CSMC>PJLX</CSMC>
+		<CSSQL>PJLX = '@@PJLX,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP159</KJM>
+		<CSMC>PZH</CSMC>
+		<CSSQL>pzh like '%@@PZH,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP159</KJM>
+		<CSMC>RKDH</CSMC>
+		<CSSQL>id like '%@@RKDH,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP159</KJM>
+		<CSMC>ZDR</CSMC>
+		<CSSQL>zdr like '%@@ZDR,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP160</KJM>
+		<CSMC>JBRMC</CSMC>
+		<CSSQL>jbrmc like '%@@JBRMC,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP160</KJM>
+		<CSMC>PJLX</CSMC>
+		<CSSQL>PJLX = '@@PJLX,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP160</KJM>
+		<CSMC>PZH</CSMC>
+		<CSSQL>pzh like '%@@PZH,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP160</KJM>
+		<CSMC>ZDR</CSMC>
+		<CSSQL>ZDR like '%@@ZDR,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP280</KJM>
+		<CSMC>JBRMC</CSMC>
+		<CSSQL>jbrmc like '%@@JBRMC,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP280</KJM>
+		<CSMC>PJLX</CSMC>
+		<CSSQL>PJLX = '@@PJLX,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP280</KJM>
+		<CSMC>PZH</CSMC>
+		<CSSQL>pzh like '%@@PZH,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP280</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>ckbm='@@Agent_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP280</KJM>
+		<CSMC>ZDR</CSMC>
+		<CSSQL>ZDR like '%@@ZDR,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>JJ0001</KJM>
+		<CSMC>Series_Code</CSMC>
+		<CSSQL>Series_Code='@@Series_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP163</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>agent_code in (select agent_code from agent_list where agent_name like '%@@AGENT_NAME,%')</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJH163</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>agent_code in (select agent_code from agent_list where agent_name like '%@@AGENT_NAME,%')</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJP092</KJM>
+		<CSMC>d_Qg_Id</CSMC>
+		<CSSQL>a.id in (@@d_Qg_Id,)</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0X23</KJM>
+		<CSMC>d_Qg_Id</CSMC>
+		<CSSQL>id in (@@d_Qg_Id,)</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP165</KJM>
+		<CSMC>ID_RWD</CSMC>
+		<CSSQL>ID_RWD='@@ID_RWD,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP165</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>sh='@@Sts,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP165</KJM>
+		<CSMC>ZDR</CSMC>
+		<CSSQL>zdr='@@ZDR,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP165</KJM>
+		<CSMC>DWBM</CSMC>
+		<CSSQL>DWMC like '%@@DWBM,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP165</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP166</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>Agent_Name like '%@@Agent_Name,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0S86</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>PRODUCT_CODE like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+<row>
+		<KJM>MJ0S86</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code='@@SERIES_CODE,'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+<row>
+		<KJM>MJ0S86</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(product_code like '%@@PRODUCT_NAME,%' or PRODUCT_NAME like '%@@PRODUCT_NAME,%' or product_size like '%@@PRODUCT_NAME,%')</CSSQL>
+		<XH>3.0</XH>
+	</row>
+<row>
+		<KJM>MJ0S86</KJM>
+		<CSMC>ID</CSMC>
+		<CSSQL>ID='@@ID,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S86</KJM>
+		<CSMC>DWBM</CSMC>
+		<CSSQL>ID in (select product_id from product_wldw where dwbm='@@DWBM,')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S86</KJM>
+		<CSMC>XL_Type</CSMC>
+		<CSSQL>series_code in (select series_code from series_list where series_type='@@XL_Type,')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0012</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>(product_code like '%@@PRODUCT_CODE,%' or product_name like '%@@PRODUCT_CODE,%')</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0012</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0012</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>a.xl_code= '@@XL_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0012</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>a.agent_code= '@@Brand_Code,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0012</KJM>
+		<CSMC>Warn</CSMC>
+		<CSSQL>product_num&lt;lower_num</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0012</KJM>
+		<CSMC>Cond</CSMC>
+		<CSSQL>product_num @@Cond, @@PRODUCT_NUM,</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0015</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>(product_code like '%@@PRODUCT_CODE,%' or product_name like '%@@PRODUCT_CODE,%')</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0015</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0015</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>a.xl_code= '@@XL_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0015</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>a.agent_code= '@@Brand_Code,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0015</KJM>
+		<CSMC>Warn</CSMC>
+		<CSSQL>product_num&lt;lower_num</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0015</KJM>
+		<CSMC>Cond</CSMC>
+		<CSSQL>product_num @@Cond, @@PRODUCT_NUM,</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0030</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>PRODUCT_NAME like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0030</KJM>
+		<CSMC>ID</CSMC>
+		<CSSQL>id='@@ID,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJZ004</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>(arr_tel like '@@Cust_Name,%' or (arr_address+arr_address_detail) like '%@@Cust_Name,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJZ004</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>order_sts='@@Back_Sts,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJZ004</KJM>
+		<CSMC>AZ_Man</CSMC>
+		<CSSQL>AZ_Man='@@AZ_Man,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	 <row>
+		<KJM>MJZ004</KJM>
+		<CSMC>Order_Src</CSMC>
+		<CSSQL>order_Src='@@Order_Src,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJZ004</KJM>
+		<CSMC>ISFP</CSMC>
+		<CSSQL>isfp='@@ISFP,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJZ004</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>agent_code='@@Agent_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJZ004</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>order_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJZ001</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_tel like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0043</KJM>
+		<CSMC>ID</CSMC>
+		<CSSQL>id='@@ID,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0K02</KJM>
+		<CSMC>query</CSMC>
+		<CSSQL> zy like '%@@query,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C10</KJM>
+		<CSMC>query</CSMC>
+		<CSSQL>agent_name like '%@@query,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C10</KJM>
+		<CSMC>is331KH</CSMC>
+		<CSSQL>is330KH='@@is331KH,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S51</KJM>
+		<CSMC>query</CSMC>
+		<CSSQL>agent_name like '%@@query,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	
+	<row>
+		<KJM>MJ0C05</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>sh='@@Sts,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C05</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>ckmc like '%@@Agent_Name,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP181</KJM>
+		<CSMC>ID</CSMC>
+		<CSSQL>ID ='@@ID,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP181</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>sh ='@@Sts,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP181</KJM>
+		<CSMC>store_no</CSMC>
+		<CSSQL>store_no ='@@store_no,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP181</KJM>
+		<CSMC>DWMC</CSMC>
+		<CSSQL>dwmc like '%@@DWMC,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP185</KJM>
+		<CSMC>ID</CSMC>
+		<CSSQL>id ='@@ID,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP185</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>sh ='@@Sts,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP185</KJM>
+		<CSMC>DWMC</CSMC>
+		<CSSQL>DWMC like '%@@DWMC,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0S01</KJM>
+		<CSMC>taf_sffs</CSMC>
+		<CSSQL>taf_sffs='@@taf_sffs,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S01</KJM>
+		<CSMC>store_no</CSMC>
+		<CSSQL>store_no='@@store_no,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S01</KJM>
+		<CSMC>query</CSMC>
+		<CSSQL>product_code like '%@@query,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ8006</KJM>
+		<CSMC>query</CSMC>
+		<CSSQL>dwmc like '%@@query,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S20</KJM>
+		<CSMC>query</CSMC>
+		<CSSQL>(product_code like '%@@query,%' or product_name like '%@@query,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0060</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>sh='@@Sts,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0060</KJM>
+		<CSMC>ZDR</CSMC>
+		<CSSQL>zdr like '%@@ZDR,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0039</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(psid like '%@@SJ,%' or spmc like '%@@SJ,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0S21</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>agent_code in (select agent_code from agent_list where agent_name like '%@@Cust_Name,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S21</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(product_name like '%@@PRODUCT_NAME,%' or product_code like  '%@@PRODUCT_NAME,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0022</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>agent_code in (select agent_code from agent_list where agent_name like '%@@Cust_Name,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0022</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(product_name like '%@@PRODUCT_NAME,%' or product_code like  '%@@PRODUCT_NAME,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0047</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0047</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>a.back_sts = '@@Back_Sts,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0047</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0047</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where agent_name like '%@@Cust_Name,%') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0047</KJM>
+		<CSMC>Back_Demo</CSMC>
+		<CSSQL>a.Back_Demo like '%@@Back_Demo,%'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0047</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>a.agent_code='@@Cust_Code,' </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0047</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>a.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0047</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>a.jsdh like '%@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0047</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>a.Brand_Code= '@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0047</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>back_code like '%@@Back_Code,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0047</KJM>
+		<CSMC>ISWC</CSMC>
+		<CSSQL>a.back_sts!= '2'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0S29</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S29</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S29</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>a.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S29</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>a.jsdh= '@@JSDH,'</CSSQL>
+		<XH>7.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S29</KJM>
+		<CSMC>SFSF</CSMC>
+		<CSSQL>a.sfsf= '@@SFSF,'</CSSQL>
+		<XH>8.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S29</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>a.ywy= '@@YWY,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S29</KJM>
+		<CSMC>DOMAIN_MAN</CSMC>
+		<CSSQL>Domain_Man= '@@DOMAIN_MAN,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S29</KJM>
+		<CSMC>Demo</CSMC>
+		<CSSQL>a.back_demo= '@@Demo,'</CSSQL>
+		<XH>10.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S29</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>a.agent_code= '@@Cust_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S29</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>b.agent_name like '%@@Cust_Name,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S29</KJM>
+		<CSMC>Back_Type</CSMC>
+		<CSSQL>a.Back_Type= '@@Back_Type,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S29</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S29</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>Back_sts in ( @@Back_Sts,)</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S29</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>agent_name like '%@@Agent_Name,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S29</KJM>
+		<CSMC>BT_TYPE</CSMC>
+		<CSSQL>sfsf='@@BT_TYPE,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	
+	
+	<row>
+		<KJM>MJ0S02</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			a.back_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S02</KJM>
+		<CSMC>AGENT_CODE</CSMC>
+		<CSSQL>a.agent_code in (select agent_code from agent_list where sjbm='@@AGENT_CODE,') </CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S02</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>a.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S02</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>a.jsdh= '@@JSDH,'</CSSQL>
+		<XH>7.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S02</KJM>
+		<CSMC>SFSF</CSMC>
+		<CSSQL>a.sfsf= '@@SFSF,'</CSSQL>
+		<XH>8.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S02</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>a.ywy= '@@YWY,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S02</KJM>
+		<CSMC>DOMAIN_MAN</CSMC>
+		<CSSQL>Domain_Man= '@@DOMAIN_MAN,'</CSSQL>
+		<XH>9.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S02</KJM>
+		<CSMC>Demo</CSMC>
+		<CSSQL>a.back_demo= '@@Demo,'</CSSQL>
+		<XH>10.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S02</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>a.agent_code= '@@Cust_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S02</KJM>
+		<CSMC>Cust_Name</CSMC>
+		<CSSQL>b.agent_name like '%@@Cust_Name,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S02</KJM>
+		<CSMC>Back_Type</CSMC>
+		<CSSQL>a.Back_Type= '@@Back_Type,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S02</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S02</KJM>
+		<CSMC>Back_Sts</CSMC>
+		<CSSQL>Back_sts in ( @@Back_Sts,)</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S02</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>agent_name like '%@@Agent_Name,%'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S02</KJM>
+		<CSMC>BT_TYPE</CSMC>
+		<CSSQL>sfsf='@@BT_TYPE,'</CSSQL>
+		<XH>11.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0C08</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.sh_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C08</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>b.agent_code='@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C08</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C08</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C08</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C08</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>b.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C08</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>b.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C08</KJM>
+		<CSMC>PRODUCT_SIZE</CSMC>
+		<CSSQL>PRODUCT_SIZE like '@@PRODUCT_SIZE,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C08</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C08</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>jsdh like '@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0S07</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>
+			b.sh_date between '@@ORDER_DATE1, 00:00:00' and
+			'@@ORDER_DATE2, 23:59:59'
+		</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S07</KJM>
+		<CSMC>Cust_Code</CSMC>
+		<CSSQL>b.agent_code='@@Cust_Code,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S07</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>a.product_code like '@@PRODUCT_CODE,%'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S07</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>a.product_name like '%@@PRODUCT_NAME,%'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S07</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S07</KJM>
+		<CSMC>Note_Type</CSMC>
+		<CSSQL>b.note_type= '@@Note_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S07</KJM>
+		<CSMC>YWY</CSMC>
+		<CSSQL>b.ywy= '@@YWY,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S07</KJM>
+		<CSMC>PRODUCT_SIZE</CSMC>
+		<CSSQL>PRODUCT_SIZE like '@@PRODUCT_SIZE,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S07</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>b.Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S07</KJM>
+		<CSMC>JSDH</CSMC>
+		<CSSQL>jsdh like '@@JSDH,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP094</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>agent_name like '%@@Agent_Name,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP094</KJM>
+		<CSMC>domain_man</CSMC>
+		<CSSQL>domain_man = '@@domain_man,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP094</KJM>
+		<CSMC>Agent_Level</CSMC>
+		<CSSQL>Agent_Level like '%@@Agent_Level,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJH094</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>agent_name like '%@@Agent_Name,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJH094</KJM>
+		<CSMC>domain_man</CSMC>
+		<CSSQL>domain_man = '@@domain_man,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP095</KJM>
+		<CSMC>domain_man</CSMC>
+		<CSSQL>domain_man = '@@domain_man,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP177</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>agent_code in (select agent_code from agent_list where agent_name like '%@@Agent_Name,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP177</KJM>
+		<CSMC>Product_Name</CSMC>
+		<CSSQL>(psid like '%@@Product_Name,%' or spmc like '%@@Product_Name,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0S03</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>(product_code like '%@@PRODUCT_CODE,%' or product_name like '%@@PRODUCT_CODE,%')</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S03</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.series_code= '@@SERIES_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S03</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>a.xl_code= '@@XL_CODE,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S03</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>a.agent_code= '@@Agent_Code,'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S03</KJM>
+		<CSMC>Warn</CSMC>
+		<CSSQL>product_num&lt;lower_num</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S03</KJM>
+		<CSMC>Cond</CSMC>
+		<CSSQL>product_num @@Cond, @@PRODUCT_NUM,</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJP133</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>agent_name like '%@@Agent_Name,%'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	<row>
+		<KJM>MJH133</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>agent_name like '%@@Agent_Name,%'</CSSQL>
+		<XH>5.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP197</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>agent_name like '%@@Agent_Name,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP197</KJM>
+		<CSMC>domain_man</CSMC>
+		<CSSQL>domain_man = '@@domain_man,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP197</KJM>
+		<CSMC>Agent_Level</CSMC>
+		<CSSQL>Agent_Level like '%@@Agent_Level,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP196</KJM>
+		<CSMC>domain_man</CSMC>
+		<CSSQL>domain_man = '@@domain_man,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP205</KJM>
+		<CSMC>domain_man</CSMC>
+		<CSSQL>domain_man = '@@domain_man,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP204</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>agent_name like '%@@Agent_Name,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP204</KJM>
+		<CSMC>domain_man</CSMC>
+		<CSSQL>domain_man = '@@domain_man,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP204</KJM>
+		<CSMC>Agent_Level</CSMC>
+		<CSSQL>Agent_Level like '%@@Agent_Level,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJE001</KJM>
+		<CSMC>CXTJ</CSMC>
+		<CSSQL>(buyer_nick like '%@@CXTJ,%' or payment like '%@@CXTJ,%' or receiver_name like '%@@CXTJ,%' or receiver_mobile like '%@@CXTJ,%' or tid like '%@@CXTJ,%' or receiver_address like '%@@CXTJ,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE001</KJM>
+		<CSMC>Order_Sts</CSMC>
+		<CSSQL>order_sts='@@Order_Sts,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE001</KJM>
+		<CSMC>seller_memo</CSMC>
+		<CSSQL>(seller_memo like '%@@seller_memo,%' or prc_memo like '%@@seller_memo,%' or buyer_message like '%@@seller_memo,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE001</KJM>
+		<CSMC>seller_nick</CSMC>
+		<CSSQL>seller_nick like '@@seller_nick,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE001</KJM>
+		<CSMC>Exp_Name</CSMC>
+		<CSSQL>exp_name='@@Exp_Name,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE001</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>tid='@@Back_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE001</KJM>
+		<CSMC>Exp_Num</CSMC>
+		<CSSQL>exp_Num='@@Exp_Num,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE001</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>convert(datetime,pay_time) between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE001</KJM>
+		<CSMC>End_Date</CSMC>
+		<CSSQL>weight_date between '@@ORDER_DATE1, 00:00:00' and '@@End_Date, 23:59:59'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE001</KJM>
+		<CSMC>type</CSMC>
+		<CSSQL>type='@@type,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE001</KJM>
+		<CSMC>KF_Man</CSMC>
+		<CSSQL>KF_Man='@@KF_Man,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE001</KJM>
+		<CSMC>Print_Hits</CSMC>
+		<CSSQL>Print_Hits='@@Print_Hits,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE001</KJM>
+		<CSMC>DATE_TYPE</CSMC>
+		<CSSQL>convert(datetime,@@DATE_TYPE,) between '@@DIY_DATE1, 00:00:00' and '@@DIY_DATE2, 23:59:59'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE004</KJM>
+		<CSMC>CXTJ</CSMC>
+		<CSSQL>(buyer_nick like '%@@CXTJ,%' or payment like '%@@CXTJ,%' or receiver_name like '%@@CXTJ,%' or receiver_mobile like '%@@CXTJ,%' or tid like '%@@CXTJ,%' or receiver_address like '%@@CXTJ,%' or exp_num like '%@@CXTJ,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE004</KJM>
+		<CSMC>Exp_Name</CSMC>
+		<CSSQL>Exp_Name='@@Exp_Name,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE006</KJM>
+		<CSMC>CXTJ</CSMC>
+		<CSSQL>(buyer_nick like '%@@CXTJ,%' or payment like '%@@CXTJ,%' or receiver_name like '%@@CXTJ,%' or receiver_mobile like '%@@CXTJ,%' or tid like '%@@CXTJ,%' or receiver_address like '%@@CXTJ,%' or exp_num like '%@@CXTJ,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE006</KJM>
+		<CSMC>Exp_Name</CSMC>
+		<CSSQL>Exp_Name='@@Exp_Name,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE006</KJM>
+		<CSMC>send</CSMC>
+		<CSSQL>send='@@send,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE012</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>sh='@@Sts,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE012</KJM>
+		<CSMC>DH</CSMC>
+		<CSSQL>dh like '%@@DH,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE012</KJM>
+		<CSMC>JSR</CSMC>
+		<CSSQL>JSR like '%@@JSR,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE012</KJM>
+		<CSMC>DWMC</CSMC>
+		<CSSQL>DWMC like '%@@DWMC,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE012</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJE013</KJM>
+		<CSMC>CXTJ</CSMC>
+		<CSSQL>(a.buyer_nick like '%@@CXTJ,%' or a.payment like '%@@CXTJ,%' or a.receiver_name like '%@@CXTJ,%' or a.receiver_mobile like '%@@CXTJ,%' or a.tid like '%@@CXTJ,%' or a.receiver_address like '%@@CXTJ,%' or a.exp_num like '%@@CXTJ,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE013</KJM>
+		<CSMC>Order_Sts</CSMC>
+		<CSSQL>a.order_sts='@@Order_Sts,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE013</KJM>
+		<CSMC>seller_memo</CSMC>
+		<CSSQL>(a.seller_memo like '%@@seller_memo,%' or a.prc_memo like '%@@seller_memo,%' or a.buyer_message like '%@@seller_memo,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE013</KJM>
+		<CSMC>seller_nick</CSMC>
+		<CSSQL>a.seller_nick like '@@seller_nick,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE013</KJM>
+		<CSMC>Exp_Name</CSMC>
+		<CSSQL>a.exp_name='@@Exp_Name,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE013</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>a.tid='@@Back_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE013</KJM>
+		<CSMC>Exp_Num</CSMC>
+		<CSSQL>a.exp_Num='@@Exp_Num,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE013</KJM>
+		<CSMC>DATE_TYPE</CSMC>
+		<CSSQL>convert(datetime,@@DATE_TYPE,) between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJE013</KJM>
+		<CSMC>type</CSMC>
+		<CSSQL>type='@@type,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE013</KJM>
+		<CSMC>KF_Man</CSMC>
+		<CSSQL>kf_man='@@KF_Man,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE013</KJM>
+		<CSMC>title</CSMC>
+		<CSSQL>b.title like '%@@title,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	
+	<row>
+		<KJM>MJE014</KJM>
+		<CSMC>CXTJ</CSMC>
+		<CSSQL>(buyer_nick like '%@@CXTJ,%' or payment like '%@@CXTJ,%' or receiver_name like '%@@CXTJ,%' or receiver_mobile like '%@@CXTJ,%' or tid like '%@@CXTJ,%' or receiver_address like '%@@CXTJ,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE014</KJM>
+		<CSMC>Order_Sts</CSMC>
+		<CSSQL>order_sts='@@Order_Sts,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE014</KJM>
+		<CSMC>seller_memo</CSMC>
+		<CSSQL>(seller_memo like '%@@seller_memo,%' or prc_memo like '%@@seller_memo,%' or buyer_message like '%@@seller_memo,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE014</KJM>
+		<CSMC>seller_nick</CSMC>
+		<CSSQL>seller_nick like '@@seller_nick,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE014</KJM>
+		<CSMC>Exp_Name</CSMC>
+		<CSSQL>exp_name='@@Exp_Name,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE014</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>tid='@@Back_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE014</KJM>
+		<CSMC>Exp_Num</CSMC>
+		<CSSQL>exp_Num='@@Exp_Num,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE014</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>weight_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE014</KJM>
+		<CSMC>type</CSMC>
+		<CSSQL>type='@@type,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE014</KJM>
+		<CSMC>KF_Man</CSMC>
+		<CSSQL>kf_man='@@KF_Man,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE018</KJM>
+		<CSMC>CXTJ</CSMC>
+		<CSSQL>(buyer_nick like '%@@CXTJ,%' or payment like '%@@CXTJ,%' or receiver_name like '%@@CXTJ,%' or receiver_mobile like '%@@CXTJ,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE018</KJM>
+		<CSMC>Order_Sts</CSMC>
+		<CSSQL>order_sts='@@Order_Sts,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE018</KJM>
+		<CSMC>seller_memo</CSMC>
+		<CSSQL>(spmc like '%@@seller_memo,%'  or ysmc like '%@@seller_memo,%' or psid like '%@@seller_memo,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE018</KJM>
+		<CSMC>seller_nick</CSMC>
+		<CSSQL>seller_nick like '@@seller_nick,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE018</KJM>
+		<CSMC>Exp_Name</CSMC>
+		<CSSQL>exp_name='@@Exp_Name,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE018</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>tid='@@Back_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE018</KJM>
+		<CSMC>Exp_Num</CSMC>
+		<CSSQL>exp_Num='@@Exp_Num,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE018</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>weight_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE018</KJM>
+		<CSMC>type</CSMC>
+		<CSSQL>type='@@type,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE019</KJM>
+		<CSMC>JSR</CSMC>
+		<CSSQL>a.JSR like '%@@JSR,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE019</KJM>
+		<CSMC>DWMC</CSMC>
+		<CSSQL>a.DWMC like '%@@DWMC,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE019</KJM>
+		<CSMC>seller_memo</CSMC>
+		<CSSQL>(spmc like '%@@seller_memo,%' or ysmc like '%@@seller_memo,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE019</KJM>
+		<CSMC>Srv_Reason</CSMC>
+		<CSSQL>a.Srv_Reason = '@@Srv_Reason,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE020</KJM>
+		<CSMC>CXTJ</CSMC>
+		<CSSQL>(buyer_nick like '%@@CXTJ,%' or payment like '%@@CXTJ,%' or receiver_name like '%@@CXTJ,%' or receiver_mobile like '%@@CXTJ,%' or tid like '%@@CXTJ,%' or receiver_address like '%@@CXTJ,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE020</KJM>
+		<CSMC>Order_Sts</CSMC>
+		<CSSQL>order_sts='@@Order_Sts,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE020</KJM>
+		<CSMC>seller_memo</CSMC>
+		<CSSQL>(seller_memo like '%@@seller_memo,%' or prc_memo like '%@@seller_memo,%' or buyer_message like '%@@seller_memo,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE020</KJM>
+		<CSMC>seller_nick</CSMC>
+		<CSSQL>seller_nick like '@@seller_nick,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE020</KJM>
+		<CSMC>Exp_Name</CSMC>
+		<CSSQL>exp_name='@@Exp_Name,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE020</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>tid='@@Back_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE020</KJM>
+		<CSMC>Exp_Num</CSMC>
+		<CSSQL>exp_Num='@@Exp_Num,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE020</KJM>
+		<CSMC>type</CSMC>
+		<CSSQL>type='@@type,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE020</KJM>
+		<CSMC>KF_Man</CSMC>
+		<CSSQL>KF_Man='@@KF_Man,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE020</KJM>
+		<CSMC>Print_Hits</CSMC>
+		<CSSQL>Print_Hits='@@Print_Hits,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE020</KJM>
+		<CSMC>DATE_TYPE</CSMC>
+		<CSSQL>convert(datetime,@@DATE_TYPE,) between '@@DIY_DATE1, 00:00:00' and '@@DIY_DATE2, 23:59:59'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJE021</KJM>
+		<CSMC>CXTJ</CSMC>
+		<CSSQL>(buyer_nick like '%@@CXTJ,%' or payment like '%@@CXTJ,%' or receiver_name like '%@@CXTJ,%' or receiver_mobile like '%@@CXTJ,%' or tid like '%@@CXTJ,%' or receiver_address like '%@@CXTJ,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE021</KJM>
+		<CSMC>Order_Sts</CSMC>
+		<CSSQL>order_sts='@@Order_Sts,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE021</KJM>
+		<CSMC>seller_memo</CSMC>
+		<CSSQL>(seller_memo like '%@@seller_memo,%' or prc_memo like '%@@seller_memo,%' or buyer_message like '%@@seller_memo,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE021</KJM>
+		<CSMC>seller_nick</CSMC>
+		<CSSQL>seller_nick like '@@seller_nick,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE021</KJM>
+		<CSMC>Exp_Name</CSMC>
+		<CSSQL>exp_name='@@Exp_Name,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE021</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>tid='@@Back_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE021</KJM>
+		<CSMC>Exp_Num</CSMC>
+		<CSSQL>exp_Num='@@Exp_Num,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE021</KJM>
+		<CSMC>type</CSMC>
+		<CSSQL>type='@@type,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE021</KJM>
+		<CSMC>KF_Man</CSMC>
+		<CSSQL>KF_Man='@@KF_Man,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE021</KJM>
+		<CSMC>Print_Hits</CSMC>
+		<CSSQL>Print_Hits='@@Print_Hits,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE021</KJM>
+		<CSMC>DATE_TYPE</CSMC>
+		<CSSQL>convert(datetime,@@DATE_TYPE,) between '@@DIY_DATE1, 00:00:00' and '@@DIY_DATE2, 23:59:59'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJE022</KJM>
+		<CSMC>CXTJ</CSMC>
+		<CSSQL>(buyer_nick like '%@@CXTJ,%' or payment like '%@@CXTJ,%' or receiver_name like '%@@CXTJ,%' or receiver_mobile like '%@@CXTJ,%' or tid like '%@@CXTJ,%' or receiver_address like '%@@CXTJ,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE022</KJM>
+		<CSMC>Order_Sts</CSMC>
+		<CSSQL>order_sts='@@Order_Sts,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE022</KJM>
+		<CSMC>seller_memo</CSMC>
+		<CSSQL>(seller_memo like '%@@seller_memo,%' or prc_memo like '%@@seller_memo,%' or buyer_message like '%@@seller_memo,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE022</KJM>
+		<CSMC>seller_nick</CSMC>
+		<CSSQL>seller_nick like '@@seller_nick,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE022</KJM>
+		<CSMC>Exp_Name</CSMC>
+		<CSSQL>exp_name='@@Exp_Name,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE022</KJM>
+		<CSMC>Back_Code</CSMC>
+		<CSSQL>tid='@@Back_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE022</KJM>
+		<CSMC>Exp_Num</CSMC>
+		<CSSQL>exp_Num='@@Exp_Num,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE022</KJM>
+		<CSMC>PRC_DATE2</CSMC>
+		<CSSQL>convert(datetime,prc_date) between '@@PRC_DATE1, 00:00:00' and '@@PRC_DATE2, 23:59:59'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE022</KJM>
+		<CSMC>End_Date</CSMC>
+		<CSSQL>weight_date between '@@ORDER_DATE1, 00:00:00' and '@@End_Date, 23:59:59'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE022</KJM>
+		<CSMC>type</CSMC>
+		<CSSQL>type='@@type,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE022</KJM>
+		<CSMC>KF_Man</CSMC>
+		<CSSQL>KF_Man='@@KF_Man,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE022</KJM>
+		<CSMC>Print_Hits</CSMC>
+		<CSSQL>Print_Hits='@@Print_Hits,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE022</KJM>
+		<CSMC>DATE_TYPE</CSMC>
+		<CSSQL>convert(datetime,@@DATE_TYPE,) between '@@DIY_DATE1, 00:00:00' and '@@DIY_DATE2, 23:59:59'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE023</KJM>
+		<CSMC>Sts</CSMC>
+		<CSSQL>sh='@@Sts,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE023</KJM>
+		<CSMC>DH</CSMC>
+		<CSSQL>dh like '%@@DH,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE023</KJM>
+		<CSMC>JSR</CSMC>
+		<CSSQL>JSR like '%@@JSR,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE023</KJM>
+		<CSMC>DWMC</CSMC>
+		<CSSQL>DWMC like '%@@DWMC,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJE023</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP202</KJM>
+		<CSMC>Srv_Id</CSMC>
+		<CSSQL>qus_id='@@Srv_Id,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP211</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(psid like '%@@SJ,%' or spmc like '%@@SJ,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP211</KJM>
+		<CSMC>DWMC</CSMC>
+		<CSSQL>dwmc like '%@@DWMC,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP211</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP211</KJM>
+		<CSMC>JD_DATE2</CSMC>
+		<CSSQL>bzsj between '@@JD_DATE1, 00:00:00' and '@@JD_DATE2, 23:59:59'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0X65</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(yhh like '%@@SJ,%' or yhxm like '%@@SJ,%' or lxfs like '%@@SJ,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP238</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(yhh like '%@@SJ,%' or yhxm like '%@@SJ,%' or lxfs like '%@@SJ,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP245</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(agent_tel like '%@@SJ,%' or contact_man like '%@@SJ,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP220</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_man like '%@@SJ,%' or  arr_tel like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP220</KJM>
+		<CSMC>Ywy</CSMC>
+		<CSSQL>ywy_tel='@@Ywy,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP220</KJM>
+		<CSMC>dh_sts</CSMC>
+		<CSSQL>dh_sts='@@dh_sts,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP220</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>order_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP261</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_man like '%@@SJ,%' or  arr_tel like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP261</KJM>
+		<CSMC>Ywy</CSMC>
+		<CSSQL>ywy_tel='@@Ywy,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP261</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>groom_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0008</KJM>
+		<CSMC>Open_Flag</CSMC>
+		<CSSQL>open_flag='@@Open_Flag,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0008</KJM>
+		<CSMC>Taf_Company</CSMC>
+		<CSSQL>Taf_Company='@@Taf_Company,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+
+	<row>
+		<KJM>MJ0008</KJM>
+		<CSMC>AGENT</CSMC>
+		<CSSQL>AGENT_CODE='@@AGENT,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0008</KJM>
+		<CSMC>DOMAIN_MAN</CSMC>
+		<CSSQL>a.DOMAIN_MAN='@@DOMAIN_MAN,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0008</KJM>
+		<CSMC>AGENT_TYPE</CSMC>
+		<CSSQL>sjbm='@@AGENT_TYPE,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0008</KJM>
+		<CSMC>Sjbm</CSMC>
+		<CSSQL>a.sjbm='@@Sjbm,'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0008</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>end_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+<row>
+		<KJM>MJ0008</KJM>
+		<CSMC>AGENT_NAME</CSMC>
+		<CSSQL>a.agent_name like '%@@AGENT_NAME,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0008</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>a.brand_code='@@Agent_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0008</KJM>
+		<CSMC>LXFS</CSMC>
+		<CSSQL>a.agent_tel like '%@@LXFS,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<!-- cyl -->
+	<row>
+		<KJM>MJP224</KJM>
+		<CSMC>Open_Flag</CSMC>
+		<CSSQL>open_flag='@@Open_Flag,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP224</KJM>
+		<CSMC>Brand_Code</CSMC>
+		<CSSQL>Brand_Code='@@Brand_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP224</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>join_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>3.0</XH>
+	</row>
+    <row>
+		<KJM>MJP224</KJM>
+		<CSMC>contact_man</CSMC>
+		<CSSQL>(CONTACT_MAN like '%@@contact_man,%' or agent_name like '%@@contact_man,%')</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP224</KJM>
+		<CSMC>AGENT_TEL</CSMC>
+		<CSSQL>AGENT_TEL like '%@@AGENT_TEL,%'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	
+	<!--库存 【 产品 】-->
+	<row>
+		<KJM>MJP233</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(PRODUCT_CODE like '%@@PRODUCT_NAME,%' or PRODUCT_NAME like '%@@PRODUCT_NAME,%' )</CSSQL>
+		<XH>3.0</XH>
+	</row>
+	<row>
+		<KJM>MJP233</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>SERIES_CODE='@@SERIES_CODE,'</CSSQL>
+		<XH>4.0</XH>
+	</row>
+	
+	<!--入库列表查询接口  -->
+	<row>
+		<KJM>MJP229</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+
+	<!--出库列表查询接口  -->
+	<row>
+		<KJM>MJP236</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP256</KJM>
+		<CSMC>PRODUCT_NAME</CSMC>
+		<CSSQL>(PRODUCT_CODE like '%@@PRODUCT_NAME,%' or id like '%@@PRODUCT_NAME,%' or PRODUCT_NAME like '%@@PRODUCT_NAME,%')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP256</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>a.SERIES_CODE='@@SERIES_CODE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP256</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>a.xl_code='@@XL_CODE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<!-- 库存查询 -->
+	<row>
+		<KJM>MJP235</KJM>
+		<CSMC>PRODUCT_CODE</CSMC>
+		<CSSQL>(PRODUCT_CODE like '@@PRODUCT_CODE,' or id like '@@PRODUCT_CODE,' or PRODUCT_NAME like '@@PRODUCT_CODE,')</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP235</KJM>
+		<CSMC>SERIES_CODE</CSMC>
+		<CSSQL>SERIES_CODE='@@SERIES_CODE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	<row>
+		<KJM>MJP235</KJM>
+		<CSMC>XL_CODE</CSMC>
+		<CSSQL>xl_code='@@XL_CODE,'</CSSQL>
+		<XH>2.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP420</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_man like '%@@SJ,%' or arr_tel like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP420</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>dbo.getdatestr1(groom_date) between '@@ORDER_DATE1,' and '@@ORDER_DATE2,' </CSSQL>
+		<XH>1.0</XH>
+	</row>	
+	
+	<row>
+		<KJM>MJPD03</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_man like '%@@SJ,%' or  arr_tel like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJPD03</KJM>
+		<CSMC>Ywy</CSMC>
+		<CSSQL>ywy_tel='@@Ywy,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJPD03</KJM>
+		<CSMC>src</CSMC>
+		<CSSQL>order_src='@@src,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJPD03</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_man like '%@@SJ,%' or  arr_tel like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJPD03</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>groom_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP241</KJM>
+		<CSMC>arr_man</CSMC>
+		<CSSQL>(arr_man like '%@@arr_man,%' or arr_tel like '%@@arr_man,%' or (arr_address+arr_address_detail) like '%@@arr_man,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP241</KJM>
+		<CSMC>qh_sts</CSMC>
+		<CSSQL>(qh_sts ='@@qh_sts,') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP241</KJM>
+		<CSMC>sjqh_sts</CSMC>
+		<CSSQL>(sjqh_sts ='@@sjqh_sts,') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP271</KJM>
+		<CSMC>arr_man</CSMC>
+		<CSSQL>(arr_man like '%@@arr_man,%' or arr_tel like '%@@arr_man,%' or (arr_address+arr_address_detail) like '%@@arr_man,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	
+	
+	
+	<row>
+		<KJM>MJP248</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_man like '%@@SJ,%' or  arr_tel like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP249</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_man like '%@@SJ,%' or  arr_tel like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP249</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>agent_code='@@Agent_Code,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	
+	<row>
+		<KJM>MJ0S71</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_man like '%@@SJ,%' or  arr_tel like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S71</KJM>
+		<CSMC>Ywy</CSMC>
+		<CSSQL>ywy_tel='@@Ywy,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S71</KJM>
+		<CSMC>Col_Sts</CSMC>
+		<CSSQL>Col_Sts='@@Col_Sts,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S71</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>a.end_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0S74</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_man like '%@@SJ,%' or  arr_tel like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S74</KJM>
+		<CSMC>Ywy</CSMC>
+		<CSSQL>ywy_tel='@@Ywy,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S74</KJM>
+		<CSMC>Col_Sts</CSMC>
+		<CSSQL>Col_Sts='@@Col_Sts,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S74</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>a.col_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	
+	<row>
+		<KJM>MJ0S72</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_man like '%@@SJ,%' or  arr_tel like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S72</KJM>
+		<CSMC>Ywy</CSMC>
+		<CSSQL>ywy_tel='@@Ywy,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S72</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>a.end_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0C07</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_man like '%@@SJ,%' or  arr_tel like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C07</KJM>
+		<CSMC>Ywy</CSMC>
+		<CSSQL>ywy_tel='@@Ywy,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0C07</KJM>
+		<CSMC>TJKJ</CSMC>
+		<CSSQL>dh_sts in ('已送货','已安装') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	
+	<row>
+		<KJM>MJ0040</KJM>
+		<CSMC>Ywy</CSMC>
+		<CSSQL>b.lxfs='@@Ywy,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0S57</KJM>
+		<CSMC>arr_man</CSMC>
+		<CSSQL>(arr_man like '%@@arr_man,%' or arr_tel like '%@@arr_man,%' or (arr_address+arr_address_detail) like '%@@arr_man,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP223</KJM>
+		<CSMC>SJBM</CSMC>
+		<CSSQL>Brand_Type='@@SJBM,'</CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP223</KJM>
+		<CSMC>Brand_Name</CSMC>
+		<CSSQL>(Brand_Name like '%@@Brand_Name,%' or brand_chnname like '%@@Brand_Name,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP257</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_man like '%@@SJ,%' or  arr_tel like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP257</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>(cust_name like '%@@Agent_Name,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP257</KJM>
+		<CSMC>order_src</CSMC>
+		<CSSQL>order_src='@@order_src,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP257</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>order_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP258</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_man like '%@@SJ,%' or  arr_tel like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP258</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>a.end_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP258</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>(cust_name like '%@@Agent_Name,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP258</KJM>
+		<CSMC>Col_Sts</CSMC>
+		<CSSQL>(col_sts='@@Col_Sts,') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP259</KJM>
+		<CSMC>Agent_Name</CSMC>
+		<CSSQL>(agent_name like '%@@Agent_Name,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJZ013</KJM>
+		<CSMC>dh_sts</CSMC>
+		<CSSQL>dh_sts='@@dh_sts,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJZ013</KJM>
+		<CSMC>qh_sts</CSMC>
+		<CSSQL>qh_sts='@@qh_sts,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJZ013</KJM>
+		<CSMC>srv_sts</CSMC>
+		<CSSQL>srv_sts='@@srv_sts,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP260</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_man like '%@@SJ,%' or  arr_tel like '%@@SJ,%' or arr_address like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP260</KJM>
+		<CSMC>Ywy</CSMC>
+		<CSSQL>ywy_tel='@@Ywy,' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP260</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>order_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	
+	
+	<row>
+		<KJM>MJP263</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>order_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP263</KJM>
+		<CSMC>SPMC</CSMC>
+		<CSSQL>(product_name like '%@@SPMC,%' or  product_code like '%@@SPMC,%' or product_id like '%@@SPMC,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP263</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_tel like '%@@SJ,%' or  arr_man like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP264</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>rq between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP264</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(psid like '%@@SJ,%' or  spmc like '%@@SJ,%' or spbm like '%@@SJ,%') </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP269</KJM>
+		<CSMC>Series_Type</CSMC>
+		<CSSQL>series_code in (select series_code from series_list where series_type='@@Series_Type,')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP269</KJM>
+		<CSMC>Series_Code</CSMC>
+		<CSSQL>series_code='@@Series_Code,' </CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP269</KJM>
+		<CSMC>XL_Code</CSMC>
+		<CSSQL>XL_Code='@@XL_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	
+	<row>
+		<KJM>MJP269</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(product_size like '%@@SJ,%' or product_name like '%@@SJ,%' or product_code like '%@@SJ,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP269</KJM>
+		<CSMC>BM</CSMC>
+		<CSSQL>id='@@BM,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP269</KJM>
+		<CSMC>ISNEW</CSMC>
+		<CSSQL>isnew='是'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP161</KJM>
+		<CSMC>Agent_Code</CSMC>
+		<CSSQL>a.agent_code='@@Agent_Code,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJ0066</KJM>
+		<CSMC>SJ</CSMC>
+		<CSSQL>(arr_tel like '%@@SJ,%' or  arr_man like '%@@SJ,%' or (arr_address+arr_address_detail) like '%@@SJ,%')</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJ0066</KJM>
+		<CSMC>dh_sts</CSMC>
+		<CSSQL>dh_sts='@@dh_sts,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	
+	<row>
+		<KJM>MJP274</KJM>
+		<CSMC>Users_Name</CSMC>
+		<CSSQL>users_name like '%@@Users_Name,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP275</KJM>
+		<CSMC>bm</CSMC>
+		<CSSQL>bm='@@bm,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP276</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>Fee_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP276</KJM>
+		<CSMC>Fee_Type</CSMC>
+		<CSSQL>Fee_Type='@@Fee_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	<row>
+		<KJM>MJP276</KJM>
+		<CSMC>USERS_NAME</CSMC>
+		<CSSQL>fee_man like '%@@USERS_NAME,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	
+	
+	
+	<row>
+		<KJM>MJP277</KJM>
+		<CSMC>ORDER_DATE2</CSMC>
+		<CSSQL>Fee_date between '@@ORDER_DATE1, 00:00:00' and '@@ORDER_DATE2, 23:59:59' </CSSQL>
+		<XH>1.0</XH>
+	</row>
+	<row>
+		<KJM>MJP277</KJM>
+		<CSMC>Fee_Type</CSMC>
+		<CSSQL>Fee_Type='@@Fee_Type,'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+	<row>
+		<KJM>MJP277</KJM>
+		<CSMC>USERS_NAME</CSMC>
+		<CSSQL>fee_man like '%@@USERS_NAME,%'</CSSQL>
+		<XH>6.0</XH>
+	</row>
+</data>

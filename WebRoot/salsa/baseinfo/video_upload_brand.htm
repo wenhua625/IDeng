@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>短视频上传</title>
+<base target="_self"/>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" CONTENT="0">
+<style>
+    .bar {
+        height: 18px;
+        background: green;
+    }
+    .content{
+        width: 100%;text-align: center;margin-top: 70px;
+    }
+    #progress{
+        border-radius:6px;width: 300px;background: red;
+        margin: 10px auto;
+    }
+</style>
+
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<link href="js/uploadify/uploadify.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+
+<script src="js/jfu/vendor/jquery.ui.widget.js"></script>
+<script src="js/jfu/jquery.iframe-transport.js"></script>
+<script src="js/jfu/jquery.fileupload.js"></script>
+
+
+
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+
+<script type="text/javascript">
+         var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+		 
+		  //此处的ifrc和winc的意义可自行查阅
+  var ifrc = window.parent.frames[0];
+  var winc = ifrc.window || ifrc.contentWindow;
+  
+		 
+		//var ff=window.parent.$('#d_Flag').val();//.text('我被改变了');
+		// var ff= parent.layer.document.getElementById('d_Flag').value;
+		 
+		// alert("ff="+ff)
+		
+       
+        $(document).ready(function() {
+			 if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+	
+    var formMap = DWRUtil.getValues("form1");
+			var s_sup;
+               DwrComm.parseMJ('MJP272',formMap,{callback:function(list){
+                   s_sup = list;  
+               },async:false});
+			   
+			   if(s_sup.length==0)
+			   {
+				   $('#BtnClear').attr('disabled',"true");
+			   }
+			   
+			   for(var x=0;x<s_sup.length;x++)
+			   {
+				 $("#divPreview").append($("<img src='" +s_sup[x].full_path + "'/>"));  
+			   }
+			  // alert("dd="+s_sup.length);
+			  
+			
+			  
+			  $("#BtnClear").click(function(){
+				  
+				  if(s_sup[0].agent_code != '@@LS.DWDM,')
+				  {
+					   alert("你无权删除该图片，只有图片发布者才允许删除！");
+					   return false;
+				  }
+				  if(!confirm("清除掉后，图片将无法恢复，你确认要删除吗？")) return false;
+				  formMap = DWRUtil.getValues("form1");
+                 DwrComm.parseIN('INP075',formMap,'delete',{callback:function(data){
+                    if (data != 'ok'){
+                      alert(data);
+                      }else{ 
+					   alert("删除成功！");
+					   dialogArguments.document.getElementById('d_Flag').value="1";
+			   window.close();
+					  
+                     }
+                 },async:false});
+             });
+
+			
+			
+			 $('#uploadify').fileupload({
+         dataType: 'json',
+		 
+		 url:  '@@LS.URL,/FileLoadUpServlet?proname=UE0028&brand_code=@@BM,&agent_code=@@LS.DWDM,',//文件的后台接受地址
+        //url:  '@@LS.URL,/work?proname=UE0028&brand_code=@@BM,&agent_code=@@LS.DWDM,',//文件的后台接受地址
+        //设置进度条
+        progressall: function (e, data) {
+			//alert(data.total)
+			
+            var progress = parseInt(data.loaded / data.total * 100);
+            $('#progress .bar').css('width', progress + '%');
+        },
+        //上传完成之后的操作，显示在img里面
+        done: function (e, data){
+			//alert("data:"+data);
+			//parent.$('#d_Flag').text('1');
+			
+			try {
+   //设置父窗口隐藏输入框的值为hello world
+   winc.document.getElementById("d_Flag").value = "1";
+ 
+   } catch (ex) {
+        winc.location.reload();
+   }
+			parent.layer.close(index);
+        }
+    });
+
+			
+			
+        });
+ 
+
+
+
+</script>
+</head>
+<body scroll="auto" style="BACKGROUND-COLOR: #cccccc;">
+<form action="" method="post" name="form1" >
+<input type="hidden" value="@@BM," name="BM" id="BM">
+<input type="hidden" value="@@Product_Id," name="Product_Id" id="Product_Id">
+<input type="hidden" value="@@Image_Type," name="Image_Type" id="Image_Type">
+<input type="hidden" value="@@LS.LXFS," name="lxfs" id="lxfs">
+
+<div class="content">
+    <input id="uploadify" type="file" name="file" accept="video/mp4" encType="multipart/form-data" multiple>
+    <div id="progress">
+        <div class="bar" style="width: 0%;"></div>
+    </div>
+</div>
+
+
+
+
+
+</form>
+</body>
+</html>

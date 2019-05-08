@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/extjs/ext-base3.4.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all3.4.js"></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type="text/javascript" src="js/extjs/ColumnHeaderGroup.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type="text/javascript">
+
+    //弹出窗口l
+   function opr(url){
+        var s=NewWinCustMD(url+'&LX=1&tmp11='+Math.random(),window,450,650);
+        
+    } 
+</script>
+
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    var orderDetailstore = new Ext.data.JsonStore({
+         url:"work?proname=MJ0S25",
+        root:"root",
+        fields: ['code','spbm','psid','ysmc','spmc','xhgg','jldw','lcsl','hssl','dwmc','spinfo','sysl']
+    });
+
+    //var sm = new Ext.grid.CheckboxSelectionModel();
+    var cm = new Ext.grid.ColumnModel([
+        new Ext.grid.RowNumberer(),//自动行号
+        //sm,
+		{header:'生产单号',dataIndex:'code',width: 75,hidden:true},
+      
+        {header:'名称及型号',dataIndex:'spinfo',width: 205},
+       
+        {header:'单位',dataIndex:'jldw',width: 55},
+        {header:'领出数量',dataIndex:'lcsl',width: 55},
+        {header:'已用数量',dataIndex:'hssl',width: 65},
+		{header:'剩余数量',dataIndex:'sysl',width: 65},
+		//{header:'损耗率',dataIndex:'shl',width: 55},
+		{header:'加工单位',dataIndex:'dwmc',width: 105}
+		
+	   
+		
+		
+       
+	   
+       ]);
+	   
+	 
+  
+    var grid = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'backDetails',
+    	width:document.body.clientWidth-35, 
+    	height:document.body.clientHeight-65,
+    	title:'',
+    	ds: orderDetailstore,
+        cm: cm,
+       // sm:sm,
+	   enableHdMenu:false,
+        forceFit:true,
+		viewConfig: {
+            forceFit: true
+        },
+		bbar: new Ext.PagingToolbar({  
+                 store: orderDetailstore,  
+                 pageSize: 15,  
+                 displayInfo: true,  
+                 displayMsg: "本页显示第{0}条到第{1}条记录,一共{2}条",  
+                 emptyMsg: "没有记录"  
+  
+             }),
+        frame:false,
+		
+        clicksToEdit:1,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid.render();
+	
+	orderDetailstore.on('beforeload',function(){
+		Ext.apply(
+			this.baseParams, {
+				start:0, limit:15,
+				SPMC:encodeURI(Ext.get('SPMC').dom.value),JHD_CODE:encodeURI(Ext.get('JHD_CODE').dom.value),isJA:Ext.get('isJA').dom.value,DWMC:encodeURI(Ext.get('DWMC').dom.value)
+			});
+	});
+    orderDetailstore.load();
+
+     Ext.get("BtnCX").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       orderDetailstore.load();
+	   
+    });
+	
+	grid.on("rowcontextmenu",function(grid,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             if('@@View,'=='View') {return;}
+             var treeMenu = new Ext.menu.Menu
+            ([
+                {xtype:"button",text:"提料记录",icon:"images/webtype/del.gif",pressed:true, handler:function(){
+                    DWRUtil.setValue("d_Product_Id",orderDetailstore.getAt(rowIndex).get('spbm'));
+                    treeMenu.hide();
+					opr('display?proname=report/product_ck_ll.htm&d_Product_Id='+form1.d_Product_Id.value+'&ref_id='+orderDetailstore.getAt(rowIndex).get('jh_id'));
+                    
+                }},
+				{xtype:"button",text:"入库记录",icon:"images/webtype/del.gif",pressed:true, handler:function(){
+                    DWRUtil.setValue("d_Product_Id",orderDetailstore.getAt(rowIndex).get('spbm'));
+                    treeMenu.hide();
+					opr('display?proname=report/product_rk_mx1.htm&d_Product_Id='+form1.d_Product_Id.value+'&ref_id='+orderDetailstore.getAt(rowIndex).get('jh_id'));
+                    
+                }},
+				{xtype:"button",text:"结案",icon:"images/webtype/modify.gif",pressed:true, handler:function(){
+                    DWRUtil.setValue("d_Product_Id",orderDetailstore.getAt(rowIndex).get('jh_id'));
+					if(!confirm("你确认要结案吗，结案后，将不能入库？")) return false;
+					formMap = DWRUtil.getValues("form1");
+                    DwrComm.parseIN('INP013',formMap,'update',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                     }else{
+                        var record = grid.getSelectionModel().getSelected();
+                         orderDetailstore.remove(record); 
+						 treeMenu.hide();
+                     }
+                    },async:false});
+                    
+                }}               
+                
+            ]);
+            treeMenu.showAt(e.getPoint());
+      });  
+     
+
+});
+
+</script>
+<form name="form1" method="post" action="" id="form1">
+<input name="d_Flag" value="0" type="hidden">
+<input name="d_Product_Id" value="0" type="hidden">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr align="center" height="5"> 
+		<td>
+		
+		</td>
+	</tr>
+	<tr align="center">
+		<td>
+		<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;" valign="top"><img
+					src="images/loadtree/mdmde.gif" WIDTH="18" HEIGHT="18">剩余料统计</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+	<td>
+	   
+	   
+	  <table width="100%" border="0" cellpadding="5" cellspacing="0" >
+          <tr> 
+            <td width="16%" align="right">成品型号及名称：</td>
+            <td width="84%"><input type="text" name="SPMC" id="SPMC" size="15" value="" >
+              加工商：<input type="text" name="DWMC" id="DWMC" size="10" value="" >生产指令单号：
+                <input type="text" name="JHD_CODE"  id="JHD_CODE" size="15" value="" >
+				 状态: <select id="isJA" name="isJA">
+                     <option value="F">生产中</option>
+                     <option value="J">已结案</option>
+                     <option value="">全部</option>
+              </select>
+            <input type="button" name="BtnCx" id="BtnCx" value="查询"></td>
+          </tr>
+        </table>
+	
+	</td>
+	</tr>
+	
+	<tr>
+      <td>
+		<div id="backDetails"></div>
+		 
+       
+      </td>
+    </tr>
+    
+  </table>
+  </form>  
+
+</body>
+
+</html>

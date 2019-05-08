@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base target="_self">
+<title>产品选择</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+
+
+<script>
+  
+  function selected()
+  {
+      
+       var New=document.getElementsByName("SPBM");  
+      
+	   var strNew="";  
+	   var s_New="";
+	   for(var i=0;i<New.length;i++)   
+	   {     
+	         
+		   if(New[i].checked){         
+		      strNew=New[i].value
+			  //var aNew = strNew.split('|');
+			  //s_New=s_New+"'"+aNew[0]+"',";
+			  s_New=s_New+"'"+strNew+"',";
+			}else  continue;  
+	   }
+	   
+      
+      if(s_New ==""){
+	      alert("请选择!");
+		  return false;
+	  }
+	  s_New = s_New.substring(0,s_New.length-1);
+	   
+	   var arg;
+	   if (window.parent.opener) {
+	      arg=window.parent.opener;
+       }
+        else {
+	      arg=window.dialogArguments;
+       }
+	  
+	  arg.document.getElementById('d_Flag').value="1";
+	  //var s_value=strNew.split("|");
+	 
+	  //window.dialogArguments.document.getElementById('ref_id').value=s_value[0];
+	  //window.dialogArguments.document.getElementById('DWBM').value=s_value[1];
+	  arg.document.getElementById('d_SPBM').value=s_New;
+	  //arg.document.getElementById('ref_id').value=s_value[1];
+	 window.parent.close();
+      
+	  
+  }
+  function BindEnter(obj)
+  {    
+	 if(obj.keyCode == 27)        
+     {                 
+          window.close();
+     } 
+
+   }
+
+ 
+</script>
+
+</head>
+
+<body >
+<form name="form1" method="post" action="" id="form1">
+  <table width="100%" border="1">
+  <tr>
+    <td><input type="button" name="Submit" id="Submit"  value="选中" onClick="selected()" ></td>
+    <td align="right"><font color="red">【操作提示：】</font></td>
+    <td><font color="blue">按ESC键退出</font></td>
+    <td>&nbsp;</td>
+    
+  </tr>
+</table>
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    
+
+
+	<tr>
+      <td height="0">
+          
+        <table width="100%" border="1" style="border-collapse:collapse" bordercolor="#000000"  >
+          <tr align="center" bgcolor="#BFBFBF"> 
+            <td>选择</td>
+            <td>编码或型号</td>
+            <td>名称</td>
+           
+            <td>规格</td>
+            <td>单位</td>
+            <td>下达数量</td>
+            <td>已入库数</td>
+            <td>领料数</td>
+            <td>下达日期</td>
+            <td>要求完成日期</td>
+            <td>生产指令单号</td>
+          </tr>
+          <tr >
+            <td>
+            <input type="checkbox" name="SPBM"  value="$$MJ0034,11" id="SPBM">           </td> 
+            <td>$$MJ0034,02</td>
+            <td>$$MJ0034,04</td>
+            <td>$$MJ0034,05</td>
+            <td>$$MJ0034,06</td>
+           
+            <td style="color:red">$$MJ0034,07</td>
+            <td>$$MJ0034,13</td>
+            <td>$$MJ0034,12</td>
+            <td>$$MJ0034,08</td>
+            <td>$$MJ0034,09</td>
+            <td>$$MJ0034,10</td>
+          </tr>
+        </table>
+        $$page,      </td>
+    </tr>
+  </table>
+  
+</form>
+</body>
+</html>

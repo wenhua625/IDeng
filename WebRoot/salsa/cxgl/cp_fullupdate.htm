@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>产品信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+
+</head>
+
+<body>
+<script language="javascript">
+Ext.onReady(function(){
+    
+     if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+     var formMap = DWRUtil.getValues("form1");
+     var store = new Ext.data.JsonStore({
+        fields: ['value', 'name']
+    });
+	  
+	  if('@@ID,' != "")
+	  {
+		  DWRUtil.setValue("SERIES_CODE","!!MJ0S33,13");
+		 
+		
+		  DWRUtil.setValue("XL_CODE","!!MJ0S33,27");
+		  DWRUtil.setValue("PACK_TYPE","!!MJ0S33,24");
+		  DWRUtil.setValue("PRODUCT_CODE1","!!MJ0S33,01");
+		  
+		 
+		  DWRUtil.setValue("PRODUCT_PRICE","!!MJ0S33,10");
+		  DWRUtil.setValue("ZXYH","!!MJ0S33,08");
+		  DWRUtil.setValue("PACK_NUM","!!MJ0S33,23");
+		  
+		  form1.SERIES_CODE.disabled = true;
+		  form1.XL_CODE.disabled = true;
+		  form1.PACK_TYPE.disabled = true;
+		 
+		
+	  }
+
+	 Ext.get("BtnSubmit").on("click",function(){
+       
+       formMap = DWRUtil.getValues("form1");
+	 
+	  if(form1.PACK_NUM.value.length==0 || isNaN(form1.PACK_NUM.value) || form1.PACK_NUM.value == "0")
+	  {
+	      alert("包装方式数目不能为空或包装方式数目输入不正确,请通知系统管理员修改!");
+		 
+		  return false;
+	  }
+	   if(form1.ZXYH.value.length==0 || isNaN(form1.ZXYH.value) )
+	  {
+	      alert("整箱优惠必须填写!");
+		   form1.ZXYH.focus();
+		  return false;
+	  }
+      formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('IN0046',formMap,'insert',{callback:function(data){if (data != 'ok'){alert(data);}else{ 
+                      dialogArguments.document.getElementById('d_Flag').value="1";   
+                      window.close();   
+                   }},async:false});
+      
+    });
+	
+	
+     
+     
+    
+
+});
+</script>
+<form name="form1" method="post" action="" id="form1">
+  <input name="ID" type="hidden" value="@@ID,">
+
+  
+  
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center" ><b>整箱优惠设置</b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;产品基本信息</td>
+          </tr>
+          
+	      
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+             所属类别：
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <select name="SERIES_CODE">
+                <option value="" selected>==选择==</option>
+                <option>$$XL0001,</option>
+              </select>
+            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+              所属系列：
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <select name="XL_CODE" id="XL_CODE">
+                <option value="" selected>==选择==</option>
+                <option>$$XL1008,</option>
+              </select>
+            </td>
+          </tr> 
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+              货号：
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_CODE1" type="text"  value="" size="20" readonly class="TEXTDISABLED"> 
+              
+             
+			     </td>
+          </tr>
+        
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+              名称：
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_NAME" type="text" readonly class="TEXTDISABLED" value="!!MJ0S33,03">
+            </td>
+          </tr>
+         
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">规格：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_SIZE" type="text" value="!!MJ0S33,04" readonly class="TEXTDISABLED"></td>
+          </tr>
+          
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">单位：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_Untl" type="text" value="!!MJ0S33,09" size="10" maxlength="10" readonly class="TEXTDISABLED">
+            </td>
+          </tr>
+		   <tr>
+		    <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;整箱优惠信息</td>
+	      </tr>
+		    <tr>
+		      <td bgcolor="#C4DFDC" class="tableleft" align="right">经销价：</td>
+		      <td bgcolor="#FFFFFF"> <input name="PRODUCT_PRICE" type="text" readonly class="TEXTDISABLED" value="" size="15"></td>
+	      </tr>
+		    <tr>
+		    <td bgcolor="#C4DFDC" class="tableleft" align="right">包装方式：</td>
+		    <td bgcolor="#FFFFFF"><input name="PACK_NUM" type="text" value="" size="5" readonly class="TEXTDISABLED">
+		      单位/
+	          <select name="PACK_TYPE" id="PACK_TYPE">
+	            <option value="包">包</option>
+	            <option value="箱">箱</option>
+	            <option value="件">件</option>
+              </select></td>
+	      </tr>
+		    <tr>
+		      <td bgcolor="#C4DFDC" class="tableleft" align="right">整箱优惠：</td>
+		      <td bgcolor="#FFFFFF"> <input name="ZXYH" type="text" style ="color:blue" value="" size="15"></td>
+	      </tr>
+         
+          
+          
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="90%" height="40" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" valign="bottom"><div align="center"> 
+          <input name="BtnSubmit"  id="BtnSubmit" type="button" class="ImgButton" value="确  定">
+          &nbsp;&nbsp;&nbsp;&nbsp; 
+          <input name="Submit2" type="reset" class="ImgButton" onClick="window.close()" value="关 闭">
+        </div></td>
+    </tr>
+  </table>
+</form>
+</body>
+
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>客户信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type="text/javascript">
+
+ function initPage()
+ {
+	  if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+      var formMap = DWRUtil.getValues("form1");
+	  DWRUtil.setValue("is330KH","!!MJ0S38,29");
+	  DWRUtil.setValue("SHDZJC","!!MJ0S38,30");
+	  DWRUtil.setValue("DOMAIN_MAN","!!MJ0S38,04");
+	  DWRUtil.setValue("Brand_Code","!!MJ0S38,17");
+	  DWRUtil.setValue("Sjbm","!!MJ0S38,11");
+      DWRUtil.setValue("Agent_Level","!!MJ0S38,26");
+	   DWRUtil.setValue("Open_Flag","!!MJ0S38,12");
+	  DWRUtil.setValue("Agent_Area","!!MJ0S38,32");
+	  DWRUtil.setValue("Auth_Amount","!!MJ0S38,33");
+	  DWRUtil.setValue("ICBC_Account","!!MJ0S38,35");
+	  DWRUtil.setValue("Agent_StarLevel","!!MJ0S38,36");
+	   DWRUtil.setValue("kcc_price","!!MJ0S38,37");
+	   DWRUtil.setValue("adh_agentcode","!!MJ0S38,38");
+	   
+	  
+	  if('@@View,' =='View')
+	  {
+		   form1.Submit4.disabled = true;
+	  }
+	   
+	  
+ }
+ function work(){
+     
+    
+	if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+      var formMap = DWRUtil.getValues("form1");
+	
+	
+    DwrComm.parseIN('IN0006',formMap,'update',{callback:function(data){if (data != 'ok'){alert(data);}else{ 
+	                   alert("修改成功！");
+                      dialogArguments.document.getElementById('d_Flag').value="1";  
+					
+                      window.close();   
+                   }},async:false});
+        }
+</script>
+<script type="text/javascript">
+	function add(){
+	        if(form1.YF_XT.value==""){
+			   form1.YF_XT.value=0;
+			}
+			if(form1.YF_JX.value==""){
+			   form1.YF_JX.value=0;
+			}if(form1.YF_LG.value==""){
+			   form1.YF_LG.value=0;
+			}
+			if(form1.YF_XS.value==""){
+			   form1.YF_XS.value=1;
+			}
+			if(form1.YF_DQXT.value==""){
+			   form1.YF_DQXT.value=0;
+			}
+			if(form1.QYZK.value==""){
+			   form1.QYZK.value=100;
+			}
+			if(form1.End_Date.value=="")
+			{
+				 alert("请输入店铺有效期");
+				 return false;
+			}
+		
+			work();		
+		
+		
+	}
+	
+</script>
+</head>
+
+<body onLoad="initPage()">
+<form name="form1" method="post" action="" id="form1"><div align="right"> 
+</div><table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center"><b> 修改客户信息</b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">品牌：</div>            </td>
+            <td bgcolor="#FFFFFF">
+              <select name="Brand_Code" >
+		  			<option>$$XL1005,</option>
+        	</select>            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">所属区域：</div>            </td>
+            <td bgcolor="#FFFFFF">
+              <select name="Sjbm" disabled=true>
+		  			<option>$$XL0018,</option>
+        	</select>            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">客户代号：</div>            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="AGENT_CODE" type="text" class="TEXTDISABLED" maxlength="4" size="10" value="!!MJ0S38,01" readonly>签约日期：
+              <input type="text" name="Join_Date" size="12" readonly onClick="javascript:ShowCalendar(this)" value="!!MJ0S38,27">
+到期日期：
+<input type="text" name="End_Date" size="12" readonly onClick="javascript:ShowCalendar(this)" value="!!MJ0S38,28">            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">客户名称：</div>            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="AGENT_NAME" type="text" class="input" value="!!MJ0S38,02" size="30">执价方式：
+			  <select name="AGENT_TYPE" id="AGENT_TYPE">
+			      <option>$$XL0031,</option>
+			      
+			  </select>
+			           </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">售价：</div>            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input id="kcc_price" name="kcc_price" type="text" class="input" value="!!MJ0S38,37" size="30">
+			  
+			           </td>
+          </tr>
+          
+          <!--
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">名称拼音：</div>
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="AGENT_PING" type="text" class="input" value="!!MJ0S38,07">
+            </td>
+          </tr>
+          
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">客户类型：</div>
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <select name="AGENT_TYPE">
+                <option>$$XL0018,</option>
+                
+              </select>
+            </td>
+          </tr>
+          -->
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">所属区域经理：</td>
+            <td bgcolor="#FFFFFF">
+              <select name="DOMAIN_MAN">
+                <option>$$XL0009,</option>
+              </select>            </td>
+          </tr>
+         
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">电话：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="AGENT_TEL1" type="text" class="input" value="!!MJ0S38,18">            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">传真：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="AGENT_FAX" type="text" class="input" value="!!MJ0S38,13">            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">手机一：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="Agent_Mobile1" type="text" class="input" value="!!MJ0S38,15">            </td>
+          </tr>
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">手机二：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="Agent_Mobile2" type="text" class="input" value="!!MJ0S38,16">            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">QQ：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="AGENT_QQ" type="text" class="input" value="!!MJ0S38,19">            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">状态：</td>
+            <td bgcolor="#FFFFFF">
+              <select name="Open_Flag">
+                 <option value="启用">启用</option>
+		         <option value="禁用">禁用</option>
+              </select> 
+			   <input type="hidden" name="YF_XT" size="10" value="!!MJ0S38,20">
+           
+            <input type="hidden" name="YF_JX" size="10" value="!!MJ0S38,21">
+           
+            <input type="hidden" name="YF_LG" size="10" value="!!MJ0S38,22">
+          
+        <input type="hidden" name="YF_DQXT" size="10" value="!!MJ0S38,24">
+             
+          <input type="hidden" name="YF_XS" size="5" value="!!MJ0S38,23">
+          
+			  
+			             评级：<select name="Agent_StarLevel" id="Agent_StarLevel">
+                  <option value="可领导型">可领导型</option>
+                  <option value="可领军型">可领军型</option>
+                  <option value="未激发型">未激发型</option>
+                  <option value="未给足压力型">未给足压力型</option>
+                  
+                  <option value="发展严重滞后型">发展严重滞后型</option>
+                  
+				  
+                </select> </td>
+          </tr>
+		 
+		  <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">签约折扣：</td>
+            <td bgcolor="#FFFFFF"><input type="text" name="QYZK" size="10" value="!!MJ0S38,25">
+            （95:表示打95折） 
+              客户任务等级：
+                <select name="Agent_Level">
+                  <option>$$XLS017,</option>
+				  
+                </select>
+               </td>
+          </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">是否能看数据：</td>
+            <td bgcolor="#FFFFFF">
+                <select name="is330KH" id="is330KH">
+                  <option value="否">否</option>
+				  <option value="是">是</option>
+                </select>
+                门店面积：
+                <input type="text" name="Agent_Area" id="Agent_Area" size=8>平方
+              贷款信用额度： <input type="text" name="Auth_Amount" id="Auth_Amount" size=6>元</td>
+          </tr>
+		   <tr>
+		     <td  bgcolor="#C4DFDC" class="tableleft">默认收货信息&gt;&gt;</td>
+		     <td  bgcolor="#C4DFDC" align="left"></td>
+	      </tr>
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">收货地址：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="AGENT_ADDRESS" type="text" class="input" value="!!MJ0S38,08" size="50"></td>
+          </tr>
+           <tr>
+             <td bgcolor="#C4DFDC" class="tableleft" align="right">地址简称：</td>
+             <td bgcolor="#FFFFFF"><input name="SHDZJC" type="text" class="input" value=""></td>
+           </tr>
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">联系人：</td>
+            <td bgcolor="#FFFFFF">
+              <input name="CONTACT_MAN" type="text" size="15"class="input" value="!!MJ0S38,10">
+              联系电话：
+              <input name="AGENT_TEL" type="text" size="15" class="input" value="!!MJ0S38,09">
+             <font color="red"> 非常重要</font></td>
+          </tr>
+           <tr>
+             <td bgcolor="#C4DFDC" class="tableleft" align="right">工商银行收款账号：</td>
+             <td bgcolor="#FFFFFF"><input name="ICBC_Account" type="text" style=" font-size:16px;color:red" value="" size="30"></td>
+           </tr>
+            <tr>
+             <td bgcolor="#C4DFDC" class="tableleft" align="right">艾订货编码：</td>
+             <td bgcolor="#FFFFFF"><input name="adh_agentcode" type="text" style=" font-size:16px;color:red" value="" size="10"></td>
+           </tr>
+          
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    
+          <tr align="center"> 
+            <td>     
+        		<input type="button" name="Submit4" id="Submit4" value="修 改" onClick="add()">
+        		
+        		<!--<input type="button" name="Submit5" value="开通片区系统" onClick="open_sys()">
+            --></td>
+          </tr>
+        
+  </table>
+  
+</form>
+</body>
+
+</html>

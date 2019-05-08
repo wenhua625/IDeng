@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<data>
+  <row>
+    <KJM>UE0001</KJM>
+    <CS></CS>
+    <PATH>salsa/product_photo/</PATH>
+    <SQL_UPDATE>update kc_kcdtb set product_image='@@FileFullName,' where id='@@BM,'</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>200</Compress_H>
+    <KJSM>产品单图上传</KJSM>
+  </row>
+  <row>
+    <KJM>UE0002</KJM>
+    <CS></CS>
+    <PATH>salsa/product_photo/</PATH>
+    <SQL_UPDATE>update kc_kcdtb set product_MD='@@FileName,' where id='@@BM,'</SQL_UPDATE>
+    <FILE_TYPE>图像不压缩</FILE_TYPE>
+    <Compress_W>110</Compress_W>
+    <Compress_H>60</Compress_H>
+    <KJSM>产品卖点</KJSM>
+  </row>
+   <row>
+    <KJM>UE0003</KJM>
+    <CS></CS>
+    <PATH>salsa/product_photo/hkpz/</PATH>
+    <SQL_UPDATE>update backlist set back_image='@@FileName,' where back_code='@@BM,'</SQL_UPDATE>
+    <FILE_TYPE>图像不压缩</FILE_TYPE>
+    <Compress_W>110</Compress_W>
+    <Compress_H>60</Compress_H>
+    <KJSM>汇款凭证图上传</KJSM>
+  </row>
+  <row>
+    <KJM>UE0004</KJM>
+    <CS></CS>
+    <PATH>salsa/product_photo/xgt/</PATH>
+    <SQL_UPDATE>insert into bm_tp(pic_code,short_path,full_path,width,height,style,layout,pic_mj,agent_code) values('@@FileCode,','@@FileName,','@@FileFullName,','@@Pix_W,','@@Pix_H,','','',80,'@@LS.DWDM,')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>143</Compress_H>
+    <KJSM>效果图上传</KJSM>
+  </row>
+  <row>
+    <KJM>UE0005</KJM>
+    <CS></CS>
+    <PATH>salsa/product_photo/xgt/</PATH>
+    <SQL_UPDATE>insert into bm_tp(pic_code,short_path,full_path,width,height,style,layout,pic_mj) values('@@FileCode,','@@FileName,','@@FileFullName,','@@Pix_W,','@@Pix_H,','','',80)</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>143</Compress_H>
+    <KJSM>测试图上传</KJSM>
+  </row>
+  <row>
+    <KJM>UE0006</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@ordercode,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','测量图','@@meter_id,')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>143</Compress_H>
+    <KJSM>测试图上传</KJSM>
+  </row>
+  <row>
+    <KJM>UE0007</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@ordercode,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','分享图','@@ordercode,')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>143</Compress_H>
+    <KJSM>分享图上传</KJSM>
+  </row>
+  <row>
+    <KJM>UE0008</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@ordercode,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','实景图','@@track_id,')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>200</Compress_H>
+    <KJSM>实景图上传</KJSM>
+  </row>
+  <row>
+    <KJM>UE0009</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@ordercode,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','日志图','@@track_id,')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>143</Compress_H>
+    <KJSM>跟单图</KJSM>
+  </row>
+  <row>
+    <KJM>UE0010</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@order_code,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','定稿图','@@track_id,')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>143</Compress_H>
+    <KJSM>定稿图</KJSM>
+  </row>
+   <row>
+    <KJM>UE0011</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@order_code,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','测量图','@@track_id,')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>143</Compress_H>
+    <KJSM>测量图</KJSM>
+  </row>
+  <row>
+    <KJM>UE0012</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('000000','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','工作日志','@@track_id,')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>143</Compress_H>
+    <KJSM>工作日志图</KJSM>
+  </row>
+  <row>
+    <KJM>UE0013</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>update agent_list set wx_ewm='@@FileFullName,' where agent_code='@@agent_code,'</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>143</Compress_H>
+    <KJSM>上传微信二维码</KJSM>
+  </row>
+   <row>
+    <KJM>UE0014</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>update agent_list set zfb_ewm='@@FileFullName,' where agent_code='@@agent_code,'</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>143</Compress_H>
+    <KJSM>上传支付宝二维码</KJSM>
+  </row>
+   <row>
+    <KJM>UE0015</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@order_code,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','效果图','')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>143</Compress_H>
+    <KJSM>pc上传效果图</KJSM>
+  </row>
+   <row>
+    <KJM>UE0016</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@order_code,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','维修图','@@srv_id,')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>143</Compress_H>
+    <KJSM>维修图</KJSM>
+  </row>
+  <row>
+    <KJM>UE0017</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>begin insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@agent_code,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','头像图','') update agent_list set agent_headimage='@@FileFullName,' where agent_code='@@agent_code,' end</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>100</Compress_W>
+    <Compress_H>100</Compress_H>
+    <KJSM>头像图图</KJSM>
+  </row>
+  <row>
+    <KJM>UEM001</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo</PATH>
+    <SQL_UPDATE>insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@order_code,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','@@image_type,','')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>143</Compress_H>
+    <KJSM>经销商店铺头像图</KJSM>
+  </row> 
+  
+   <row>
+    <KJM>UE0018</KJM>
+    <CS>delete from orderimage where ordercode='@@id,' and image_type='产品图'</CS>
+    <PATH>salsa/product_photo/</PATH>
+    <SQL_UPDATE>begin  insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@id,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','产品图','') update kc_kcdtb set Product_Image ='@@FileName,' where ID='@@id,' end</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>200</Compress_H>
+    <KJSM>客串串产品图</KJSM>
+  </row>
+   <row>
+    <KJM>UE0019</KJM>
+    <CS>delete from orderimage where ordercode='@@id,' and image_type='产品宣传图'</CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>begin  insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@id,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','产品宣传图','') end </SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W></Compress_W>
+    <Compress_H></Compress_H>
+    <KJSM>客串串产品宣传图(手机端上传)</KJSM>
+  </row>
+  <row>
+    <KJM>UE0024</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>begin  insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@id,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','产品宣传图','@@Product_Id,') end </SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W></Compress_W>
+    <Compress_H></Compress_H>
+    <KJSM>客串串产品宣传图(电脑端上传)</KJSM>
+  </row>
+  
+   <row>
+    <KJM>DE0020</KJM>
+    <CS></CS>
+    <PATH>salsa/product_photo/</PATH>
+    <SQL_UPDATE>{ call sp_kcc_cpxz('@@products,','@@agent_code,','@@url_paths,') }</SQL_UPDATE>
+    <FILE_TYPE></FILE_TYPE>
+    <Compress_W></Compress_W>
+    <Compress_H></Compress_H>
+    <KJSM>产品图片下载</KJSM>
+  </row>
+  
+  <row>
+    <KJM>UE0021</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@ordercode,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','@@image_type,','')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>200</Compress_H>
+    <KJSM>图片上传</KJSM>
+  </row>
+  
+  <row>
+    <KJM>UE0022</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@order_code,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','报销图','')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>200</Compress_H>
+    <KJSM>报销图</KJSM>
+  </row>
+  
+   <row>
+    <KJM>UE0023</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@track_id,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','拜访拍照','')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>200</Compress_H>
+    <KJSM>拜访拍照日志图</KJSM>
+  </row>
+   <row>
+    <KJM>UE0025</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@ordercode,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','报修图','@@track_id,')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>200</Compress_H>
+    <KJSM>报修图上传</KJSM>
+  </row>
+  <row>
+    <KJM>UE0026</KJM>
+    <CS></CS>
+    <PATH>salsa/product_photo/</PATH>
+    <SQL_UPDATE>update import_kcdtb_brand set product_image='@@FileFullName,' where id='@@BM,'</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>200</Compress_H>
+    <KJSM>品牌产品单图上传</KJSM>
+  </row>
+ <row>
+    <KJM>UE0027</KJM>
+    <CS></CS>
+    <PATH>salsa/product_photo/xgt/</PATH>
+    <SQL_UPDATE>insert into bm_tp(pic_code,short_path,full_path,width,height,agent_code,brand_code,add_date,layout,ext_name) values('@@FileCode,','@@FileShortFullName,','@@FileFullName,','@@Pix_W,','@@Pix_H,','@@Agent_Code,','@@id,',getdate(),'效果图','@@ExeName,')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>200</Compress_H>
+    <KJSM>效果图上传</KJSM>
+  </row>
+  <row>
+		<KJM>UE0028</KJM>
+		<CS></CS>
+		<PATH>salsa/product_photo/xgt/</PATH>
+		<SQL_UPDATE>insert into bm_tp(pic_code,short_path,full_path,width,height,agent_code,pic_name,brand_code,add_date,layout,ext_name,lxfs,isaudit,video_id) values('@@FileCode,','@@FileShortFullName,','@@FileFullName,','@@Pix_W,','@@Pix_H,','@@agent_code,','@@pic_name,','@@brand_code,',getdate(),'图文','@@ExeName,','@@lxfs,','T','@@video_id,')</SQL_UPDATE>
+		<FILE_TYPE>图像</FILE_TYPE>
+		<Compress_W>200</Compress_W>
+		<Compress_H>200</Compress_H>
+		<KJSM>图文营销</KJSM>
+	</row>
+ <row>
+    <KJM>UE0029</KJM>
+    <CS></CS>
+    <PATH>salsa/product_photo/xgt/</PATH>
+    <SQL_UPDATE>insert into BM_TP(Pic_Code,Full_Path,Short_Path,Width,Height,Style,Pic_MJ,Pic_Position,houseType,Pic_Price,Pic_Name,agent_code,brand_code,add_date,layout,lxfs,isaudit)values('@@FileCode,','@@FileFullName,','@@FileShortFullName,','@@Pix_W,','@@Pix_H,','@@style,','@@pic_mj,','@@pic_position,','@@housetype,','@@pic_price,','@@pic_name,','@@agent_code,','@@brand_code,',GETDATE(),'效果图','@@lxfs,','F')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>200</Compress_H>  
+    <KJSM>效果图营销</KJSM>
+  </row>
+	<row>
+		<KJM>UE0030</KJM>
+		<CS></CS>
+		<PATH>salsa/product_photo/xgt/</PATH>
+		<SQL_UPDATE>if(((select product_image from  product_list where id='@@product_id,')='') or ((select product_image from  product_list where id='@@product_id,')= null)) begin update PicProductList set Product_Image='@@FileFullName,' where Sale_Id='@@sale_id,' update product_list set Product_Image='@@FileFullName,' where id='@@product_id,' end else begin update PicProductList set Product_Image='@@FileFullName,' where Sale_Id='@@sale_id,' end</SQL_UPDATE>
+		<FILE_TYPE>图像</FILE_TYPE>
+		<Compress_W>200</Compress_W>
+		<Compress_H>200</Compress_H>
+		<KJSM>关联的产品的图像修改</KJSM>
+	</row>
+	<row>
+		<KJM>UE0031</KJM>
+		<CS></CS>
+		<PATH>salsa/product_photo/agent/</PATH>
+		<SQL_UPDATE>if not exists(select * from agent_tp where agent_code is  null and open_id='@@open_id,')    insert into agent_tp(agent_logo,open_id,add_time)values('@@FileFullName,','@@open_id,',GETDATE())  else    update agent_tp  set agent_logo='@@FileFullName,' where open_id='@@open_id,'</SQL_UPDATE>
+		<FILE_TYPE>图像</FILE_TYPE>
+		<Compress_W>200</Compress_W>
+		<Compress_H>200</Compress_H>
+		<KJSM>店铺logo</KJSM>
+	</row>
+	<row>
+		<KJM>UE0032</KJM>
+		<CS></CS>
+		<PATH>salsa/product_photo/agent/</PATH>
+		<SQL_UPDATE>if not exists(select * from agent_tp where agent_code is  null and open_id='@@open_id,')    insert into agent_tp(agent_license,open_id,add_time)values('@@FileFullName,','@@open_id,',GETDATE())  else    update agent_tp  set agent_license='@@FileFullName,' where open_id='@@open_id,'</SQL_UPDATE>
+		<FILE_TYPE>图像</FILE_TYPE>
+		<Compress_W>200</Compress_W>
+		<Compress_H>200</Compress_H>
+		<KJSM>店铺营业执照</KJSM>
+	</row>
+	<row>
+		<KJM>UE0033</KJM>
+		<CS></CS>
+		<PATH>salsa/product_photo/agent/</PATH>
+		<SQL_UPDATE>if not exists(select * from agent_tp where agent_code is  null and open_id='@@open_id,')    insert into agent_tp(agent_identity,open_id,add_time)values('@@FileFullName,','@@open_id,',GETDATE())  else    update agent_tp  set agent_identity='@@FileFullName,' where open_id='@@open_id,'</SQL_UPDATE>
+		<FILE_TYPE>图像</FILE_TYPE>
+		<Compress_W>200</Compress_W>
+		<Compress_H>200</Compress_H>
+		<KJSM>店铺法人身份证</KJSM>
+	</row>
+	<row>
+		<KJM>UE0034</KJM>
+		<CS></CS>
+		<PATH>salsa/product_photo/agent/</PATH>
+		<SQL_UPDATE>update tj_sys_yh set WX_headimage='@@FileFullName,' where lxfs='@@lxfs,'</SQL_UPDATE>
+		<FILE_TYPE>图像</FILE_TYPE>
+		<Compress_W>200</Compress_W>
+		<Compress_H>200</Compress_H>
+		<KJSM>用户头像的修改</KJSM>
+	</row>
+
+	<row>
+		<KJM>UE0035</KJM>
+		<CS></CS>
+		<PATH>salsa/product_photo/agent/</PATH>
+		<SQL_UPDATE>update kc_kcdtb set Product_Image='@@FileFullName,' where ID='@@id,'</SQL_UPDATE>
+		<FILE_TYPE>图像</FILE_TYPE>
+		<Compress_W>200</Compress_W>
+		<Compress_H>200</Compress_H>
+		<KJSM>产品图片的修改</KJSM>
+	</row>
+
+
+
+	<row>
+		<KJM>UE0036</KJM>
+		<CS></CS>
+		<PATH>salsa/product_photo/agent/</PATH>
+		<SQL_UPDATE>insert into Activity(agent_code,beginDate,endDate,price,title,cover,adddate,actCode) values('@@agent_code,','@@beginDate, 00:00:00','@@endDate, 23:59:59','@@price,','@@title,','@@FileFullName,',GETDATE(),'@@actcode,')</SQL_UPDATE>
+		<FILE_TYPE>图像</FILE_TYPE>
+		<Compress_W>200</Compress_W>
+		<Compress_H>200</Compress_H>
+		<KJSM>店铺活动封面上传</KJSM>
+	</row>
+	
+	<row>
+		<KJM>UE0037</KJM>
+		<CS></CS>
+		<PATH>salsa/product_photo/agent/</PATH>
+		<SQL_UPDATE>insert into Activity_pic(actcode,pic_path) values('@@actcode,','@@FileFullName,')</SQL_UPDATE>
+		<FILE_TYPE>图像</FILE_TYPE>
+		<Compress_W>200</Compress_W>
+		<Compress_H>200</Compress_H>
+		<KJSM>店铺活动图的上传</KJSM>
+	</row>
+	<row>
+    <KJM>UE0038</KJM>
+    <CS></CS>
+    <PATH>salsa/order_photo/</PATH>
+    <SQL_UPDATE>insert into OrderImage(OrderCode,Image_Path,Image_Name,Image_Memo,Image_Width,Image_Length,image_type,meter_id) values('@@ordercode,','@@FileFullName,','@@FileCode,','','@@Pix_W,','@@Pix_H,','@@track_memo,','@@track_id,')</SQL_UPDATE>
+    <FILE_TYPE>图像</FILE_TYPE>
+    <Compress_W>200</Compress_W>
+    <Compress_H>200</Compress_H>
+    <KJSM>到货确认图上传</KJSM>
+  </row>
+	
+	
+</data>
+

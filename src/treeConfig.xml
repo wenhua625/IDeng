@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<data>
+  <row>
+    <KJM>JREE05</KJM>
+    <SQL>zq4mxConfig.xml</SQL>
+    <LJH>xml</LJH>
+    <CS>0</CS>
+    <CHK_SQL></CHK_SQL>
+    <KJSM>菜单树</KJSM>
+  </row>
+  <row>
+    <KJM>JREE01</KJM>
+    <SQL>zq4mxConfig.xml</SQL>
+    <LJH>xml</LJH>
+    <CS>1</CS>
+    <CHK_SQL>select qx_cd from tj_sys_yhz where yhz='@@YHZ,'</CHK_SQL>
+    <KJSM>菜单权限管理树</KJSM>
+  </row>
+  <row>
+    <KJM>JREE02</KJM>
+    <SQL>zq4mxConfig.xml</SQL>
+    <LJH>xml</LJH>
+    <CS>1</CS>
+    <CHK_SQL>select qx_cd from tj_sys_yh where yhh='@@YHH,'</CHK_SQL>
+    <KJSM>员工菜单树</KJSM>
+  </row>
+  
+   <row>
+    <KJM>JREE03</KJM>
+    <SQL>zq4mxConfig_shop.xml</SQL>
+    <LJH>xml</LJH>
+    <CS>1</CS>
+    <CHK_SQL>select qx_cd from tj_sys_yh where yhh='@@YHH,'</CHK_SQL>
+    <KJSM>员工菜单树(显示)</KJSM>
+  </row>
+  <row>
+    <KJM>JREE04</KJM>
+    <SQL>select  * from (select agent_code,sjbm, agent_name,'' url,'' target,'' icon,'' ispms,'' isleaf,'' tip from agent_list where sjbm='-1' union all select agent_code,sjbm,isnull(Brand_Code,'未知')+'_'+agent_name agent_name,'' url,'' target,'' icon,'' ispms,'' isleaf,'' tip from agent_list where open_flag='启用' and sjbm in (select agent_code from agent_list where sjbm='-1')) x order by sjbm</SQL>
+    <LJH>database</LJH>
+    <CS>1</CS>
+    <CHK_SQL>select qx_ck from tj_sys_yh where yhh='@@YHH,'</CHK_SQL>
+    <KJSM>全部客户权限树</KJSM>
+  </row>
+  <row>
+    <KJM>JREE06</KJM>
+    <SQL>select * from (select  bm,zb,mc,'' url,'' target,'' icon,'' ispms,'' isleaf,'' tip,bm pxh  from sc_bm_gx union  select bm,'-1' zb,mc,'' url,'' target,'' icon,'' ispms,'' isleaf ,'' tip,pxh from sc_bm_sczb ) x order by pxh</SQL>
+    <LJH>database</LJH>
+    <CS>1</CS>
+    <CHK_SQL>select '' scgx from product_list where product_code='@@ID,'</CHK_SQL>
+    <KJSM>生产工序树</KJSM>
+  </row>
+  <row>
+    <KJM>JREE10</KJM>
+    <SQL>select brand_name,'10' sjbm,brand_chnname agent_name,'' url,'' target,'' icon,'' ispms,'' isleaf,'' tip  from brand_list </SQL>
+    <LJH>database</LJH>
+    <CS>1</CS>
+    <CHK_SQL>select qx_qt from tj_sys_yh where yhh='@@YHH,'</CHK_SQL>
+    <KJSM>品牌树</KJSM>
+  </row>
+  
+  <row>
+    <KJM>JREE11</KJM>
+    <SQL>select series_code,'999' sjbm,series_name,'' url,'' target,'' icon,'' ispms,'' isleaf,'' tip  from series_list </SQL>
+    <LJH>database</LJH>
+    <CS>1</CS>
+    <CHK_SQL>select qx_dj from tj_sys_yh where yhh='@@YHH,'</CHK_SQL>
+    <KJSM>产品类型树</KJSM>
+  </row>
+   <row>
+    <KJM>JREE12</KJM>
+    <SQL>tipConfig.xml</SQL>
+    <LJH>xml</LJH>
+    <CS>1</CS>
+    <CHK_SQL>select qx_ts from tj_sys_yh where yhh='@@YHH,'</CHK_SQL>
+    <KJSM>提醒菜单树</KJSM>
+  </row>
+   <row>
+    <KJM>JREE13</KJM>
+    <SQL>select gnid,'-1' sjbm,gnmc,'' url,'' target,'' icon,'' ispms,'' isleaf,'' tip  from tj_sys_qx </SQL>
+    <LJH>database</LJH>
+    <CS>1</CS>
+    <CHK_SQL>select qx_sh from tj_sys_yh where yhh='@@YHH,'</CHK_SQL>
+    <KJSM>审核权限树</KJSM>
+  </row>
+  <row>
+    <KJM>JREE14</KJM>
+    <SQL>select  * from (select agent_code,sjbm, agent_name,'' url,'' target,'' icon,'' ispms,'' isleaf,'' tip from agent_list where sjbm='-1') x order by sjbm</SQL>
+    <LJH>database</LJH>
+    <CS>1</CS>
+    <CHK_SQL>select qx_ck from tj_sys_yh where yhh='@@YHH,'</CHK_SQL>
+    <KJSM>省份客户权限树</KJSM>
+  </row>
+   <row>
+    <KJM>JREE15</KJM>
+    <SQL>select bm,'999' sjbm,mc,'' url,'' target,'' icon,'' ispms,'' isleaf,'' tip  from bm_cw </SQL>
+    <LJH>database</LJH>
+    <CS>1</CS>
+    <CHK_SQL>select qx_dj from tj_sys_yh where yhh='@@YHH,'</CHK_SQL>
+    <KJSM>产品类型树</KJSM>
+  </row>
+  <row>
+    <KJM>JREE16</KJM>
+    <SQL>select gnid bm,sjbm,gnmc mc,'' url,'' target,'' icon,'' ispms,'' isleaf,'' tip  from tj_sys_mobqx order by sort_bm </SQL>
+    <LJH>database</LJH>
+    <CS>1</CS>
+    <CHK_SQL>select qx_mob_cd from tj_sys_yh where yhh='@@YHH,'</CHK_SQL>
+    <KJSM>产品类型树</KJSM>
+  </row>
+  <row>
+    <KJM>JREE17</KJM>
+    <SQL>select gnid bm,sjbm,gnmc mc,'' url,'' target,'' icon,'' ispms,'' isleaf,'' tip  from tj_sys_mobqx </SQL>
+    <LJH>database</LJH>
+    <CS>1</CS>
+    <CHK_SQL>select qx_mob_cd from agent_list where agent_code='@@YHH,'</CHK_SQL>
+    <KJSM>店铺权限树</KJSM>
+  </row>
+   <row>
+    <KJM>EREE01</KJM>
+    <SQL>select bm,sjbm,mc,'' url,'' target,'' icon,'' ispms, (select case sign(count(*))  when 1 then 'false' else 'true' end  from v_bm_splb a where sjbm=x.bm) isleaf,'' tip from v_bm_splb x where sjbm='@@SJBM,' and agent_code='@@Agent_Code,' order by pxh </SQL>
+    <LJH>database</LJH>
+    <CS>1</CS>
+    <CHK_SQL>select * from v_bm_splb where 1=2</CHK_SQL>
+    <KJSM>商品类别管理</KJSM>
+  </row>
+   <row>
+    <KJM>EREE04</KJM>
+    <SQL>select bm,sjbm,mc,'' url,'' target,'' icon,'' ispms, (select case sign(count(*))  when 1 then 'false' else 'true' end  from v_bm_splb_brand a where sjbm=x.bm) isleaf,'' tip from v_bm_splb_brand x where sjbm='@@SJBM,' and brand_code='@@Brand_Code,' order by pxh </SQL>
+    <LJH>database</LJH>
+    <CS>1</CS>
+    <CHK_SQL>select * from v_bm_splb_brand where 1=2</CHK_SQL>
+    <KJSM>按品牌成品商品类别</KJSM>
+  </row>
+   <row>
+    <KJM>EREE02</KJM>
+    <SQL>select bm,sjbm,mc,'' url,'' target,'' icon,'' ispms, (select case sign(count(*))  when 1 then 'false' else 'true' end  from v_bm_splb_cp a where sjbm=x.bm) isleaf,'' tip from v_bm_splb_cp x where sjbm='@@SJBM,' </SQL>
+    <LJH>database</LJH>
+    <CS>1</CS>
+    <CHK_SQL>select * from v_bm_splb where 1=2</CHK_SQL>
+    <KJSM>成品商品类别</KJSM>
+  </row>
+  <row>
+    <KJM>EREE03</KJM>
+    <SQL>select bm,sjbm,mc,'' url,'' target,'' icon,'' ispms, (select case sign(count(*))  when 1 then 'false' else 'true' end  from v_bm_splb_cp a where sjbm=x.bm) isleaf,'' tip from v_bm_splb_cp x where sjbm='@@SJBM,' </SQL>
+    <LJH>database</LJH>
+    <CS>2</CS>
+    <CHK_SQL>select * from v_bm_splb where 1=2</CHK_SQL>
+    <KJSM>带复选框的成品商品类别</KJSM>
+  </row>
+</data>

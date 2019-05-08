@@ -1,0 +1,573 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<link rel="stylesheet" type="text/css" href="css/style1.css" />
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript></script>
+<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+</object> 
+<title>类型管理</title>
+</head>
+
+<body>
+<script type='text/javascript'>
+
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+	
+    //
+    /*var splb1Detailstore = new Ext.data.JsonStore({
+        url:"work?proname=MJP118",
+        root:"root",
+        fields: ['bm','mc']
+    });*/
+     
+    //产品类型
+    var splb2Detailstore = new Ext.data.JsonStore({
+        url:"work?proname=MJP119",
+        root:"root",
+        fields: ['bm','mc','lb','xl']
+    });
+	
+	//产品系列
+    var splb3Detailstore = new Ext.data.JsonStore({
+        url:"work?proname=MJP120",
+        root:"root",
+        fields: ['bm','mc','xl']
+    });
+	
+   
+    //一级
+   /* var cm = new Ext.grid.ColumnModel([
+        new Ext.grid.RowNumberer(),//自动行号
+        {header:'编码',dataIndex:'bm',width: 65,hidden:true},
+        {header:'类型名称',dataIndex:'mc',width: 100,editor: new Ext.form.TextField({ allowBlank: true })}
+       ]);
+    
+    cm.defaultSortable = true;
+    
+   
+    var grid_splb1 = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'splb1',
+    	width:200, 
+    	height:380,
+    	title:'一级类型',
+    	ds: splb1Detailstore,
+        cm: cm,
+        enableHdMenu:false,
+       
+        frame:false,
+        clicksToEdit:1,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid_splb1.render();
+    splb1Detailstore.load();*/
+	
+	Ext.get("Agent_Code").on("change",function(){
+		
+		 formMap = DWRUtil.getValues("form1");
+	   
+       /*DwrComm.parseAL('XLP009',formMap,{callback:function(list){
+           store.loadData(list);
+           items=list;
+       },async:false});*/
+	   
+	   var s_sup;
+               DwrComm.parseMJ('MJ0S46',formMap,{callback:function(list){
+                   s_sup = list; 
+				   form1.BRANDIMAGEURL.value = s_sup[0].brand_imageurl;
+				   form1.BRANDCHNNAME.value = s_sup[0].brand_name;
+				   form1.ADHAGENTCODE.value = s_sup[0].adh_agentcode;
+				   
+            
+               },async:false});
+			   
+        if (form1.BRANDIMAGEURL.value!='')
+		{
+			form1.BtnAddProcess2.disabled = true;
+			form1.BtnAddProcess3.disabled = true;
+			form1.BtnDownLoad.disabled = false;
+		}else{
+		   form1.BtnAddProcess2.disabled = false;
+			form1.BtnAddProcess3.disabled = false;
+			form1.BtnDownLoad.disabled = true;
+		}
+	   
+       formMap = DWRUtil.getValues("form1");
+	   splb2Detailstore.load({params:{Agent_Code:Ext.get('Agent_Code').dom.value}});
+          
+   });
+  
+    //二级
+	
+    var cm1 = new Ext.grid.ColumnModel([
+        {header:'编码',dataIndex:'bm',width: 95,hidden:true},
+        {header:'类型名称',dataIndex:'mc',width: 100,editor: new Ext.form.TextField({ allowBlank: true })},
+		{header:'类别',dataIndex:'lb',width: 95,hidden:true,editor:new Ext.form.ComboBox({   
+            width : 50,    
+            store : new Ext.data.SimpleStore({   fields : ['Label', 'Value'], data : [['成品','成品' ], ['物料','物料' ]]}),   
+            displayField : 'Label',   
+            valueField : 'Value',   
+            typeAhead : true,   
+            mode : 'local',   
+            value : 20,   
+            listWidth: 50, /** 行宽   **/    
+            triggerAction : 'all',   
+            selectOnFocus : true
+            })
+		 },
+		 {header:'排序',dataIndex:'xl',width: 50,editor: new Ext.form.TextField({ allowBlank: true })}
+		
+
+       ]);
+  
+   
+    var grid_splb2 = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'splb2',
+    	width:290, 
+    	height:380,
+    	title:'类型',
+    	ds: splb2Detailstore,
+        cm: cm1,
+        enableHdMenu:false,
+      
+        frame:false,
+        clicksToEdit:2,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid_splb2.render();
+	splb2Detailstore.load()
+	 //三级
+	
+    var cm2 = new Ext.grid.ColumnModel([
+        {header:'编码',dataIndex:'bm',width: 95,hidden:true},
+        {header:'类型名称',dataIndex:'mc',width: 100,editor: new Ext.form.TextField({ allowBlank: true })},
+         {header:'排序',dataIndex:'xl',width: 50,editor: new Ext.form.TextField({ allowBlank: true })}
+
+       ]);
+    
+   
+    var grid_splb3 = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'splb3',
+    	width:195, 
+    	height:380,
+    	title:'二级类型',
+    	ds: splb3Detailstore,
+        cm: cm2,
+        enableHdMenu:false,
+        
+        frame:false,
+        clicksToEdit:2,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid_splb3.render();
+    
+ 
+ 
+ 
+     Ext.get("BtnDownLoad").on("click",function(){
+		
+		
+	  
+         if(form1.Agent_Code.value == "")
+	    {
+		    alert("请选择产品所在的店铺");
+			return false;
+	     }
+		 
+		 if(form1.BRANDIMAGEURL.value=='')
+		 {
+			 alert(form1.BRANDCHNNAME.value+" 的总部没有与客串串合作，无法下载，请直接设置自己的产品类别!");
+			 return false;
+		 }
+		 
+		/* if(form1.ADHAGENTCODE.value == '')
+		 {
+			 alert("总部还没有授权你开"+form1.BRANDCHNNAME.value+' 店，请联系总部授权！')
+			 return false;
+		 }*/
+		 
+		 if (!confirm("下载类别后，你原有的类型将全部清空，你确认要从总部下载吗？")) return false;
+		 
+		
+		
+		 
+		 
+		  formMap = DWRUtil.getValues("form1");
+		 
+		   
+		   form1.BtnDownLoad.value="正在下载...";
+		   
+		  DwrComm.parseIN('INP021',formMap,'call',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+			    
+			    Ext.get('BtnDownLoad').dom.disabled = false;
+           }else{
+		      alert("下载成功！");
+			   splb2Detailstore.load({params:{Agent_Code:Ext.get('Agent_Code').dom.value}});
+		       form1.BtnDownLoad.value="从总部下载";
+		   }
+       },async:false});
+        
+   });
+ 
+ 
+    //增加一级
+   /* Ext.get("BtnAddProcess").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+        DwrComm.parseIN('INP033',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+               splb1Detailstore.load();
+           }
+       },async:false});   
+   });
+   //修改一级
+   grid_splb1.on("afteredit", afterEdit1, grid_splb1); 
+   
+   function afterEdit1(e) { 
+   var record = e.record;
+   
+   DWRUtil.setValue("d_SPLB1_Id",e.record.get("bm"));
+   DWRUtil.setValue("d_SPLB1_MC",e.record.get("mc"));
+   
+   formMap = DWRUtil.getValues("form1");
+  
+   DwrComm.parseIN('INP033',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }
+       },async:false});
+   };
+   //删除一级
+   
+   grid_process.on("rowcontextmenu",function(grid_process,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             if('@@View,'=='View') {return;}
+             var treeMenu = new Ext.menu.Menu
+            ([       
+                {xtype:"button",text:"删除",icon:"images/webtype/del.gif",pressed:true, handler:function(){
+                    DWRUtil.setValue("d_Id",processDetailstore.getAt(rowIndex).get('id'));
+                    formMap = DWRUtil.getValues("form1");
+                    DwrComm.parseIN('IN1007',formMap,'delete',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                     }else{
+                        var record = grid_process.getSelectionModel().getSelected();
+                         processDetailstore.remove(record); 
+                     }
+                    },async:false});
+                    
+                }}               
+                
+            ]);
+            treeMenu.showAt(e.getPoint());
+      }); 
+    //点击一级  
+   grid_splb1.on("rowclick",function(grid_splb1,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             var record = grid_splb1.getSelectionModel().getSelected();
+              DWRUtil.setValue("d_SPLB1_Id",record.get("bm"));
+            
+             splb2Detailstore.load({params:{SJBM:encodeURIComponent(Ext.get('d_SPLB1_Id').dom.value)}});
+           
+   });*/
+  
+    //增加二级
+    Ext.get("BtnAddProcess2").on("click",function(){
+		if(form1.Agent_Code.value == "")
+		{
+			alert("请选择门店！");
+			return false;
+		}
+       formMap = DWRUtil.getValues("form1");
+        DwrComm.parseIN('INP034',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+               splb2Detailstore.load({params:{SJBM:encodeURIComponent(Ext.get('d_SPLB1_Id').dom.value),Agent_Code:Ext.get('Agent_Code').dom.value}});
+           }
+       },async:false});   
+   });
+   //修改二级
+    grid_splb2.on("beforeedit", beforeEdit2, grid_splb2);
+    function beforeEdit2(e){
+ 
+		 if (e.field == "mc")
+		 {
+			 if (form1.BRANDIMAGEURL.value!='')
+			  return false;
+			 if (e.record.get("mc")=='未知')
+			  return false;
+		 }
+    }
+   
+   
+   grid_splb2.on("afteredit", afterEdit2, grid_splb2); 
+   
+   function afterEdit2(e) { 
+   var record = e.record;// 被编辑的记录  
+   //alert(record);
+   DWRUtil.setValue("d_SPLB2_Id",e.record.get("bm"));
+   DWRUtil.setValue("d_SPLB2_MC",e.record.get("mc"));
+   DWRUtil.setValue("d_SPLB2_LB",e.record.get("lb"));
+   DWRUtil.setValue("d_SPLB2_XL",e.record.get("xl"));
+   formMap = DWRUtil.getValues("form1");
+  
+   DwrComm.parseIN('INP034',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+          splb2Detailstore.load({params:{SJBM:encodeURIComponent(Ext.get('d_SPLB1_Id').dom.value),Agent_Code:Ext.get('Agent_Code').dom.value}});
+           }
+       },async:false});
+   };
+   
+   //向上
+  // grid_splb2.on("", afterEdit4, grid_splb2); 
+  // function afterEdit4(e){
+  // Ext.get("BtnAddProcess4").on("click",function(){
+  //  var record = e.record;
+   // alert(record);
+ //  DWRUtil.setValue("d_SPLB2_Id",e.record.get("bm"));
+ //  DWRUtil.setValue("d_SPLB2_MC",e.record.get("mc"));
+  // DWRUtil.setValue("d_SPLB2_LB",e.record.get("lb"));
+  // var xl = e.record.get("xl");
+  // if (xl>=1) xl = xl-1;
+ //  alert(xl);
+  // DWRUtil.setValue("d_SPLB2_XL",xl);
+   //    formMap = DWRUtil.getValues("form1");
+   //     DwrComm.parseIN('INP034',formMap,'update',{callback:function(data){
+    //       if (data != 'ok'){
+    //           alert(data);
+    //       }else{
+    //      splb2Detailstore.load({params:{SJBM:encodeURIComponent(Ext.get('d_SPLB1_Id').dom.value)}});
+   //        }
+ //      },async:false});   
+ //  });
+//  }
+   //删除二级
+   
+   
+   
+   
+   grid_splb2.on("rowcontextmenu",function(grid_process,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             if('@@View,'=='View') {return;}
+			 if (form1.BRANDIMAGEURL.value!='')
+			  return false;
+			// if (splb2Detailstore.getAt(rowIndex).get('mc')=='未知')
+			 // return false;
+             var treeMenu = new Ext.menu.Menu
+            ([       
+                {xtype:"button",text:"删除",icon:"images/webtype/del.gif",pressed:true, handler:function(){
+                    DWRUtil.setValue("d_Id",splb2Detailstore.getAt(rowIndex).get('id'));
+					var mc =splb2Detailstore.getAt(rowIndex).get('mc')
+					if(mc == "未知"){
+					    alert("该类型不能删除，导入数据时会用到！");
+						treeMenu.hide(); 
+						return false;
+					}
+                    formMap = DWRUtil.getValues("form1");
+                    DwrComm.parseIN('INP034',formMap,'delete',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                     }else{
+                        var record = grid_splb2.getSelectionModel().getSelected();
+                         splb2Detailstore.remove(record); 
+						 treeMenu.hide();
+                     }
+                    },async:false});
+                    
+                }}               
+                
+            ]);
+            treeMenu.showAt(e.getPoint());
+      });
+    //点击二级 
+   grid_splb2.on("rowclick",function(grid_splb2,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             var record = grid_splb2.getSelectionModel().getSelected();
+              DWRUtil.setValue("d_SPLB2_Id",record.get("bm"));
+            
+             splb3Detailstore.load({params:{SJBM:encodeURIComponent(Ext.get('d_SPLB2_Id').dom.value),Agent_Code:Ext.get('Agent_Code').dom.value}});
+           
+   });
+   
+  
+   
+     //增加三级
+    Ext.get("BtnAddProcess3").on("click",function(){
+		if(form1.Agent_Code.value == "")
+		{
+			alert("请选择门店！");
+			return false;
+		}
+       formMap = DWRUtil.getValues("form1");
+        DwrComm.parseIN('INP035',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+               splb3Detailstore.load({params:{SJBM:encodeURIComponent(Ext.get('d_SPLB2_Id').dom.value),Agent_Code:Ext.get('Agent_Code').dom.value}});
+           }
+       },async:false});   
+   });
+   
+    grid_splb3.on("beforeedit", beforeEdit3, grid_splb3);
+    function beforeEdit3(e){
+ 
+		 if (e.field == "mc")
+		 {
+			 if (form1.BRANDIMAGEURL.value!='')
+			  return false;
+			 if (e.record.get('mc')=='未知')
+			  return false;
+		 }
+    }
+   
+   
+   //修改三级
+   grid_splb3.on("afteredit", afterEdit3, grid_splb3); 
+   
+   function afterEdit3(e) { 
+   var record = e.record;// 被编辑的记录  
+   
+   DWRUtil.setValue("d_SPLB3_Id",e.record.get("bm"));
+   DWRUtil.setValue("d_SPLB3_MC",e.record.get("mc"));
+   DWRUtil.setValue("d_SPLB3_XL",e.record.get("xl"));
+   
+   formMap = DWRUtil.getValues("form1");
+  
+   DwrComm.parseIN('INP035',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+          splb3Detailstore.load({params:{SJBM:encodeURIComponent(Ext.get('d_SPLB2_Id').dom.value),Agent_Code:Ext.get('Agent_Code').dom.value}});
+           }
+       },async:false});
+   };
+   //删除三级
+ 
+   grid_splb3.on("rowcontextmenu",function(grid_splb3,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             if('@@View,'=='View') {return;}
+			 if (form1.BRANDIMAGEURL.value!='')
+			      return false;
+             var treeMenu = new Ext.menu.Menu
+            ([       
+                {xtype:"button",text:"删除",icon:"images/webtype/del.gif",pressed:true, handler:function(){
+                    DWRUtil.setValue("d_SPLB3_Id",splb3Detailstore.getAt(rowIndex).get('bm'));
+                    formMap = DWRUtil.getValues("form1");
+					var mc =splb3Detailstore.getAt(rowIndex).get('mc')
+					if(mc == "未知"){
+					    alert("该子类不能删除，导入数据时会用到！");
+						treeMenu.hide(); 
+						return false;
+					}
+                    DwrComm.parseIN('INP035',formMap,'delete',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                     }else{
+                         alert("删除成功!");
+                         var record = grid_splb3.getSelectionModel().getSelected();
+                         grid_splb3.remove(record);
+						  treeMenu.hide(); 
+                     }
+                    },async:false});
+                    
+                }}               
+                
+            ]);
+            treeMenu.showAt(e.getPoint());
+      }); 
+      
+    
+   
+});
+
+</script>
+<form action="" method="post" name="form1" id="form1">
+<input type="hidden" name="d_Id" id="d_Id">
+<input type="hidden" name="d_SPLB1_Id" id="d_SPLB1_Id">
+<input type="hidden" name="d_SPLB1_MC" id="d_SPLB1_MC">
+<input type="hidden" name="d_SPLB2_Id" id="d_SPLB2_Id">
+<input type="hidden" name="d_SPLB2_MC" id="d_SPLB2_MC">
+<input type="hidden" name="d_SPLB2_LB" id="d_SPLB2_LB">
+<input type="hidden" name="d_SPLB2_XL" id="d_SPLB2_XL">
+
+<input type="hidden" name="d_SPLB3_Id" id="d_SPLB3_Id">
+<input type="hidden" name="d_SPLB3_MC" id="d_SPLB3_MC">
+<input type="hidden" name="d_SPLB3_XL" id="d_SPLB3_XL">
+
+<input type="hidden" name="d_Flag"  id="d_Flag" value="0">
+
+<input type="hidden" name="BRANDCHNNAME" id="BRANDCHNNAME" value="" >
+<input type="hidden" name="ADHAGENTCODE" id="ADHAGENTCODE" size="10" value=""> 
+<input type="hidden" name="BRANDIMAGEURL" id="BRANDIMAGEURL" value="">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;" width="20%"><img
+					src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">产品类别管理</td>
+                    <td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;" width="80%">门店：<select  name="Agent_Code" id="Agent_Code" >
+                    
+								    <option value="">选择</option>
+                                  <option>$$XL0008,</option>
+                              </select> <input type="button" name="BtnDownLoad"  id="BtnDownLoad" value="从总部下载" /></td>
+			</tr>
+  <tr>
+    <td colspan="2">
+      <table width="100%" border="0">
+        <tr>
+          <td width="50%"><table width="100%" border="0" cellspacing="0" cellpadding="0" bordercolor="#000000">
+      
+      <tr align="center">
+        <td><input type="hidden" name="BtnAddProcess"  id="BtnAddProcess" value="添加大类" /></td>
+        <td ><input type="button" name="BtnAddProcess2" id="BtnAddProcess2" value="添加类型" /></td>
+        
+       
+        <td ><input type="button" name="BtnAddProcess3"  id="BtnAddProcess3" value="添加子类" /></td>
+        </tr>
+       
+      <tr>
+        <td><div id="splb1"></div></td>
+        <td><div id="splb2"></div></td>
+        
+        <td><div id="splb3"></div></td>
+      </tr>
+      
+    </table></td>
+          <td  width="50%">&nbsp;	      </td>
+          
+  </tr>
+</table>
+
+</form>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>终端授权激活</title>
+<base target="_self">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script language="javascript">
+        function opr(url,yhh,yhxm,sts,sj){
+		        if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+               var formMap = DWRUtil.getValues("form1");
+		       form1.YHID.value=url;
+			   document.getElementById("YHH").readOnly=true
+			   document.getElementById('BtnGenCode').style.visibility='hidden';
+			
+			   form1.YHH.value=yhh;
+			   form1.YHXM.value=yhxm;
+			   form1.STS.value=sts;
+			   form1.SJ.value=sj;
+              
+              
+          }
+      </script></head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+   
+	
+	
+	
+	Ext.get("BtnSave").on("click",function(){
+	    
+		   alert("操作成功!");
+		
+      
+    });
+	
+	
+	
+	
+   
+ 
+   
+   
+
+    
+	
+    
+	 
+});
+
+</script>
+<form name="form1" method="post" action="" id="form1">
+<input name="DEPT" id="DEPT" type="hidden" value="@@AGENT_CODE,">
+<input name="YHID" id="YHID" type="hidden" value="">
+<input name="SJBM" id="SJBM" type="hidden" value="@@SJBM,">
+<input name="Brand_Code" id="Brand_Code" type="hidden" value="@@Brand_Code,">
+
+<table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center" style="font-size:18px"><strong>终端授权</strong></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          
+          
+		  <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">授权号： </td>
+            <td bgcolor="#FFFFFF">
+            <input name="SJ"  id="SJ" type="text" style="height:25;  font-size:18px; color:#008040" size="25"></td>
+          </tr>
+          
+          <tr>
+            <td colspan="2" align="center"  class="tableleft"><input name="BtnSave"  id="BtnSave" type="button"  value="激活授权" >
+               <input name="BtnClose"  id="BtnClose" type="button" class="ImgButton" onClick="window.close()" value="关  闭">
+              </td>
+          </tr>
+          <tr>
+            <td colspan="2" align="left" class="tableleft" >&nbsp;</td>
+          </tr>
+         
+        </table>
+      </td>
+    </tr>
+  </table>
+ 
+  
+</form>
+</body>
+</html>

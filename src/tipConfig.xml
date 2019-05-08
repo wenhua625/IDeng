@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<data>
+  <row>
+    <KJM>101</KJM>
+    <LJH>0002</LJH>
+    <KJSM>财务来单提醒</KJSM>
+    <CS>having(count(*)>0)</CS>
+    <SQL1></SQL1>
+    <SQL2></SQL2>
+    <DEFAULTS></DEFAULTS>
+    <MSJTS></MSJTS>
+    <TSDsc></TSDsc>
+    <SQL>select '有 '+convert(varchar,count(*))+' 个订单需要 财审' memo from backlist where back_sts in ('5') and note_type='XS' and agent_code in(@@LS.QXCK,)</SQL>
+  </row>
+  <row>
+    <KJM>102</KJM>
+    <LJH>0002</LJH>
+    <KJSM>仓库来单提醒</KJSM>
+    <CS>having(count(*)>0)</CS>
+    <SQL1></SQL1>
+    <SQL2></SQL2>
+    <DEFAULTS></DEFAULTS>
+    <MSJTS></MSJTS>
+    <TSDsc></TSDsc>
+    <SQL>select '有 '+convert(varchar,count(*))+' 个订单需要 打包' memo from backlist where back_sts in ('1') and note_type='XS' and agent_code in(@@LS.QXCK,)</SQL>
+    
+  </row>
+  <row>
+    <KJM>103</KJM>
+    <LJH>0002</LJH>
+    <KJSM>物流来单提醒</KJSM>
+    <CS>having(count(*)>0)</CS>
+    <SQL1>having(count(*)>0)</SQL1>
+    <SQL2></SQL2>
+    <DEFAULTS></DEFAULTS>
+    <MSJTS></MSJTS>
+    <TSDsc></TSDsc>
+    <SQL>select '有 '+convert(varchar,count(*))+' 个订单需要 发物流' memo from backlist where back_sts in ('7') and note_type='XS' and agent_code in(@@LS.QXCK,)</SQL>
+  </row>
+  <row>
+    <KJM>104</KJM>
+    <LJH>0002</LJH>
+    <KJSM>欠货提醒</KJSM>
+    <CS>having(count(*)>0)</CS>
+    <SQL1></SQL1>
+    <SQL2></SQL2>
+    <DEFAULTS></DEFAULTS>
+    <MSJTS></MSJTS>
+    <TSDsc></TSDsc>
+    <SQL>select '有 '+convert(varchar,count(*))+' 个单子存在 欠货'  from backdetails a,backlist b  where a.back_code=b.back_code  and a.back_num!=a.fact_num and back_sts='2'  and qh_sts is null and not exists (select * from backdetails where ware_code=a.back_code and product_id=a.product_id) and agent_code in (@@LS.QXCK,) </SQL>
+  </row>
+  <row>
+    <KJM>105</KJM>
+    <LJH>0002</LJH>
+    <KJSM>到款提醒</KJSM>
+    <CS></CS>
+    <SQL1></SQL1>
+    <SQL2></SQL2>
+    <DEFAULTS></DEFAULTS>
+    <MSJTS></MSJTS>
+    <TSDsc></TSDsc>
+    <SQL>select '&lt;a href="display?proname=quickorder/order_tip.htm&amp;Agent_Code='+a.AGENT_Code+ '" target="main"&gt;'+AGENT_NAME +' 的款已到账，请速下单!&lt;/a&gt;' tip from v_AbsAmount a,agent_list b where a.agent_code=b.AGENT_CODE and (a.agent_amount-finall_amount)>0 and  b.sjbm in (@@LS.QXCK,)</SQL>
+  </row>
+   <row>
+    <KJM>107</KJM>
+    <LJH>0002</LJH>
+    <KJSM>产品修改审核提醒</KJSM>
+    <CS></CS>
+    <SQL1></SQL1>
+    <SQL2></SQL2>
+    <DEFAULTS></DEFAULTS>
+    <MSJTS></MSJTS>
+    <TSDsc></TSDsc>
+    <SQL>select '有  &lt;a href=&quot;display?proname=baseinfo/productinfo.htm&amp;XG_FLAG=T&quot; target=&quot;main&quot;&gt;'+convert(varchar, count(*))+' &lt;/a&gt; 产品信息已经修改，请审核!' tip_memo from product_list_xgjl having (count(*)>0) </SQL>
+  </row>
+  
+</data>

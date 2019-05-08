@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base target="_self"/>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/extjs/openWindow.js"></script>
+<script src="inc/dateams.js" type='text/javascript' language=javascript></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+</head>
+<body>
+<script type='text/javascript'>
+
+
+//定义一个方法用来在添加之前，对输入框进行判断是否为空
+	function add(){
+	       if(!confirm("你确认要变更吗？")) return false;
+			//满足条件，侧调用修改的方法
+			 var oSelect = document.getElementById('track_man_new');
+            var ind = oSelect.selectedIndex;
+            var val = oSelect.options[ind].value;
+            var tex = oSelect.options[ind].text;
+			form1.ywy.value=tex;
+			form1.ywy_tel.value=val;
+			work();		
+	}
+
+   //【订单】添加的方法
+   function work(){
+	if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+      var formMap = DWRUtil.getValues("form1");
+    DwrComm.parseIN('INP077',formMap,'update',{callback:function(data){if (data != 'ok'){alert(data);}else{
+                     // dialogArguments.document.getElementById('d_Flag').value="1";   
+                      //window.close(); 
+					    parent.frames["main"].document.getElementById("d_Flag").value="1";
+						closewin('b-win');  
+                   }},async:false});
+        }
+</script>
+<form name="form1" method="post" action="" id="form1">
+<table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" align="center" style="font-size: 16pt; COLOR: #124164; FONT-WEIGHT: bold;" >变更跟单员</td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;【客户信息】</td>
+          </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">业主姓名：</td>
+            <td bgcolor="#FFFFFF">
+            <input id="CustName" name="CustName" value="!!MJP239,03" readonly class="TEXTDISABLED">
+            <input id="OrderCode" name="OrderCode" value="!!MJP239,01" type="hidden">
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">电话：</td>
+            <td bgcolor="#FFFFFF">
+              <input id="Cust_Tel" name="Cust_Tel" value="!!MJP239,04" readonly class="TEXTDISABLED"></td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">原跟单人：</td>
+            <td bgcolor="#FFFFFF">
+              <input type="text" name="Track_Man" id="Track_Man" value="!!MJP239,12" size="15" readonly class="TEXTDISABLED"> 
+                          
+              </td>
+          </tr>
+         
+           <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;【变更信息】</td>
+          </tr>
+           <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">跟单员变更为：</td>
+            <td bgcolor="#FFFFFF"> <select id="track_man_new" id="track_man_new">
+                  <option>$$XLP010,</option>
+              </select> <input type="hidden" name="ywy" id="ywy" value=""> <input type="hidden" name="ywy_tel" id="ywy_tel" value="">  </td>
+          </tr> 
+          
+          
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="90%" height="40" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" valign="bottom"><div align="center">
+	      <input type="button" name="Save" id="Save" value="确定"  onClick="add()" >
+	      <input type="button" name="Backd" value="关闭" class="ImgButton" style="width:80px" onClick="closewin('b-win')">
+        </div></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

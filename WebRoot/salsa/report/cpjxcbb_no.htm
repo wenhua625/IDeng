@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script src="inc/Calendar1.js" type=text/javascript language=javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base3.4.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all3.4.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+ <script type="text/javascript" src="js/extjs/BufferView.js"></script>
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type="text/javascript">
+    //弹出窗口
+   function opr(url){
+        var s=NewWinCustMD(url+'&LX=1&tmp11='+Math.random(),window,450,650);
+        
+    }  
+     
+    
+</script>
+
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    var orderDetailstore = new Ext.data.JsonStore({
+         url:"work?proname=MJH081",
+        root:"root",
+        fields: ['编号','商品编码', '商品名称', '规格', '单位', '品牌', '上期结存','本期入库',  '本期出库',  '期末存量','系列名称']
+    });
+
+   // var sm = new Ext.grid.CheckboxSelectionModel();
+    var cm = new Ext.grid.ColumnModel({ 
+	     defaults: {
+            sortable: true // columns are not sortable by default           
+        },
+        columns: [
+        new Ext.grid.RowNumberer(),//自动行号
+        //sm,
+        
+		{header:'系列名称',dataIndex:'系列名称',width: 70},
+        {header:'型号编码',dataIndex:'商品编码',width: 85},
+		
+        {header:'名称',dataIndex:'商品名称',width: 170},
+        {header:'规格',dataIndex:'规格',width: 60},
+		
+		{header:'单位',dataIndex:'单位',width: 50},
+       
+		
+		{header:'上期结存',dataIndex:'上期结存',width: 80,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		
+		{header:'本期入库',dataIndex:'本期入库',width: 60,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		
+		{header:'本期出库',dataIndex:'本期出库',width: 60,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')},
+		
+		{header:'期末存量',dataIndex:'期末存量',width: 80,summaryType:'sum',renderer:Ext.util.Format.numberRenderer('00.00')}
+		
+		
+	   
+       ]});
+    
+    cm.defaultSortable = true;
+  
+    var grid = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'backDetails',
+    	width:document.body.clientWidth-35, 
+    	height:document.body.clientHeight-65,
+    	title:'',
+    	ds: orderDetailstore,
+        cm: cm,
+		enableHdMenu:false,
+        plugins: new Ext.ux.grid.GridSummary(),
+        view: new Ext.ux.grid.BufferView({
+             scrollDelay: false,
+			 forceFit: true
+			
+        }),
+		
+        frame:false,
+        clicksToEdit:1,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid.render();
+	orderDetailstore.on('beforeload',function(){
+		Ext.apply(
+			this.baseParams, {
+				ORDER_DATE1:Ext.get('ORDER_DATE1').dom.value,ORDER_DATE2:Ext.get('ORDER_DATE2').dom.value,
+				SPBM:encodeURI(Ext.get('SPBM').dom.value),SERIES_CODE:encodeURI(Ext.get('SERIES_CODE').dom.value),XL_CODE:Ext.get('XL_CODE').dom.value
+			});
+	});
+   // orderDetailstore.load();
+
+     Ext.get("BtnCX").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       orderDetailstore.load();
+	   
+    });
+	
+	
+	
+     var store = new Ext.data.JsonStore({
+        fields: ['value', 'name']
+    });
+    var items;
+    
+    
+     Ext.get("SERIES_CODE").on("change",function(){
+	   
+       formMap = DWRUtil.getValues("form1");
+	   
+       DwrComm.parseAL('XLS006',formMap,{callback:function(list){
+           store.loadData(list);
+           items=list;
+       },async:false});
+	   
+        DWRUtil.removeAllOptions("XL_CODE");
+		//var arr={"","全部"};
+		var arr=[{"name":"全部","value":""}];
+		DWRUtil.addOptions("XL_CODE",arr,"value","name");
+        DWRUtil.addOptions("XL_CODE",items,"value","name");   
+   });
+	
+	
+	 Ext.get("exportE").on("click",function(){
+		
+        window.location.href='downLoad?proname=EXH081&inexcel=1&ORDER_DATE1='+Ext.get('ORDER_DATE1').dom.value+"&ORDER_DATE2="+Ext.get('ORDER_DATE2').dom.value+"&SERIES_CODE="+Ext.get('SERIES_CODE').dom.value+"&XL_CODE="+Ext.get('XL_CODE').dom.value;
+	   
+    });
+	 
+
+});
+
+</script>
+<form name="form1" method="post" action="" id="form1">
+
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr align="center" height="5"> 
+		<td>
+		
+		</td>
+	</tr>
+	<tr align="center">
+		<td>
+		<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;" valign="top"><img
+					src="images/loadtree/mdmde.gif" WIDTH="18" HEIGHT="18">进销存报表</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+	<td>
+	   
+	   
+	  <table width="100%" border="0" cellpadding="5" cellspacing="0" >
+          <tr> 
+            <td width="10%" align="right">统计周期：</td>
+            <td width="90%"><input type="text" name="ORDER_DATE1" size="10" value="@@LS.FIRSTDAYSOFCURMONTH," readonly onFocus="calendar()">
+              -            
+            <input type="text" name="ORDER_DATE2" size="10" readonly value="@@LS.CURDATE," onFocus="calendar()">
+            名称及型号
+            ：
+            <input name="SPBM" type="text" value="" size="20">
+              类型：
+            <select name="SERIES_CODE">
+                <option value="">全部</option>
+			    <option>$$XL0001,</option>
+            </select>
+			系列
+			 <select name="XL_CODE" id="XL_CODE">
+                   <option value="">全部</option>
+                   <option>$$XL1008,</option>
+            </select>
+            
+            <input type="button" name="BtnCx" id="BtnCx" value="查询">   $$EXH081,</td>
+          </tr>
+        </table>
+	
+	</td>
+	</tr>
+	
+	<tr>
+      <td>
+		<div id="backDetails"></div>
+		 
+       
+      </td>
+    </tr>
+    
+  </table>
+  </form>  
+
+</body>
+
+</html>

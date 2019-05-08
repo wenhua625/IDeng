@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>物料</title>
+<base target="_self"/>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/easyui/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/easyui/icon.css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-webase.js"></script>
+<script type="text/javascript" src="js/easyui/json2.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.edatagrid.js"></script>
+<script type="text/javascript" src="js/easyui/easyui.plugin.hy.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0></object>
+</head>
+<body >
+<script type="text/javascript">
+$(function() 
+  {
+     //初始化表单数据
+    var $dg1=$('#orderDetails');
+	if('@@View,' == 'View')
+        form1.BtnSave.style.visibility='hidden';
+    //表格数据
+    $dg1.edatagrid({
+				//width:'auto',
+				height:400,
+				nowrap: true,
+				autoRowHeight: false,
+				striped: true,
+				singleSelect:true,
+				collapsible:true,
+				url:'query?proname=MJS020&SPBM=@@SPBM,&ID=@@ID,',
+				queryParams:{sl:@@sl,},
+				showFooter:true,
+				remoteSort: false,
+				idField:'id',
+				rownumbers:true,
+				
+				fit:false,
+				fitColumns:true,
+				columns:[[
+        			{title:'物料编号',field:'spbm',width: 65},
+					{title:'名称',field:'spmc',width: 235},
+        			{title:'规格',field:'xhgg',width: 115},
+        			
+					{title:'单位',field:'jldw',width: 45},
+					{title:'单耗',field:'dh_sl',width: 55,align:'right',sum:"true"},
+        			{title:'总耗',field:'sl',width: 55,align:'right',sum:"true"},
+					{title:'库存',field:'kcsl',width: 70,align:'right',sum:"true"},
+        			{title:'库存差额',field:'ce',width: 70,align:'right',sum:"true"} 
+        			
+    			]],
+    			onLoadSuccess:function(data){
+    			     $(this).edatagrid('statistics');
+    			},
+    			onAfterEdit:function(index,data){
+    			    
+    			    $(this).edatagrid('statistics');
+    			}
+			});	
+   
+   //保存，公用
+   function checkAndSave()
+   {
+       $dg1.edatagrid('acceptChanges'); 
+       var rows=$dg1.edatagrid('getRows');
+       if (rows.length == 0) return false;
+	   form1.BtnSave.disabled = true;
+       form1.d_JsonData.value=encodeURI(JSON.stringify(rows));
+       if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+       var formMap = DWRUtil.getValues("form1");
+       var ret=false;
+       DwrComm.parseIN('INS012',formMap,'insert',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                         
+                     }else
+                     {
+                        ret= true;
+                     }
+                    },async:false});
+      return ret;  
+       
+   }
+  
+   //保存
+   $("#BtnSave").click(function(event){
+      if(!confirm("你确认要安排生产吗？")) return false;
+      if(checkAndSave()) {
+         var formMap = DWRUtil.getValues("form1");
+        var ret=false;
+       DwrComm.parseIN('INS013',formMap,'update',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                         return false;
+                     }else
+                     {
+                        ret= true;
+                     }
+                    },async:false});
+                    
+	    if(ret)
+		{
+		   alert("已成功安排生产!");
+		   dialogArguments.document.getElementById('d_Flag').value="1";
+           window.close();
+		}
+       
+      }
+   });
+   
+   //回车试算
+   $("#BtnClose").click(function(event){
+       
+	   window.close();
+        
+   });
+   
+   
+   
+   
+ });
+</script>
+<form id="form1" method="post" name="form1" onSubmit="return false;">
+  <input type="hidden" name="d_Flag" value="0">
+  <input type="hidden" name="d_JsonData" value="">
+  <input type="hidden" name="d_SPBM">
+  <input type="hidden" name="SH_FLAG">
+  <input type="hidden" name="id" value="@@ID,"> 
+  <input type="hidden" name="d_JsonType" value="Easyui">
+  <table width="100%" border="0">
+    <tr>
+      <td  style=" border-top:@@LS.BGCOLOR, 1px solid;">
+	     
+	      <table class="easyui-datagrid" title="计划单信息" style="width:'auto';height:'auto'"
+			data-options="singleSelect:true,collapsible:true,url:'query?proname=MJS022&ID=@@ID,'">
+		<thead>
+			<tr>
+				<th data-options="field:'rwd_id',width:125">任务单号</th>
+				<th data-options="field:'spbm',width:80">产品编码</th>
+				<th data-options="field:'spmc',width:100">产品名称</th>
+				<th data-options="field:'xhgg',width:80,align:'right'">规格</th>
+				<th data-options="field:'jldw',width:80,align:'right'">单位</th>
+				<th data-options="field:'sl',width:80">计划数量</th>
+				<th data-options="field:'bz',width:100">备注</th>
+			</tr>
+		</thead>
+	</table>
+	
+	  </td>
+    </tr>
+    <tr>
+      <td >
+	    <div class="easyui-tabs" style="width:'680px';height:400px">
+              <div title="物料信息" id="orderDetails" style="padding:10px">
+			      
+			  </div>
+			   <div title="工序信息" style="padding:10px">
+	         This is the help content.
+	         </div>
+	     </div>
+	    
+	  </td>
+    </tr>
+	<tr>
+      <td align="center">
+	     <input type="button" name="BtnSave" id="BtnSave" value="安排生产">	 
+		 <input type="button" name="BtnClose" id="BtnClose" value="关  闭">
+		  </td>
+    </tr>
+   
+  </table>
+</form>
+</body>
+</html>

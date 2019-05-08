@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<data>
+  <row>
+    <MenuId>1</MenuId>
+    <ParentMenuId>-1</ParentMenuId>
+    <MenuName>客串串</MenuName>
+    <MenuUrl></MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/folder.gif</MenuIcon>
+    <IsPms>0</IsPms>
+    <isLeaf>0</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  
+ 
+  <row>
+    <MenuId>ZQ0005</MenuId>
+    <ParentMenuId>1</ParentMenuId>
+    <MenuName>门店销售</MenuName>
+    <MenuUrl>work?proname=TREE01&amp;ParentMenuId=ZQ0005</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/folder.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>0</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>ZQ0009</MenuId>
+    <ParentMenuId>1</ParentMenuId>
+    <MenuName>门店费用</MenuName>
+    <MenuUrl>work?proname=TREE01&amp;ParentMenuId=ZQ0009</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/folder.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>0</isLeaf><MenuDsc></MenuDsc>
+  </row>
+   <row>
+    <MenuId>ZQ0001</MenuId>
+    <ParentMenuId>1</ParentMenuId>
+    <MenuName>库存管理</MenuName>
+    <MenuUrl>work?proname=TREE01&amp;ParentMenuId=ZQ0010</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/folder.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>0</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  
+  <!-- <row>
+    <MenuId>ZQ0004</MenuId>
+    <ParentMenuId>1</ParentMenuId>
+    <MenuName>售后管理</MenuName>
+    <MenuUrl>work?proname=TREE01&amp;ParentMenuId=ZQ0005</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/folder.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>0</isLeaf><MenuDsc></MenuDsc>
+  </row> -->
+ 
+   <row>
+    <MenuId>ZQ0003</MenuId>
+    <ParentMenuId>1</ParentMenuId>
+    <MenuName>查询分析</MenuName>
+    <MenuUrl>work?proname=TREE01&amp;ParentMenuId=ZQ0003</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/folder.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>0</isLeaf><MenuDsc></MenuDsc>
+  </row> 
+  <row>
+    <MenuId>ZQ0002</MenuId>
+    <ParentMenuId>1</ParentMenuId>
+    <MenuName>门店设置</MenuName>
+    <MenuUrl>work?proname=TREE01&amp;ParentMenuId=ZQ0010</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/folder.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>0</isLeaf><MenuDsc></MenuDsc>
+  </row>
+   <!--<row>
+    <MenuId>ZQ0008</MenuId>
+    <ParentMenuId>1</ParentMenuId>
+    <MenuName>艾登宝管理</MenuName>
+    <MenuUrl>work?proname=TREE01&amp;ParentMenuId=ZQ0009</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/folder.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>0</isLeaf><MenuDsc></MenuDsc>
+  </row>-->
+
+ 
+
+ <!-- 库存管理 -->
+   
+   
+  
+   <row>
+    <MenuId>0101</MenuId>
+    <ParentMenuId>ZQ0001</ParentMenuId>
+    <MenuName>入仓单</MenuName>
+    <MenuUrl>display?proname=production/wlrkd.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0102</MenuId>
+    <ParentMenuId>ZQ0001</ParentMenuId>
+    <MenuName>出仓单</MenuName>
+    <MenuUrl>display?proname=authority/dsh.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0115</MenuId>
+    <ParentMenuId>ZQ0001</ParentMenuId>
+    <MenuName>出库单</MenuName>
+    <MenuUrl>display?proname=production/wlckd.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+
+  <row>
+    <MenuId>0103</MenuId>
+    <ParentMenuId>ZQ0001</ParentMenuId>
+    <MenuName>盘点单</MenuName>
+    <MenuUrl>display?proname=production/ckpdd.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc><MenuDsc></MenuDsc>
+  </row>
+
+ 
+  
+  
+   <row>
+    <MenuId>0104</MenuId>
+    <ParentMenuId>ZQ0001</ParentMenuId>
+    <MenuName>库存查询</MenuName>
+    <MenuUrl>display?proname=report/kucun_list.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0108</MenuId>
+    <ParentMenuId>ZQ0001</ParentMenuId>
+    <MenuName>库存查询</MenuName>
+    <MenuUrl>display?proname=report/kucun_no_list.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc>无金额</MenuDsc>
+  </row>
+  <row>
+    <MenuId>0109</MenuId>
+    <ParentMenuId>ZQ0001</ParentMenuId>
+    <MenuName>入库明细</MenuName>
+    <MenuUrl>display?proname=report/rkmxb.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0110</MenuId>
+    <ParentMenuId>ZQ0001</ParentMenuId>
+    <MenuName>出仓明细</MenuName>
+    <MenuUrl>display?proname=report/ckmxb.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+    <row>
+    <MenuId>0116</MenuId>
+    <ParentMenuId>ZQ0001</ParentMenuId>
+    <MenuName>出库单查询</MenuName>
+    <MenuUrl>display?proname=report/wlckd.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0111</MenuId>
+    <ParentMenuId>ZQ0001</ParentMenuId>
+    <MenuName>类型管理</MenuName>
+    <MenuUrl>display?proname=baseinfo/splb_list.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+   <row>
+    <MenuId>0112</MenuId>
+    <ParentMenuId>ZQ0001</ParentMenuId>
+    <MenuName>产品导入</MenuName>
+    <MenuUrl>display?proname=baseinfo/cpxx_import.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+   
+  <row>
+    <MenuId>0113</MenuId>
+    <ParentMenuId>ZQ0001</ParentMenuId>
+    <MenuName>产品管理</MenuName>
+    <MenuUrl>display?proname=baseinfo/productinfo.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+ <row>
+    <MenuId>0114</MenuId>
+    <ParentMenuId>ZQ0001</ParentMenuId>
+    <MenuName>产品图片</MenuName>
+    <MenuUrl>display?proname=baseinfo/spzl_tp.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  
+  
+
+  
+  <row>
+    <MenuId>0203</MenuId>
+    <ParentMenuId>ZQ0002</ParentMenuId>
+    <MenuName>常用小区</MenuName>
+    <MenuUrl>display?proname=baseinfo/housing_list.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0212</MenuId>
+    <ParentMenuId>ZQ0002</ParentMenuId>
+    <MenuName>生产厂家</MenuName>
+    <MenuUrl>display?proname=baseinfo/sccj_list.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0207</MenuId>
+    <ParentMenuId>ZQ0002</ParentMenuId>
+    <MenuName>效果图</MenuName>
+    <MenuUrl>display?proname=baseinfo/spzl_xgt.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0211</MenuId>
+    <ParentMenuId>ZQ0002</ParentMenuId>
+    <MenuName>视频点播</MenuName>
+    <MenuUrl>display?proname=baseinfo/video.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  
+   <row>
+    <MenuId>0210</MenuId>
+    <ParentMenuId>ZQ0002</ParentMenuId>
+    <MenuName>员工权限</MenuName>
+    <MenuUrl>display?proname=authority/ygsjqx.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+   <row>
+    <MenuId>0213</MenuId>
+    <ParentMenuId>ZQ0002</ParentMenuId>
+    <MenuName>门店设置</MenuName>
+    <MenuUrl>display?proname=baseinfo/mdsz.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0214</MenuId>
+    <ParentMenuId>ZQ0002</ParentMenuId>
+    <MenuName>考勤数据</MenuName>
+    <MenuUrl>display?proname=report/kq_list.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+ 
+  
+  
+   <row>
+    <MenuId>0501</MenuId>
+    <ParentMenuId>ZQ0005</ParentMenuId>
+    <MenuName>客户报备</MenuName>
+    <MenuUrl>display?proname=authority/my_bbgj.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0502</MenuId>
+    <ParentMenuId>ZQ0005</ParentMenuId>
+    <MenuName>订单处理</MenuName>
+    <MenuUrl>display?proname=report/my_list.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+   <row>
+    <MenuId>0520</MenuId>
+    <ParentMenuId>ZQ0005</ParentMenuId>
+    <MenuName>历史订单导入</MenuName>
+    <MenuUrl>display?proname=baseinfo/order_import.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+   <row>
+    <MenuId>0521</MenuId>
+    <ParentMenuId>ZQ0005</ParentMenuId>
+    <MenuName>意向客户导入</MenuName>
+    <MenuUrl>display?proname=baseinfo/khdd_import.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  
+  
+   <!--  <row>
+    <MenuId>0512</MenuId>
+    <ParentMenuId>ZQ0005</ParentMenuId>
+    <MenuName>预进货订单</MenuName>
+    <MenuUrl>display?proname=authority/yjhdd.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc><MenuDsc></MenuDsc>
+  </row>
+  -->
+ 
+  
+  
+ 
+   <!--  <row>
+    <MenuId>0512</MenuId>
+    <ParentMenuId>ZQ0005</ParentMenuId>
+    <MenuName>订单查询</MenuName>
+    <MenuUrl>display?proname=quickorder/order_cx.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc><MenuDsc></MenuDsc>
+  </row>-->
+  
+  <!-- 售后管理模块 
+  
+  <row>
+    <MenuId>0401</MenuId>
+    <ParentMenuId>ZQ0004</ParentMenuId>
+    <MenuName>售后管理</MenuName>
+    <MenuUrl>display?proname=authority/bxhf.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+   <row>
+    <MenuId>0402</MenuId>
+    <ParentMenuId>ZQ0004</ParentMenuId>
+    <MenuName>报修查询</MenuName>
+    <MenuUrl>display?proname=shop/maintenance_list.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0403</MenuId>
+    <ParentMenuId>ZQ0004</ParentMenuId>
+    <MenuName>维修送货</MenuName>
+    <MenuUrl>display?proname=shop/dsh.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>-->
+ 
+  
+  
+  
+   <row>
+    <MenuId>0310</MenuId>
+    <ParentMenuId>ZQ0003</ParentMenuId>
+    <MenuName>欠款报表</MenuName>
+    <MenuUrl>display?proname=report/qk_list.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0311</MenuId>
+    <ParentMenuId>ZQ0003</ParentMenuId>
+    <MenuName>未入账明细</MenuName>
+    <MenuUrl>display?proname=report/ordercol_wrz_list.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0312</MenuId>
+    <ParentMenuId>ZQ0003</ParentMenuId>
+    <MenuName>收款明细</MenuName>
+    <MenuUrl>display?proname=report/ordercol_list.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  
+   <row>
+    <MenuId>0313</MenuId>
+    <ParentMenuId>ZQ0003</ParentMenuId>
+    <MenuName>收款汇总</MenuName>
+    <MenuUrl>display?proname=report/ordercol_hz.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+   <row>
+    <MenuId>0314</MenuId>
+    <ParentMenuId>ZQ0003</ParentMenuId>
+    <MenuName>员工业绩</MenuName>
+    <MenuUrl>display?proname=report/ygyj_list.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0315</MenuId>
+    <ParentMenuId>ZQ0003</ParentMenuId>
+    <MenuName>毛利分析表</MenuName>
+    <MenuUrl>display?proname=report/mlfxb.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+   <row>
+    <MenuId>0316</MenuId>
+    <ParentMenuId>ZQ0003</ParentMenuId>
+    <MenuName>净利分析表</MenuName>
+    <MenuUrl>display?proname=report/jlfxb.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  
+   <row>
+    <MenuId>0301</MenuId>
+    <ParentMenuId>ZQ0003</ParentMenuId>
+    <MenuName>订单数据分析</MenuName>
+    <MenuUrl>display?proname=decise/ddsjfx.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+ 
+  <row>
+    <MenuId>0302</MenuId>
+    <ParentMenuId>ZQ0003</ParentMenuId>
+    <MenuName>订单来源分析</MenuName>
+    <MenuUrl>display?proname=decise/ddlyfx.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0303</MenuId>
+    <ParentMenuId>ZQ0003</ParentMenuId>
+    <MenuName>个人订单来源分析</MenuName>
+    <MenuUrl>display?proname=decise/ddlyfx.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0304</MenuId>
+    <ParentMenuId>ZQ0003</ParentMenuId>
+    <MenuName>门店均单值分析</MenuName>
+    <MenuUrl>display?proname=decise/jdzfx.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc></MenuDsc>
+  </row>
+  <row>
+    <MenuId>0305</MenuId>
+    <ParentMenuId>ZQ0003</ParentMenuId>
+    <MenuName>个人均单值分析</MenuName>
+    <MenuUrl>display?proname=decise/jdzfx.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc>按权限</MenuDsc>
+  </row>
+ 
+ <!-- 门店费用 -->
+ <row>
+    <MenuId>0905</MenuId>
+    <ParentMenuId>ZQ0009</ParentMenuId>
+    <MenuName>费用类别</MenuName>
+    <MenuUrl>display?proname=shopInstall/fylb_list.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc>按权限</MenuDsc>
+  </row>
+ <row>
+    <MenuId>0901</MenuId>
+    <ParentMenuId>ZQ0009</ParentMenuId>
+    <MenuName>费用报销</MenuName>
+    <MenuUrl>display?proname=shopInstall/fee_list.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc>按权限</MenuDsc>
+  </row>
+  <row>
+    <MenuId>0902</MenuId>
+    <ParentMenuId>ZQ0009</ParentMenuId>
+    <MenuName>员工工资</MenuName>
+    <MenuUrl>display?proname=shopInstall/emp_salary.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc>按权限</MenuDsc>
+  </row>
+  <row>
+    <MenuId>0903</MenuId>
+    <ParentMenuId>ZQ0009</ParentMenuId>
+    <MenuName>费用查询</MenuName>
+    <MenuUrl>display?proname=shopInstall/fycx.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc>按权限</MenuDsc>
+  </row>
+   <row>
+    <MenuId>0904</MenuId>
+    <ParentMenuId>ZQ0009</ParentMenuId>
+    <MenuName>支出统计</MenuName>
+    <MenuUrl>display?proname=shopInstall/jdzfx.htm</MenuUrl>
+    <MenuTarget>main</MenuTarget>
+    <MenuIcon>images/loadtree/entity.gif</MenuIcon>
+    <IsPms>1</IsPms>
+    <isLeaf>1</isLeaf><MenuDsc>按权限</MenuDsc>
+  </row>
+ 
+
+  
+  
+  
+ 
+  
+  
+ 
+   
+
+ 
+</data>

@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>已送货</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<style>
+.x-grid-record-red table{
+   background: #E6D1E3;
+}
+.x-grid-record-yellow table{
+   background: #F3FEC2;
+}
+.x-grid-record-green table{
+   background: #92FCCC;
+}
+</style>
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/extjs/ext-base3.4.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all3.4.js"></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type="text/javascript" src="js/extjs/ColumnHeaderGroup.js"></script>
+<script src="inc/Calendar1.js" type=text/javascript language=javascript></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+<script>
+//弹出窗口
+   function opr(url){
+        var s=NewWinCustMD(url+'&LX=1&tmp11='+Math.random(),window,550,800);
+        
+    } 
+</script>
+</head>
+<body>
+	<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+	
+   //订单列表信息  
+    var orderDetailstore1 = new Ext.data.JsonStore({
+        url:"work?proname=MJP271",
+        root:"root",
+        fields: ['order_code','agent_code' ,'cust_name','ywy' ,'arr_tel' ,'arr_man' ,'arr_address','jl_day' ,'sex' ,'djje','dh_sts' ,'housearea','housetype','groom_date' ,'yqazsj','order_date','qh_sts']
+    });
+   
+    //产品信息列
+     var cm1 = new Ext.grid.ColumnModel([
+         new Ext.grid.RowNumberer(),//自动行号 
+		{header:'订单号',dataIndex:'order_code',width: 95},
+        {header:'业主姓名',dataIndex:'arr_man',width: 65},
+		{header:'业主电话',dataIndex:'arr_tel',width:80 },
+		{header:'房屋地址',dataIndex:'arr_address',width:180 },
+		{header:'通知时间',dataIndex:'order_date',width: 85},
+		{header:'业务员',dataIndex:'ywy',width:80 },
+		{header:'距离安装日期',dataIndex:'jl_day',width: 85},
+		{header:'状态',dataIndex:'dh_sts',width: 85},
+		{header:'欠货',dataIndex:'qh_sts',width: 65}
+       ]);
+   
+     //产品信息表格
+    var grid1 = new Ext.grid.EditorGridPanel({
+    	el: 'List',
+    	width:document.body.clientWidth-15, 
+    	height:document.body.clientHeight-65,
+    	title:'待送货的订单列表',
+    	ds: orderDetailstore1,
+        cm: cm1,
+		plugins: new Ext.ux.grid.GridSummary(),
+        frame:false,
+        clicksToEdit:1,
+		enableHdMenu:false,
+        stripeRows:true,
+        columnLines: true,
+		viewConfig: {
+			forceFit: true,
+			getRowClass : function(record,rowIndex,rowParams,store){
+                  
+                 if(record.data.qh_sts == '欠货'){
+                           return 'x-grid-record-red';
+                 }
+                
+            }
+			},
+		bbar: new Ext.PagingToolbar({  
+                 store: orderDetailstore1,  
+                 pageSize: 15,  
+                 displayInfo: true,  
+                 displayMsg: "本页显示第{0}条到第{1}条记录,一共{2}条",  
+                 emptyMsg: "没有记录"   
+             }),
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid1.render();
+    
+    //列表刷新之前先执行
+	orderDetailstore1.on('beforeload',function(){
+		Ext.apply(
+			this.baseParams, {
+				start:0,
+				 limit:15,
+				arr_man:encodeURI(Ext.get('arr_man').dom.value),
+				 Sts:encodeURI(Ext.get('Sts').dom.value),
+				 Agent_Code:Ext.get('Agent_Code').dom.value,
+				 sjqh_sts:encodeURI(Ext.get('qh_sts').dom.value),
+				 qh_proc:encodeURI('欠货未处理')
+				
+			});
+	});
+    orderDetailstore1.load();//刷新列表
+	
+	
+	//点击订单
+   grid1.on("rowdblclick",function(grid1,rowIndex,e){
+             e.preventDefault();
+             if(rowIndex<0){return;}
+             var record = grid1.getSelectionModel().getSelected();
+            
+			 opr('display?proname=production/order_reshd.htm&ID='+record.get("order_code"));
+			 if(form1.d_Flag.value == "1")
+			 {
+				 orderDetailstore1.load();
+			 }
+            
+        });
+        
+   //搜索成品
+   Ext.get("Btncx").on("click",function(){
+   formMap = DWRUtil.getValues("form1");
+       orderDetailstore1.load();
+   });
+ 
+  });
+</script>
+	<form name="form1" method="post" action="" id="form1">
+		<input type="hidden" name="d_Flag" id="d_Flag" value="0">
+        
+		<table width="100%" border="0">
+			<tr>
+				<td>
+					<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+						<tr height="30">
+							<td
+								style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">
+								<img src="images/loadtree/mdmde.gif" WIDTH="18" HEIGHT="18">欠货管理</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr >
+			   <td width="100%">业主姓名/电话/地址：
+			     <input id="arr_man" name="arr_man"
+														type="text">
+                                                        
+             状态：
+            <select name="Sts">
+                <option value="已送货">已送货</option>
+            </select>
+             货物状态<select name="qh_sts">
+                <option value="欠货">欠货</option>
+            </select>
+            
+            门店：<select  name="Agent_Code" id="Agent_Code" >
+                    
+								   
+                                  <option>$$XL0008,</option>
+                              </select>
+                                            
+			     <input name="Btncx" id="Btncx"
+														value="查询" type="button">
+														 </td>
+			</tr>
+			<tr>
+				<td>
+					<table width="100%" border="0" cellpadding="0" cellspacing="0">
+						<tr valign="top">
+							<td >
+								<table width="100%" border="0">
+									<tr>
+										<td>
+											<div id="List"></div>
+										</td>
+									</tr>
+								</table>
+							</td>
+							
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

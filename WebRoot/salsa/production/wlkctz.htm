@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>出库单</title>
+<base target="_self"/>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/easyui/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/easyui/icon.css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-webase.js"></script>
+<script type="text/javascript" src="js/easyui/json2.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.edatagrid.js"></script>
+<script type="text/javascript" src="js/easyui/easyui.plugin.hy.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+
+</head>
+<body >
+<script type="text/javascript">
+$(function() 
+  {
+     //初始化表单数据
+    var $dg1=$('#orderDetails');
+    //表格数据
+    $dg1.datagrid({
+				width:'100%',
+				height:'auto',
+				nowrap: true,
+				autoRowHeight: false,
+				striped: true,
+				singleSelect:true,
+				collapsible:true,
+				url:'query?proname=MJS032&SPBM=@@SPBM,',
+				showFooter:true,
+				remoteSort: false,
+				idField:'id',
+				title:'@@SPBM, 出入库台账',
+				rownumbers:true,
+				fit:false,
+				fitColumns:true,
+				columns:[[
+				    {title:'发生日期',field:'rq',width: 85},
+        			{title:'物料编码',field:'spbm',width:85},
+        			{title:'名称',field:'spmc',width: 205},
+					{title:'数量',field:'sl',width: 55,align:"right",sum:"true"},
+        			{title:'单价',field:'dj',width: 55},
+        			{title:'金额',field:'je',width: 65,align:"right",sum:"true"}, 
+					{title:'备注',field:'demo',width: 105}
+        			
+        			
+    			]]
+			});	
+ });
+</script>
+<form name="form1" method="post" action="" id="form1" onsubmit="return false;">
+  <table width="100%" border="0">
+    <tr>
+      <td>
+	     <div id="orderDetails"></div>
+	  </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+
+});
+
+</script>
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr align="center" height="5"> 
+		<td>
+		
+		</td>
+	</tr>
+	<tr align="center">
+		<td>
+		<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><img
+					src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">销售单查询</td>
+				<td style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"></td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+	<td>
+	   <form name="form1" method="post" action="display?proname=taobao/xsd_list1_content.htm" id="form1" target="cardframe">
+	     <table width="100%"  border="0" cellpadding="1" cellspacing="1">
+           <tr>
+             <td width="6%">&nbsp;</td>
+             <td>查询条件：
+                 <input type="text" name="CXTJ" id="CXTJ" value="" size="20">
+      备注：
+      <input type="text" name="seller_memo" id="seller_memo" size="15">
+      处理状态：
+      <select name="Order_Sts" id="Order_Sts">
+       
+        <option value="2">已发货</option>
+		<option value="0">待处理</option>
+        <option value="1">配货中</option>
+        <option value="6">已作废</option>
+       
+        
+        <option value="">全部</option>
+       
+      </select>
+      客服专员：
+      <select name="KF_Man" id="KF_Man">
+	      <option value="">全部</option>
+	      <option>$$XLS021,</option>
+      </select>
+</td>
+           </tr>
+           <tr>
+             <td>&nbsp;</td>
+             <td>店面名称：
+                 <select name="seller_nick" id="seller_nick">
+                   <option value="">全部</option>
+				   <option>$$XLS018,</option>
+                   
+                 </select>
+      平台内类型：
+      <select name="type" id="type">
+        <option value="">全部</option>
+		<option value="fixed">淘宝</option>
+        <option value="AGENT">淘宝分销</option>
+		 <option value="sop">京东</option>
+      </select>
+      
+      <select name="DATE_TYPE">
+	       <option value="Pay_Time">订货日期</option>
+		   <option value="End_Date">发货日期</option>
+      </select>
+      ：<input type="text" name="DIY_DATE1" id="ORDER_DATE1"  size="10" value="@@LS.FIRSTDAYSOFCURMONTH," readonly onClick="javascript:ShowCalendar(this)">
+      -
+      <input type="text" name="DIY_DATE2"  id="ORDER_DATE2"  size="10"  value="@@LS.CURDATE," readonly onClick="javascript:ShowCalendar(this)"> 
+      
+      产品名称：
+      <input type="text" name="title" id="title" size="15">
+             <input type="submit" name="BtnCx" id="BtnCx"  value="查询">                   </td>
+           </tr>
+         </table> 
+      </form>
+	</td>
+	</tr>
+	
+	<tr>
+      <td>
+         <IFRAME id="cardframe" name="cardframe"
+						src=""
+						frameBorder=0 width="100%" scrolling=auto height="380"></IFRAME>
+       
+      </td>
+    </tr>
+    <tr></tr>
+  </table>
+  
+
+</body>
+<script language="javascript">
+function go(){
+    if('@@LS.YHZEG,' == 'ywy'){
+      
+       form1.YWY.options.length=0; //清除下拉框的值
+       form1.YWY.options[0]=new Option('@@LS.XM,','@@LS.XM,');
+      }
+    form1.submit();
+}
+go();
+</script>
+</html>

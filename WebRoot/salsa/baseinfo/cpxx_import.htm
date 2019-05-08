@@ -1,0 +1,492 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>导入产品数据</title>
+		<base target="_self"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<link href="css/style1.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+        <object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+        </object> 
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<script src="inc/dateams.js" type=text/javascript></script>
+         <script src="http://oss.sheetjs.com/js-xlsx/xlsx.full.min.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+        <script type="text/javascript" src="js/extjs/openWindow.js"></script>
+		
+		<script type='text/javascript' src='dwr/engine.js'></script>
+		<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+        
+
+	</head>
+
+	<body>
+		<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+	 var store = new Ext.data.JsonStore({
+        fields: ['value', 'name']
+    });
+    var items;
+	
+	
+	Ext.get("Agent_Code").on("change",function(){
+	   
+       formMap = DWRUtil.getValues("form1");
+	   
+       DwrComm.parseAL('XLP009',formMap,{callback:function(list){
+           store.loadData(list);
+           items=list;
+       },async:false});
+	   
+	   var s_sup;
+               DwrComm.parseMJ('MJ0S46',formMap,{callback:function(list){
+                   s_sup = list; 
+				   form1.BRANDIMAGEURL.value = s_sup[0].brand_imageurl;
+				   form1.BRANDCHNNAME.value = s_sup[0].brand_name;
+				   form1.ADHAGENTCODE.value = s_sup[0].adh_agentcode;
+				   
+            
+               },async:false});
+	   
+	   
+        //DWRUtil.removeAllOptions("Series_Code");
+		//var arr={"","全部"};
+		//var arr=[{"name":"全部","value":""}];
+		//DWRUtil.addOptions("Series_Code",arr,"value","name");
+        //DWRUtil.addOptions("Series_Code",items,"value","name");   
+   });
+	
+   
+    //产品列表存储
+    var orderDetailstore = new Ext.data.JsonStore({
+         url:"work?proname=EJQ090",
+        root:"root",
+        fields: ['型号','品名','规格','单位','进货价','售价','库存','备注']
+    })
+	
+
+
+    
+    //产品列表表格
+     var cm = new Ext.grid.ColumnModel([
+         new Ext.grid.RowNumberer(),//自动行号
+      
+        {header:'型号',dataIndex:'型号',width: 125},
+        {header:'品名',dataIndex:'品名',width: 285},
+		{header:'规格',dataIndex:'规格',width: 125},
+		{header:'颜色',dataIndex:'颜色',width: 95,hidden:true},
+      {header:'单位',dataIndex:'单位',width: 95},
+	  {header:'进货价',dataIndex:'进货价',width: 135},
+	  {header:'售价',dataIndex:'售价',width: 135},
+	  {header:'库存',dataIndex:'库存',width: 105},
+	  {header:'备注',dataIndex:'备注',width: 235}
+	 
+       
+       ]);
+    //商品列表表格
+    var summary = new Ext.ux.grid.GridSummary(); 
+    var grid = new Ext.grid.EditorGridPanel({
+    	el: 'productList',
+    	width:document.body.clientWidth-25, 
+    	height:325,
+    	title:'产品数据导入(模板：型号,品名,规格,单位,进货价,售价,库存,备注)',
+    	ds: orderDetailstore,
+        cm: cm,
+        frame:false,
+		enableHdMenu:false,
+		viewConfig: {
+            forceFit: true,
+			getRowClass:function(record,index,p,ds) {
+                  var cls = '';
+				 
+				  if(record.data.product_attr == "特价品")
+				  {
+					  cls="x-grid-record-red";
+					 
+				  }
+				  return cls;
+            }
+        },
+        plugins: summary,
+        clicksToEdit:1,
+        stripeRows:true,
+        columnLines: true,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+        
+        
+    });
+    grid.render();
+	
+	
+	this.uploadreload=function(s_json){
+	   
+	  // alert("fdfdfdfd="+s_json);
+	   var data=Ext.util.JSON.decode(s_json);//字符串转json对象
+	    var store=new Ext.data.JsonStore(  {
+	        data: data,
+	        autoLoad:true,
+	        root:'root',
+	         fields: ['型号','品名','规格','单位','进货价','售价','库存','备注']
+	    });
+		
+		store.each(function (record) {
+            grid.store.add(record);
+         });
+
+      } 
+   // orderDetailstore.load({params:{ID:Ext.get('ID').dom.value}});
+
+   //表格编辑前 
+   grid.on("beforeedit", beforeEdit, grid); 
+   function beforeEdit(e) { 
+      var record = e.record;// 被编辑的记录 
+      if('!!MJQ064,22' == 'T') return false;
+       formMap = DWRUtil.getValues("form1");
+      
+    }
+    
+  
+   //表格编辑后
+   grid.on("afteredit", afterEdit, grid); 
+   
+   function afterEdit(e) { 
+   var record = e.record;// 被编辑的记录  
+       e.record.set("sl",parseFloat(e.record.get("spsl"))-parseFloat(e.record.get("zmsl")));
+       e.record.set("je",parseFloat(e.record.get("sl"))*parseFloat(e.record.get("dj")));
+       updateData();
+   
+   };
+   
+   //保存
+  Ext.get("BtnSave").on("click",function(){
+	   if(form1.Agent_Code.value == "")
+	   {
+		    alert("请选择产品所在的店铺");
+			return false;
+	   }
+	   /*if(form1.Series_Code.value == "")
+	   {
+		    alert("请选择产品所属的类型");
+			return false;
+	   }*/
+       if(checkAndSave()) {alert("保存成功,请点击【同步到手机】按钮，把数据导入系统!");}
+   }); 
+    //删除单据
+  Ext.get("BtnDel").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       if(!confirm("你确认要将整张单据删除吗？")) return false;
+       DwrComm.parseIN('INP026',formMap,'delete',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                         
+                     }else
+                     {
+                        dialogArguments.document.getElementById('d_Flag').value="1";
+                        window.close();
+                     }
+                    },async:false});
+   });
+    //删除记录
+  Ext.get("BtnDelRecord").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       var record = grid.getSelectionModel().getSelected();
+       if(record == null)
+       {
+          alert("请选择要删除的记录!");
+          return false;
+       }
+       grid.store.remove(record);
+      
+   }); 
+   
+   
+    
+   
+   //保存数据，公用
+  function checkAndSave()
+  {
+      
+       form1.BtnSave.disabled = true;
+	   var vRecords = grid.store.data.items;
+       var vCount = vRecords.length; //得到记录长度
+       //订单没有数据
+       if(vCount == 0)
+       {
+          form1.SPBM.focus();
+		  form1.BtnSave.disabled = false;
+          return false;
+       } 
+       
+	   if (vCount > 0) {
+        //begin 将记录对象转换为字符串（json格式的字符串）
+      
+        var d_check="0";
+        var vDatas = '[';
+        for (var i = 0; i < vCount; i++) {
+            /*if(vRecords[i].get("code") == "0"){
+                alert("行的【数量】没有填写！");
+                d_check="1";
+                break;
+            }*/
+            vDatas += Ext.util.JSON.encode(vRecords[i].data) + ',';
+
+        }
+        if(d_check =="1") 
+		{
+		    form1.BtnSave.disabled = false;
+			return false;
+		}
+        vDatas = vDatas.substr(0, vDatas.length - 1) + ']';
+
+        //end 将记录对象转换为字符串（json格式的字符串）
+      }
+       form1.d_JsonData.value=vDatas;
+	   //alert(vDatas);
+	   formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('IN0A04',formMap,'insert',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+						  form1.BtnSave.disabled = false;
+                         return false;
+                     }else
+                     {
+						  form1.BtnSave.disabled = false;
+                        return true;
+                     }
+                    },async:false});
+     return true;
+  } 
+   //关闭
+  Ext.get("BtnClose").on("click",function(){
+       window.close();
+    
+   }); 
+   
+   Ext.get("BtnSCWJ").on("click",function(){
+	  
+         var win=NewWinCustMD('display?proname=order/file_upload.htm&SRC=CPXX&tmp='+Math.random(),window,450,650);
+		
+		 if(form1.d_Flag.value=="1")
+		{
+		   
+		   grid.store.proxy.conn.url="work?proname=EJ0001" ;
+		   grid.store.load({params:{d_SPBM:Ext.get('d_SPBM').dom.value}});
+		   
+		}  
+        
+   });  
+  
+    Ext.get("BtnDownLoad").on("click",function(){
+		
+		
+	  
+         if(form1.Agent_Code.value == "")
+	    {
+		    alert("请选择产品所在的店铺");
+			return false;
+	     }
+		 
+		/* if(form1.BRANDIMAGEURL.value=='')
+		 {
+			 alert(form1.BRANDCHNNAME.value+" 的总部没有与客串串合作，无法下载，请直接点【导入】通过Excel模板导入!");
+			 return false;
+		 }*/
+		 
+		 if(form1.ADHAGENTCODE.value == '')
+		 {
+			 alert("总部还没有授权你开"+form1.BRANDCHNNAME.value+' 店，请联系总部授权！')
+			 return false;
+		 }
+		 
+		 if (!confirm("你确认要从总部下载吗？")) return false;
+		  Ext.MessageBox.wait('数据下载中...')
+		
+		
+		 
+		 
+		  formMap = DWRUtil.getValues("form1");
+		 
+		   
+		   form1.BtnDownLoad.value="正在下载...";
+		   
+		  DwrComm.parseIN('INP016',formMap,'call',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+			     Ext.MessageBox.hide();
+			    Ext.get('BtnDownLoad').dom.disabled = false;
+           }else{
+		      alert("下载成功，你可登录手机端->产品功能中查看产品！");
+			   window.location.href="display?proname=baseinfo/productinfo.htm&Agent_Code="+form1.Agent_Code.value;
+			   Ext.get('BtnDownLoad').dom.disabled = false;
+			     Ext.MessageBox.hide();
+		       form1.BtnDownLoad.value="从总部下载";
+		   }
+       },async:false});
+        
+   });
+   
+   //生成总部品牌数据  
+   
+    Ext.get("BtnTryBuiler").on("click",function(){
+	  
+         
+		 
+		 if (!confirm("你确认要生成总部数据吗？")) return false;
+		 
+		  formMap = DWRUtil.getValues("form1");
+		 
+		   
+		   form1.BtnTryBuiler.value="正在生成...";
+		  DwrComm.parseIN('INP067',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+			    Ext.get('BtnTryBuiler').dom.disabled = false;
+           }else{
+		      alert("生成成功，你可直接下载产品！");
+			   Ext.get('BtnTryBuiler').dom.disabled = false;
+		       form1.BtnTryBuiler.value="生成品牌数据";
+		   }
+       },async:false});
+        
+   });  
+   
+   
+   
+   
+   
+   
+   
+     //结算
+    Ext.get("BtnJS").on("click",function(){
+
+		  if(form1.Agent_Code.value == "")
+	   {
+		    alert("请选择门店");
+			return false;
+	   }
+       if(checkAndSave()){
+	        
+			 DwrComm.parseIN('IN0A04',formMap,'call',{callback:function(data){
+           if (data != 'ok'){
+               alert("导入失败");
+			   // Ext.get('BtnJS').dom.disabled = false;
+		      
+           }else{
+		      alert("导入成功，你可以到手机端->成交订单中查看订单！");
+			   //window.location.href="display?proname=baseinfo/productinfo.htm&Src_Series=999999999";
+			   window.location.reload();
+			   //Ext.get('BtnJS').dom.disabled = false;
+		      
+		    }
+          },async:false});
+	   }else{
+	      alert("无数据或数据错误，无法导入!");
+	   }
+        
+   });
+  
+  
+  
+  
+   
+});
+</script>
+		<form name="form1" method="post" action="" id="form1">
+            <input type="hidden" name="d_Flag"  id="d_Flag" value="0">
+			<input type="hidden" name="d_JsonData" id="d_JsonData"  value="">
+			<input type="hidden" name="d_SPBM" id="d_SPBM">
+			<input type="hidden" name="SH_FLAG" id="SH_FLAG">
+            <input type="hidden" name="ID"  id="ID"  value="@@LS.DWDM,">
+			<input type="hidden" name="BRANDIMAGEURL" id="BRANDIMAGEURL" value="">
+            
+            
+
+			<table width="100%" border="0" cellpadding="1" 
+							cellspacing="0">
+				<tr >
+					<td colspan="2" >
+						<table width="100%" border="0" align="center" cellpadding="0"
+							cellspacing="0">
+
+							<tr>
+								<td colspan="10" align="center">
+									<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+										<tr height="30">
+											<td align="center"
+												style="font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;">店内产品信息批量导入</td>
+										</tr>
+									</table>								</td>
+							</tr>
+							<tr>
+								<td align="right">&nbsp;</td>
+								<td width="58%" colspan="3" align="left">&nbsp;</td>
+							</tr>
+							<tr class="tabletoptitle">
+								<td align="right" width="10%">店铺名称：</td>
+								<td colspan="3"><select  name="Agent_Code" id="Agent_Code" >
+								    <option value="">选择</option>
+                                  <option>$$XL0008,</option>
+                              </select>
+                              
+                                <input type="file" onchange="importf(this)" id="BtnImportExcel" />   <a href="salsa/download/CPXX.xls" target="_blank">【下载模板】</a> </td>
+							</tr>
+						</table>					</td>
+				</tr>
+
+				<tr>
+					<td colspan="2">
+						<table width="100%" border="0">
+							<tr class="tabletoptitle">
+								<td width="69%" align="center"><input type="hidden" name="BRANDCHNNAME" id="BRANDCHNNAME" value="" readonly class="TEXTDISABLED"><input type="hidden" name="ADHAGENTCODE" id="ADHAGENTCODE" size="10" value=""  readonly class="TEXTDISABLED"> 
+								  <input type="hidden" name="BtnDownLoad"  id="BtnDownLoad" value="从总部下载">
+                                </td>
+							  <td width="31%">
+									<input type="hidden" name="BtnSCWJ" id="BtnSCWJ"  value="导入">
+									
+									<input type="button" name="BtnDelRecord" id="BtnDelRecord"  value="删除记录">
+									<input type="hidden" name="BtnClose"  id="BtnClose" value="关  闭">
+									<input type="hidden" name="BtnDel" id="BtnDel"  value="删除单据"></td>
+							</tr>
+						</table>					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div id='productList'></div>					</td>
+				</tr>
+				
+
+				<tr height="10">
+					<td colspan="2">
+						<table width="100%" border="0" cellpadding="1" cellspacing="0">
+							<tr>
+								<td width="59%">&nbsp;</td>
+								<td width="41%"><table width="100%" border="0">
+									<tr>
+											<td>
+										  </td>
+										</tr>
+										<tr>
+											<td>
+												<input type="hidden" name="BtnSave" id="BtnSave"  value="保  存">
+												<input type="button" name="BtnJS" id="BtnJS" size="10"  value="导入" >	
+                                                
+                                              <input type="hidden" name="BtnTryBuiler"  id="BtnTryBuiler" value="生成品牌数据">	
+												</td>
+										</tr>
+									</table>							  </td>
+							</tr>
+						</table>					</td>
+				</tr>
+			</table>
+
+		</form>
+
+	</body>
+</html>

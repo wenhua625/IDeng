@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/easyui/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/easyui/icon.css">
+
+
+
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script>
+		$(function(){
+		    $('#win').window('close'); 
+			$('#productList').datagrid({
+				
+				width:"100%",
+				height:"auto",
+				nowrap: true,
+				autoRowHeight: false,
+				striped: true,
+				singleSelect:true,
+				collapsible:true,
+				url:'query?proname=MJS002',
+				remoteSort: false,
+				title:"类别管理",
+				iconCls:'icon-edit',
+				idField:'bm',
+				columns:[[
+					{title:'编码',field:'bm',width:75},
+        			{title:'名称',field:'mc',width: 250},
+        			{title:'类别',field:'lb',width: 70},
+        			
+        			{title:'是否启用',field:'qy_mc',width: 75} 
+    			]],
+				pagination:true,
+				rownumbers:true,
+				toolbar:[{
+					id:'btnadd',
+					text:'新增',
+					iconCls:'icon-add',
+					handler:function(){
+					    $('#bm').attr({ readonly:false });
+					    $('#form1').form('load',{bm:"",mc:"",lb:""});
+					    $('#win').window('open');
+						//$('#btnsave').linkbutton('enable');
+						//alert('add')
+					}
+				},'-',{
+					id:'btnupdate',
+					text:'修改',
+					iconCls:'icon-edit',
+					handler:function(){
+					    var row = $('#productList').datagrid('getSelected'); 
+					    if(!row) 
+					    {
+					       $.messager.alert('提示信息','请先选择要更新的记录。','info'); 
+					       return false;
+					    }else
+					    {
+					        $('#bm').attr({ readonly:true });
+					        $('#form1').form('load',row); 
+					        $('#win').window('open');
+					    }
+					    
+						//$('#btnsave').linkbutton('enable');
+						//alert('add')
+					}
+				}]
+			});
+			$('#form1').form({  
+                url:"work?proname=INS002",  
+    			onSubmit:function(){
+                    return $(this).form('validate');
+    			},  
+    		    success:function(data){  
+        		    if (data=="ok")
+        		    {
+        		      alert("操作成功!");
+        		      $('#win').window('close');
+        		      $("#productList").datagrid('reload');   
+        		    }else 
+        		    {  alert(data);}
+        		     
+    		    }  
+			});
+			
+
+			
+		});
+		function closewin(){
+			    $('#win').window('close'); 
+		}
+		function save(){
+			     $('#form1').submit(); 
+		 }
+		
+		
+</script>
+<script type="text/javascript">
+     function opr(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,550,850);
+        
+     }
+     
+    
+</script>
+
+</head>
+
+<body>
+
+<input type="hidden" name="d_Flag" value="0">
+<table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr align="center" height="5">
+    <td></td>
+  </tr>
+  <tr align="center">
+    <td><table cellspacing=0 cellpadding=0 border="0" width="100%">
+      <tr height="30">
+        <td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><img
+					src="images/webtype/colon.gif" width="24" height="24">产品类别管理</td>
+        </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td></td>
+  </tr>
+  <tr>
+    <td style="background-color:#FFFFFF"><!--<IFRAME id="cardframe" name="cardframe"
+						src="display?proname=report/ywdjcz_content.htm&ORDER_DATE1=@@LS.FIRSTDAYSOFCURMONTH,&ORDER_DATE2=@@LS.CURDATE,&Note_Type=XS"
+						frameBorder=0 width="100%" scrolling=auto height="450"></IFRAME>-->
+        <div id="productList" ></div></td>
+  </tr>
+  <tr></tr>
+</table>
+<div  id="win" class="easyui-window" title="类别信息"  icon="icon-save" style="width:600px;height:450px;">  
+    
+     <form id="form1" method="post">
+           <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;基本信息</td>
+          </tr>
+          <tr> 
+            <td width="200" align="right" bgcolor="#C4DFDC" class="tableleft"> 
+              代码：            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="bm" id="bm" class="easyui-validatebox" type="text"  maxlength="20" size="10"></td>
+          </tr>
+         
+          <tr> 
+            <td width="200" align="right" bgcolor="#C4DFDC" class="tableleft"> 
+              名称：            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="mc" class="easyui-validatebox" type="text" data-options="required:true" size="25">            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">类别：</td>
+            <td bgcolor="#FFFFFF"> 
+                 <select name="lb" >
+                <option value="成品">成品</option>
+                <option value="物料">物料</option>
+              </select>         </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">是否启用：</td>
+            <td bgcolor="#FFFFFF"> 
+                 <select name="qy_flag" >
+                <option value="0">启用</option>
+                <option value="1">停用</option>
+              </select>         </td>
+          </tr>
+        </table>
+            <div style="padding:5px;text-align:center;">  
+            <a  href="#" class="easyui-linkbutton" icon="icon-ok" onClick="save()">保存</a>  
+            <a  href="#" class="easyui-linkbutton" icon="icon-cancel" onClick="closewin()">取消</a>  
+        </div>
+   </form> 
+    
+</div>
+
+</body>
+
+</html>

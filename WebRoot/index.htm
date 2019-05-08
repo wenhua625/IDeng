@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<HTML>
+	<HEAD>
+		<TITLE>客串串服务系统</TITLE>
+		<META http-equiv=Content-Type content="text/html; charset=gb2312">
+		<META content="MSHTML 6.00.2900.3492" name=GENERATOR>
+        
+		<object id="LODOP" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+        </object>  
+		<STYLE type=text/css>BODY {
+	BACKGROUND-COLOR: #646464
+}
+.aa {
+	FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: #ffffff; FONT-FAMILY: "幼圆"
+}
+.bb {
+	FONT-WEIGHT: bold; FONT-SIZE: 14pt; COLOR: #ffffff; FONT-FAMILY: "幼圆"; TEXT-DECORATION: none
+}
+.cc {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; COLOR: #ffffff; FONT-FAMILY: "幼圆"
+}
+</STYLE>
+
+		<STYLE type=text/css>.style12 {
+	FONT-SIZE: 12pt; FONT-FAMILY: "幼圆"
+}
+.style13 {
+	FONT-SIZE: 10pt; COLOR: #ffffff; FONT-FAMILY: "幼圆"
+}
+.style14 {
+	FONT-SIZE: 12pt
+}
+.style16 {
+	COLOR: #ffffff; FONT-FAMILY: "幼圆"
+}
+A:link {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ff9933; TEXT-DECORATION: underline
+}
+A:active {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+</STYLE>
+
+<script>
+String.prototype.replaceAll  = function(s1,s2){  
+    return this.replace(new RegExp(s1,"gm"),s2);   //这里的gm是固定的，g可能表示global，m可能表示multiple。 
+}
+
+function init()
+{
+	document.forms[0].elements[0].focus();
+}
+
+function logon()
+{
+	var logonForm = document.forms[0];
+	if( logonForm.username.value == "" )
+	{
+		alert("友情提示：请输入账号！");
+		logonForm.username.focus();
+		return false;
+	}
+	 if(logonForm.password.value.length == 0)
+     {
+        alert("友情提示：请输入密码!");
+        logonForm.password.focus();
+        return false;
+
+     }
+	logonForm.ipmac.value = LODOP.GET_SYSTEM_INFO('NetworkAdapter.1.PhysicalAddress');
+	
+	//logonForm.submit();
+	return true;
+}
+ function showAddress(){
+       alert("你电脑的系统备案号为："+LODOP.GET_SYSTEM_INFO('NetworkAdapter.1.PhysicalAddress').replaceAll("-","")+"\n\n请联系总部系统管理员进行备案。");
+  }
+
+</script>
+
+</HEAD>
+	<BODY>
+		<TABLE cellSpacing=0 cellPadding=0 width="60%" align=center border=0>
+			<TBODY>
+				<TR>
+					<TD colSpan=5 height=100>&nbsp;
+						
+					</TD>
+				</TR>
+				<TR>
+					<TD width=153 rowSpan=2>&nbsp;					</TD>
+					
+					<TD vAlign=top width=540 bgColor=#000000 height=90 algin="right">
+						<DIV align=center>
+							<img style="width: 100%" src="images/logon/top.jpg" width="100%">
+						</DIV>
+				  </TD>
+					
+					<TD width=153 rowSpan=2>&nbsp;					</TD>
+				</TR>
+				<TR>
+					<TD height="204" vAlign=top bgColor=#000000>
+						<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+							<TBODY>
+								<TR>
+									<TD vAlign=top>
+										<FORM method="post" action="work?proname=LOGON" name="logonForm" onSubmit="javascript:return logon();">
+											<TABLE cellSpacing=0 cellPadding=0 width="85%" align=center
+												border=0>
+												<TBODY>
+													
+													<TR borderColor=#000000 >
+														<TD class="unnamed2 style13" width="39%" height=50>
+															<DIV class=aa align=right>
+																手机号:
+															</DIV>
+														</TD>
+														<TD width="61%" height=50>
+															<INPUT size=15 name=username style="ime-mode:disabled;">
+														</TD>
+													</TR>
+													<TR borderColor=#000000>
+														<TD height=30>
+															<DIV class=aa align=right>
+																密&nbsp;&nbsp;码:
+															</DIV>
+														</TD>
+														<TD height=30>
+															<INPUT type=password size=15 name=password>
+															<input type="hidden" name="ipmac">
+														</TD>
+													</TR>
+													<tr ><td height="20"></td></tr>
+													<TR borderColor=#000000>
+														<TD colSpan=2 height=30 >
+															<DIV align=center>
+																<INPUT type=submit value=登陆 name=cmdOk>
+																&nbsp;&nbsp;
+																<INPUT type=reset value=取消 name=Submit2>
+																
+															</DIV>
+														</TD>
+														
+													</TR>
+													
+												</TBODY>
+											</TABLE>
+										</FORM>
+									</TD>
+								</TR>
+								<tr>
+								  <td height="60" align="right" style="FONT-SIZE: 9pt"><a href="#" onClick="javascript:showAddress()">【电脑备案】</a><a href="ocx/FSL.zip">【桌面快捷图标】</a> <a href="ocx/install_lodop.exe" >【打印控件32位】</a> <a href="ocx/install_lodop64.exe" >【打印控件64位】</a></td>
+								</tr>
+							</TBODY>
+						</TABLE>
+				  </TD>
+				</TR>
+			</TBODY>
+		</TABLE>
+	</BODY>
+</HTML>

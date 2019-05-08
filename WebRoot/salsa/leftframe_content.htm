@@ -1,0 +1,38 @@
+<html>
+	<HEAD>
+
+		<!-- HTTP 1.1 -->
+		<meta http-equiv="Cache-Control" content="no-store" />
+		<!-- HTTP 1.0 -->
+		<meta http-equiv="Pragma" content="no-cache" />
+		<!-- Prevents caching at the Proxy Server -->
+		<meta http-equiv="Expires" content="0" />
+		<META http-equiv=Content-Type content="text/html; charset=GBK">
+
+		<link href="css/shop.css" rel="stylesheet" type="text/css">
+		<SCRIPT language=JavaScript src="js/module_menu.js"></SCRIPT>
+		<SCRIPT language=JavaScript>
+function moduleClick(obj,url){
+    var oicqItemNums=document.all.item("oicqItemNum").value;
+    for (var j=1;j<=oicqItemNums;j++ ){
+
+	   if(obj == j){
+	        document.getElementById("tb_"+j).className="menu_table_mousedown";
+		}
+	   else{
+		  document.getElementById("tb_"+j).className="menu_table_mouseout";
+		}
+    }
+   
+    parent.parent.main.location=url;
+
+}
+</SCRIPT>
+	</HEAD>
+	<BODY leftMargin=1 topMargin=10 marginheight="0" bgcolor="#e8f0ec">
+		<TABLE width=100 align=center>
+			$$TREE01,
+
+		</table>
+	</BODY>
+</html>

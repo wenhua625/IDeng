@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+
+
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+<script type="text/javascript">
+     
+     function opr(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,450,550);
+        
+     }
+    
+</script>
+
+</head>
+
+<body>
+<script type='text/javascript'>
+Ext.onReady(function(){
+    
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    var orderDetailstore = new Ext.data.JsonStore({
+         url:"work?proname=MJ8038",
+        root:"root",
+        fields: ['spbm','psid','ysmc','spmc','xhgg','sl','metail_code','product_code','product_name','product_size','product_untl','wl_sl','product_num','lower_num','xq_sl','code','id_dhd','jc_sl','cg_sl','yqcgrq','cg_sh','mrp_rq','mrp_id','rq']
+    });
+
+   // var sm = new Ext.grid.CheckboxSelectionModel();
+    var cm = new Ext.grid.ColumnModel([
+        new Ext.grid.RowNumberer(),//自动行号
+        //sm,
+       
+        {header:'编码及型号',dataIndex:'product_code',width: 85},
+        {header:'名称',dataIndex:'product_name',width: 130},
+        {header:'规格',dataIndex:'product_size',width: 100},
+		{header:'单位',dataIndex:'product_untl',width: 50},
+       
+		
+		{header:'需求数',dataIndex:'wl_sl',width: 60},
+		{header:'提交日期',dataIndex:'rq',width: 90,renderer:function(value){   
+    			if(value instanceof Date){   
+        			return new Date(value).format("Y-m-d");   
+    			}else{   
+        			return value;   
+    			}  
+		      }},
+		{header:'要求进仓日期',dataIndex:'yqcgrq',width: 90,renderer:function(value){   
+    			if(value instanceof Date){   
+        			return new Date(value).format("Y-m-d");   
+    			}else{   
+        			return value;   
+    			}  
+		      }},
+		{header:'MRP号',dataIndex:'code',width: 95}
+		
+       
+	   
+       ]);
+    
+    cm.defaultSortable = true;
+  
+    var grid = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'backDetails',
+    	width:document.body.clientWidth-35, 
+    	height:document.body.clientHeight-65,
+    	title:'',
+    	ds: orderDetailstore,
+        cm: cm,
+        //sm:sm,
+		enableHdMenu:false,
+        forceFit:true,
+		viewConfig: {
+            forceFit: true
+        },
+		bbar: new Ext.PagingToolbar({  
+                 store: orderDetailstore,  
+                 pageSize: 15,  
+                 displayInfo: true,  
+                 displayMsg: "本页显示第{0}条到第{1}条记录,一共{2}条",  
+                 emptyMsg: "没有记录"  
+  
+             }),
+        frame:false,
+        clicksToEdit:1,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        columnLines: true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid.render();
+	
+	
+	orderDetailstore.on('beforeload',function(){
+		Ext.apply(
+			this.baseParams, {
+				
+				SPMC:encodeURI(Ext.get('SPMC').dom.value),WLMC:encodeURI(Ext.get('WLMC').dom.value),
+				ORDER_DATE1:form1.ORDER_DATE1.value,
+				ORDER_DATE2:form1.ORDER_DATE2.value
+			});
+	});
+    orderDetailstore.load();
+
+     Ext.get("BtnCX").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       orderDetailstore.load();
+	   
+    });
+	
+	 //双击表格
+     grid.on("rowdblclick",function(grid,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             var record = grid.getSelectionModel().getSelected();
+            // form1.d_Flag.value = "0";
+             opr('display?proname=report/product_cg_mx.htm&MRP_ID='+record.get("mrp_id"));
+            
+      }); 
+     
+
+});
+
+</script>
+<form name="form1" method="post" action="" id="form1">
+<input name="d_Flag" value="0" type="hidden">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr align="center" height="5"> 
+		<td>
+		
+		</td>
+	</tr>
+	<tr align="center">
+		<td>
+		<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;" valign="top"><img
+					src="images/loadtree/mdmde.gif" WIDTH="18" HEIGHT="18">物料需求计划</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+	<td>
+	   
+	   
+	  <table width="100%" border="0" cellpadding="5" cellspacing="0" >
+         <tr> 
+            <td width="9%" align="right">成品型号及名称：</td>
+            <td width="71%"><input type="text" name="SPMC" id="SPMC" size="15" value="" >
+              物料编码或名称：
+                <input type="text" name="WLMC"  id="WLMC" size="15" value="" >
+               
+                提交日期：<input type="text" name="ORDER_DATE1" id="ORDER_DATE1" size="10" readonly onClick="javascript:ShowCalendar(this)" value="@@LS.FIRSTDAYSOFCURMONTH,">
+              - 
+ <input type="text" name="ORDER_DATE2" id="ORDER_DATE2"size="10" readonly onClick="javascript:ShowCalendar(this)" value="@@LS.CURDATE,">
+                <input type="button" name="BtnCx" id="BtnCx" value="查询">  
+                $$EX8038,   </td>
+           
+          </tr>
+        </table>
+        
+	
+	</td>
+	</tr>
+	
+	<tr>
+      <td>
+		<div id="backDetails"></div>
+		 
+       
+      </td>
+    </tr>
+    
+  </table>
+  </form>  
+
+</body>
+
+</html>

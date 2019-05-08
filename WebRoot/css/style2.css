@@ -1,0 +1,168 @@
+UNKNOWN {
+	FONT-SIZE: 9pt; COLOR: #000000; FONT-FAMILY: 宋体
+}
+P {
+	FONT-SIZE: 9pt; COLOR: #000000; FONT-FAMILY: 宋体
+}
+TD {
+	FONT-SIZE: 9pt; COLOR: #000000; FONT-FAMILY: 宋体
+}
+.nn {
+	BACKGROUND-REPEAT: no-repeat
+}
+P {
+	LINE-HEIGHT: 140%
+}
+.pt11 {
+	FONT-SIZE: 10pt
+}
+.pt16 {
+	FONT-SIZE: 16pt
+}
+.pt7 {
+	FONT-SIZE: 7pt
+}
+.pt8 {
+	FONT-SIZE: 8pt
+}
+A:link {
+	COLOR: #003333; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:hover {
+	FONT-SIZE: 9pt; COLOR: #ff0000; TEXT-DECORATION: underline
+}
+A:active {
+	FONT-SIZE: 9pt; COLOR: #003333; TEXT-DECORATION: underline
+}
+.input {
+	BORDER-RIGHT: rgb(56,121,187) 1px solid; BORDER-TOP: rgb(56,121,187) 1px solid; FONT-SIZE: 9pt; BACKGROUND: #e5f2ff; BORDER-LEFT: rgb(56,121,187) 1px solid; COLOR: #003333; BORDER-BOTTOM: rgb(56,121,187) 1px solid
+}
+input {
+	BORDER-RIGHT: rgb(56,121,187) 1px solid; BORDER-TOP: rgb(56,121,187) 1px solid; FONT-SIZE: 9pt; BACKGROUND: #e5f2ff; BORDER-LEFT: rgb(56,121,187) 1px solid; COLOR: #003333; BORDER-BOTTOM: rgb(56,121,187) 1px solid
+}
+
+.input3 {
+	WIDTH: 10px; HEIGHT: 10px
+}
+.input1 {
+	BORDER-RIGHT: rgb(0,0,0) 1px solid; BORDER-TOP: rgb(0,0,0) 1px solid; FONT-SIZE: 9pt; BACKGROUND: #ffffff; BORDER-LEFT: rgb(0,0,0) 1px solid; COLOR: #003333; BORDER-BOTTOM: rgb(0,0,0) 1px solid
+}
+.bar {
+	FONT-SIZE: 9pt; COLOR: #ccff99
+}
+A.bar:visited {
+	FONT-SIZE: 9pt; COLOR: #ccff99; TEXT-DECORATION: none
+}
+
+
+BODY {
+	FONT-SIZE: 15px; COLOR: #00309c; FONT-FAMILY: 宋体
+}
+TD {
+	FONT-SIZE: 9pt; COLOR: #00309c
+}
+INPUT {
+	FONT-SIZE: 9pt; COLOR: #000000
+}
+A {
+	FONT-SIZE: 9pt; COLOR: #00309c; TEXT-DECORATION: none
+}
+A:hover {
+	FONT-SIZE: 9pt; COLOR: #ff6600
+}
+LI {
+	LINE-HEIGHT: 200%
+}
+.form1 {
+	BORDER-RIGHT: #ffffff 0px solid; BORDER-TOP: #999999 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #ffffff 0px solid; COLOR: #9933ff; BORDER-BOTTOM: #999999 1px solid
+}
+.form2 {
+	BORDER-RIGHT: #ffffff 0px solid; BORDER-TOP: #999999 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #ffffff 0px solid; COLOR: #000099; BORDER-BOTTOM: #999999 1px solid
+}
+.WH {
+	FONT: bold 14px 宋体; COLOR: #fff
+}
+.WHS {
+	FONT: 12px 宋体; COLOR: #fff
+}
+.WHS:link {
+	FONT: 12px 宋体; COLOR: #fff
+}
+.WHS:visited {
+	FONT: 12px 宋体; COLOR: #fff
+}
+.WHS:hover {
+	FONT: 12px 宋体; COLOR: #f60
+}
+.X {
+	FONT-WEIGHT: bold; FONT-SIZE: 24px
+}
+.L {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px
+}
+.M {
+	FONT: bold 14px "宋体"
+}
+.C {
+	FONT-SIZE: 14px
+}
+.S {
+	FONT-SIZE: 12px
+}
+.LM {
+	LINE-HEIGHT: 130%
+}
+.LL {
+	LINE-HEIGHT: 150%
+}
+.f11 {
+	FONT-SIZE: 14px
+}
+.f1 {
+	FONT-SIZE: 10px
+}
+.f2 {
+	FONT-SIZE: 12px
+}
+.f3 {
+	FONT-SIZE: 16px
+}
+.f4 {
+	FONT-SIZE: 18px
+}
+.f5 {
+	FONT-SIZE: 24px
+}
+.f6 {
+	FONT-SIZE: 31px
+}
+.lh13 {
+	LINE-HEIGHT: 130%
+}
+.lh15 {
+	LINE-HEIGHT: 150%
+}
+.lh17 {
+	LINE-HEIGHT: 170%
+}
+SELECT {
+	FONT-SIZE: 12px
+}
+INPUT {
+	FONT-SIZE: 12px
+}
+.form {
+	BORDER-TOP-WIDTH: 1px; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 12px; BORDER-LEFT-COLOR: #cccccc; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #cccccc; BORDER-TOP-COLOR: #cccccc; FONT-FAMILY: "宋体"; BACKGROUND-COLOR: #ffffff; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #cccccc
+}
+.form2 {
+	BORDER-TOP-WIDTH: 1px; BORDER-LEFT-WIDTH: 1px; FONT-SIZE: 12px; BORDER-LEFT-COLOR: #cccccc; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #cccccc; BORDER-TOP-COLOR: #cccccc; FONT-FAMILY: "宋体"; BACKGROUND-COLOR: #ececec; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #cccccc
+}
+.form3 {
+	BORDER-RIGHT: #abaeb4 1px solid; BORDER-TOP: #666666 1px solid; FONT-SIZE: 12px; BORDER-LEFT: #666666 1px solid; COLOR: #666666; BORDER-BOTTOM: #abaeb4 1px solid; FONT-FAMILY: "宋体"
+}
+.form4 {
+	BORDER-RIGHT: #abaeb4 0px solid; BORDER-TOP: #666666 0px solid; FONT-SIZE: 12px; BORDER-LEFT: #666666 0px solid; COLOR: #666666; BORDER-BOTTOM: #abaeb4 0px solid; FONT-FAMILY: "宋体"
+}

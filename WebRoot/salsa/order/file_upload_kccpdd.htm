@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base target="_self">
+<title>导入文件</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+
+<script>
+function check()
+{
+	
+    if (form1.WJ.value == "") 
+   {
+	   alert("请先上传文件！");
+	   return false;
+   }
+}
+</script>
+
+</head>
+
+<body >
+<form name="form1" method="post" action="display?proname=order/file_upload_rs.htm" id="form1" enctype="multipart/form-data" onSubmit="return check()">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    
+	
+	
+	<tr>
+      <td height="0">
+        <table width="100%" border="0" style="border-collapse:collapse" bordercolor="#000000">
+          <tr >
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+         
+          <tr > 
+	        <td width="30%" align="center"><input type="file" name="WJ" size="30" ></td>
+             <td width="70%"><input type="submit" name="BtnImport" value="导入" >
+			
+              <a href="downLoad?proname=EX0S55&Agent_Code=@@CK," target="_blank">【下载盘点表】</a>
+             
+             </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+   
+      
+  </table>
+  <table width="100%" border="1">
+  <tr>
+    <td align="right"><font color="red">【操作提示：】</font></td>
+    <td><p><font color="blue">导入前，请先下载EXCEL模板，按照EXCEL模版填写数据后再导入。</font></p>
+      <p><font color="blue">如果总部与客串串已经合作，可以直接下载总部数据，然后再Excel中删除你店不销售的产品后再导入</font></p>
+      <p><font color="blue">Excel文件必须是Excel2003文件</font></p></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+</form>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>设置零售价</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type='text/javascript'>
+function opr(url){
+     NewWinCustMD(url+'&tmp='+Math.random(),window,650,600);
+     
+  	 
+  }
+</script>
+</head>
+
+<body>
+<script language="javascript">
+Ext.onReady(function(){
+    
+     if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+     var formMap = DWRUtil.getValues("form1");
+     
+
+
+	 
+	
+    
+  
+	
+	
+	
+	 Ext.get("BtnSubmit").on("click",function(){
+       
+       formMap = DWRUtil.getValues("form1");
+      if(form1.Agent_Code.value.length==0 || form1.Agent_Code.value.length==0)
+	  {
+	      alert("门店没有选择，无法设置!");
+		  
+		  return false;
+	  }
+	   if(form1.BS.value.length==0 || form1.BS.value.length==0)
+	  {
+	      alert("请填写倍数!");
+		  
+		  return false;
+	  }
+	  
+	  if(!confirm("你确认要调整零售价为进货价的 "+ form1.BS.value+" 倍吗？")) return false;
+      formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('IN0052',formMap,'insert',{callback:function(data){if (data != 'ok'){alert(data);}else{ 
+                      alert("零售价设置成功！");
+					  dialogArguments.document.getElementById('d_Flag').value="1";   
+                      window.close();   
+                   }},async:false});
+      
+    });
+	
+	 
+
+	 
+	
+    
+     
+    
+
+});
+</script>
+<form name="form1" method="post" action="" id="form1">
+  <input name="ID" type="hidden" value="@@ID,">
+  <input name="Agent_Code" id="Agent_Code" type="hidden" value="@@Agent_Code,">
+  <input name="Product_Attr" id="Product_Attr" type="hidden" value="">
+  
+  <input name="d_Flag" id="d_Flag"  type="hidden" value="">
+  
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center" ><b>批量设置零售价</b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+        
+          
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;批量设置零售价</td>
+          </tr>
+          <tr> 
+            <td width="413" bgcolor="#C4DFDC" class="tableleft" align="right">零售价为进货价的倍数：</td>
+            <td width="684" bgcolor="#FFFFFF"> 
+              <input name="BS" type="text" style ="color:#FF0000;font-size:21px" value="" size="10"></td>
+          </tr>
+          <tr> 
+            <td width="413" bgcolor="#C4DFDC" class="tableleft" align="right">&nbsp;</td>
+            <td bgcolor="#FFFFFF">&nbsp;</td>
+          </tr>
+          
+          <tr> 
+            <td width="413" bgcolor="#C4DFDC" class="tableleft" align="right">&nbsp;</td>
+            <td bgcolor="#FFFFFF">&nbsp;</td>
+          </tr>
+        
+          
+          
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="90%" height="40" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" valign="bottom"><div align="center"> 
+          <input name="BtnSubmit"  id="BtnSubmit" type="button" class="ImgButton" value="确  定">
+          &nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+    </tr>
+  </table>
+</form>
+</body>
+
+</html>

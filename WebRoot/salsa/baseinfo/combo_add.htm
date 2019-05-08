@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>套餐信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script lanuage="javascript">
+  function checkInput()
+  {
+      if(form1.PRODUCT_CODE.value.length==0 || form1.PRODUCT_CODE.value.length>20)
+	  {
+	      alert("套餐编码不能为空，请输入!");
+		  form1.PRODUCT_CODE.focus();
+		  return false;
+	  }
+	  
+	  if(form1.PRODUCT_NAME.value.length==0)
+	  {
+	      alert("套餐名称不能为空，请输入!");
+		  form1.PRODUCT_NAME.focus();
+		  return false;
+	  }
+	  
+	  if(form1.PRODUCT_PRICE.value.length==0 || isNaN(form1.PRODUCT_PRICE.value))
+	  {
+	      alert("经销价不能为空或经销价输入不正确，请输入!");
+		  form1.PRODUCT_PRICE.focus();
+		  return false;
+	  }
+	  
+	  if(form1.TYPE_SALES.value.length==0 || isNaN(form1.TYPE_SALES.value))
+	  {
+	      alert("特价不能为空或特价输入不正确，请输入!");
+		  form1.TYPE_SALES.focus();
+		  return false;
+	  }
+	  if(form1.TYPE_BAZAAR.value.length==0 || isNaN(form1.TYPE_BAZAAR.value))
+	 {
+	      
+		  form1.TYPE_BAZAAR.value=0;
+		 
+	  }
+
+	  return true;
+  }
+</script>
+<script type="text/javascript">
+ if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+  var formMap = DWRUtil.getValues("form1");
+ function initPage()
+ {
+	 
+	  if ('@@ID,' != ''){
+		 
+       	 DWRUtil.setValue("Agent_Code","!!MJ0T06,09");
+		 DWRUtil.setValue("PRODUCT_CODE","!!MJ0030,01");
+		 DWRUtil.setValue("PRODUCT_NAME","!!MJ0030,02");
+		 DWRUtil.setValue("PRODUCT_PRICE","!!MJ0030,03");
+	     DWRUtil.setValue("TYPE_SALES","!!MJ0030,04");
+		 DWRUtil.setValue("TYPE_BAZAAR","!!MJ0030,10");
+		 DWRUtil.setValue("DEMO","!!MJ0030,06");
+	     DWRUtil.setValue("STS","!!MJ0030,05");
+		
+	  }
+ }
+ function work(){
+    
+     formMap = DWRUtil.getValues("form1");
+    DwrComm.parseIN('IN0042',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              alert("操作成功!");
+              dialogArguments.document.getElementById('d_Flag').value="1";   
+              window.close();
+           }
+       },async:false});
+}
+
+
+</script>
+<script type="text/javascript">
+	function add(){
+		if(checkInput()){
+			work();		
+		}
+		
+	}
+</script>
+</head>
+
+<body onLoad="initPage()">
+
+<form name="form1" method="post" action="" id="form1">
+  <input type="hidden" name="ID" id="ID" value="@@ID,">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center" ><b> 促销套餐信息</b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;套餐基本信息</td>
+          </tr>
+          <tr>
+		    <td bgcolor="#C4DFDC" class="tableleft" align="right">品牌： </td>
+		    <td bgcolor="#FFFFFF"><select name="Agent_Code">
+		      <option>$$XL1005,</option>
+	        </select></td>
+	      </tr>
+	      
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">套餐编码：            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_CODE" id="PRODUCT_CODE" type="text" class="input" maxlength="20" size="10"><input name="isPublic" type="hidden" value="否">
+			     </td>
+          </tr>
+          <!--  <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft"> 
+              <div align="right">条形码：</div>
+            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_TXM" id="PRODUCT_TXM" type="text" class="input" size="30">
+            </td>
+          </tr>-->
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right"> 
+             套餐名称：            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input name="PRODUCT_NAME" id="PRODUCT_NAME" type="text" class="input" size="30">            </td>
+          </tr>
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;套餐价格信息</td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">经销价：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="PRODUCT_PRICE"  id="PRODUCT_PRICE" size="15" style ="color:#FF0000">
+              
+              <input type="hidden" name="TYPE_AGENT" id="TYPE_AGENT" size="15" style ="color:#FF0000" value="0">            </td>
+          </tr>
+         <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">市场价：</td>
+            <td bgcolor="#FFFFFF">
+            <input type="text" name="TYPE_SALES"  id="TYPE_SALES" size="15" style ="color:#FF0000"></td>
+          </tr>
+		  <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">成本价：</td>
+            <td bgcolor="#FFFFFF">
+              <input type="input" name="TYPE_BAZAAR"  id="TYPE_BAZAAR" size="15" style ="color:#FF0000" value="0">            </td>
+          </tr>
+		  <tr>
+		    <td bgcolor="#C4DFDC" class="tableleft" align="right">价格类型： </td>
+		    <td bgcolor="#FFFFFF"><select name="PRICE_TYPE" id="PRICE_TYPE">
+		      <option>$$XL0028,</option>
+	        </select></td>
+	      </tr>
+		  <tr>
+		    <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;套餐备注信息</td>
+	      </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">状态：</td>
+            <td bgcolor="#FFFFFF"><select name="STS">
+			    <option value="启用">启用</option>
+				<option value="停用">停用</option>
+            </select>
+            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">备注：</td>
+            <td bgcolor="#FFFFFF"> 
+              <textarea name="DEMO" cols="30"></textarea></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="90%" height="40" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" valign="bottom"><div align="center"> 
+          <input name="Submit" type="button" class="ImgButton" value="保存" onClick="add()">
+          &nbsp;&nbsp;&nbsp;&nbsp; 
+          <input name="Submit2" type="reset" class="ImgButton" onClick="window.close()" value="关 闭">
+        </div></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

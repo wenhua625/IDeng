@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>产品管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" src="inc/sort.js"></SCRIPT>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script type="text/javascript">
+ function work(id){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+      form1.PRODUCT_CODE.value = id;
+      var formMap = DWRUtil.getValues("form1");
+      
+     DwrComm.parseIN('IN0002',formMap,'delete',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              alert("操作成功!");
+              window.location.reload();
+              
+           }
+       },async:false});
+  }
+  function wareInit(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+     
+      var formMap = DWRUtil.getValues("form1");
+      if('@@SERIES_CODE,' == '')
+      {
+          alert("请选择要初始化库存的产品类型!");
+          return false;
+      }
+      if(!confirm("你确定要为 !!MJ0038,02 类型下的所有的产品初始化吗？")) return false;
+     DwrComm.parseIN('IN1014',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              alert("初始化成功!");
+           }
+       },async:false});
+  }
+</script>
+<script language="javascript">
+  function checkDel(id)
+  {
+      if(confirm('删除后将不在恢复! \n您确定删除吗?'))
+	  {
+	     
+		work(id);
+	  }
+	  else return;
+  }
+  function opr(url){
+     NewWinCustMD(url+'&tmp='+Math.random(),window,650,700);
+     if(form1.d_Flag.value == "1")
+     {
+        // window.parent.form1.submit();
+		window.location.reload();
+     }
+  	 
+  }
+  
+   function opr1(url){
+     NewWinCustMD(url+'&tmp='+Math.random(),window,450,800);
+     if(form1.d_Flag.value == "1")
+     {
+         window.location.reload();
+     }
+  	 
+  }
+</script>
+</head>
+
+<body>
+<form name="form1" method="post" action="display?proname=baseinfo/productinfo.htm" id="form1">
+<input name="SERIES_CODE" type="hidden" value="@@SERIES_CODE," id="SERIES_CODE">
+<input name="PRODUCT_CODE" type="hidden" value="" id="PRODUCT_CODE">
+
+<input name="d_Flag" type="hidden" value="0" id="d_Flag" >  
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+	<tr>
+	
+      <td>
+        <table width="100%"  border="1" style="border-collapse:collapse" bordercolor="#000000" id="PowerTable">
+          <tr align="center" bgcolor="#BFBFBF">
+            <td >类型</td>
+            <!--<td >大类</td>
+            <td >类型</td>
+            <td >系列</td> -->
+            
+            <td >编码</td>
+            <td >名称</td>
+            
+            <td >规格</td>
+            <td >单位</td>
+			<td>成本价</td>
+			
+            <td>采购周期</td>
+            <td>起订量</td>
+            <td>预警下限</td>
+            <td>备注</td>
+  
+            <td>操作</td>
+          </tr>
+          <tr >
+            <td>$$MJ0038,25</td> 
+            <!--<td>$$MJ0038,27</td>
+            <td>$$MJ0038,02</td>
+            <td>$$MJ0038,25</td>-->
+             
+            <td>$$MJ0038,01</td>
+            <td>$$MJ0038,03</td>
+           
+            <td>$$MJ0038,04</td>
+			<td >$$MJ0038,09</td>
+            <td align="right">$$MJ0038,20</td>
+           
+        
+            <td align="center">$$MJ0038,27</td>
+            <td align="center">$$MJ0038,28</td>
+            <td align="center">$$MJ0038,24</td>
+            <td>$$MJ0038,11</td>
+            <td> 
+			【<a  onClick=opr('display?proname=baseinfo/wl_cbupdate&ID=$$MJ0038,12')>设置成本</a>】<!--【<a  onClick="return checkDel('$$MJ0038,12')">删除</a>】-->
+            </td>
+          </tr>
+         
+        </table>
+      </td>
+    </tr>
+     <tr align="right">
+         <td><table>$$page,</table></td>
+      </tr>
+  </table>
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+      <td height="30"><div align="center">$$EX0038,
+          <input name="BtnAdd" type="hidden" class="ImgButton" value="增  加" onClick="opr('display?proname=baseinfo/wl_add.htm')">
+          &nbsp;&nbsp;&nbsp;&nbsp; 
+          
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

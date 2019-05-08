@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>客户管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" src="inc/sort.js"></SCRIPT>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script>
+function work1(){
+
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    DwrComm.parseIN('IN0006',formMap,"delete",{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              alert("操作成功!");
+              window.location.reload();             
+              //window.close();
+           }
+       },async:false});
+  }
+  function opr(url){
+     NewWinCustMD(url+'&tmp='+Math.random(),window,650,700);
+     if(form1.d_Flag.value == "1")
+     {
+         window.location.reload();
+     }
+  }
+</script>
+<script language="javascript">
+  function checkDel(id)
+  {
+      if(confirm('如删除，数据将不可恢复! 您确定删除吗?'))
+	  {
+	     form1.AGENT_CODE.value=id;
+	     work1();
+	  }
+	  else return;
+  }
+</script>
+</head>
+
+<body>
+<form name="form1" method="post" action="display?proname=authority/agent_list.htm" id="form1">
+<input name="AGENT_CODE" type="hidden"><input name="d_Flag" type="hidden" value="0">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr height="30">
+				<td colspan="3"
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><img
+					src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">客户列表</td>
+			</tr>
+    <tr> 
+      <td width="8%" height="30">&nbsp;</td>
+      <td width="92%">客户名称:
+        <input type="text" name="AGENT_NAME">
+        所属销售经理：
+        <select name="DOMAIN_MAN" onChange="javascript:form1.submit()">
+          <option value=" ">全部</option>
+          <option>$$XL0003,</option>
+        </select>
+片区：
+<select name="AGENT_TYPE" onChange="javascript:form1.submit()">
+  <option value=" ">全部</option>
+  <option>$$XL0018,</option>
+</select>
+<!--
+        所属区域:
+        <select name="Sjbm" onChange="javascript:form1.submit()">
+          <option value=" ">全部</option>
+		  <option>$$XL0038,</option>
+        </select>
+        
+        -->
+<input type="submit" name="Submit2" value="查询"></td>
+    </tr>
+    <tr> 
+      <td height="0" colspan="2"> 
+        <table width="100%"  border="1" style="border-collapse:collapse" bordercolor="#000000" id="PowerTable">
+          <tr align="center" bgcolor="#BFBFBF"> 
+           
+            <td>所属区域</td>
+            <td>客户代号</td>
+            <td>客户名称</td>
+            <td>联系人</td>
+            <td>联系电话</td>
+            <td>传真</td>
+            <td>销售经理</td>
+            <td>状态</td>
+            <td>修改</td>
+            <!--  <td>删除</td> -->
+          </tr>
+          <tr > 
+            <!--<td>$$MJ0007,09</td>-->
+            <td>$$MJ0007,07</td>
+            <td>$$MJ0007,01</td>
+            <td>$$MJ0007,02</td>
+            <td>$$MJ0007,10</td>
+            <td>$$MJ0007,11</td>
+             
+             <td>$$MJ0007,18</td>
+             <td>$$MJ0007,03</td>
+            <td>$$MJ0007,08</td>
+            <td>【<a href='#' onClick=opr('display?proname=authority/agent_update.htm&View=View&AGENT_CODE=$$MJ0007,01')>详细信息</a>】            </td>
+          </tr>
+        </table>      </td>
+    </tr>
+    <tr align="right">
+         <td colspan="2"><table>$$page,</table></td>
+      </tr>
+  </table>
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center">&nbsp;</td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

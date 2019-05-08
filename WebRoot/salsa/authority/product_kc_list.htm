@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>【库存】--【产品选择（头尾部）】</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script language="javascript">
+	var selarrar = new Array();
+	if (!Array.indexOf) {
+		Array.prototype.indexOf = function(obj) {
+			for (var i = 0; i < this.length; i++) {
+				if (this[i] == obj) {
+					return i;
+				}
+			}
+			return -1;
+		}
+	}
+	Array.prototype.remove = function(b) {
+		var a = this.indexOf(b);
+		if (a >= 0) {
+			this.splice(a, 1);
+			return true;
+		}
+		return false;
+	};
+	function pageInit() {
+		form1.submit();
+	}
+	function BindEnter(obj) {
+		if (obj.keyCode == 27) {
+			window.close();
+		}
+	}
+	function selected() {
+		if (selarrar != "") {
+			window.dialogArguments.document.getElementById('d_Flag').value = "1";
+			window.dialogArguments.document.getElementById('d_SPBM').value = selarrar;
+		}
+		window.close();
+	}
+</script>
+</head>
+<body onLoad="pageInit()" onkeydown="BindEnter(event)">
+	<form name="form1" method="post"
+		action="display?proname=authority/product_kc_content.htm" id="form1"
+		target="cardframe">
+		<table width="100%" height="0" border="0" align="center"
+			cellpadding="0" cellspacing="0">
+			<tr>
+				<td width="2%">&nbsp;</td>
+				<td width="98%">查询： <input type="text" name="PRODUCT_NAME" size="20"> 
+					类型： <select name="SERIES_CODE" onChange="javascript:form1.submit()">
+						<option value=" ">全部</option>
+						<option>$$XL0001,</option>
+				</select><input type="submit" name="Submit2" value="查询">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><IFRAME id="cardframe" name="cardframe" src=""
+						frameBorder=0 width="100%" scrolling=auto height="400"></IFRAME></td>
+			</tr>
+		</table>
+		<table width="100%" border="1">
+			<tr>
+				<td align="right"><font color="red">【操作提示：】</font></td>
+				<td><font color="blue">按ESC键退出</font></td>
+				<td>&nbsp;</td>
+				<td><input type="button" name="BtnSel" value="确定"
+					onClick="selected()"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

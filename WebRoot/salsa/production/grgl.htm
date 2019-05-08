@@ -1,0 +1,333 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/easyui/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/easyui/icon.css">
+
+
+
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script>
+		$(function(){
+		    $dg1=$('#productList');
+		    $('#win').window('close'); 
+			$dg1.datagrid({
+				title:'员工管理',
+				iconCls:'icon-edit',
+				width:"auto",
+				height:document.body.clientHeight-70,
+				nowrap: true,
+				autoRowHeight: false,
+				striped: true,
+				singleSelect:true,
+				collapsible:true,
+				url:'query?proname=MJS028',
+				showFooter:true,
+				remoteSort: false,
+				fitColumns:true,
+				idField:'bm',
+				columns:[[
+				    {title:'员工编号',field:'bm',width: 55},
+        			{title:'姓名',field:'mc',width: 55},
+        			{title:'部门',field:'mrck',width: 75},
+        			{title:'岗位',field:'zw',width: 75},
+        			{title:'组别',field:'zbmc',width: 75},
+					{title:'性别',field:'xb',width: 45},
+        			{title:'出生日期',field:'sr',width: 75},
+        			{title:'婚否',field:'hf',width: 45},
+        			{title:'联系电话',field:'dh',width: 75},
+        			{title:'地址',field:'dz',width: 205},
+        			{title:'身份证号',field:'sfz',width: 105},
+        			{title:'学历',field:'xl',width: 55},
+        			{title:'进厂时间',field:'jcrq',width: 75},
+        			{title:'状态',field:'qy_mc',width: 45} 
+    			]],
+				pagination:true,
+				rownumbers:true,
+				toolbar:[{
+					id:'btnadd',
+					text:'新增',
+					iconCls:'icon-add',
+					handler:function(){
+					   
+					    $('#form1').form('load',{mc:"",mrck:"",zw:"",xb:"",sr:"",hf:"",dh:"",dz:"",sfz:"",xl:"",jcrq:"",qy_flag:"T"});
+					    $('#win').window('open');
+						//$('#btnsave').linkbutton('enable');
+						//alert('add')
+					}
+				},'-',{
+					id:'btnupdate',
+					text:'修改',
+					iconCls:'icon-edit',
+					handler:function(){
+					    var row = $('#productList').datagrid('getSelected'); 
+					    if(!row) 
+					    {
+					       $.messager.alert('提示信息','请先选择要更新的记录。','info'); 
+					       return false;
+					    }else
+					    {
+					        form1.bm.value=row.bm;
+					        form1.bm.disabled = true;
+					        form1.old_bm.value=row.bm;
+					        form1.action.value="update";
+					        $('#form1').form('load',row); 
+					        $('#win').window('open');
+					    }
+					    
+						//$('#btnsave').linkbutton('enable');
+						//alert('add')
+					}
+				}]
+			});
+			$('#form1').form({  
+                url:"work?proname=INS017",  
+    			onSubmit:function(){
+                    return $(this).form('validate');
+    			},  
+    		    success:function(data){  
+        		    if (data=="ok")
+        		    {
+        		      alert("操作成功!");
+        		      $('#win').window('close');
+        		      $("#productList").datagrid('reload');   
+        		    }else 
+        		    {  alert(data);}
+        		     
+    		    }  
+			});
+			$('#SJ').keydown(function(e){ 
+					if(e.keyCode==13){ 
+				       searchData()
+						} 
+			}); 
+
+
+			
+
+			
+		});
+		function closewin(){
+			    $('#win').window('close'); 
+		}
+		function save(){
+			     $('#form1').submit(); 
+		 }
+		function del(){
+		         if(!confirm("你确认要删除吗？")) return false;
+		         form1.action.value="delete";
+			     $('#form1').submit(); 
+		 }
+		function searchData(){
+		          var queryParams = $('#productList').datagrid('options').queryParams;  
+		          queryParams.LB=document.getElementById("LB").value;
+		          queryParams.SJ=encodeURI(document.getElementById("SJ").value);
+		          queryParams.Sts=encodeURI(document.getElementById("Sts").value);
+			      $("#productList").datagrid('reload');  
+		 }
+		 function round2(Num1,Num2){     
+		      if(isNaN(Num1)||isNaN(Num2)){           
+		             return(0);     
+		       }else{     
+		          return(Num1.toFixed(Num2));           
+		       }
+		 }
+		
+		
+</script>
+<script type="text/javascript">
+     function opr(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,550,850);
+        
+     }
+     
+    
+</script>
+
+</head>
+
+<body>
+
+<input type="hidden" name="d_Flag" value="0">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr align="center" height="5"> 
+		<td>
+		
+		</td>
+	</tr>
+	<tr align="center">
+		<td>
+		<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><img
+					src="images/webtype/colon.gif" WIDTH="24" HEIGHT="24">员工管理</td>
+		    </tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+	<td>
+	  
+	  <table width="100%" border="0" cellpadding="5" cellspacing="0" >
+          <tr> 
+            <td width="5%">过滤条件：
+            <input name="SJ" type="text" value="" size="20" id="SJ">
+         组别：<select name="LB" id="LB">
+               <option value="">全部</option>
+			  <option>$$XLS002,</option>
+            </select>
+            状态：<select name="Sts" >
+                <option value="T">正常</option>
+                <option value="F">离职</option>
+              </select>
+           <a  href="#" class="easyui-linkbutton" icon="icon-search" onClick="searchData()">查询</a></td>
+          </tr>
+        </table>
+	   
+	</td>
+	</tr>
+	
+	<tr>
+      <td style="background-color:#FFFFFF;">
+        
+		<div id="productList" ></div>
+		 
+       
+      </td>
+    </tr>
+    <tr></tr>
+  </table>
+ <div  id="win" class="easyui-window" data-options="title:'员工基本信息',iconCls:'icon-save'"  style="width:600px;height:500px;">  
+    
+     <form id="form1" method="post">
+           <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;员工基本信息</td>
+          </tr>
+         
+          <tr> 
+            <td width="200" align="right" bgcolor="#C4DFDC" class="tableleft"> 
+              员工编码：            </td>
+            <td bgcolor="#FFFFFF"> 
+               <input type="hidden" name="action" value="insert">
+               <input type="hidden" name="old_bm" value="">   
+              <input name="bm" class="easyui-validatebox" type="text" data-options="required:true" size="10">            </td>
+          </tr>
+          <tr> 
+            <td width="200" align="right" bgcolor="#C4DFDC" class="tableleft"> 
+              姓名：            </td>
+            <td bgcolor="#FFFFFF"> 
+               
+              <input name="mc" class="easyui-validatebox" type="text" data-options="required:true" size="25">            </td>
+          </tr>
+          
+          <tr> 
+            <td width="200" align="right" bgcolor="#C4DFDC" class="tableleft"> 
+              部门：            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="mrck"  size="20" >             </td>
+          </tr>
+          <tr> 
+            <td width="200" align="right" bgcolor="#C4DFDC" class="tableleft"> 
+              岗位：            </td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="zw"  size="20" >            </td>
+          </tr>
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">生产组别：</td>
+            <td bgcolor="#FFFFFF"> 
+             <select name="zbbm" >
+                <option value="">==选择==</option>
+                <option>$$XLS002,</option>
+              </select>             </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">性别：</td>
+            <td bgcolor="#FFFFFF"> 
+             <select name="xb" >
+                <option value="女">女</option>
+                <option value="男">男</option>
+              </select>             </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">生日：</td>
+            <td bgcolor="#FFFFFF"><input type="text" name="sr"  size="10" ></td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">婚否：</td>
+            <td bgcolor="#FFFFFF"> 
+             <select name="hf" >
+                <option value="否">否</option>
+                <option value="已">已</option>
+              </select> 
+             </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">联系电话：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="dh"   maxlength="11" size="15">            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">进厂日期：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="jcrq"    size="15">            </td>
+          </tr>
+		  <tr>
+		    <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;补充信息</td>
+	      </tr>
+		  <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">地址：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="dz"    size="35">            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">身份证：</td>
+            <td bgcolor="#FFFFFF"> 
+              <input type="text" name="sfz"   maxlength="18" size="18">            </td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">学历：</td>
+            <td bgcolor="#FFFFFF"> 
+              <select name="xl" >
+                <option value="小学">小学</option>
+                <option value="初中">初中</option>
+                <option value="高中">高中</option>
+                <option value="职高">职高</option>
+                <option value="技工">技工</option>
+                <option value="中专">中专</option>
+                <option value="大专">大专</option>
+                <option value="本科">本科</option>
+               
+              </select>             </td>
+          </tr>
+		 
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">状态：</td>
+            <td bgcolor="#FFFFFF"> 
+                 <select name="qy_flag" >
+                <option value="T">正常</option>
+                <option value="F">离职</option>
+              </select>         </td>
+          </tr>
+        </table>
+            <div style="padding:5px;text-align:center;">  
+            <a  href="#" class="easyui-linkbutton" icon="icon-ok" onClick="save()">保存</a>
+            <a  href="#" class="easyui-linkbutton" icon="icon-remove" onClick="del()">删除</a>  
+            <a  href="#" class="easyui-linkbutton" icon="icon-cancel" onClick="closewin()">取消</a>  
+        </div>
+   </form> 
+    
+</div>
+
+</body>
+
+</html>

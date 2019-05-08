@@ -1,0 +1,825 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<base target="_self" />
+		<title>订货单</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<link href="css/style1.css" rel="stylesheet" type="text/css">
+		
+		<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+		
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<script src="inc/dateams.js" type=text/javascript></script>
+		<style type="text/css">
+<!--
+.field_Stye1 {height:35;width:43;font-size:24;}
+.field_Stye2 {font-size:24;}
+.field_Stye3 {font-size:24;}
+.x-grid-record-red table{
+	color: #FF0000;
+}
+
+
+
+.btn{width:80px;height:20px;line-height:18px;font-size:18px;
+background:url("images/button/1_130916141709_1.jpg") no-repeat left top;color:#FFF;padding-bottom:4px;border:0} 
+-->
+</style>
+
+		<object id="LODOP"
+			classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+		</object>
+		<script type="text/javascript" src="js/extjs/ext-base3.4.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-all3.4.js"></script>
+		<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+        <script type='text/javascript' src='js/easyui/jquery-1.8.0.min.js'></script>
+         
+		
+		<script type='text/javascript' src='dwr/engine.js'></script>
+		<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+        <script type="text/javascript">
+     
+    function opr(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,550,600);
+        
+     }
+	 
+	  
+     
+    
+</script>
+	</head>
+
+	<body style="background-color:#EEF2EB;">
+		<script type='text/javascript'>
+		String.prototype.startWith=function(str){   
+     if(str==null||str==""||this.length==0||str.length>this.length)   
+       return false;   
+     if(this.substr(0,str.length).toLowerCase()==str.toLowerCase())   
+       return true;   
+     else   
+       return false;   
+     return true;   
+   }  
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+	
+	 
+	 DWRUtil.setValue("Order_Num","!!MJ0T09,01");
+     DWRUtil.setValue("Order_Amount","!!MJ0T09,02");
+       
+		
+		
+	
+	
+    //产品列表存储
+    var orderDetailstore = new Ext.data.JsonStore({
+         url:"work?proname=MJP156",
+        root:"root",
+        fields: ['product_code', 'product_name','product_size','product_color','product_untl','back_num','product_price','back_amount','back_type','price_type','back_reason','id','store_num','disaccount_price','fact_num','product_id','zk','pxh','series_name','pack_num','type_agent','type_ls','pack_memo','pack_nums','iszx','pcs_dj','product_info','product_mj']
+    });
+
+    
+    //产品列表表格
+     var cm = new Ext.grid.ColumnModel({
+        
+        columns:[
+        new Ext.grid.RowNumberer(),//自动行号
+       
+        {header:'编码',dataIndex:'product_code',width: 15,hidden:true},
+		{header:'型号名称',dataIndex:'product_info',width: 285},
+		
+		{header:'规格',dataIndex:'product_size',width: 100,summaryRenderer: function(v, params, data){return  '合计：';}},
+        {header:'单位',dataIndex:'product_untl',width: 55,hidden:true},
+		{header:'长度(mm)',dataIndex:'product_mj',width: 80,editor:new Ext.form.NumberField({   
+                    allowNegative: true, // 不允许为负数   
+                    decimalPrecision: 0, // 默认的小数点位数   
+                    allowDecimals: false, // 不允许为负数   
+                    maxValue: 10000000, // 最大值为10万
+                    selectOnFocus:true                   
+        })},
+		{header:'装箱规格',dataIndex:'pack_memo',width: 70},
+		{header:'件数',dataIndex:'pack_nums',width: 50,summaryType:'sum',editor:new Ext.form.NumberField({   
+                    allowNegative: true, // 不允许为负数   
+                    decimalPrecision: 1, // 默认的小数点位数   
+                    allowDecimals: false, // 不允许为负数   
+                    maxValue: 10000000, // 最大值为10万
+                    selectOnFocus:true                   
+        }),hidden:true},   
+		{header:'数量',dataIndex:'back_num',width: 55,summaryType:'sum',align:"right",editor:new Ext.form.NumberField({
+		            fieldClass:'field_stye1',
+                    allowNegative: false, // 不允许为负数   
+                    decimalPrecision: 3, // 默认的小数点位数   
+                    allowDecimals: true, // 不允许为负数   
+                    maxValue: 10000000, // 最大值为10万
+                    selectOnFocus:true            
+        })},
+       
+		
+		{header:'单价',dataIndex:'product_price',width: 75,renderer:Ext.util.Format.usMoney},
+		{header:'金额',dataIndex:'back_amount',width: 95,renderer:Ext.util.Format.usMoney,summaryType:'sum',align:"right"},
+		
+		
+        {header:'备注',dataIndex:'back_reason',width: 135,editor:new Ext.form.TextField({ 
+              allowBlank: true,
+              selectOnFocus:false  
+          })}
+		
+       
+        
+
+       ]});
+    //商品列表表格
+    var summary = new Ext.ux.grid.GridSummary();
+    var model=new Ext.grid.RowSelectionModel({singleSelect:false});
+   
+    var grid = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'productList',
+    	width:780, 
+    	height:400,
+    	title:'你选择的产品',
+    	ds: orderDetailstore,
+        cm: cm,
+        plugins: summary,
+        frame:false,
+        clicksToEdit:1,
+        selModel:model, 
+		enableHdMenu:false,
+        columnLines: true,
+        viewConfig:{
+           forceFit:true,
+           getRowClass:function(record,index,p,ds){
+             if(record.data.zk != '100'){
+              return 'x-grid-record-red';
+            }
+            else
+            return '';
+          }
+        },
+        autoScroll:true,
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+	if ('@@LS.BM,' == "8889")
+    {
+    	grid.getColumnModel().setHidden(9,true); 
+		grid.getColumnModel().setHidden(10,true);
+    	document.getElementById("span_jxj").innerHTML="--";
+        document.getElementById("span_zxj").innerHTML="--";
+    }  
+    grid.render();
+   
+    orderDetailstore.load({params:{Back_Code:Ext.get('Back_Code').dom.value}});
+	
+ 
+
+   //表格编辑前 
+   grid.on("beforeedit", beforeEdit, grid); 
+   function beforeEdit(e) { 
+   
+      if(e.field == "product_mj")
+	   {
+		   if(e.record.get("pcs_dj") != "PCS")
+		   {
+			   return false;
+		    }
+	   }
+     
+	 if(e.record.get('back_type').startWith("满就送") || e.record.get('back_type').startWith("代金券") || e.record.get('back_type').startWith("配套") ||e.record.get('back_type').startWith("送龙骨"))
+	   {
+		  
+		  return false;
+	   }
+       formMap = DWRUtil.getValues("form1");
+      
+    }
+    
+  
+   //表格编辑后
+   grid.on("afteredit", afterEdit, grid); 
+   
+   function afterEdit(e) { 
+   var record = e.record;// 被编辑的记录 
+   
+   if(e.record.get("back_num") == "" || e.record.get("back_num") == null)
+	   e.record.set("back_num","0");
+   
+   if(e.field == "pack_nums") 
+         e.record.set("back_num",parseInt(e.record.get("pack_nums"))*parseInt(e.record.get("pack_num"))); 
+		 
+  
+  
+   var backAmount=0;
+    if(e.record.get("pcs_dj") == "PCS")
+	{
+		if(e.record.get("back_num") == null)   e.record.set("back_num","0");
+		
+		if(e.record.get("product_mj") != "" || e.record.get("product_mj")>0)
+        {
+	         
+			 backAmount=Ext.util.Format.round(parseFloat(e.record.get("product_mj"))*parseFloat(e.record.get("product_price")*parseFloat(e.record.get("back_num"))),2); 
+        } 
+	}else 
+	         backAmount=Ext.util.Format.round(parseFloat(e.record.get("back_num"))*parseFloat(e.record.get("product_price")),2);
+  
+  
+   e.record.set("back_amount",backAmount); 
+   DWRUtil.setValue("d_Product_Id",e.record.get("id"));
+   DWRUtil.setValue("d_Order_Num",e.record.get("back_num"));
+   DWRUtil.setValue("d_Pack_Nums",e.record.get("pack_nums"));
+   DWRUtil.setValue("d_Product_Memo",e.record.get("back_reason"));
+   DWRUtil.setValue("d_Order_Amount",backAmount);
+   DWRUtil.setValue("d_Product_Price",e.record.get("product_price"));
+   DWRUtil.setValue("d_ZK",e.record.get("zk"));
+    DWRUtil.setValue("d_Product_Price",e.record.get("product_price"));
+ 
+    if(e.record.get("store_num") == "" || e.record.get("store_num") == "null" || e.record.get("store_num") == null)
+     DWRUtil.setValue("d_Store_Num","0");
+   else
+     DWRUtil.setValue("d_Store_Num",e.record.get("store_num"));
+	 
+   if(e.record.get("product_mj") == "" || e.record.get("product_mj") == "null" || e.record.get("product_mj") == null)
+     DWRUtil.setValue("d_Product_MJ","");
+   else
+     DWRUtil.setValue("d_Product_MJ",e.record.get("product_mj")); 
+   form1.Order_Num.value=orderDetailstore.sum('back_num');
+   form1.Order_Amount.value=orderDetailstore.sum('back_amount');
+  
+  
+
+    refreshBT();
+       
+      
+   
+   
+   formMap = DWRUtil.getValues("form1");
+   //if (parseInt(e.record.get("back_num"))>parseInt(e.record.get("store_num"))){
+    //   alert("友情提示：该产品库存不够，请修改数量!");
+    //   return false;
+  // }
+   DwrComm.parseIN('IN0K06',formMap,'delete',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }
+       },async:false});
+     
+   
+   };
+   
+   //挂单
+  Ext.get("BtnSave").on("click",function(){
+        if(checkAndSave()) {
+            alert("保存成功!");
+            //form1.ID.value = "";
+            //form1.action="display?proname=quickorder/xsd.htm";
+          // form1.submit();
+        }
+	    
+   }); 
+   
+   
+    //计算优惠
+   Ext.get("BtnNewProduct").on("click",function(){
+	       calDis();
+        
+   });
+   
+   function calDis()
+   {
+	   formMap = DWRUtil.getValues("form1");
+		var result=false;
+		 if(!checkAndSave()) return false;
+         DwrComm.parseIN('IN0S11',formMap,'call',{callback:function(data){if (data != 'ok'){alert(data);}else{  
+		             
+                orderDetailstore.load({params:{Back_Code:Ext.get('Back_Code').dom.value}}); 
+				result = true; 
+				form1.BtnKCLG.click();         
+                 refreshBT();       
+              }},async:false});
+	     
+	   return result;
+   }
+  
+  
+ 
+    //删除单据
+  Ext.get("BtnDel").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       if(!confirm("你确认要将整张单据删除吗？")) return false;
+       DwrComm.parseIN('INP007',formMap,'delete',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                         
+                     }else
+                     {
+                        alert("删除成功!");
+                        dialogArguments.document.getElementById('d_Flag').value="1";
+                        window.close();
+                     }
+                    },async:false});
+   });
+    //删除记录
+  Ext.get("BtnDelRecord").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       var record = grid.getSelectionModel().getSelected();
+       if(record == null)
+       {
+          alert("请选择要删除的记录!");
+          return false;
+       }
+	   if(record.get('back_type')=="满就送"||  record.get('back_type') =="配套" ||record.get('back_type') =="送龙骨")
+	   {
+		   alert("该产品不能删除!");
+		   return false;
+	   }
+	   
+	   if(!confirm('你确认要删除 '+ record.get('product_info')+ ' 吗？')) return false;
+	   DWRUtil.setValue("d_Product_Id",record.get('id'));
+                    formMap = DWRUtil.getValues("form1");
+                    DwrComm.parseIN('IN0K11',formMap,'delete',{callback:function(data){
+                     if (data != 'ok'){
+                         alert(data);
+                     }else{
+                       
+                         orderDetailstore.remove(record); 
+						 refreshBT();
+                     }
+        },async:false});
+	   
+       
+       
+   });
+  
+  
+   
+    
+   //加盟商确认下单
+  Ext.get("BtnConfirm").on("click",function(){ 
+     formMap = DWRUtil.getValues("form1");
+	 //满就送活动
+	
+	// if(!checkAndSave()) return false;
+	 //form1.BtnNewProduct.click();
+	 if(!calDis()) return false;
+	 if(parseInt(form1.Order_Num.value) == 0)
+	 {
+	     alert("订单无效，无法结算!");
+         return false;
+	 }
+	  if(parseInt(form1.Order_Amount.value) == 0)
+	 {
+	     alert("订单无效，无法结算!");
+         return false;
+	 }
+	   
+	 if(document.getElementById("span_ztj").innerHTML == "")
+	 {
+	     alert("请计算优惠后，在结算!");
+         return false;
+	 }
+       
+     opr('display?proname=agent/confirmOrder.htm&BACK_CODE=XS@@LS.DWDM,&Back_Code=XS@@LS.DWDM,&Note_Type=XS');
+   
+      
+      
+    });
+
+       //打印
+  Ext.get("BtnPrint").on("click",function(){
+      
+         NewWinMD('@@LS.URL,/display?proname=print/xsd_print_page.htm&Back_Code='+Ext.get('Back_Code').dom.value+'&BACK_CODE='+Ext.get('Back_Code').dom.value+"&time="+Math.random(),window);      
+         
+  });
+  
+  
+ 
+   //关闭
+  Ext.get("BtnClose").on("click",function(){
+       window.close();
+	  
+    
+   });
+  
+   
+   
+  
+  
+   //过滤查询
+   Ext.get("BtnSPBM").on("click",function(){
+       
+       form1.Product_Code.value='@@BM,'
+	   formMap = DWRUtil.getValues("form1");
+	   if (DWRUtil.getValue("Product_Code") == ""){
+            alert("友情提醒:请输入货号");
+            return false;
+       }
+	    formMap = DWRUtil.getValues("form1");
+	    var s_sup;
+         DwrComm.parseMJ('MJ0C04',formMap,{callback:function(list){
+              s_sup = list;  
+         },async:false});
+		if(s_sup.length ==0)
+		{
+			DwrComm.parseIN('IN0S03',formMap,'insert',{callback:function(data){
+                   if (data != 'ok'){
+                         alert(data);
+               }else{  }
+            },async:false});
+			
+		}
+		
+			   
+	  
+        formMap = DWRUtil.getValues("form1");
+		//吊顶行业 IN0K07 //集成墙面 INP036 折扣+价格组合
+       DwrComm.parseIN('IN0K07',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{ 
+		       orderDetailstore.load({params:{Back_Code:Ext.get('Back_Code').dom.value}});
+			    form1.Order_Num.value=orderDetailstore.sum('back_num');
+                form1.Order_Amount.value=orderDetailstore.sum('back_amount');
+			   refreshBT(); 
+           }
+       },async:false});
+			  
+			  // model.selectLastRow();
+			   //model.selectFirstRow();//选择第一行  
+              // checkAndSave();
+         
+   });
+   
+   
+    //保存数据，公用
+  function checkAndSaveforExtjs()
+  {
+      
+       
+	   var vRecords = grid.store.data.items;
+       var vCount = vRecords.length; //得到记录长度
+       //订单没有数据
+       if(vCount == 0)
+       {
+          return false;
+       } 
+      
+      
+	   if (vCount > 0) {
+        //begin 将记录对象转换为字符串（json格式的字符串）
+      
+		
+        var d_check="0";
+        var vDatas = '[';
+        for (var i = 0; i < vCount; i++) {
+            if(vRecords[i].get("back_num") == "0" || vRecords[i].get("back_num") == "" ||vRecords[i].get("back_num") == null){
+                alert("第 "+(i+1)+" 行的【数量】输入无效，请重输！");
+                d_check="1";
+                break;
+            }
+			if(vRecords[i].get("pcs_dj") == "PCS")
+			{
+				if (vRecords[i].get("product_mj") == "0" || vRecords[i].get("product_mj") == "" ||vRecords[i].get("product_mj") == null || vRecords[i].get("product_mj") < 318)
+				{
+				  alert("第 "+(i+1)+" 行的【长度】输入无效，请重输！");
+                   d_check="1";
+                   break;
+				}
+			}
+			 if (vRecords[i].get("pcs_dj") == "PACK")
+            {
+	                
+					var packs = parseFloat(vRecords[i].get("back_num"))%parseInt(vRecords[i].get("pack_num"));
+					//alert(packs);
+	                if (packs != 0)
+					{
+						alert("第 "+(i+1)+" 行的【数量】应为"+vRecords[i].get("pack_num")+"的倍数，请重输！");
+						
+                        d_check="1";
+                        break;
+					}
+             }
+			
+			 
+			 
+            vDatas += Ext.util.JSON.encode(vRecords[i].data) + ',';
+
+        }
+        if(d_check =="1") return false;
+        vDatas = vDatas.substr(0, vDatas.length - 1) + ']';
+
+        //end 将记录对象转换为字符串（json格式的字符串）
+      }
+      
+	   //alert(vDatas);
+	   var ret=true;
+	   
+     
+     return ret;
+  } 
+   
+   function checkAndSave(){
+       form1.Order_Num.value=orderDetailstore.sum('back_num');
+       form1.Order_Amount.value=Ext.util.Format.round(orderDetailstore.sum('back_amount'),2);
+       formMap = DWRUtil.getValues("form1");
+        if (DWRUtil.getValue("Back_Code").length == 0){
+            alert("友情提醒:单据无效，无法保存!");
+            return false;
+       }
+	   if (DWRUtil.getValue("Arr_Man").length > 10){
+            alert("友情提醒:收货人不正确!");
+            return false;
+       }
+      
+	   if(!checkAndSaveforExtjs()) return false;
+       /*if (DWRUtil.getValue("Order_Num") == "0" ||DWRUtil.getValue("Order_Num").length ==0 ){
+            //if(!confirm("提示：你提交的单据数量合计为0,你确认要保存吗?")){
+             alert("提示：你提交的单据数量合计为0,无法保存!");
+              return false;
+              
+           // }
+       }*/
+	   if(isNaN(form1.ZDZK.value))
+	   {
+		   form1.ZDZK.value=100;
+	   }
+	   formMap = DWRUtil.getValues("form1");
+       DwrComm.parseIN('IN0S03',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+		      orderDetailstore.load({params:{Back_Code:Ext.get('Back_Code').dom.value}});
+			  refreshBT();
+           }
+       },async:false}); 
+       
+      
+       
+       return true;
+   }
+   
+   
+   
+   function refreshBT()
+  {
+    var acc_amount=(parseFloat(form1.Order_Amount.value))-parseFloat(form1.Account_Amount.value) ;
+   
+	
+	 //取补贴清单
+	 var s_sup;
+	 var s_bt="";
+	 var bte=0;
+	 var yfk="";
+	 var bte_lp=0;
+	 var yfk_lp="";
+	 
+     DwrComm.parseMJ('MJ0S35',formMap,{callback:function(list){
+                   s_sup = list;
+				   for(var i=0;i<s_sup.length;i++)
+				   {
+				      s_bt=s_bt+s_sup[i].bt;  
+					  bte=bte+parseFloat(s_sup[i].bt_amount);
+					  if(parseFloat(s_sup[i].bt_amount)>0)
+					      bte_lp=bte_lp+parseFloat(s_sup[i].bt_amount);
+				   } 
+				   yfk=parseFloat(form1.Order_Amount.value)-bte;
+				   yfk_lp=parseFloat(form1.Order_Amount.value)-bte_lp;
+				   acc_amount=acc_amount-bte;
+				  
+				  
+				    form1.Accounting_Amount.value=Ext.util.Format.round(acc_amount,2);
+					//s_bt=+"，本单实付："+ Ext.util.Format.round(yfk,2)+"元；";
+					s_bt = "本单实付：<font color=red>"+ Ext.util.Format.round(yfk,2)+"</font>元("+Ext.util.Format.round(parseFloat(form1.Order_Amount.value),2)+s_bt+")";
+					
+					form1.ZDZK.value = Ext.util.Format.round((yfk_lp/parseFloat(form1.Order_Amount.value))*100,2);
+					if(isNaN(form1.ZDZK.value))
+					   form1.ZDZK.value = "100";
+				  //document.getElementById("span_tis").innerHTML=s_bt;	
+				   
+				  /* if(parseInt(form1.Accounting_Amount.value )>0)
+	  {
+	     document.getElementById("span_bk").style.color ="red";
+		 document.getElementById("span_bk").innerHTML="应汇款："+form1.Accounting_Amount.value+"元。";	  
+	   }else{
+	      document.getElementById("span_bk").style.color ="green";
+		  document.getElementById("span_bk").innerHTML="余款充足，无需汇款！";
+	   }	*/	  
+				  
+				    
+     },async:false});
+	 
+	 
+	  var ztj="";
+	  DwrComm.parseMJ('MJ0F24',formMap,{callback:function(list){
+                   s_sup = list;
+				   ztj="正价产品："+Ext.util.Format.round(s_sup[0].zj_amount,2)+"，特价产品："+Ext.util.Format.round(s_sup[0].tj_amount,2)
+				    document.getElementById("span_ztj").innerHTML=ztj+"<br>   "+s_bt;	
+				  	  
+				  
+				    
+     },async:false});
+	 
+	  
+	  DwrComm.parseMJ('MJ0S44',formMap,{callback:function(list){
+                   s_sup = list;
+				   if(s_sup.length >0)
+				   {
+					   form1.BtnDJQ.value="代金券("+(s_sup.length)+")";
+				   }else form1.BtnDJQ.disabled = true;
+				  	  
+				  
+				    
+     },async:false});
+	 
+	 
+	
+	
+	 
+  }
+   
+   
+   //送礼品
+      Ext.get("BtnKCLG").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+	    if (DWRUtil.getValue("Back_Code").length == 0){
+            alert("友情提醒:无效的单据");
+            return false;
+       }
+	   //判断是否有送礼品
+	    var s_sup;
+       DwrComm.parseMJ('MJ0041',formMap,{callback:function(list){
+                   s_sup = list;  
+         },async:false});
+		if(s_sup.length ==0){
+			refreshBT();  
+			return false;
+		}
+      
+         NewWinCustMD('display?proname=order/gift_sel.htm&Back_Code='+form1.Back_Code.value+'&tmp='+Math.random(),window,750,750);
+       
+	   
+	   if(form1.d_Flag.value == "1"){
+          orderDetailstore.load({params:{Back_Code:Ext.get('Back_Code').dom.value}});
+          form1.Order_Num.value=orderDetailstore.sum('back_num');
+          form1.Order_Amount.value=orderDetailstore.sum('back_amount');
+	   }
+	    refreshBT();  
+      
+    });
+   
+  
+   
+ 
+   //单击表格
+     grid.on("rowclick",function(grid,rowIndex,e){
+             e.preventDefault();if(rowIndex<0){return;}
+             var record = grid.getSelectionModel().getSelected();
+			 
+            
+      }); 
+	  
+	 //代金券
+   Ext.get("BtnDJQ").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+       if (DWRUtil.getValue("Back_Code").length == 0){
+            alert("友情提醒:单据无效，无法操作!");
+            return false;
+       }
+	   
+	    formMap = DWRUtil.getValues("form1");
+	    var s_sup;
+         DwrComm.parseMJ('MJ0C04',formMap,{callback:function(list){
+              s_sup = list;  
+         },async:false});
+		if(s_sup.length ==0)
+		{
+			DwrComm.parseIN('IN0S03',formMap,'insert',{callback:function(data){
+                   if (data != 'ok'){
+                         alert(data);
+               }else{  }
+            },async:false});
+			
+		}
+		
+		
+      // NewWinMD('display?proname=order/combo_sel.htm&PXH='+form1.d_PXH.value+'&tmp='+Math.random(),window);
+	  // var url=
+       NewWinCustMD('display?proname=cxgl/djq_order_sel.htm&Agent_Code='+form1.Agent_Code.value+'&Back_Code='+form1.Back_Code.value+'&QYZK='+form1.QYZK.value+'&tmp='+Math.random(),window,550,850);
+     
+	   if(form1.d_Flag.value == "1"){
+          orderDetailstore.load({params:{Back_Code:Ext.get('Back_Code').dom.value}});
+          form1.Order_Num.value=orderDetailstore.sum('back_num');
+          form1.Order_Amount.value=orderDetailstore.sum('back_amount');
+	   }
+     
+    });
+	
+     refreshBT();
+   // Ext.get("BtnSPBM").dom.click();
+   
+	
+});
+</script>
+		<form name="form1" method="post" action="" id="form1">
+			
+			<input type="hidden" name="Product_Id" id="Product_Id">
+<input type="hidden" name="d_Product_Id" id="d_Product_Id"><input type="hidden" name="d_Order_Amount" id="d_Order_Amount"><input type="hidden" name="d_Product_Price" id="d_Product_Price"> <input type="hidden"
+	name="d_Product_Memo" id="d_Product_Memo"> <input type="hidden" name="d_Order_Num" id="d_Order_Num"><input type="hidden" name="d_Flag" id="d_Flag" value="0"><input type="hidden" name="d_ZK"  id="d_ZK" value="0">
+<input type="hidden" name="Note_Type" value='XS'><input type="hidden" name="OprType"><input type="hidden" name="S_BackSts">
+<input type="hidden" name="MEMO" value=""> <input type="hidden" name="BFDH" value=""> <input type="hidden" name="d_PXH" value="">
+<input type="hidden" name="QYZK" value="!!MJP105,07">
+<input type="hidden" name="JGLX" value="!!MJP105,23">
+<input type="hidden" name="ZDZK" value="100">
+<input type="hidden" name="Product_Code" value="" id="Product_Code">
+<input type="hidden" name="Product_Num" value="0" id="Product_Num">
+<input type="hidden" name="Back_Code" value="XS@@LS.DWDM," id="Back_Code">
+<input type="hidden" name="Order_Num" value="" id="Order_Num">
+<input type="hidden" name="Order_Amount" value="" id="Order_Amount">			
+<input type="hidden" name="Agent_Code" value="@@LS.DWDM," id="Agent_Code">	
+<input type="hidden" name="d_Pack_Nums" value="" id="d_Pack_Nums">	
+<input type="hidden" name="d_Store_Num" value="" id="d_Store_Num">	
+<input type="hidden" name="d_Product_MJ" value="" id="d_Product_MJ">	
+
+
+		 		
+			<table width="100%" border="0">
+				
+				<tr>
+					<td>
+					   <div id="table_image">
+						<table width="100%" border="0">
+							<tr>
+								<td width="30%" valign="top"><table width="100%" border="0">
+                                      <tr>
+                                        <td align="center"><img width="220" height="220" src="salsa/product_photo/$$MJP104,17" title="!!MJP104,01" style="border:1px solid #009900;"/><br></td>
+                                      </tr>
+                                      <tr>
+                                        <td><span style="height: 24px; font-weight:400;margin-top: 5px;"> !!MJP104,01 !!MJP104,02 !!MJP104,03</span> <br>
+                                          <span style="font-size:16px;font-family: Arial; color:#ff2900; font-weight:700" id="span_jxj">￥!!MJP104,05</span><br>
+										  <div style="background-color: #a91110;padding-left: 66px;
+display: inline-block;
+vertical-align: top;
+width: 168px;">
+										    <input type="button" name="BtnSPBM" value="立刻购买" id="BtnSPBM">
+									    </div>
+									    <input type="hidden" name="ISZX" value="!!MJP104,18" id="ISZX">										  <input type="hidden" name="PackNum" value="!!MJP104,15" id="PackNum"></td>
+                                      </tr>
+                                    </table>
+									装箱规格：!!MJP104,14!!MJP104,04/!!MJP104,15  <!--整箱价格：<font color="blue">!!MJP104,13</font>--><br>
+							  </td>
+								<td width="70%"  valign="top">
+								   <table width="100%" border="0">
+										<tr>
+											<td ><div id="productList"></div></td>
+										</tr>
+										<tr>
+										   <td>
+										      <table width="100%" border="0">
+							<tr>
+								<td width="40%" ><input type="hidden" name="Account_Amount" id="Account_Amount" size="10" value="!!MJP105,06" readonly class="TEXTDISABLED" style="color:blue"> 
+								  <input type="hidden" name="Accounting_Amount"  id="Accounting_Amount" size="10" value="0" readonly class="TEXTDISABLED" style="color:red">
+								  <input type="hidden" name="BtnZTCombo"  id="BtnZTCombo" value="套餐" style="color:#F30" >
+                                  <input type="button" name="BtnDJQ" id="BtnDJQ" value="代金券" style="color:#F30" ></td>
+							  <td align="center"><input type="button" name="BtnNewProduct" id="BtnNewProduct" value="计算优惠" style="color:blue" > <input type="button" name="BtnConfirm" id="BtnConfirm" value="结 算>>" >
+							    <input type="hidden" name="BtnSave" id="BtnSave" value="保 存" >
+								<input type="button" name="BtnDelRecord"  id="BtnDelRecord" value="删除条目">
+								  <input type="hidden" name="BtnDel"  id="BtnDel"  value="删除单据">
+                                  <input type="hidden" name="BtnKCLG"  id="BtnKCLG"  value="删除单据">
+                                  
+								  <input type="hidden" name="BtnNoSave" id="BtnNoSave" value="提单" >
+								  <input type="button" name="BtnPrint"  id="BtnPrint"value="打印" >
+								  <input name="BtnNoAudit" id="BtnNoAudit" type="hidden" value="取消审核"><input name="BtnSMS" id="BtnSMS" type="hidden" value="发送短信">
+							    <input type="button" name="BtnClose" id="BtnClose" value="继续选购" style="color:green" >							    </td>
+						    </tr>
+						</table>
+										   </td>
+									 </tr>
+										
+								  </table>
+							  </td>
+							</tr>
+						</table>
+						</div>
+					</td>
+				</tr>
+               
+				<tr valign="top">
+					<td>
+				       <div style="border:1px solid #009900; width:100%; height:100px;min-height:100px;overflow: scroll;font-size:16px; " id="span_ztj">
+					       
+					   </div>
+				    </td>
+				</tr>
+				
+				
+
+
+			</table>
+
+
+		</form>
+
+	</body>
+</html>

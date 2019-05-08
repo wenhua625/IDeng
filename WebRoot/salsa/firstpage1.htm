@@ -1,0 +1,181 @@
+
+
+
+<html>
+<head>
+<title></title>
+<link type="text/css" rel="stylesheet" href="css/moia.css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+</head>
+
+<body background="images/firstbg/welcome.gif">
+<script type='text/javascript'>
+Ext.chart.Chart.CHART_URL = 'images/charts.swf';
+Ext.onReady(function(){
+    var store =new Ext.data.JsonStore({
+        		url:"work?proname=MJ0X36",
+        		root:"root",
+        		fields: ['agent_name', 'back_amount']
+    		});
+  
+     var store3 =new Ext.data.JsonStore({
+        		url:"work?proname=MJ0X37",
+        		root:"root",
+        		fields: ['mm_name', 'back_amount']
+    		});
+   
+     var store_com = new Ext.data.JsonStore({
+        url:"work?proname=XL0064",
+        fields: ['value', 'name']
+    });
+    store_com.load();		
+    var combo2 = new Ext.form.ComboBox({
+        store: store_com,
+        displayField:'name',
+        typeAhead: true,
+        mode: 'local',
+        forceSelection: true,
+        triggerAction: 'all',
+        emptyText:'',
+        selectOnFocus:true,
+        valueField :'value',
+        listeners:{select:function(){
+               
+               // form1.Cust_Code.value = combo.getValue();    
+             }
+           }
+    });
+    
+    new Ext.Panel({
+        width: 450,
+        height: 200,
+        title: '按省份销售额分析',
+        renderTo: 'container',
+        draggable:true,
+        tbar : ['单据日期:　', {
+       				id : 'startdate',
+       				xtype : 'datefield',
+       				format : 'Y-m-d'
+       }, '至', {
+          id : 'enddate',
+          xtype : 'datefield',
+          format : 'Y-m-d'
+      
+        }, '-', {
+          text : '分析',
+          iconCls : 'icon-find',
+          xtype:"button",
+          id:'BtnCx',
+        handler:function(){
+         store.load({params:{ORDER_DATE1:Ext.get('startdate').dom.value,ORDER_DATE2:Ext.get('enddate').dom.value}});
+       }
+      }],
+        items: {
+            store: store,
+            xtype: 'piechart',
+            dataField: 'back_amount',
+            categoryField: 'agent_name',
+            //extra styles get applied to the chart defaults
+            extraStyle:
+            {
+                legend:
+                {
+                    display: 'bottom',
+                    padding: 5,
+                    font:
+                    {
+                        //family: 'Tahoma',
+                        size: 13
+                    }
+                }
+            }
+        }
+    });
+    
+     
+    
+    
+    
+    new Ext.Panel({
+        width: 450,
+        height: 280,
+        title: '@@LS.YEAR,年月度销售分析',
+        renderTo: 'container_mm',
+        draggable:true,
+        tbar : ['业务员:　', combo2, '-', {
+          text : '分析',
+          iconCls : 'icon-find',
+          xtype:"button",
+          id:'BtnCx',
+        handler:function(){
+           store3.load({params:{ORDER_DATE1:'@@LS.YEAR,-01-01',ORDER_DATE2:'@@LS.YEAR,-12-31',YWY:encodeURIComponent(combo2.getValue())}});
+           
+       }
+      }],
+        items: {
+            store: store3,
+            xtype: 'columnchart',
+            xField: 'mm_name',
+            yField: 'back_amount',
+           
+            //extra styles get applied to the chart defaults
+            extraStyle:
+            {
+                legend:
+                {
+                    display: 'bottom',
+                    padding: 5,
+                    font:
+                    {
+                        //family: 'Tahoma',
+                        size: 13
+                    }
+                }
+            }
+        }
+    });
+    
+    Ext.get('startdate').dom.value = '@@LS.FIRSTDAYSOFCURMONTH,';
+    Ext.get('enddate').dom.value = '@@LS.CURDATE,';
+    //Ext.get('startdate1').dom.value = '@@LS.FIRSTDAYSOFCURMONTH,';
+    //Ext.get('enddate1').dom.value = '@@LS.CURDATE,';
+    store.load({params:{ORDER_DATE1:Ext.get('startdate').dom.value,ORDER_DATE2:Ext.get('enddate').dom.value}});
+   
+    store3.load({params:{ORDER_DATE1:'@@LS.YEAR,-01-01',ORDER_DATE2:'@@LS.YEAR,-12-31'}});
+});
+
+</script>
+<table width="100%" class="w01_13px_grey">
+<tr>
+	<td ></td>
+	<td ></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td width="2%">	</td>
+	<td width="45%"><div id="container"></div></td>
+	<td width="5%">	</td>
+	<td width="45%">
+		
+		<div id="total_container"></div>
+		
+	</td>
+</tr>
+<tr>
+	<td width="2%">	</td>
+	<td width="45%"><div id="container_line"></div></td>
+	<td width="5%">	</td>
+	<td width="45%">
+		
+		<div id="container_mm"></div>
+		
+	</td>
+</tr>
+</table>
+</body>
+</html>

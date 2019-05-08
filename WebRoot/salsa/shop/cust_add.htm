@@ -1,0 +1,486 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>订单信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" /> 
+<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+
+</head>
+
+<body >
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+    
+	Ext.get('BtnPrint').dom.style.visibility='hidden';
+	Ext.get('BtnToSJ').dom.style.visibility='hidden';
+	Ext.get('BtnFinish').dom.style.visibility='hidden';
+	//alert("fdsfds");
+	if ('@@Back_Code,' != ''){
+       	
+    	
+    	DWRUtil.setValue("Back_Code","!!MJZ003,01");
+		DWRUtil.setValue("Agent_Name","!!MJZ003,02");
+		 DWRUtil.setValue("Arr_Man","!!MJZ003,03");
+        DWRUtil.setValue("Arr_Tel","!!MJZ003,04");
+        DWRUtil.setValue("Arr_Address","!!MJZ003,05");
+    	DWRUtil.setValue("Order_Src","!!MJZ003,06");
+    	DWRUtil.setValue("Ht_Amount","!!MJZ003,07");
+		DWRUtil.setValue("Fk_Amount1","!!MJZ003,08");
+		 DWRUtil.setValue("YWY","!!MJZ003,09");
+		DWRUtil.setValue("Arr_Date","!!MJZ003,10");
+        
+		DWRUtil.setValue("Agent_Code","!!MJZ003,13");
+		DWRUtil.setValue("Fk_Amount2","!!MJZ003,14");
+		DWRUtil.setValue("Fk_Amount3","!!MJZ003,15");
+		DWRUtil.setValue("AZ_Man","!!MJZ003,17");
+		DWRUtil.setValue("ISFP","!!MJZ003,20");
+		DWRUtil.setValue("FPH","!!MJZ003,21");
+		DWRUtil.setValue("FPDZ","!!MJZ003,22");
+		DWRUtil.setValue("DWMC","!!MJZ003,23");
+		
+       
+        
+          
+    }else{
+		
+	      var store = new Ext.data.JsonStore({
+              url:"work?proname=AL0T48",
+              fields: ['value', 'name']
+         });
+         store.load();
+    var combo = new Ext.form.ComboBox({
+        store: store,
+        displayField:'name',
+        typeAhead: true,
+        mode: 'local',
+        forceSelection: true,
+        triggerAction: 'all',
+        emptyText:'请选择客户名称',
+        selectOnFocus:true,
+        valueField :'value',
+        applyTo: 'DWMC',
+		 listeners:{select:function(){
+			 alert(combo.getValue());
+                form1.Agent_Code.value = combo.getValue();
+		 }}
+       
+       });
+	  combo.on('beforequery',function(e){
+                      var combo = e.combo; 
+                      if(!e.forceAll){ 
+                          var value = e.query; 
+                          combo.store.filterBy(function(record,id){
+                            var text = record.get(combo.displayField); //用自己的过滤规则,如写正则式 
+                            return (text.indexOf(value)!=-1); 
+                          }); 
+                          combo.expand(); 
+                       return false; } });
+	}
+	
+	
+	
+	if('!!MJZ003,12' == '1'){
+	   Ext.get('BtnPrint').dom.style.visibility='visible';
+	   Ext.get('BtnToSJ').dom.style.visibility='visible';
+	   Ext.get('BtnSubmit').dom.style.visibility='hidden';
+	   Ext.get('Fk_Amount2').dom.disabled = true;
+	   Ext.get('Fk_Amount3').dom.disabled = true;
+	   
+	}
+	
+	if('!!MJZ003,12' == '4'){
+	   Ext.get('BtnFinish').dom.style.visibility='visible';
+	   Ext.get('BtnPrint').dom.style.visibility='hidden';
+	   Ext.get('BtnToSJ').dom.style.visibility='hidden';
+	   Ext.get('BtnSubmit').dom.style.visibility='hidden';
+	   Ext.get('BtnDelete').dom.style.visibility='hidden';
+	   Ext.get('BtnSave').dom.style.visibility='visible';
+	   Ext.get('Fk_Amount1').dom.disabled = true;
+	   Ext.get('Fk_Amount2').dom.disabled = true;
+	   // Ext.get('Fk_Amount3').dom.disabled = true;
+		 //Ext.get('Fk_Amount3').dom.disabled = true;
+		  
+	   
+	}
+	
+	if('@@View,'=='View'){
+	   Ext.get('BtnFinish').dom.style.visibility='hidden';
+	   Ext.get('BtnPrint').dom.style.visibility='hidden';
+	   Ext.get('BtnToSJ').dom.style.visibility='hidden';
+	   Ext.get('BtnSubmit').dom.style.visibility='hidden';
+	   Ext.get('BtnDelete').dom.style.visibility='hidden';
+	   //Ext.get('BtnSave').dom.style.visibility='hidden';
+	    Ext.get('BtnGenCode').dom.style.visibility='hidden';
+		
+	   Ext.get('Back_Code').dom.disabled = true;
+	   Ext.get('Agent_Name').dom.disabled = true;
+	   Ext.get('Arr_Man').dom.disabled = true;
+	   Ext.get('Arr_Tel').dom.disabled = true;
+	   Ext.get('Arr_Address').dom.disabled = true;
+	   Ext.get('Order_Src').dom.disabled = true;
+	  Ext.get('Ht_Amount').dom.disabled = true;
+		Ext.get('YWY').dom.disabled = true;
+		 Ext.get('Arr_Date').dom.disabled = true;
+		 Ext.get('Fk_Amount1').dom.disabled = true;
+		  Ext.get('Fk_Amount2').dom.disabled = true;
+		   Ext.get('Fk_Amount3').dom.disabled = true;
+			Ext.get('AZ_Man').dom.disabled = true;
+			 Ext.get('Demo').dom.disabled = true;
+			  Ext.get('Agent_Code').dom.disabled = true;
+			 
+	}
+	
+   
+	
+	Ext.get("BtnToSJ").on("click",function(){
+	   if(!confirm('你确认测量已经完毕，要提交给设计了吗？')) return false;
+	    if(form1.Back_Code.value.length==0 || form1.Back_Code.value == "")
+	  {
+	      alert("无效的单据，无法提交!");
+		  return false;
+	  }
+	   
+	   form1.Order_Sts.value='2';
+       formMap = DWRUtil.getValues("form1");
+      
+       DwrComm.parseIN('INZ003',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+               alert("操作成功，等待设计部处理!");
+		       dialogArguments.document.getElementById('d_Flag').value="1";   
+              window.close();
+             
+           }
+       },async:false}); 
+      
+    }); 
+	function checkAndSave(){
+     
+	  
+	  if(form1.Arr_Address.value.length==0)
+	  {
+	      alert("房主地址不能为空!");
+		  form1.Arr_Address.focus();
+		  return false;
+	  }
+	  if(form1.Arr_Man.value.length==0)
+	  {
+	      alert("房主姓名不能为空!");
+		  form1.Arr_Man.focus();
+		  return false;
+	  }
+	   if(form1.Arr_Tel.value.length==0)
+	  {
+	      alert("手机号码不能为空!");
+		  form1.Arr_Tel.focus();
+		  return false;
+	  }
+	   
+	  
+	  if(form1.Ht_Amount.value.length==0)
+	  {
+	      form1.Ht_Amount.value=0;
+		  
+	  }
+	   if(form1.Fk_Amount1.value.length==0)
+	  {
+	      form1.Fk_Amount1.value=0;
+		  
+	  }
+       formMap = DWRUtil.getValues("form1");
+	   var run="insert";
+	   if('@@Back_Code,' != '')
+	   {
+		    run="update";
+	   }
+       DwrComm.parseIN('INZ001',formMap,run,{callback:function(data){
+		   
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              
+             
+           }
+       },async:false}); 
+       return true;
+   }
+   //保存
+   Ext.get("BtnSave").on("click",function(){
+       if(checkAndSave()){
+	      alert("操作成功!");
+		  if(dialogArguments.document.getElementById('d_Flag') == null)
+		  {
+		  }else 
+		     dialogArguments.document.getElementById('d_Flag').value="1";   
+              window.close();
+	   }
+        
+   });
+	
+	
+	 Ext.get("BtnDelete").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+        if (DWRUtil.getValue("Back_Code").length == 0){
+            alert("友情提醒:不能删除无效的单据!");
+            return false;
+       }
+        if (confirm('友情提示：删除后，数据不能恢复，确认要删除吗？')){
+        DwrComm.parseIN('INZ001',formMap,'delete',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              
+             alert("友情提示：已成功删除!");
+            dialogArguments.document.getElementById('d_Flag').value="1";   
+              window.close();
+             
+             
+                        
+              
+           }
+       },async:false});
+       }else return ; 
+       
+        
+   }); 
+   
+   Ext.get("BtnPrint").on("click",function(){
+       if('@@View,' != 'View')
+          if ( !checkAndSave()) return false;
+            
+       LODOP.ADD_PRINT_URL(10,10,"100%","95%",'@@LS.URL,/display?proname=print/cld_print.htm&Back_Code='+Ext.get('Back_Code').dom.value+'&BACK_CODE='+Ext.get('Back_Code').dom.value);	
+		//LODOP.SET_PRINT_PAGESIZE(2,2100,2970,""); 
+		LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,""); //按适宽模式显示
+		
+		LODOP.PREVIEW();
+		//window.close();	
+	   //LODOP.PRINT();	
+       
+        
+   }); 
+   //提交下单
+     Ext.get("BtnSubmit").on("click",function(){
+          form1.Order_Sts.value='1';
+		  if(form1.Back_Code.value.length==0 || form1.Back_Code.value == "")
+	      {
+	         alert("无效的单据，无法提交!");
+		     return false;
+	      }
+          formMap = DWRUtil.getValues("form1");
+          DwrComm.parseIN('INZ002',formMap,'update',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else
+           {
+              alert("提交成功，等待安排测量!");
+			  dialogArguments.document.getElementById('d_Flag').value="1";   
+              window.close();
+              
+           }
+         },async:false}); 
+             
+              
+          
+       
+        
+   });  
+   
+      Ext.get("BtnXSQD").on("click",function(){
+          
+          NewWinCustMD('display?proname=shop/xsdView.htm&View=View&Back_Code='+Ext.get('Back_Code').dom.value+'&BACK_CODE='+Ext.get('Back_Code').dom.value+'&tmp11='+Math.random(),window,1050,950);	
+             
+              
+          
+       
+        
+   });  
+   
+   
+    //工程完工
+     Ext.get("BtnFinish").on("click",function(){
+	       if(form1.Fk_Amount3.value == ''){
+	      alert("收款金额无效，请重输!");
+		  form1.Fk_Amount3.focus();
+		  return false;
+	   }
+	      
+          form1.Order_Sts.value='5';
+		  if(form1.Back_Code.value.length==0 || form1.Back_Code.value == "")
+	      {
+	         alert("无效的单据，无法提交!");
+		     return false;
+	      }
+		   var acc_amount=0;
+	   var hk_amount=0
+       
+        acc_amount =parseFloat(form1.Ht_Amount.value)-parseFloat(form1.Fk_Amount1.value)-parseFloat(form1.Fk_Amount2.value)-parseFloat(form1.Fk_Amount3.value);  
+               
+		hk_amount=Ext.util.Format.round(acc_amount,2);	
+		 if (hk_amount>0)
+	     {
+		      if(!confirm("该客户截止到目前为止欠款:"+hk_amount+"元，你确认要结案吗！")) return false;
+	      }
+		  
+		  if(!confirm('你确认工程已经完工，货款两清了吗？')) return false;
+          formMap = DWRUtil.getValues("form1");
+          DwrComm.parseIN('INZ002',formMap,'insert',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else
+           {
+              alert("工程完工!");
+			  dialogArguments.document.getElementById('d_Flag').value="1";   
+              window.close();
+              
+           }
+         },async:false}); 
+             
+              
+          
+       
+        
+   });  
+});
+
+</script>
+<form name="form1" method="post" action="" id="form1">
+  <input type="hidden" name="Note_Type" value="Z">
+  <input type="hidden" name="Order_Sts" value="">
+
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td align="center" style="font-size:18px"><b>订单信息</b></td>
+    </tr>
+    <tr> 
+      <td height="0"> 
+        <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1">
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;客户基本信息</td>
+          </tr>
+          <tr>
+            <td bgcolor="#C4DFDC" class="tableleft" align="right">房主地址：</td>
+            <td bgcolor="#FFFFFF"><input type="text" name="Arr_Address" size="43" value="">
+            <font color="red">*</font></td>
+          </tr>
+           <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">房主姓名：</td>
+            <td bgcolor="#FFFFFF">
+              <input type="text" name="Arr_Man"
+					 size="10">
+              <font color="red">*</font>手机号码：
+              <input type="text" name="Arr_Tel" size="25">
+              <font color="red">*</font></td>
+          </tr>
+          <tr>
+		    <td bgcolor="#C4DFDC" class="tableleft" align="right">票据号码： </td>
+		    <td bgcolor="#FFFFFF"><input
+					type="text" name="Agent_Name" value="" size="30">		      
+		      <font color="red">*		      
+		      <input type="hidden" name="Back_Code" value="" >
+		      </font></td>
+          </tr>
+		 
+	      
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">专门店名称：</td>
+            <td bgcolor="#FFFFFF"> 
+                <input
+					type="text" name="DWMC" value="" size="20">
+                    <input type="hidden"  name="Agent_Code" id="Agent_Code"></td>
+          </tr>
+         
+          <tr>
+            <td colspan="2" bgcolor="#C4DFDC" class="tableleft">&gt;&gt;订单信息</td>
+          </tr>
+          <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">客户来源：</td>
+            <td bgcolor="#FFFFFF"><select name="Order_Src">
+              <option value="门店">门店</option>
+              <option value="齐家网">齐家网</option>
+			  <option value="城团网">城团网</option>
+			  <option value="一起装修网">一起装修网</option>
+			  <option value="华夏家博会">华夏家博会</option>
+			  <option value="婚博会">婚博会</option>
+			  <option value="我爱我家">我爱我家</option>
+			  <option value="爱舍区">爱舍区</option>
+			  <option value="其他">其他</option>
+                        </select>
+            安装工人：
+            <input type="text" name="AZ_Man"
+					 size="10"></td>
+          </tr>
+         <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">合同金额：</td>
+            <td bgcolor="#FFFFFF">
+              <input type="text" name="Ht_Amount"   size="15" style ="color:#FF0000" value="0"></td>
+          </tr>
+		  <tr>
+		    <td bgcolor="#C4DFDC" class="tableleft" align="right">定金：</td>
+		    <td bgcolor="#FFFFFF"><input type="text" name="Fk_Amount1" size="10" style ="color:#FF0000" value="0">
+		      设计阶段付款：
+	          <input type="text" name="Fk_Amount2" size="10" style ="color:#FF0000" value="0">
+	          结案阶段付款：
+	          <input type="text" name="Fk_Amount3" size="10" style ="color:#FF0000" value="0"></td>
+	      </tr>
+		  <tr>
+		    <td bgcolor="#C4DFDC" class="tableleft" align="right">是否要发票：</td>
+		    <td bgcolor="#FFFFFF"><select name="ISFP">
+			   <option value="未开">未开</option>
+              <option value="待开">待开</option>
+              <option value="已开">已开</option>
+             
+            </select>
+		    发票号码：
+		    <input type="text" name="FPH"   size="15" >
+		    邮寄地址：
+		    <input type="text" name="FPDZ"   size="25" ></td>
+	      </tr>
+		  <tr>
+		    <td bgcolor="#C4DFDC" class="tableleft" align="right">业务员：</td>
+		    <td bgcolor="#FFFFFF"><input type="text" name="YWY"   size="15" ></td>
+	      </tr>
+		  <tr>
+		    <td bgcolor="#C4DFDC" class="tableleft" align="right">订货日期：</td>
+		    <td bgcolor="#FFFFFF"><input type="text" name="Arr_Date"
+					readonly size="15" value="@@LS.CURDATE," onClick="javascript:ShowCalendar(this)"></td>
+	      </tr>
+		  <tr> 
+            <td width="200" bgcolor="#C4DFDC" class="tableleft" align="right">订单详情：</td>
+            <td bgcolor="#FFFFFF"><textarea name="Demo" cols="58" rows="3">!!MJZ003,11</textarea></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table width="90%" height="40" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr> 
+      <td height="30" valign="bottom"><div align="center"> 
+          <input name="BtnSave" id="BtnSave"  type="button" class="ImgButton" value="保  存" >
+          <input type="button" name="BtnPrint" id="BtnPrint" value="打 印">
+          <input type="button" name="BtnSubmit" id="BtnSubmit" value="提交测量">
+          &nbsp;&nbsp;
+		   <input type="button" name="BtnToSJ" id="BtnToSJ" value="提交设计">
+		   <input type="button" name="BtnFinish"  id="BtnFinish" value="工程结案">
+		  
+		  &nbsp;&nbsp; 
+		   <input name="BtnDelete" id="BtnDelete" type="button" class="ImgButton" value="删除单据" >
+		   &nbsp;&nbsp;&nbsp;&nbsp;
+          <input name="Submit2" id="Submit2" type="reset" class="ImgButton" onClick="window.close()" value="关 闭">
+          <input type="button" name="BtnXSQD" id="BtnXSQD" value="安装清单">
+      </div></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

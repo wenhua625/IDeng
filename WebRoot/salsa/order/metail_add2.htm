@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base target="_self">
+<title>物料选择</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link href="css/style011.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+
+<script>
+  function selected(productCode)
+  {
+     
+      dialogArguments.document.getElementById('Product_Code').value=productCode;
+      
+      dialogArguments.document.getElementById('BtnAddProduct').click();
+  }
+ // function conf(){
+      // window.close();
+  //}
+
+</script>
+
+</head>
+
+<body >
+<script type='text/javascript'>
+Ext.onReady(function(){
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+    var formMap = DWRUtil.getValues("form1");
+
+     var orderDetailstore = new Ext.data.JsonStore({
+         url:"work?proname=MJ1001",
+        root:"root",
+        fields: ['product_code', 'product_name','product_size','product_untl','product_num','product_price','id']
+    });
+    
+   
+    var sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown: Ext.emptyFn}); 
+    var cm = new Ext.grid.ColumnModel([
+        //new Ext.grid.RowNumberer(),//自动行号
+        sm,
+        {header:'货号',dataIndex:'product_code',width: 75},
+        {header:'品名',dataIndex:'product_name',width: 200,summaryRenderer: function(v, params, data){
+					return '合计：';
+				}},
+        {header:'单位',dataIndex:'product_untl',width: 40},
+        {header:'库存',dataIndex:'store_num',width: 100,summaryType:'sum'},
+        {header:'备注',dataIndex:'back_reason',width: 80}
+       ]);
+    
+    cm.defaultSortable = true;
+    
+    var grid = new Ext.grid.EditorGridPanel({
+    	stripeRows: true,
+    	el: 'productList',
+    	width:document.body.clientWidth-8, 
+    	height:document.body.clientHeight-100,
+    	title:'',
+    	ds: orderDetailstore,
+        cm: cm,
+        sm:sm,
+        plugins: new Ext.ux.grid.GridSummary(),
+        frame:false,
+        clicksToEdit:1,
+        columnLines: true,
+        selModel: new Ext.grid.RowSelectionModel({singleSelect:false}),
+        loadMask: true,
+        loadMask:{msg:'正在加载数据...'}
+    });
+    grid.render();
+    //orderDetailstore.load();
+    
+    
+    Ext.get("PRODUCT_NAME").on("propertychange",function(){
+       //formMap = DWRUtil.getValues("form1");
+        orderDetailstore.load({params:{PRODUCT_NAME:Ext.get('PRODUCT_NAME').dom.value}});
+       //alert(form1.PRODUCT_NAME.value);
+      
+      
+     });
+     
+    Ext.get("Submit4").on("click",function(){
+       formMap = DWRUtil.getValues("form1");
+      
+       
+       var rows=grid.getSelectionModel().getSelections();
+      
+       var str = "";
+       for(i=0;i<rows.length;i++){
+           str+="'"+rows[i].get("id") +"',";
+       }
+       if (str.length == 0){
+           alert("请选择！！！");
+           return false;
+        }
+        alert(str);
+       //form1.d_Qg_Id.value=str.substring(0,str.length-1);
+       //formMap = DWRUtil.getValues("form1");
+      
+     });
+});
+
+</script>
+<form name="form1" method="post" action="" id="form1">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    
+	<tr> 
+            
+      <td height="30"  colspan="9">
+       品名：
+        <input type="text" name="PRODUCT_NAME">货号：
+        <input type="text" name="PRODUCT_CODE">
+        <input type="submit" name="Submit2" value="查询">
+            </td>
+            
+    </tr>
+	<tr>
+	   <td> 系列号： 
+        <select name="SERIES_CODE" onChange="javascript:form1.submit()">
+          <option value=" ">全部</option>
+		  <option>$$XL1001,</option>
+        </select>
+          </td>
+	</tr>
+	<tr>
+		<td>
+		  <div id='productList' style="background-color:#006699 margin-left:auto;margin-right:auto"></div>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+		  <input type="button" name="Submit4" value="选中">
+		</td>
+	</tr>
+     
+  
+      
+  </table>
+  
+</form>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>图片上传</title>
+		<base target="_self" />
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<link href="css/style1.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+		<style>
+
+#phones {
+    background-color: #fff;
+    text-shadow: #fff 0 1px 0;
+}
+#phones ul {
+    position: relative;
+    display: block;
+    height: auto;
+    font-size: 85%;
+}
+#phones ul li img {
+    margin-bottom: 1px;
+}
+#phones ul li {
+    float: left;
+    padding: 8px 10px;
+    
+    border-top: 1px solid transparent;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+			
+		</style>
+		<object id="LODOP"
+			classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+		</object>
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<script src="inc/dateams.js" type=text/javascript></script>
+<script type="text/javascript" src="js/extjs/ext-base.js"></script>
+<script type="text/javascript" src="js/extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/extjs/openWindow.js"></script>
+		<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="js/extjs/GroupSummary.js"></script>
+		<script type="text/javascript" src="js/extjs/BufferView.js"></script>
+		<script type="text/javascript" src="js/extjs/DataViewTransition.js"></script>
+		
+		<script type='text/javascript' src='dwr/engine.js'></script>
+		<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+        <script type="text/javascript">
+     
+     function opr(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,600,850);
+        
+     }
+     function opr1(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,580,750);
+        
+     }
+	 function opr2(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,413,910);
+        
+     }
+      function toUpload(spbm,photo)
+     {
+   //  alert("spbm:"+spbm+"photo:"+photo);
+       document.getElementById('d_Flag').value="0";
+      // opr1('display?proname=baseinfo/xgt_photo_upload_brand.htm&Agent_Code=@@LS.DWDM,&BM='+spbm+'&Photo='+photo);
+	   openWindow('b-win','效果图上传','display?proname=baseinfo/xgt_photo_upload_brand.htm&Agent_Code=@@LS.DWDM,&BM='+spbm+'&Photo='+photo+'&tmp11='+Math.random(),750,580,function(){
+		   if (document.getElementById('d_Flag').value == "1"){
+		      uploadreload();
+		   }
+	   });
+	 
+	   
+       
+      // alert(document.contentWindow);
+     }
+	 
+	 function toRePro(spbm,photo)
+	 {
+		  if(photo != '@@LS.DWDM,')
+		{
+			alert("你无权设置该图片的详情，只有图片发布者才允许设置！");
+			 return false;
+		}
+	   document.getElementById('d_Flag').value="0";
+	   var url='display?proname=baseinfo/xgt_photo_upload_brand_desc.htm&BM='+spbm;
+	  // NewWinCustMD(url+'&tmp11='+Math.random(),window,380,480);
+       openWindow('b-win','效果图上传',url+'&tmp11='+Math.random(),480,380,function(){
+		   if (document.getElementById('d_Flag').value == "1"){
+		      uploadreload();
+		   }
+	   });
+	 }
+	 
+	 function toUploadMD(spbm,photo)
+     {
+      
+       opr2('display?proname=baseinfo/spgl_photo_md.htm&BM='+spbm+'&Photo='+photo);
+       uploadreload();
+      // alert(document.contentWindow);
+     }
+     
+    
+</script>
+
+	</head>
+
+	<body id="docbody" style="background-color: #EEF2EB">
+	<script type="text/javascript">
+Ext.onReady(function() {
+	
+	
+	
+	//品牌信息
+	
+	/*var store = new Ext.data.JsonStore({
+        url:"work?proname=XLP012",
+        fields: ['value', 'name']
+    });
+    store.load();
+	
+	//alert(store.getAt(0));
+    var combo = new Ext.form.ComboBox({
+        store: store,
+        displayField:'name',
+        typeAhead: true,
+        mode: 'local',
+        forceSelection: true,
+        triggerAction: 'all',
+        //emptyText:'请选择门店',
+        selectOnFocus:true,
+        valueField :'value',
+       
+        listeners:{
+			
+			
+			select:function(){
+                Ext.get('Brand_Code').dom.value = combo.getValue();
+               
+				orderDetailstore1.load();
+				 //tree.loader.dataUrl = 'work?proname=EREE01&SJBM=-1'+'&Brand_Code='+Ext.get('Brand_Code').dom.value; 
+                root.reload();
+             }
+           }
+    });*/
+
+   
+	
+     //产品信息
+    var orderDetailstore1 = new Ext.data.JsonStore({
+         url:"work?proname=MJP161",
+        root:"root",
+        fields: [ 'pic_code','short_path','style','pic_mj','pic_price','pic_position','pic_name','housetype','rand','agent_name','add_date','agent_code']
+       
+    });
+	
+    var dataview = new Ext.DataView({
+        store: orderDetailstore1,
+        tpl  : new Ext.XTemplate(
+            '<ul>',
+                '<tpl for=".">',
+                    '<li class="phone">',
+                       '<table width="25%" border="0">',
+        '<tr>',
+          '<td><a onclick=toUpload("{pic_code}","{short_path}")><img  title="{demo}" src="{short_path}?tmp={rand}" style="border:1px solid #999999;" /></a></td>',
+        '</tr>',
+        '<tr>',
+          '<td style="width:200px;overflow: hidden;" height="35" valign="top"><span style="font-size: 12px">{style} {pic_position} {housetype} <br> {pic_name} {pic_mj}平方 {pic_price}元</span></td>',
+        '</tr>',
+        '<tr>',
+          '<td style="width:200px;overflow: hidden;" height="35" valign="top"><span style="font-size: 12px">来自 {agent_name} 发布于 {add_date}</span></td>',
+        '</tr>',
+      
+        '<tr>',
+          '<td><input type=button name="BtnUpTp{code}" value="图片描述" onclick=toRePro("{pic_code}","{agent_code}")></td>',
+        '</tr>',
+      '</table>',
+                    '</li>',
+                '</tpl>',
+            '</ul>'
+        ),
+        
+       /* plugins : [
+            new Ext.ux.DataViewTransition({
+                duration  : 550,
+                idProperty: 'spbm'
+            })
+        ],*/
+        id: 'phones',
+        
+        itemSelector: 'li.phone',
+        overClass   : 'phone-hover',
+        //singleSelect: true,
+        //multiSelect : true,
+        autoScroll  : true
+    });
+    
+     this.uploadreload=function(){
+           orderDetailstore1.load({params:{start:pageBar.cursor, limit:20}});
+      } 
+    
+     //filters the store based on the current slider values
+    /*function filterData(slider) {
+        var values  = slider.getValues();
+        
+        orderDetailstore1.filter([{
+            fn: function(record) {
+                return record.get('product_price') >= values[0] && record.get('product_price') <= values[1];
+            }
+        }]);
+        
+        orderDetailstore1.sort('name', 'ASC');
+    };
+	
+    var phoneSlider = new Ext.Slider({
+        width   : 300,
+        minValue: 0,
+        maxValue: 5000,
+        values  : [0, 1320],
+        plugins : [
+            new Ext.slider.Tip({
+                getText: function(thumb) {
+                    var largest = Ext.max(orderDetailstore1.collect('product_price', false, true));
+                    //return Ext.util.Format.round(thumb.value,2);
+                    return String.format('<b>{0}</b>', Ext.util.Format.round(thumb.value,2));
+                }
+            })
+        ],
+        
+        listeners: {
+            change: {
+                buffer: 70,
+                fn    : filterData
+            }
+        }
+    });*/
+    
+    var pageBar=new Ext.PagingToolbar({  
+                 store: orderDetailstore1,  
+                 pageSize: 20,  
+                 displayInfo: true,  
+                 displayMsg: "本页显示第{0}条到第{1}条记录,一共{2}条",  
+                 emptyMsg: "没有记录"  
+  
+    });
+    new Ext.Panel({
+        title: '效果图',
+        layout: 'fit',
+        items : dataview,
+        height: document.body.clientHeight-8,
+        width : document.body.clientWidth-20,
+        tbar  : [
+             "<select id='CKBM' name='CKBM' style='height:30px;font-size:22px;background-color:#ccffcc;color:black;'></select><input type='text' name='SJ' id='SJ' value='' style='height:30px;font-size:22px;background-color:#ccffcc;color:black;text-transform:uppercase' size='20'>  <input type='button' name='BtnCpcx'  value='搜索' id='BtnCpcx' style='width:50px;background: #999999 repeat-x;padding-top:3px; font-size:12pt;cursor:hand;text-align:center;'>","<input type='button' name='BtnNew' id='BtnNew' value='上传新效果图' style='width:150px;color:red;font-size:16px;background-color:red;color:black;text-transform:uppercase'> "     
+        ],
+        bbar:pageBar,
+        renderTo: 'list'
+    });
+    
+     orderDetailstore1.on('beforeload',function(){
+		Ext.apply(
+			this.baseParams, {
+				start:0, limit:20,SYJG:encodeURI("出厂价"),ZK:"100",CK:"2000",
+				Brand_Code:Ext.get('Brand_Code').dom.value,
+				Series_Code:Ext.get('PLB').dom.value,
+				Agent_Code:Ext.get('CKBM').dom.value,
+				SJ:encodeURI(Ext.get('SJ').dom.value)
+			});
+	});
+    orderDetailstore1.load();
+    
+     //搜索成品
+   Ext.get("BtnCpcx").on("click",function(){
+       Ext.get('LB').dom.value = "";
+	   Ext.get('PLB').dom.value = "";
+       orderDetailstore1.load();
+   });
+     //上传新效果图
+   Ext.get("BtnNew").on("click",function(){
+	   if (Ext.get('Brand_Code').dom.value == "")
+	    {
+			  alert("请选择品牌！");
+			  return false;
+		}
+      toUpload(Ext.get('Brand_Code').dom.value,"");
+      orderDetailstore1.load();
+   });
+    //查看特价
+   /*Ext.get("BtnTJ").on("click",function(){
+        orderDetailstore1.load({params:{TJ_FLAG:'T'}});
+   });*/
+   //过滤查询
+   Ext.get("SJ").on("keydown",function(){
+       if( event.keyCode==13){
+	       if(Ext.get("SJ").dom.value == "") return ;
+	       Ext.get("BtnCpcx").dom.click();
+		   //processDetailstore.load({params:{start:0, limit:15}});
+		   
+       }
+        
+   });
+    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+   
+    DWRUtil.removeAllOptions("CKBM");
+		//var arr={"","全部"};
+		var arr=[{"name":"全部","value":""},{"name":"总部","value":"00"},{"name":"本店","value":"@@LS.DWDM,"}];
+		DWRUtil.addOptions("CKBM",arr,"value","name");
+        //DWRUtil.addOptions("XL_CODE",items,"value","name"); 
+   
+    
+    //perform initial filter
+   // filterData(phoneSlider);
+});	
+		  
+	</script>
+	<input type="hidden" name="LB" value="" id="LB">
+	 <input type="hidden" name="PLB" value="" id="PLB">
+	 <input type="hidden" name="d_Flag" value="" id="d_Flag">
+     <input type="hidden" name="Brand_Code" value="@@LS.BRAND," id="Brand_Code">
+     
+	<table width="100%" border="0">
+  <tr>
+    
+    <td><div id="list"></div></td>
+  </tr>
+</table>
+
+	</body>
+</html>

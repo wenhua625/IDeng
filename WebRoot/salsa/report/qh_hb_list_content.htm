@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>Untitled Document</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<meta http-equiv="expires" content="30">
+		<link href="css/style011.css" rel="stylesheet" type="text/css">
+		<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+		<SCRIPT LANGUAGE="JavaScript" src="inc/sort.js"></SCRIPT>
+		<script src="inc/dateams.js" type=text/javascript language=javascript></script>
+		<script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+        <script type='text/javascript' src='dwr/engine.js'></script>
+        <script type='text/javascript' src='dwr/util.js'></script>
+        <script language="javascript">
+        function opr(url,h,w){
+             var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,h,w);
+          }
+		
+		function qxqh(d_id){
+		     if(!confirm('你确认客户不需要该欠货了吗，取消后将无法恢复，确认吗？')) return false;
+		     if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+              form1.d_ID.value = d_id;
+			  form1.d_HB.value = "合并";
+              var formMap = DWRUtil.getValues("form1");
+      
+             DwrComm.parseIN('IN0004',formMap,'call',{callback:function(data){
+           if (data != 'ok'){
+               alert(data);
+           }else{
+              alert("操作成功!");
+               window.parent.form1.submit(); 
+              
+           }
+       },async:false});
+		   
+			
+            
+        }
+      </script>
+	</head>
+
+	<body style="margin-left: 0px;">
+	<form name="form1" method="post" action="" id="form1">
+	    <input type="hidden" value="" name="d_ID">
+        <input type="hidden" value="" name="d_HB">
+	</form>
+		<div >
+			<table width="100%" border="0">
+				
+				<tr>
+					<td >
+						<table width="100%" border="1" style="border-collapse:collapse" bordercolor="#000000" id="PowerTable">
+        <tr align="center" bgcolor="#BFBFBF"> 
+          <td>品牌</td>
+          <td>发生日期</td>
+          <td>单据编号</td>
+          <td>客户名称</td>
+          <td>类型</td>
+          <td>货号</td>
+          <td>名称</td>
+          <td>单位</td>
+          <td>订单数量</td>
+          <td>实发数</td>
+          <td>欠货数</td>
+          <td>销售经理</td>
+          <td>当前库存</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr >
+          <td>$$MJ0S21,13</td> 
+          <td>$$MJ0S21,01</td>
+          <td><a href="#" onClick="javascript:opr('display?proname=quickorder/xsdView.htm&BACK_CODE=$$MJ0S21,02&Note_Type=XS&View=View',650,850)">$$MJ0S21,12</a></td>
+          <td>$$MJ0S21,03</td>
+          <td >$$MJ0S21,04</td>
+          <td>$$MJ0S21,05</td>
+          <td >$$MJ0S21,06</td>
+          <td >$$MJ0S21,07</td>
+          <td align="right">$$MJ0S21,08</td>
+          <td align="right">$$MJ0S21,09</td>
+          <td align="right">$$MJ0S21,10</td>
+          <td align="right">$$MJ0S21,11</td>
+          <td align="right">$$MJ0S21,14</td>
+          <td align="center"><input type="button" name="BtnQXQH" value="取消欠货" onClick="qxqh('$$MJ0S21,16')"></td>
+          </tr>
+        <tr style="font:bold;"> 
+          <td colspan="8" align="right">合计：</td>
+          <td align="right">!!MJ0022,01</td>
+          <td align="right">!!MJ0022,02</td>
+          <td align="right">!!MJ0022,03</td>
+          <td align="right">&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+         </tr>
+      </table>
+					</td>
+				</tr>
+				$$page,		
+			</table>
+
+		</div>
+		<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+      
+    <td align="center"> 
+	
+	$$EX0S21,
+	
+    </td>
+    </tr>
+  </table>
+	</body>
+</html>

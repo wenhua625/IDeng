@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<link href="css/style1.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/easyui/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="css/easyui/icon.css">
+<SCRIPT LANGUAGE="JavaScript" src="inc/check.js"></SCRIPT>
+<script type="text/javascript" src="js/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/easyui/easyui-lang-zh_CN.js"></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script><script type='text/javascript' src='dwr/interface/DwrComm.js'></script>
+
+<script>
+		$(function(){
+		    if (typeof window['DWRUtil'] == 'undefined') window.DWRUtil = dwr.util;
+              var formMap = DWRUtil.getValues("form1");
+		    $('#win').window('close'); 
+			$('#productList').datagrid({
+				title:'',
+				width:"auto",
+				height:document.body.clientHeight-75,
+				nowrap: true,
+				autoRowHeight: false,
+				striped: true,
+				singleSelect:true,
+				collapsible:true,
+				url:'query?proname=MJS030&lx=@@lx,',
+				showFooter:true,
+				title:"供货商列表",
+				iconCls:'icon-edit',
+				remoteSort: false,
+				fitColumns:true,
+				idField:'bm',
+				columns:[[
+					{title:'编码',field:'bm',width:55},
+        			{title:'名称',field:'mc',width: 185},
+					{title:'联系人',field:'lxr',width: 55},
+        			{title:'电话',field:'dh',width: 85},
+					{title:'手机',field:'sj',width: 115},
+        			
+        			{title:'地址',field:'dz',width: 205},
+					{title:'类型',field:'lxmc',width: 95,hidden:true},
+					{title:'开户行',field:'zw_khh',width: 95},
+					{title:'账号',field:'zw_zh',width: 95},
+					{title:'户名',field:'zw_hm',width: 95},
+					{title:'税号',field:'zw_sh',width: 95},
+					
+					
+					
+        			{title:'是否启用',field:'qy_mc',width: 65} 
+    			]],
+				pagination:true,
+				rownumbers:true,
+				toolbar:[{
+					id:'btnadd',
+					text:'新增',
+					iconCls:'icon-add',
+					handler:function(){
+					   /* $('#bm').attr({ readonly:true });
+						var s_bm="";
+						formMap = DWRUtil.getValues("form1");
+						DwrComm.parseKey('MJS031',formMap,{callback:function(data){s_bm=data;},async:false});
+					    $('#form1').form('load',{bm:s_bm,mc:"",lxr:"",dh:"",cz:"",dz:"",lx:"@@lx,",sj:""});
+					    $('#win').window('open');*/
+			       opr1('display?proname=production/wldw_add.htm');
+					    
+					}
+				},'-',{
+					id:'btnupdate',
+					text:'修改',
+					iconCls:'icon-edit',
+					handler:function(){
+					    var row = $('#productList').datagrid('getSelected'); 
+					    if(!row) 
+					    {
+					       $.messager.alert('提示信息','请先选择要更新的记录。','info'); 
+					       return false;
+					    }
+						  form1.d_Flag.value="0";
+						  opr1('display?proname=production/wldw_add.htm&BM='+row.bm);
+						  if(form1.d_Flag.value == "1")
+							{
+							    $("#productList").datagrid('reload');  
+							}
+					    
+						//$('#btnsave').linkbutton('enable');
+						//alert('add')
+					}
+				},'-',{
+					id:'btnsupproduct',
+					text:'供应的物料',
+					iconCls:'icon-edit',
+					handler:function(){
+					    var row = $('#productList').datagrid('getSelected'); 
+					    if(!row) 
+					    {
+					       $.messager.alert('提示信息','请先选择供应商。','info'); 
+					       return false;
+					    }else
+					    {
+						    form1.d_Flag.value="0";
+							opr('display?proname=baseinfo/sup_prdlist.htm&DWBM='+row.bm);
+							if(form1.d_Flag.value == "1")
+							{
+							    $("#productList").datagrid('reload');  
+							}
+					      
+					    }
+					    
+						//$('#btnsave').linkbutton('enable');
+						//alert('add')
+					}
+				}]
+			});
+			
+			$('#SJ').keydown(function(e){ 
+					if(e.keyCode==13){ 
+				       searchData()
+						} 
+			}); 
+
+
+			
+
+			
+		});
+		
+		function searchData(){
+		          var queryParams = $('#productList').datagrid('options').queryParams;  
+		          queryParams.SJ=encodeURI(document.getElementById("SJ").value);
+			      $("#productList").datagrid('reload');  
+		 }
+		 function round2(Num1,Num2){     
+		      if(isNaN(Num1)||isNaN(Num2)){           
+		             return(0);     
+		       }else{     
+		          return(Num1.toFixed(Num2));           
+		       }
+		 }
+		
+		
+</script>
+<script type="text/javascript">
+     function opr(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,450,650);
+        
+     }
+	 function opr1(url){
+        var s=NewWinCustMD(url+'&tmp11='+Math.random(),window,650,850);
+        
+     }
+     
+    
+</script>
+
+</head>
+
+<body>
+<form id="form1" method="post">
+<input type="hidden" name="d_Flag" value="0">
+  <table width="100%" height="0" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr align="center" height="5"> 
+		<td>
+		
+		</td>
+	</tr>
+	<tr align="center">
+		<td>
+		<table cellSpacing=0 cellPadding=0 border="0" width="100%">
+			<tr height="30">
+				<td
+					style="BORDER-BOTTOM: @@LS.BGCOLOR, 1px solid; font-size: 12pt; COLOR: #124164; FONT-WEIGHT: bold;"><img
+					src="images/loadtree/mdmde.gif" WIDTH="18" HEIGHT="18">供货商管理</td>
+		    </tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+	<td>
+	  
+	  <table width="100%" border="0" cellpadding="5" cellspacing="0" >
+          <tr> 
+            <td width="13%" align="right">过滤条件：</td>
+            <td width="27%"><input name="SJ" type="text" value="" size="20" id="SJ">
+            <font color="#006600">（输入后，按回车）</font></td>
+            <td width="41%"><a  href="#" class="easyui-linkbutton" icon="icon-search" onClick="searchData()">查询</a></td>
+            <td width="19%"></td>
+          </tr>
+        </table>
+	   
+	</td>
+	</tr>
+	
+	<tr>
+      <td style="background-color:#FFFFFF;">
+          <!--<IFRAME id="cardframe" name="cardframe"
+						src="display?proname=report/ywdjcz_content.htm&ORDER_DATE1=@@LS.FIRSTDAYSOFCURMONTH,&ORDER_DATE2=@@LS.CURDATE,&Note_Type=XS"
+						frameBorder=0 width="100%" scrolling=auto height="450"></IFRAME>-->
+		<div id="productList" ></div>
+		 
+       
+      </td>
+    </tr>
+    <tr></tr>
+  </table>
+ 
+   </form> 
+    
+</div>
+
+</body>
+
+</html>
